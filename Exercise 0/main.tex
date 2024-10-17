@@ -1,5 +1,12 @@
-\documentclass{article}
+\documentclass{article}[a4paper,12pt]
 \usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\usepackage{fullpage}
+
+\hypersetup{
+    colorlinks=true,     
+    urlcolor=blue,
+    }
 
 \title{Machine Learning}
 \author{Florian Engl}
@@ -9,6 +16,28 @@
 
 \maketitle
 
-\section{Introduction}
+\section{Census Income \href{https://archive.ics.uci.edu/dataset/2/adult}{Dataset}}
+
+\section{Superconductivity \href{https://archive.ics.uci.edu/dataset/464/superconductivty+data}{Dataset}}
+
+Superconducters are of growing importance for different uses ranging from nuclear fusion to modern types of transportation. A major problem with the use of superconducters has always been the fact that they need to be cooled below the critical temperature for the resistence to drop dramatically. Therefore it has been an interest of modern science to make superconductors with ever higher critical temperatures. We chose this topic as one of us is studying physics and is therefore interested in superconductors and because we think they will play an important role in the technological future.
+\vspace{4mm}
+
+The chosen dataset contains the chemical data for different superconducters with the corresponding critical temperature. There is a second file that contains the specific chemical formula and the critical temperature. It has 81+1 attributes the last one being the target attribute, the critical temperature and 21~263 instances. There are no missing values and all attributes (except for the chemical formula in the second file) are numerical. The attributes are:
+
+
+\begin{itemize}
+    \item \underline{number of elements:} An integer value describing the number of elements used in the alloy.
+    \item \underline{atomic\_mass:} Here the mean, weighted mean, geometric mean, entropy, weighted entropy, range, weighted range, standard deviation and weighted standard deviation are the distinct attributes of the quantity. They are all continues variables. 
+    \item \underline{fie:} The attributes have the same structure as above.
+    \item \underline{atomic\_radius:} The attributes have the same structure as above except for the range, which is an integer.
+    \item \underline{Density:} The attributes have the same structure as above.
+    \item \underline{ElectronAffinity:} The attributes have the same structure as above.
+    \item \underline{FusionHeat:} The attributes have the same structure as above.
+    \item \underline{ThermalConductivity:} The attributes have the same structure as above.
+    \item \underline{Valence:} The attributes have the same structure as above except for the range, which is an integer.
+    \item \underline{critical\_temp:} This is the target variable. It ranges from to with a mean and standard deviation of.
+\end{itemize}
+
 
 \end{document}
