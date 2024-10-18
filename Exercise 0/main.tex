@@ -2,6 +2,7 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{hyperref}
 \usepackage{fullpage}
+\usepackage{csquotes}
 
 \hypersetup{
     colorlinks=true,     
@@ -17,7 +18,32 @@
 \maketitle
 
 \section{Census Income \href{https://archive.ics.uci.edu/dataset/2/adult}{Dataset}}
+    The Census Income Dataset is data used to predict wheter a person has an annual salary of over or under 50 thousand dollars and also helps to predict which attributes have a greater influence on income. The United States census is taken by the United States Census Beauro every two years and this particular dataset was taken from the 1994 census.
+    \vspace{4mm}
+    
+    It has 14+1 attributes the last one being the target 'income' and 48~842 instances. The attributes are:
 
+    \begin{itemize}
+        \item \underline{age:} is a ratio attribute with integer values in [17,90]
+        \item \underline{workclass:} is a nominal attribute with the values: \textit{\enquote{Private}, \enquote{Self-emp-not-inc}, \enquote{Self-emp-inc}, \enquote{Federal-gov}, \enquote{Local-gov}, \enquote{State-gov}, \enquote{Without-pay}, \enquote{Never-worked}}.
+        \item \underline{education:} is a nominal attribute too with the ordinal values: \textit{\enquote{Preschool}, \enquote{1\textsuperscript{st}-4\textsuperscript{th}}, \enquote{5\textsuperscript{th}- 6\textsuperscript{th}}, 
+        \enquote{7\textsuperscript{th}-8\textsuperscript{th}}, \enquote{9\textsuperscript{th}}, \enquote{10\textsuperscript{th}}, \enquote{11\textsuperscript{th}}, 
+        \enquote{12\textsuperscript{th}}}, \textit{\enquote{HS-Grad}}, \textit{\enquote{Some-college}}, 
+        \textit{\enquote{Assoc-voc}}, \textit{\enquote{Assoc-acdm}},\textit{\enquote{Bachelors}},
+        \textit{\enquote{Masters}}, \textit{\enquote{Prof-school}} and \textit{\enquote{Doctorate}}.
+        \item \underline{education-nom:} is a integer value in [1,16] wich is a alternative description for the degree of education. Here 1 represents the lowest education \textit{\enquote{Prescool}} and 16 the highest \textit{\enquote{Doctorate}}. This column is not necassary as all information is also in the \underline{education} column, but it is helpful for data-preprossesing.
+        \item \underline{marital-status:} This nominal attribute can take the values: 
+        \textit{\enquote{Married-civ-spouse}}, \textit{\enquote{Divorced}}, \textit{\enquote{Never-married}}, \textit{\enquote{Seperated}}, \textit{\enquote{Widowed}}, \textit{\enquote{Married-spouse-absend}} and \textit{\enquote{Married-AF-spouse}}. Here \textit{\enquote{civ}} means civilian and 
+        \textit{\enquote{AF}} means Armed-Forces.
+        \item \underline{occupation:} is a nominal attribute, which groups the occupation in the following values 
+        \textit{\enquote{Adm-clerical}}, \textit{\enquote{Armed-Forces}}, \textit{\enquote{Craft-repair}},
+        \textit{\enquote{Exec-managerial}}, \textit{\enquote{Farming-fishing}}, \textit{\enquote{Handlers-cleaners}},
+        \textit{\enquote{Other}}, \textit{\enquote{Priv-house-serv}}, \textit{\enquote{Prof-specialty}}, \textit{\enquote{Protective-Serv}}, \textit{\enquote{Sales}}, \textit{\enquote{Tech-Support}}.
+        \item \underline{relationship:} represents the family-relationship and can take the values \textit{\enquote{Wife}}, \textit{\enquote{Own-child}},  \textit{\enquote{Husband}}, \textit{\enquote{Not-in-family}}, \textit{\enquote{Other-relative}} and \textit{\enquote{Unmarried}}. It is therefore also a nominal attribute.
+        \item \underline{race:} is another nominal attribute with the values  \textit{\enquote{White}},  \textit{\enquote{Asian-Pac-Islander}},  \textit{\enquote{Amer-Indian-Eskimo}},  \textit{\enquote{Black}} and  \textit{\enquote{Other}}.
+        \item \underline{sex:} is a nominal attribute with the two values  \textit{\enquote{male}} and  \textit{\enquote{female}}.
+        \item \underline{capital-gain:} is an ratio attribute with integer values in [0,99999]. 
+    \end{itemize}
 \section{Superconductivity \href{https://archive.ics.uci.edu/dataset/464/superconductivty+data}{Dataset}}
 
 Superconducters are of growing importance for different uses ranging from nuclear fusion to modern types of transportation. A major problem with the use of superconducters has always been the fact that they need to be cooled below the critical temperature for the resistence to drop dramatically. Therefore it has been an interest of modern science to make superconductors with ever higher critical temperatures. We chose this topic as one of us is studying physics and is therefore interested in superconductors and because we think they will play an important role in the technological future.
