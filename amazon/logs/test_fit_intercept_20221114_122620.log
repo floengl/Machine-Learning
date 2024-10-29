@@ -1,0 +1,13 @@
+14.11.2022 12:26:20
+LinearSVC with fit_intercept=True:
+Accuracy: 0.73
+F1: 0.6964491153291152
+LinearSVC with fit_intercept=False:
+Accuracy: 0.7202666666666667
+F1: 0.6867638628038627
+Ridge with fit_intercept=True:
+Accuracy: 0.7185333333333334
+F1: 0.6773603707403707
+Ridge with fit_intercept=False:
+Accuracy: 0.7196000000000001
+F1: 0.6796890021090021
