@@ -1,0 +1,15 @@
+name: machine-learning-ex-1
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.*
+  - numpy
+  - pandas
+  - scipy
+  - ipykernel
+  - matplotlib
+  - scikit-learn
+  - scikit-optimize
+  - flake8
+  - jupyter
+  - seaborn
