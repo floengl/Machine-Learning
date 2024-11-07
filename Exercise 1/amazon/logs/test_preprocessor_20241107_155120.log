@@ -1,0 +1,19 @@
+07.11.2024 15:51:20
+
+Accuracy RandomForest:
+            scaler dim_reduction      mean       std
+5             none          none  0.577867  0.035564
+3  standard_scaler          none  0.577200  0.034924
+1   max_abs_scaler          none  0.577067  0.035756
+4             none           pca  0.257200  0.032279
+2  standard_scaler           pca  0.256800  0.026708
+0   max_abs_scaler           pca  0.224933  0.030516
+
+F1 RandomForest:
+            scaler dim_reduction      mean       std
+5             none          none  0.537399  0.039602
+3  standard_scaler          none  0.537154  0.038761
+1   max_abs_scaler          none  0.536474  0.040552
+2  standard_scaler           pca  0.236960  0.030180
+4             none           pca  0.219765  0.027139
+0   max_abs_scaler           pca  0.197626  0.032482
