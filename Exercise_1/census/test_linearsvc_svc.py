@@ -16,12 +16,13 @@ X, y = load_training_dataset()
 
 # define preprocessing pipeline
 preprocessor = Pipeline([
-    ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough"))#,
-    #("max_abs_scaler", MaxAbsScaler())
+    ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
+    ("max_abs_scaler", MaxAbsScaler())
 ])
 
 # models to test with
 models = [
+    #("RandomForest", RandomForestClassifier(random_state=1234)),
     ("LinearSVC", LinearSVC(random_state=1234)),
     ("SVC", SVC(random_state=1234,kernel="linear"))
 ]
@@ -31,7 +32,7 @@ for model_name, model in models:
     accuracy = []
     f1 = []
     cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=5, random_state=1234)
-    scores = cross_validate(Pipeline([("scaler",preprocessor),("model",model)]), X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
+    scores = cross_validate(Pipeline([("model",model)]), X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
     accuracy.append((np.mean(scores['test_accuracy']), np.std(scores['test_accuracy'])))
     f1.append((np.mean(scores['test_f1_macro']), np.std(scores['test_f1_macro'])))
     logger.info(f"\nAccuracy {model_name}:")
