@@ -1,0 +1,55 @@
+08.11.2024 19:56:04
+
+Accuracy RandomForest:
+            scaler dim_reduction      mean       std
+1   max_abs_scaler          none  0.501333  0.018667
+3  standard_scaler          none  0.501333  0.016000
+5             none          none  0.498667  0.018667
+4             none           pca  0.226667  0.024000
+2  standard_scaler           pca  0.184000  0.016000
+0   max_abs_scaler           pca  0.172000  0.009333
+
+F1 RandomForest:
+            scaler dim_reduction      mean       std
+1   max_abs_scaler          none  0.463867  0.015441
+3  standard_scaler          none  0.459799  0.013086
+5             none          none  0.458330  0.013845
+4             none           pca  0.195264  0.028372
+2  standard_scaler           pca  0.161088  0.022335
+0   max_abs_scaler           pca  0.148522  0.004349
+
+Accuracy LinearSVC:
+            scaler dim_reduction      mean       std
+3  standard_scaler          none  0.642667  0.005333
+1   max_abs_scaler          none  0.638667  0.001333
+0   max_abs_scaler           pca  0.573333  0.018667
+5             none          none  0.534667  0.012000
+2  standard_scaler           pca  0.516000  0.006667
+4             none           pca  0.398667  0.009333
+
+F1 LinearSVC:
+            scaler dim_reduction      mean       std
+1   max_abs_scaler          none  0.621230  0.000841
+3  standard_scaler          none  0.618527  0.005548
+0   max_abs_scaler           pca  0.556997  0.017171
+5             none          none  0.517226  0.014255
+2  standard_scaler           pca  0.502201  0.000478
+4             none           pca  0.390692  0.003933
+
+Accuracy Ridge:
+            scaler dim_reduction      mean       std
+0   max_abs_scaler           pca  0.649333  0.006667
+2  standard_scaler           pca  0.645333  0.002667
+1   max_abs_scaler          none  0.621333  0.018667
+3  standard_scaler          none  0.606667  0.004000
+4             none           pca  0.542667  0.001333
+5             none          none  0.524000  0.009333
+
+F1 Ridge:
+            scaler dim_reduction      mean       std
+0   max_abs_scaler           pca  0.631382  0.010964
+2  standard_scaler           pca  0.620001  0.000729
+1   max_abs_scaler          none  0.609917  0.020203
+3  standard_scaler          none  0.591999  0.007014
+4             none           pca  0.516768  0.006012
+5             none          none  0.513818  0.011012

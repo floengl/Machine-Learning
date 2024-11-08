@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{geometry}
+
 \geometry{a4paper, margin=1in}
 
 % Title and Author
@@ -37,6 +38,23 @@ This section describes the methodology used in your work.
 This is an example of a subsection.
 
 \section{Preprocessing}
+We will do four different measures to properly preprocess the data. These are: data imputation, encoding of categorical variables,
+scaling of numerical values and dimensionality reduction. In this section we will look at each dataset and 
+describe which tasks can be used on the dataset and how a specific task is performed. Then we will compare the different
+settings for all the models and determine their effectiveness using measures described in the previous section. 
+In order to make this a meaningful comparison, we will use the default hyperparameters for all classifiers and 
+we will split the data equally in the cross-validation.\\
+Data leakage occurs when data is preprocessed before it was split into the training and test set. This way information 
+from the test set is used to preprocess the training set. For example the MinMaxScaler uses the minimun and maximum values 
+to scale these values properly. The values should only be computed on the training set and then be used on both training and 
+test set. This can get rather difficult when using cross-validation. In order to avoid this, we will use the pipelines.    
+Pipelines are a feature of scikit-learn that allow for the chaining of multiple transformers and estimators and also avoid 
+data leakage. We will define a different pipeline for each preprocessing task and variant and chain these pipelines to compare 
+the different settings.\\
+\textbf{Congressional Voting:} As this dataset contains missing values we will need a strategy to impute these values. 
+It is important to note that the missing values are all labeled as \textit{'unknown'}.
+As all the values are categorical there are two possible strategies for data imputation.
+We can either use the most frequent value of the respective attribute in the training dataset or we can t
 
 
 \section{Discussion}

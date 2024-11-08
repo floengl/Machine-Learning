@@ -10,12 +10,15 @@ from sklearn.linear_model import RidgeClassifier
 from sklearn.model_selection import cross_validate, RepeatedStratifiedKFold
 from sklearn.preprocessing import (OneHotEncoder, StandardScaler, MinMaxScaler, RobustScaler,
                                    MaxAbsScaler, QuantileTransformer, PowerTransformer)
+import warnings
+from sklearn.exceptions import ConvergenceWarning
 
 # Set up logging
 logger = setup_logging("test_preprocessor")
 
 # load dataset
 X, y = load_training_dataset()
+
 
 # numeric features don't have missing values, so we only need to scale them
 numeric_transformers = [

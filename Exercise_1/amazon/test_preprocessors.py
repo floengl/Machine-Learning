@@ -9,12 +9,18 @@ from sklearn.linear_model import RidgeClassifier
 from sklearn.model_selection import cross_validate, RepeatedStratifiedKFold
 import numpy as np
 import pandas as pd
-
+import warnings
+from sklearn.exceptions import ConvergenceWarning
 # Set up logging
 logger = setup_logging("test_preprocessor")
 
 # load dataset
 X, y = load_training_dataset()
+
+#disable warnigns for unseen data in test dataset
+warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn.preprocessing._encoders')
+# Suppress the specific ConvergenceWarning from sklearn.svm._base
+warnings.filterwarnings(action='ignore', category=ConvergenceWarning, module='sklearn.svm._base')
 
 # max abs scaler
 max_abs_scaler = Pipeline([
@@ -56,7 +62,7 @@ dim_reductions.append(("none", no_dim_reduction))
 
 # models to test with
 models = [
-    #("RandomForest", RandomForestClassifier(random_state=1234)),
+    ("RandomForest", RandomForestClassifier(random_state=1234)),
     ("LinearSVC", LinearSVC(random_state=1234)),
     ("Ridge", RidgeClassifier(random_state=1234))
 ]
