@@ -81,7 +81,7 @@ for model_name, model in models:
                 ("dim_reduction", dim_reduction),
                 ("model", model)
             ])
-            cv = RepeatedStratifiedKFold(n_splits=2, n_repeats=1, random_state=1234)
+            cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=10, random_state=1234)
             scores = cross_validate(pipeline, X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
             accuracy.append(
                 (name_scaler, name_dim_reduction, np.mean(scores['test_accuracy']), np.std(scores['test_accuracy']))
