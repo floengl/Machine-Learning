@@ -1,0 +1,17 @@
+10.11.2024 12:23:26
+this was calculated using f1
+Accuracy LinearSVC:
+       mean       std
+0  0.963298  0.027496
+
+F1 LinearSVC:
+       mean       std
+0  0.951759  0.035911
+
+Accuracy SVC:
+       mean       std
+0  0.968837  0.024832
+
+F1 SVC:
+       mean       std
+0  0.959104  0.032504

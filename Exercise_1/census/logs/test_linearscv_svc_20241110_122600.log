@@ -1,12 +1,12 @@
-08.11.2024 18:54:06
-This was calculated using f1_macro
+10.11.2024 12:26:00
+this was calculated using f1
 Accuracy LinearSVC:
       mean       std
 0  0.85284  0.002928
 
 F1 LinearSVC:
-       mean       std
-0  0.782319  0.004345
+      mean       std
+0  0.65842  0.006915
 
 Accuracy SVC:
        mean       std
@@ -14,4 +14,4 @@ Accuracy SVC:
 
 F1 SVC:
        mean       std
-0  0.780644  0.003491
+0  0.655971  0.005657
