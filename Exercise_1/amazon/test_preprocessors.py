@@ -1,6 +1,6 @@
 from utils import load_training_dataset, setup_logging
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MaxAbsScaler, StandardScaler
+from sklearn.preprocessing import MaxAbsScaler, StandardScaler, RobustScaler, PowerTransformer, QuantileTransformer
 from sklearn.compose import ColumnTransformer
 from sklearn.decomposition import PCA
 from sklearn.ensemble import RandomForestClassifier
@@ -39,6 +39,23 @@ no_scaling = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough"))
 ])
 
+# robust scaler
+robust_scaler = Pipeline([
+    ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
+    ("robust_scaler", RobustScaler())
+])
+# power transformer
+power_transformer = Pipeline([
+    ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
+    ("power_transformer", PowerTransformer())
+])
+
+# quantile transformer
+quantile_transformer = Pipeline([
+    ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
+    ("quantile_transformer", QuantileTransformer())
+])
+
 # PCA
 pca = Pipeline([
     ("pca", PCA(n_components=0.95))
@@ -54,6 +71,9 @@ scalers = []
 scalers.append(("max_abs_scaler", max_abs_scaler))
 scalers.append(("standard_scaler", standard_scaler))
 scalers.append(("none", no_scaling))
+scalers.append(("robust_scaler", robust_scaler))
+scalers.append(("power_transformer", power_transformer))    
+scalers.append(("quantile_transformer", quantile_transformer))  
 
 # dimensionality reduction to test
 dim_reductions = []
