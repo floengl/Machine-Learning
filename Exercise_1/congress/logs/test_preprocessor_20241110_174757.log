@@ -1,0 +1,31 @@
+10.11.2024 17:47:57
+
+Accuracy rf:
+      preprocessor      mean       std
+1    most_frequent  0.957368  0.025477
+0  nan_is_category  0.954641  0.030115
+
+F1 rf:
+      preprocessor      mean       std
+1    most_frequent  0.949445  0.029810
+0  nan_is_category  0.946511  0.034901
+
+Accuracy LinearSVC:
+      preprocessor      mean       std
+1    most_frequent  0.961512  0.021652
+0  nan_is_category  0.954683  0.027556
+
+F1 LinearSVC:
+      preprocessor      mean       std
+1    most_frequent  0.954048  0.025872
+0  nan_is_category  0.946577  0.032206
+
+Accuracy Ridge:
+      preprocessor      mean       std
+1    most_frequent  0.963351  0.025443
+0  nan_is_category  0.959704  0.029042
+
+F1 Ridge:
+      preprocessor      mean       std
+1    most_frequent  0.956838  0.029714
+0  nan_is_category  0.952928  0.033350
