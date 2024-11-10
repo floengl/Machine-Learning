@@ -12,7 +12,7 @@ import os
 from timeit import default_timer as timer
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import accuracy_score, f1_score
+
 
 # load dataset
 X, y = load_training_dataset()
@@ -70,6 +70,9 @@ models = [
     ("Ridge", ridge),
     ("RandomForest", random_forest)
 ]
+
+
+
 
 data_cv = []
 data_holdout = []
