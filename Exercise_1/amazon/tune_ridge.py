@@ -1,6 +1,6 @@
 from utils import load_training_dataset, setup_logging
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MaxAbsScaler
+from sklearn.preprocessing import MaxAbsScaler, PowerTransformer
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.decomposition import PCA
@@ -18,7 +18,7 @@ X, y = load_training_dataset()
 # define preprocessing pipeline
 preprocessor = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("max_abs_scaler", MaxAbsScaler()),
+    ("power-transformer", PowerTransformer()),
     ("pca", PCA(n_components=0.99))
 ])
 

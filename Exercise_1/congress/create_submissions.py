@@ -29,7 +29,7 @@ ridge = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("imputer", SimpleImputer(strategy="most_frequent")),
     ("one_hot_encoder", OneHotEncoder(drop="if_binary")),
-    ("model", RidgeClassifier(random_state=1234, alpha=0.057, fit_intercept=False))
+    ("model", RidgeClassifier(random_state=1234, alpha=0.0, fit_intercept=True))
 ])
 
 # define Random Forest pipeline

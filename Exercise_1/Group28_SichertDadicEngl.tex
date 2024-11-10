@@ -78,11 +78,23 @@ Here the right number in each cell is the average accuracy and the left number i
 \textbf{nan is category} & 0.955 /0.947 & 0.955 /0.947& 0.960/0.953  \\
 \hline
 \end{tabular}
-\caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} dataset.}
+\caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} datasetW}
 \label{table:imputation}
 \end{table}
 For every classifier the most frequent value imputation strategy yields better results for both accuracy and F1 score.
-In this test we used 5 folds and 10 repetitions for the cross-validation.
+In this test we used 5 folds and 10 repetitions for the cross-validation.\\
+\textbf{Amazon Commerce Reviews:} This dataset contains no missing values, therefore we don't need to impute any values.
+The target attribute has 50 different values, which will be encoded as \textit{0,1,2\ldots,49}. 
+All the other values are numerical, therefore we will try different scaling strategies.
+ We will try the most common scalers in the scikit-learn library, 
+ namely the MinMaxScaler, the StandardScaler, the RobustScaler, the power
+
+
+ \textbf{Census Income:} This dataset hat missing values, but only for categorical values.
+ Those values are labeled with '?'. We will try the same two strategies as for the \textit{Congressional Voting} dataset.
+
+
+
 
 
 
