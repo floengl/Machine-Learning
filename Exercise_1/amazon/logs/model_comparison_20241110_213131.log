@@ -1,0 +1,17 @@
+10.11.2024 21:31:31
+
+Runtime of models:
+   model  train_time  pred_time
+0  Ridge   11.674652   0.268985
+
+Holdout results:
+      model_score     score
+0  Ridge Accuracy  0.684444
+1  Ridge F1_macro  0.646795
+
+Cross validation results:
+                   score          
+                    mean       std
+model_score                       
+Ridge Accuracy  0.698667  0.007542
+Ridge F1_macro  0.684092  0.006615

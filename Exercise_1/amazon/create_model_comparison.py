@@ -1,6 +1,6 @@
 from utils import Config, load_training_dataset, setup_logging
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MaxAbsScaler
+from sklearn.preprocessing import MaxAbsScaler, PowerTransformer
 from sklearn.decomposition import PCA
 from sklearn.compose import ColumnTransformer
 from sklearn.svm import LinearSVC
@@ -28,9 +28,9 @@ linear_svc = Pipeline([
 # define RidgeClassifier pipeline
 ridge = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("max_abs_scaler", MaxAbsScaler()),
+    ("max_abs_scaler", PowerTransformer()),
     ("pca", PCA(n_components=0.99)),
-    ("model", RidgeClassifier(random_state=1234, alpha=51.6, fit_intercept=False))
+    ("model", RidgeClassifier(random_state=1234, alpha=65.6, fit_intercept=False))
 ])
 
 # define Random Forest pipeline
