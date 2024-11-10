@@ -14,7 +14,7 @@
 \geometry{a4paper, margin=1in}
 
 % Title and Author
-\title{Your Document Title}
+\title{Exercise 1}
 \author{Your Name}
 
 \begin{document}
@@ -87,8 +87,16 @@ In this test we used 5 folds and 10 repetitions for the cross-validation.
 
 
 
-\section{Discussion}
-This section discusses the implications of your results.
+\section{Hyperparameters}
+Now we want to take a closer look at the hyperparameters of our models. In a first step we want to optimize the hyperparameters for the different datasets.
+In a second step we will analyze how sensitive the models are to changes in the hyperparameters. Unfortunately we will not be able to find the optimum for all hyperparameters, as scikit-learn offers a wide range, so we are going to focus on the most important ones.\\
+
+For tuning we want to use Bayesian Optimization from the scikit-optimize package. Bayesian Optimization is a probabilistic approach to finding the minimum or maximum. This means that it builds a probabilistic model of the function and uses this model to decide on where to evaluate in the next step. In our case the function is given by the performance measure. 
+
+Bayesian Optimization does not only take a function as input but a search space as well, which is why we need to decide on an appropriate rnage of values for the parameters as well. Moreover, because we chose two different performance measures for each dataset, we will have to do the optimization twice and then compare results to get the overall best.
+
+
+
 
 \section{Conclusion}
 This is the conclusion section. Summarize your findings and suggest future work.
