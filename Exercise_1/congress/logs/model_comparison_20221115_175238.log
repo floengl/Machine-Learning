@@ -1,5 +1,0 @@
-15.11.2022 17:52:38
-          model  train_time  pred_time
-0     LinearSVC    0.005062   0.002915
-1         Ridge    0.006125   0.002309
-2  RandomForest    2.348486   0.192418
