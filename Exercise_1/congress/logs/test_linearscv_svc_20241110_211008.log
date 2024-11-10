@@ -1,0 +1,25 @@
+10.11.2024 21:10:08
+
+Accuracy LinearSVC:
+       mean       std
+0  0.954292  0.028785
+
+F1 LinearSVC:
+       mean       std
+0  0.946136  0.033497
+
+F1_macro LinearSVC:
+      mean      std
+0  0.95318  0.02938
+
+Accuracy SVC:
+       mean       std
+0  0.952431  0.028743
+
+F1 SVC:
+       mean       std
+0  0.943883  0.033176
+
+F1_macro SVC:
+      mean       std
+0  0.95125  0.029278

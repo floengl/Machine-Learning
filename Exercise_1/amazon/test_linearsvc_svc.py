@@ -29,12 +29,20 @@ models = [
 # Run the two models
 for model_name, model in models:
     accuracy = []
-    f1 = []
+    f1_micro = []
+    f1_macro = []
+    f1_weighted = []
     cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=5, random_state=1234)
-    scores = cross_validate(Pipeline([("scaler",preprocessor),("model",model)]), X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
+    scores = cross_validate(Pipeline([("scaler", preprocessor), ("model", model)]), X, y, scoring=["accuracy", "f1_micro", "f1_macro", "f1_weighted"], cv=cv, n_jobs=-1)
     accuracy.append((np.mean(scores['test_accuracy']), np.std(scores['test_accuracy'])))
-    f1.append((np.mean(scores['test_f1_macro']), np.std(scores['test_f1_macro'])))
+    f1_micro.append((np.mean(scores['test_f1_micro']), np.std(scores['test_f1_micro'])))
+    f1_macro.append((np.mean(scores['test_f1_macro']), np.std(scores['test_f1_macro'])))
+    f1_weighted.append((np.mean(scores['test_f1_weighted']), np.std(scores['test_f1_weighted'])))
     logger.info(f"\nAccuracy {model_name}:")
     logger.info(pd.DataFrame(accuracy, columns=['mean', 'std']).sort_values(by='mean', ascending=False))
-    logger.info(f"\nF1 {model_name}:")
-    logger.info(pd.DataFrame(f1, columns=['mean', 'std']).sort_values(by='mean', ascending=False))
+    logger.info(f"\nF1_micro {model_name}:")
+    logger.info(pd.DataFrame(f1_micro, columns=['mean', 'std']).sort_values(by='mean', ascending=False))
+    logger.info(f"\nF1_macro {model_name}:")
+    logger.info(pd.DataFrame(f1_macro, columns=['mean', 'std']).sort_values(by='mean', ascending=False))
+    logger.info(f"\nF1_weighted {model_name}:")
+    logger.info(pd.DataFrame(f1_weighted, columns=['mean', 'std']).sort_values(by='mean', ascending=False))
