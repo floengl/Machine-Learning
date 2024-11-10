@@ -78,14 +78,41 @@ Here the right number in each cell is the average accuracy and the left number i
 \textbf{nan is category} & 0.955 /0.947 & 0.955 /0.947& 0.960/0.953  \\
 \hline
 \end{tabular}
-\caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} dataset.}
+\caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} datasetW}
 \label{table:imputation}
 \end{table}
 For every classifier the most frequent value imputation strategy yields better results for both accuracy and F1 score.
-In this test we used 5 folds and 10 repetitions for the cross-validation.
+In this test we used 5 folds and 10 repetitions for the cross-validation.\\
+\textbf{Amazon Commerce Reviews:} This dataset contains no missing values, therefore we don't need to impute any values.
+The target attribute has 50 different values, which will be encoded as \textit{0,1,2\ldots,49}. 
+All the other values are numerical, therefore we will try different scaling strategies.
+We will try the most common scalers in the scikit-learn library, 
+\begin{itemize}
+    \item the MinMaxScaler which scales each feature to a given range, which is by default 0 to 1,
+    \item the MaxAbsScaler which divides each feature by the maximum absolute values of the respective attribute,
+    \item the StandardScaler which divides each feature by the standard deviation of the attribute,
+    \item the RobustScaler which subtracts the median from each value and divides the result by the interquartile range of the respective attribute,
+    \item the PowerTransformer which applies a power transformation to make the data more Gaussian-like,
+    \item the QuantileTransformer which transforms the data to follow a uniform distribution.
+\end{itemize}
+The Transformers and the RobustScaler are known to be robust to outliers. We have also tested a method for dimensionality reduction called
+principal component analysis (PCA). This method is used to reduce the number of features by projecting the data onto a lower dimensional space. 
+The n\_components= 0.95 parameter determines, that our data should be projected onto the number of dimensions that explain 95\% of the variance.
+Again the results are visualized in table~\ref{table:scaling}.
 
 
 
+In the above Experiment we have used 5 folds and 10 repetitions for the cross-validation. The best results are achieved by the PowerTransformer for all classifiers. However, only the ridge classifier benefited from the
+dimension reduction.
+
+
+
+ \textbf{Census Income:} This dataset hat missing values, but only for categorical values.
+ Those values are labeled with \textit{'?'}. We will try the same two strategies as for the \textit{Congressional Voting} dataset.
+ The only exception is the \textit{'education'} column. This column is already encoded as the
+ \textit{'education-num'} column and will therefore be dropped. For the numeric columns 
+ we tested the same numerical scalers, which we have tried for the 
+ \textit{Amazon Commerce Reviews} dataset. 
 
 \section{Hyperparameters}
 Now we want to take a closer look at the hyperparameters of our models. In a first step we want to optimize the hyperparameters for the different models and datasets.
@@ -97,6 +124,10 @@ Bayesian Optimization does not only take a function as input but a search space 
 
 
 
+
+
+\section{Discussion}
+This section discusses the implications of your results.
 
 \section{Conclusion}
 This is the conclusion section. Summarize your findings and suggest future work.
