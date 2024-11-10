@@ -20,7 +20,7 @@ logger = setup_logging("test_preprocessor")
 X, y = load_training_dataset()
 
 
-J# numeric features don't have missing values, so we only need to scale them
+# numeric features don't have missing values, so we only need to scale them
 numeric_transformers = [
     ("StandardScaler", StandardScaler()),
     ("MinMaxScaler", MinMaxScaler()),

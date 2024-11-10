@@ -12,7 +12,9 @@ import os
 from timeit import default_timer as timer
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+from sklearn.metrics import accuracy_score, f1_score
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 
 # load dataset
 X, y = load_training_dataset()
