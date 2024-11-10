@@ -1,6 +1,6 @@
 from utils import load_training_dataset, setup_logging
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MaxAbsScaler, StandardScaler, RobustScaler, PowerTransformer, QuantileTransformer
+from sklearn.preprocessing import MaxAbsScaler, StandardScaler, RobustScaler, PowerTransformer, QuantileTransformer, MinMaxScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.decomposition import PCA
 from sklearn.ensemble import RandomForestClassifier
@@ -54,6 +54,10 @@ power_transformer = Pipeline([
 quantile_transformer = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("quantile_transformer", QuantileTransformer())
+])
+minmax_scaler = Pipeline([
+    ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
+    ("minmax_scaler", MinMaxScaler())
 ])
 
 # PCA
