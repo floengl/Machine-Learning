@@ -13,6 +13,7 @@ from timeit import default_timer as timer
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import accuracy_score, f1_score
+from sklearn.ensemble import GradientBoostingClassifier
 
 # load dataset
 X, y = load_training_dataset()
@@ -40,12 +41,14 @@ random_forest = Pipeline([
                                      min_samples_split=2, min_samples_leaf=1, max_features="sqrt"))
 ])
 
+
 # all models
 models = [
     ("LinearSVC", linear_svc),
     ("Ridge", ridge),
     ("RandomForest", random_forest)
 ]
+
 
 data_cv = []
 data_holdout = []
