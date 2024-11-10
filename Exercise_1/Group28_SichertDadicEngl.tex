@@ -7,6 +7,10 @@
 \usepackage{hyperref}
 \usepackage{geometry}
 
+\usepackage{colortbl} % For coloring table cells and lines
+\usepackage[table]{xcolor} % For more color options
+
+
 \geometry{a4paper, margin=1in}
 
 % Title and Author
@@ -51,13 +55,35 @@ test set. This can get rather difficult when using cross-validation. In order to
 Pipelines are a feature of scikit-learn that allow for the chaining of multiple transformers and estimators and also avoid 
 data leakage. We will define a different pipeline for each preprocessing task and variant and chain these pipelines to compare 
 the different settings.\\
-
-\subsection{Congressional Voting}
-As this dataset contains missing values we will need a strategy to impute these values. 
+\textbf{Congressional Voting:} As this dataset contains missing values we will need a strategy to impute these values. 
 It is important to note that the missing values are all labeled as \textit{'unknown'}.
 As all the values are categorical there are two possible strategies for data imputation.
-We can either use the most frequent value of the respective attribute in the training dataset 
-or we can treat the missing values as a separate category.
+We can either use the most frequent value of the respective attribute in the training dataset
+or we can treat the missing values as a separate category. We will use one-hot-encoding for the categorical values,
+except for the binary ones. Binary values will be encoded as 0 and 1. By using one-hot-encoding
+the tow different treatments of the missing values will yield a different encoding. Still all the values remain binary, 
+so no further scaling is needed. As the dataset is rather small, we will not use dimensionality reduction. This means
+that we will only compare the two different strategies for data imputation.
+In table~\ref{table:imputation} the results are visualized for the different classifiers.
+Here the right number in each cell is the average accuracy and the left number is the average F1 score.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Data Imputation} & \textbf{Random Forest} & \textbf{LinearSVC} & \textbf{Ridge} \\
+\hline
+\textbf{most frequent} & \cellcolor[HTML]{C1E1C1} 0.957 /0.949  & \cellcolor[HTML]{C1E1C1} 0.962/0.954  & \cellcolor[HTML]{C1E1C1} 0.963 /0.957 \\
+\hline
+\textbf{nan is category} & 0.955 /0.947 & 0.955 /0.947& 0.960/0.953  \\
+\hline
+\end{tabular}
+\caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} dataset.}
+\label{table:imputation}
+\end{table}
+For every classifier the most frequent value imputation strategy yields better results for both accuracy and F1 score.
+In this test we used 5 folds and 10 repetitions for the cross-validation.
+
 
 
 
