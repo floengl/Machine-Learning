@@ -17,7 +17,7 @@ X, y = load_training_dataset()
 
 # define LinearSVC pipeline
 linear_svc = Pipeline([
-    ("preprocessor", StandardScaler()),
+    ("preprocessor", Pipeline([("none", "passthrough")])),
     ("model", LinearSVC(random_state=1234, max_iter=100000, dual=False, C=0.028072,
                         class_weight="balanced", fit_intercept=False))
 ])

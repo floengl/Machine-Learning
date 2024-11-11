@@ -16,7 +16,7 @@ X, y = load_training_dataset()
 
 # define estimator
 estimator = Pipeline([
-    ("preprocessor", StandardScaler()),
+    ("preprocessor", Pipeline([("none", "passthrough")])),
     ("model", LinearSVC(random_state=1234, max_iter=100000, dual=False))
 ])
 

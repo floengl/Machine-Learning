@@ -23,6 +23,7 @@ scalers = [
     ("MaxAbsScaler", MaxAbsScaler()),
     ("RobustScaler", RobustScaler()),
     ("PowerTransformer", PowerTransformer()),
+    ("QuantileTransformer", PowerTransformer()),
     ("None", Pipeline([("none", "passthrough")]))
 ]
 
