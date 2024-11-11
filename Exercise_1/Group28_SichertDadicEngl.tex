@@ -157,9 +157,11 @@ PowerTransformer & \textit{'?'} is category & 0.852 / 0.666 & 0.846 / 0.645 & 0.
 \end{table}
 
 We used 5 folds and 5 repetitions in the cross-validation for this experiment, except for the random forest
-classifier. The random forest classifier was too slow and we had to reduce the number of repetitions to 1.
+classifier. The random forest classifier was too slow, and we had to reduce the number of repetitions to 1.
 
- \textbf{Diabetes:} 
+ \textbf{Diabetes:} This dataset does not have any missing values except for the target attribute. Therefore, we 
+ don't need to consider data imputation. As the dataset is very low dimensional, we will not use any dimensionality reduction. 
+ So we will only compare different caling methods 
 
 
 
