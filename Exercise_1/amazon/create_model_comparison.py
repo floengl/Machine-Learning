@@ -22,7 +22,7 @@ X, y = load_training_dataset()
 linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("max_abs_scaler", MaxAbsScaler()),
-    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.02344))
+    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.02344,dual=True))
 ])
 
 # define RidgeClassifier pipeline
@@ -45,8 +45,8 @@ random_forest = Pipeline([
 # all models
 models = [
     ("LinearSVC", linear_svc),
-    ("Ridge", ridge),
-    ("RandomForest", random_forest)
+    #("Ridge", ridge),
+    #("RandomForest", random_forest)
 ]
 
 
@@ -56,7 +56,7 @@ data_runtime = []
 plt.figure(figsize=(10, 6))
 for name, model in models:
     # evaluate model with cross validation
-    cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=5, random_state=1234)
+    cv = RepeatedStratifiedKFold(n_splits=2, n_repeats=1, random_state=1234)
     scores = cross_validate(model, X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
     # evaluate model with holdout method and measure runtime
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
