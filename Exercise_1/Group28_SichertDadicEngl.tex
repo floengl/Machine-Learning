@@ -112,7 +112,60 @@ dimension reduction.
  The only exception is the \textit{'education'} column. This column is already encoded as the
  \textit{'education-num'} column and will therefore be dropped. For the numeric columns 
  we tested the same numerical scalers, which we have tried for the 
- \textit{Amazon Commerce Reviews} dataset. 
+ \textit{Amazon Commerce Reviews} dataset. Since the dataset only has 14 features,
+we will not use dimensionality reduction. Like for the previous
+datasets we will present the result in a table, where the first score in each cell is accuracy and the second
+number is the F1 score.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Scaler} & \textbf{Data Imputation} & \textbf{Random Forest} & \textbf{LinearSVC} & \textbf{Ridge} \\
+\hline
+StandardScaler & most frequent & \cellcolor[HTML]{C1E1C1} 0.857 / 0.677 & 0.852 / 0.655 & 0.841 / 0.607 \\
+\hline
+MaxAbsScaler & most frequent & 0.857 / 0.676 & 0.851 / 0.654 & 0.841 / 0.607 \\
+\hline
+None & most frequent & 0.857 / 0.676 & 0.800 / 0.379 & 0.830 / 0.567 \\
+\hline
+MinMaxScaler & most frequent & 0.857 / 0.676 & 0.852 / 0.654 & 0.841 / 0.607 \\
+\hline
+RobustScaler & most frequent & 0.857 / 0.676 & 0.851 / 0.649 & 0.830 / 0.561 \\
+\hline
+QuantileTransformer & most frequent & 0.857 / 0.676 & 0.845 / 0.645 & 0.842 / 0.621 \\
+\hline
+PowerTransformer & most frequent & 0.852 / 0.665 & 0.845 / 0.645 & 0.842 / 0.621 \\
+\hline
+MaxAbsScaler & \textit{'?'} is category & 0.857 / 0.676 & 0.853 / 0.659 & 0.841 / 0.610 \\
+\hline
+RobustScaler & \textit{'?'} is category & 0.857 / 0.676 & 0.852 / 0.658 & 0.841 / 0.610 \\
+\hline
+None & \textit{'?'} is category & 0.857 / 0.676 & 0.800 / 0.379 & 0.830 / 0.568 \\
+\hline
+StandardScaler & \textit{'?'} is category & 0.857 / 0.676 & \cellcolor[HTML]{C1E1C1}0.853 / 0.659 & 0.841 / 0.610 \\
+\hline
+MinMaxScaler & \textit{'?'} is category & 0.857 / 0.676 & 0.853 / 0.658 & 0.841 / 0.610 \\
+\hline
+QuantileTransformer & \textit{'?'} is category & 0.857 / 0.676 & 0.847 / 0.649 & \cellcolor[HTML]{C1E1C1} 0.844 / 0.627 \\
+\hline
+PowerTransformer & \textit{'?'} is category & 0.852 / 0.666 & 0.846 / 0.645 & 0.843 / 0.623 \\
+\hline
+\end{tabular}
+\caption{Comparison of different numeric and categorical transformers for the \textit{Census Income} dataset}
+\label{table:censustransformers}
+\end{table}
+
+We used 5 folds and 5 repetitions in the cross-validation for this experiment, except for the random forest
+classifier. The random forest classifier was too slow and we had to reduce the number of repetitions to 1.
+
+ \textbf{Diabetes:} 
+
+
+
+
+
+
 
 \section{Hyperparameters}
 Now we want to take a closer look at the hyperparameters of our models. In a first step we want to optimize the hyperparameters for the different models and datasets.
