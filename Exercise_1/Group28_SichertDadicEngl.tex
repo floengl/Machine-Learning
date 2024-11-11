@@ -86,7 +86,7 @@ In this test we used 5 folds and 10 repetitions for the cross-validation.\\
 \textbf{Amazon Commerce Reviews:} This dataset contains no missing values, therefore we don't need to impute any values.
 The target attribute has 50 different values, which will be encoded as \textit{0,1,2\ldots,49}. 
 All the other values are numerical, therefore we will try different scaling strategies.
-We will try the most common scalers in the scikit-learn library, 
+We will try the most common scalers in the scikit-learn library, namely 
 \begin{itemize}
     \item the MinMaxScaler which scales each feature to a given range, which is by default 0 to 1,
     \item the MaxAbsScaler which divides each feature by the maximum absolute values of the respective attribute,
