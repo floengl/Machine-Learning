@@ -31,7 +31,8 @@ estimator = Pipeline([
 # search space
 search_space = {
     "model__alpha": Real(0, 100),
-    "model__fit_intercept": [True, False]
+    "model__fit_intercept": [True, False],
+    "model__class_weight": ["balanced", None]
 }
 
 # cross validation strategy
@@ -56,7 +57,7 @@ for score in ["accuracy", "f1_macro"]:
     logger.info(f"Scoring: {score}")
     logger.info(f"Best score: {optimizer.best_score_}")
     logger.info(f"Best params: {optimizer.best_params_}")
-    df = pd.DataFrame(optimizer.cv_results_)[["param_model__alpha", "param_model__fit_intercept",
+    df = pd.DataFrame(optimizer.cv_results_)[["param_model__alpha", "param_model__fit_intercept", "param_model__class_weight",
                                               "mean_test_score", "std_test_score", "rank_test_score"]]
     logger.info("CV results:")
     logger.info(df.sort_values("rank_test_score").to_string())
