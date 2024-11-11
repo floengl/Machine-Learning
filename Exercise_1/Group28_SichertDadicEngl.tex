@@ -283,15 +283,15 @@ the time it took the test the model. Those values are displayed in table~\ref{ei
 
 
 On the contrary, the linear support vector classifier and ridge classifier performed similar
-on the first glance. The results from ”Amazon Commerce Reviews” and ”Census Income” might suggest,
+on the first glance. The results from \textit{'Amazon Commerce Reviews'} and \textit{'Census Income'} might suggest,
 that the linear support vector classifier is faster for high dimensional datasets, whereas the ridge classifier
 is quicker with a high number of instances. We found out that the parameter dual of the linear support
 vector classifier has a great influence on its runtime. This parameter describes whether the algorithm
 should solve for the primal or dual optimization problem. Let n be number of samples and d the number
 of dimensions of a dataset. The dual formulation requires the computation of a n × n matrix, whereas
 in the primal formulation a d × d matrix is calculated. Therefore the primal formulation is faster for
-datasets, where n > d, which was especially noticeable for the ”Census Income” dataset. Also on the dual 
-dataset as it is very low dimensional the dual formulation is faster. The results are shown in table~\ref{tab:dual_comparison}.
+datasets, where n > d, which was especially noticeable for the ”Census Income” dataset. Also on the~\textit{'Diabetes'}
+dataset as it is very low dimensional the dual prosedure is faster. The results are shown in table~\ref{tab:dual_comparison}.
 
 \begin{table}[h!]
 \centering
@@ -312,6 +312,27 @@ Diabetes & 0.004 & 1.25 \\
 \caption{Comparison of Dual and Not Dual values for different datasets}
 \label{tab:dual_comparison}
 \end{table}
+
+
+After all experiments our final conclusion is that no classifier we used outperformed the other across all
+datasets. The results in table \ref{einfügen} imply that the effectiveness of a classifier is highly dependent on the
+dataset. What we can establish is that the linear support vector classifier was never the worst in both
+metrics. Therefore it seems to be a very versatile classifier. In comparison the success for random forests
+varied quite a lot for different datasets and effectiveness measures. This could be due to the fact, that
+decision trees generally tend to overfit the model. As for efficiency, table \ref{einfügen} highlighted a big weakness of
+the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{einfügen}, choosing
+the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
+though in varying magnitude for different classifiers and datasets. Here random forest seems the be the
+least influenced by the choice of scaler as seen in table \ref{einfügen} and \ref{einfügen}. The sensitivity analysis in section \ref{einfügen}
+showed how much of an impact even a single hyperparameter can have on the overall performance of a
+model. However, comparing the results of section \ref{einfügen} with the ones in section \ref{einfügen} and table \ref{einfügen}, it is clear that
+tuning the parameters hardly influenced the result for the ”congressional voting” dataset. In contrast, the
+recall score for the ”diabetes” dataset and both effectiveness scores for the ”Amazon Commerce Reviews”
+improved a lot after the parameter tuning. For the dataset ”Census Income” only the support vector
+classifier improved after optimizing the F1 score. As a summary of this whole project we would say that
+the best strategy for a classification problem majorly depends on the dataset in the beginning. Once a
+classifier is chosen everything else depends on the combination of the two including the importance of
+parameter tuning and preprocessing as well as the overall success.
 
 
 % References
