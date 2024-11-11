@@ -9,6 +9,8 @@
 
 \usepackage{colortbl} % For coloring table cells and lines
 \usepackage[table]{xcolor} % For more color options
+\usepackage{booktabs}
+
 
 
 \geometry{a4paper, margin=1in}
@@ -163,7 +165,8 @@ missing values as an extra category for the linear support vector classifier and
 combined with setting missing values as an extra category for the ridge classifier.\\
 \textbf{Diabetes:} This dataset does not have any missing values except for the target attribute. Therefore, we 
  don't need to consider data imputation. As the dataset is very low dimensional, we will not use any dimensionality reduction. 
- So we will only compare different scaling methods 
+ So we will only compare different scaling methods. We have used the already introduced scaling methods 
+ and got the result shown in table~\ref{table:diabetesscalers}.
  \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|c|c|}
@@ -176,9 +179,9 @@ MaxAbsScaler & 0.767 / 0.590 & 0.771 / 0.553 & 0.769 / 0.543 \\
 \hline
 RobustScaler & 0.766 / 0.589 & 0.770 / 0.560 & 0.770 / 0.555 \\
 \hline
-None & 0.766 / 0.588 & 0.771 / 0.559 & 0.770 / 0.555 \\
+None & 0.766 / 0.588 & \cellcolor[HTML]{C1E1C1}0.771 / 0.559 & 0.770 / 0.555 \\
 \hline
-StandardScaler & 0.766 / 0.589 & \cellcolor[HTML]{C1E1C1}0.770 / 0.560 &\cellcolor[HTML]{C1E1C1} 0.770 / 0.555 \\
+StandardScaler & 0.766 / 0.589 & 0.770 / 0.560 &\cellcolor[HTML]{C1E1C1} 0.770 / 0.555 \\
 \hline
 PowerTransformer & 0.766 / 0.592 & 0.763 / 0.564 & 0.761 / 0.554 \\
 \hline
@@ -188,6 +191,7 @@ QuantileTransformer & 0.766 / 0.592 & 0.763 / 0.564 & 0.761 / 0.554 \\
 \caption{Comparison of different scalers for the \textit{Diabetes} dataset}
 \label{table:diabetesscalers}
 \end{table}
+In the end we decided to use the scalers marked in green for the respective classifiers.\\
 
 
 
@@ -211,7 +215,57 @@ Bayesian Optimization does not only take a function as input but a search space 
 This section discusses the implications of your results.
 
 \section{Conclusion}
-This is the conclusion section. Summarize your findings and suggest future work.
+The goal of this section is to compare the classifiers for each dataset and give a general overview on the
+performance of the tested classifiers. To make this comparison fair, we ensured to use exactly the same
+splits within each dataset in the cross-validation. This is achieved by always using the same random state
+when creating the splits. Of course we applied the most successful preprocessing steps as discussed in
+section 4 and the hyperparameter settings established in section 5, which ensures that each classifier
+performs as good as possible. This way we can accurately state which classification algorithm performed
+best for each dataset.\\
+In table~\ref{tab:best_results} we summarized the top performance measures for each dataset and classifier. We also compared
+the best result for accuracy with the accuracy of the ”Dummy classifier”, which is shown in table 11.
+The ”Dummy classifier” always predicts the majority class, so it can be used to establish a baseline. If
+the accuracy of a classifier is better than this baseline, then that classifier must have learned something.
+We can only use accuracy as a metric for the ”Dummy classifier”, because the F1 score is not defined as
+you would divide by zero in the calculation.
+
+\begin{table}[h!]
+\centering
+\footnotesize
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\hline
+& \multicolumn{2}{c|}{congressional voting} & \multicolumn{2}{c|}{Amazon Reviews} & \multicolumn{2}{c|}{Census Income} & \multicolumn{2}{c|}{diabetes} \\
+\hline
+& Accuracy & F1 & Accuracy & F1 & Accuracy & F1 & Accuracy & Recall \\
+\hline
+Random Forest & 0.973 & 0.966 & 0.708 & 0.667 & 0.805 & 0.677 & 0.766 & 0.623 \\
+\hline
+LinearSVC & 0.969 & 0.961 & 0.742 & 0.710 & 0.866 & 0.684 & 0.736 & 0.796 \\
+\hline
+Ridge & 0.968 & 0.959 & 0.743 & 0.706 & 0.844 & 0.626 & 0.737 & 0.795 \\
+\hline
+Baseline & 0.624 & - & 0.031 & - & 0.761 & - & 0.651 & - \\
+\hline
+\end{tabular}
+\vspace{0.3cm}
+\caption{Best results for each dataset and classifier}
+\label{tab:best_results}
+\end{table}
+The scores in table 11 are computed using repeated stratified 5-fold
+cross-validation. We chose 10 repetitions for the datasets ”congressional voting” and ”diabetes” and 5
+repetitions for the other two datasets (due to runtime).
+From this table we can conclude that on the dataset \textit{'congressional voting'} the random forest classifier
+performed the best. If we again prefer F1 score for the dataset \textit{'Amazon Commerce Reviews'}, then the
+linear support vector classifier gives the best results. For the dataset \textit{'Census income'} we can see that
+the linear support vector classifier is performing best with respect to both performance measures. Lastly,
+for the \text{diabetes} dataset there is no clear choice. But if we keep our preferences the same as in the
+last few sections, we can conclude that either the linear support vector classifier or the ridge classifier
+are the best choice for this dataset. \\
+At this point we also want to compare cross-validation to the hold-out method. 
+The hold-out method works by taking 70\% of the data as the training set and the remaining 30\% as the test set.
+Then on the test set an evaluation is done. The cross-validation has already been introduced in a previous section.
+
+
 
 % References
 \begin{thebibliography}{9}
