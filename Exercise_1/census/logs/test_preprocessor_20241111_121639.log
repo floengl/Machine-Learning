@@ -1,0 +1,103 @@
+11.11.2024 12:16:39
+
+Accuracy RandomForest:
+    numeric_transformer categorical_transformer      mean       std
+1        StandardScaler           most_frequent  0.857274  0.002582
+5          MaxAbsScaler           most_frequent  0.857029  0.002483
+11  QuantileTransformer           most_frequent  0.857008  0.002610
+4          MaxAbsScaler         nan_is_category  0.856967  0.002933
+6          RobustScaler         nan_is_category  0.856947  0.002619
+13                 None           most_frequent  0.856926  0.002566
+12                 None         nan_is_category  0.856824  0.002899
+3          MinMaxScaler           most_frequent  0.856804  0.002697
+7          RobustScaler           most_frequent  0.856804  0.002275
+0        StandardScaler         nan_is_category  0.856783  0.002618
+2          MinMaxScaler         nan_is_category  0.856763  0.002474
+10  QuantileTransformer         nan_is_category  0.856271  0.002576
+8      PowerTransformer         nan_is_category  0.852197  0.002653
+9      PowerTransformer           most_frequent  0.851603  0.002002
+
+F1 RandomForest:
+    numeric_transformer categorical_transformer      mean       std
+1        StandardScaler           most_frequent  0.676829  0.005965
+5          MaxAbsScaler           most_frequent  0.676212  0.005835
+11  QuantileTransformer           most_frequent  0.676166  0.006767
+13                 None           most_frequent  0.676023  0.006064
+4          MaxAbsScaler         nan_is_category  0.675816  0.006825
+7          RobustScaler           most_frequent  0.675802  0.005544
+6          RobustScaler         nan_is_category  0.675684  0.006591
+3          MinMaxScaler           most_frequent  0.675650  0.006546
+12                 None         nan_is_category  0.675412  0.006946
+0        StandardScaler         nan_is_category  0.675408  0.006446
+2          MinMaxScaler         nan_is_category  0.675251  0.006357
+10  QuantileTransformer         nan_is_category  0.674442  0.006403
+8      PowerTransformer         nan_is_category  0.665640  0.007450
+9      PowerTransformer           most_frequent  0.664633  0.005792
+
+Accuracy Ridge:
+    numeric_transformer categorical_transformer      mean       std
+10  QuantileTransformer         nan_is_category  0.843712  0.002518
+8      PowerTransformer         nan_is_category  0.842533  0.002627
+11  QuantileTransformer           most_frequent  0.842124  0.002868
+9      PowerTransformer           most_frequent  0.841444  0.002943
+0        StandardScaler         nan_is_category  0.841309  0.002579
+2          MinMaxScaler         nan_is_category  0.841272  0.002593
+4          MaxAbsScaler         nan_is_category  0.841272  0.002602
+1        StandardScaler           most_frequent  0.840739  0.002527
+5          MaxAbsScaler           most_frequent  0.840674  0.002561
+3          MinMaxScaler           most_frequent  0.840670  0.002540
+12                 None         nan_is_category  0.830490  0.002174
+6          RobustScaler         nan_is_category  0.830228  0.002355
+13                 None           most_frequent  0.830212  0.002302
+7          RobustScaler           most_frequent  0.829733  0.002468
+
+F1 Ridge:
+    numeric_transformer categorical_transformer      mean       std
+10  QuantileTransformer         nan_is_category  0.627558  0.006588
+8      PowerTransformer         nan_is_category  0.622593  0.007112
+11  QuantileTransformer           most_frequent  0.620822  0.007838
+9      PowerTransformer           most_frequent  0.618073  0.008046
+0        StandardScaler         nan_is_category  0.609841  0.007096
+2          MinMaxScaler         nan_is_category  0.609722  0.007153
+4          MaxAbsScaler         nan_is_category  0.609699  0.007169
+1        StandardScaler           most_frequent  0.607452  0.007063
+5          MaxAbsScaler           most_frequent  0.607313  0.007237
+3          MinMaxScaler           most_frequent  0.607291  0.007156
+12                 None         nan_is_category  0.568220  0.006343
+13                 None           most_frequent  0.567234  0.006533
+6          RobustScaler         nan_is_category  0.562210  0.006904
+7          RobustScaler           most_frequent  0.560721  0.007214
+
+Accuracy LinearSVC:
+    numeric_transformer categorical_transformer      mean       std
+0        StandardScaler         nan_is_category  0.853110  0.002971
+2          MinMaxScaler         nan_is_category  0.852852  0.002930
+4          MaxAbsScaler         nan_is_category  0.852840  0.002928
+6          RobustScaler         nan_is_category  0.851730  0.002998
+1        StandardScaler           most_frequent  0.851640  0.002890
+3          MinMaxScaler           most_frequent  0.851513  0.002868
+5          MaxAbsScaler           most_frequent  0.851501  0.002875
+7          RobustScaler           most_frequent  0.850555  0.002861
+10  QuantileTransformer         nan_is_category  0.846800  0.002579
+8      PowerTransformer         nan_is_category  0.845907  0.002759
+11  QuantileTransformer           most_frequent  0.845232  0.002791
+9      PowerTransformer           most_frequent  0.844609  0.002794
+12                 None         nan_is_category  0.799713  0.002650
+13                 None           most_frequent  0.799648  0.002593
+
+F1 LinearSVC:
+    numeric_transformer categorical_transformer      mean       std
+0        StandardScaler         nan_is_category  0.659254  0.007065
+2          MinMaxScaler         nan_is_category  0.658446  0.006924
+4          MaxAbsScaler         nan_is_category  0.658420  0.006915
+1        StandardScaler           most_frequent  0.654789  0.006735
+3          MinMaxScaler           most_frequent  0.654271  0.006772
+5          MaxAbsScaler           most_frequent  0.654246  0.006770
+6          RobustScaler         nan_is_category  0.653299  0.008117
+10  QuantileTransformer         nan_is_category  0.649499  0.007001
+7          RobustScaler           most_frequent  0.648527  0.007910
+11  QuantileTransformer           most_frequent  0.645178  0.007057
+8      PowerTransformer         nan_is_category  0.644644  0.007057
+9      PowerTransformer           most_frequent  0.640268  0.006933
+12                 None         nan_is_category  0.378531  0.010082
+13                 None           most_frequent  0.378281  0.009874

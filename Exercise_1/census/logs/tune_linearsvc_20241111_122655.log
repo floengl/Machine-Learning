@@ -1,0 +1,115 @@
+11.11.2024 12:26:55
+Scoring: accuracy
+Best score: 0.853126346365163
+best params: OrderedDict({'model__C': 44.85082266091369, 'model__class_weight': None, 'model__fit_intercept': False})
+CV results:
+    param_model__C param_model__class_weight  param_model__fit_intercept  mean_test_score  std_test_score  rank_test_score
+49   500006.832365                      None                       False         0.853126        0.002959                1
+37       44.850823                      None                       False         0.853126        0.002961                1
+32      103.624189                      None                        True         0.853126        0.002950                3
+5     12467.168377                      None                       False         0.853122        0.002965                4
+40   107761.391556                      None                        True         0.853122        0.002967                5
+20      127.185045                      None                       False         0.853118        0.002955                6
+10       26.541894                      None                        True         0.853118        0.002962                7
+25     3120.300381                      None                        True         0.853118        0.002953                7
+47     4609.068811                      None                        True         0.853118        0.002956                7
+42      309.491743                      None                       False         0.853114        0.002952               10
+22   477608.267722                      None                        True         0.853114        0.002953               11
+48       14.924016                      None                       False         0.853114        0.002954               11
+33    56481.756803                      None                       False         0.853114        0.002958               11
+14      561.855989                      None                        True         0.853114        0.002956               11
+45     5107.674759                      None                       False         0.853114        0.002969               15
+18   171463.181580                      None                       False         0.853114        0.002969               15
+3     29831.162550                      None                        True         0.853114        0.002972               17
+29  1000000.000000                      None                        True         0.853110        0.002956               18
+26     1261.855454                      None                       False         0.853110        0.002965               19
+12  1000000.000000                      None                       False         0.853106        0.002960               20
+21        6.324596                      None                       False         0.853102        0.002951               21
+43        5.651934                      None                        True         0.853098        0.002958               22
+17        1.296159                      None                        True         0.853094        0.002963               23
+36        4.711078                      None                        True         0.853089        0.002962               24
+44        2.329639                      None                       False         0.853085        0.002960               25
+28        0.677607                      None                       False         0.853069        0.002939               26
+24        0.245635                      None                        True         0.853065        0.002934               27
+41        0.020464                      None                        True         0.853049        0.002881               28
+1         0.062786                      None                       False         0.853040        0.002892               29
+6         0.049277                      None                        True         0.853028        0.002832               30
+16        0.005631                      None                       False         0.852262        0.002566               31
+35        0.004833                      None                        True         0.852221        0.002637               32
+31        0.002184                      None                        True         0.851296        0.002586               33
+34        0.000931                      None                       False         0.849572        0.002413               34
+8         0.000417                      None                        True         0.847521        0.002407               35
+9         0.000043                      None                        True         0.826084        0.002025               36
+27    57538.444514                  balanced                       False         0.804881        0.003761               37
+46      100.790294                  balanced                       False         0.804877        0.003764               38
+11  1000000.000000                  balanced                        True         0.804877        0.003760               38
+39     5779.812708                  balanced                        True         0.804877        0.003747               40
+7         0.274377                  balanced                       False         0.804877        0.003763               41
+38   181773.307763                  balanced                        True         0.804873        0.003757               42
+23       29.837424                  balanced                        True         0.804873        0.003749               43
+15     1443.052394                  balanced                        True         0.804869        0.003760               44
+0         0.086546                  balanced                        True         0.804779        0.003772               45
+4         0.004475                  balanced                        True         0.803337        0.003649               46
+2         0.004475                  balanced                        True         0.803333        0.003644               47
+30        0.000096                  balanced                       False         0.781225        0.004140               48
+19        0.000001                      None                       False         0.774919        0.001229               49
+13        0.000001                  balanced                        True         0.692740        0.004163               50
+
+
+Scoring: f1
+Best score: 0.6772506839490624
+best params: OrderedDict({'model__C': 0.10165935969400576, 'model__class_weight': 'balanced', 'model__fit_intercept': True})
+CV results:
+    param_model__C param_model__class_weight  param_model__fit_intercept  mean_test_score  std_test_score  rank_test_score
+29        0.101659                  balanced                        True         0.677251        0.004758                1
+48        1.777989                  balanced                       False         0.677245        0.004765                2
+16    19433.414486                  balanced                       False         0.677245        0.004730                3
+11        3.339490                  balanced                        True         0.677245        0.004755                4
+12       50.347560                  balanced                       False         0.677245        0.004740                5
+42   982995.403590                  balanced                       False         0.677236        0.004733                6
+7         0.274377                  balanced                       False         0.677236        0.004744                7
+45     2668.842241                  balanced                       False         0.677236        0.004740                8
+13      982.784146                  balanced                        True         0.677236        0.004721                9
+28      464.943203                  balanced                        True         0.677231        0.004750               10
+18  1000000.000000                  balanced                        True         0.677231        0.004743               11
+30       12.162916                  balanced                       False         0.677231        0.004734               12
+14   225632.059970                  balanced                       False         0.677231        0.004730               13
+22      489.904882                  balanced                       False         0.677231        0.004737               14
+34        0.892636                  balanced                        True         0.677227        0.004763               15
+26      414.372031                  balanced                        True         0.677227        0.004747               16
+32    66967.237385                  balanced                        True         0.677227        0.004742               17
+33     5149.375436                  balanced                        True         0.677227        0.004742               17
+37      139.726102                  balanced                       False         0.677227        0.004743               19
+36   428606.778465                  balanced                        True         0.677222        0.004744               20
+43       21.859057                  balanced                        True         0.677218        0.004740               21
+27        0.185016                  balanced                        True         0.677217        0.004768               22
+0         0.086546                  balanced                        True         0.677209        0.004728               23
+44        0.023306                  balanced                        True         0.677034        0.004534               24
+23        0.009355                  balanced                       False         0.676658        0.004432               25
+21        0.008774                  balanced                       False         0.676652        0.004409               26
+4         0.004475                  balanced                        True         0.676096        0.004597               27
+2         0.004475                  balanced                        True         0.676087        0.004588               28
+20        0.000701                  balanced                       False         0.671361        0.004269               29
+41        0.000276                  balanced                        True         0.667179        0.003839               30
+5     12467.168377                      None                       False         0.659318        0.007038               31
+49       47.253576                      None                        True         0.659318        0.007039               32
+46   991287.621157                      None                        True         0.659318        0.007044               33
+35   217154.234467                      None                       False         0.659312        0.007047               34
+15       26.355707                      None                       False         0.659311        0.007014               35
+3     29831.162550                      None                        True         0.659305        0.007052               36
+31      470.267852                      None                        True         0.659305        0.007027               37
+39     2464.368665                      None                        True         0.659305        0.007017               38
+19  1000000.000000                      None                       False         0.659274        0.007020               39
+25        1.673035                      None                        True         0.659209        0.007027               40
+38        0.307105                      None                        True         0.659055        0.007015               41
+1         0.062786                      None                       False         0.658700        0.006865               42
+6         0.049277                      None                        True         0.658622        0.006783               43
+24        0.004762                      None                       False         0.653415        0.006472               44
+10        0.000064                  balanced                       False         0.652609        0.004990               45
+47        0.000010                  balanced                        True         0.637845        0.004264               46
+8         0.000417                      None                        True         0.628871        0.006776               47
+17        0.000001                  balanced                        True         0.594880        0.003045               48
+9         0.000043                      None                        True         0.519496        0.006975               49
+40        0.000001                      None                        True         0.073683        0.005800               50
+
+
