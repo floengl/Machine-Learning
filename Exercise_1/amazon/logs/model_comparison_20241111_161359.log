@@ -1,0 +1,17 @@
+11.11.2024 16:13:59
+
+Runtime of models:
+       model  train_time  pred_time
+0  LinearSVC    0.641796   0.029517
+
+Holdout results:
+          model_score     score
+0  LinearSVC Accuracy  0.706667
+1  LinearSVC F1_macro  0.660579
+
+Cross validation results:
+                       score          
+                        mean       std
+model_score                           
+LinearSVC Accuracy  0.648000  0.015085
+LinearSVC F1_macro  0.629173  0.011768

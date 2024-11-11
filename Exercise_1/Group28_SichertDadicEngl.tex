@@ -283,15 +283,15 @@ the time it took the test the model. Those values are displayed in table~\ref{ei
 
 
 On the contrary, the linear support vector classifier and ridge classifier performed similar
-on the first glance. The results from ”Amazon Commerce Reviews” and ”Census Income” might suggest,
+on the first glance. The results from \textit{'Amazon Commerce Reviews'} and \textit{'Census Income'} might suggest,
 that the linear support vector classifier is faster for high dimensional datasets, whereas the ridge classifier
 is quicker with a high number of instances. We found out that the parameter dual of the linear support
 vector classifier has a great influence on its runtime. This parameter describes whether the algorithm
 should solve for the primal or dual optimization problem. Let n be number of samples and d the number
 of dimensions of a dataset. The dual formulation requires the computation of a n × n matrix, whereas
 in the primal formulation a d × d matrix is calculated. Therefore the primal formulation is faster for
-datasets, where n > d, which was especially noticeable for the ”Census Income” dataset. Also on the dual 
-dataset as it is very low dimensional the dual formulation is faster. The results are shown in table~\ref{tab:dual_comparison}.
+datasets, where n > d, which was especially noticeable for the ”Census Income” dataset. Also on the~\textit{'Diabetes'}
+dataset as it is very low dimensional the dual prosedure is faster. The results are shown in table~\ref{tab:dual_comparison}.
 
 \begin{table}[h!]
 \centering
