@@ -103,11 +103,8 @@ Again the results are visualized in table~\ref{table:scaling}.
 
 
 In the above Experiment we have used 5 folds and 10 repetitions for the cross-validation. The best results are achieved by the PowerTransformer for all classifiers. However, only the ridge classifier benefited from the
-dimension reduction.
-
-
-
- \textbf{Census Income:} This dataset hat missing values, but only for categorical values.
+dimension reduction.\\
+\textbf{Census Income:} This dataset hat missing values, but only for categorical values.
  Those values are labeled with \textit{'?'}. We will try the same two strategies as for the \textit{Congressional Voting} dataset.
  The only exception is the \textit{'education'} column. This column is already encoded as the
  \textit{'education-num'} column and will therefore be dropped. For the numeric columns 
@@ -158,10 +155,39 @@ PowerTransformer & \textit{'?'} is category & 0.852 / 0.666 & 0.846 / 0.645 & 0.
 
 We used 5 folds and 5 repetitions in the cross-validation for this experiment, except for the random forest
 classifier. The random forest classifier was too slow, and we had to reduce the number of repetitions to 1.
-
- \textbf{Diabetes:} This dataset does not have any missing values except for the target attribute. Therefore, we 
+For this dataset the best
+preprocessing strategy was different for every classifier. The respective cells are marked in green in the
+table above. After these experiments we decided to use the StandardScaler combined with setting missing
+values as the most frequent category for the random forest classifier, the StandardScaler but with setting
+missing values as an extra category for the linear support vector classifier and the QuantileTransformer
+combined with setting missing values as an extra category for the ridge classifier.\\
+\textbf{Diabetes:} This dataset does not have any missing values except for the target attribute. Therefore, we 
  don't need to consider data imputation. As the dataset is very low dimensional, we will not use any dimensionality reduction. 
- So we will only compare different caling methods 
+ So we will only compare different scaling methods 
+ \begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Scaler} & \textbf{Random Forest } & \textbf{LinearSVC } & \textbf{Ridge } \\
+\hline
+MinMaxScaler & \cellcolor[HTML]{C1E1C1} 0.767 / 0.592 & 0.770 / 0.553 & 0.768 / 0.542 \\
+\hline
+MaxAbsScaler & 0.767 / 0.590 & 0.771 / 0.553 & 0.769 / 0.543 \\
+\hline
+RobustScaler & 0.766 / 0.589 & 0.770 / 0.560 & 0.770 / 0.555 \\
+\hline
+None & 0.766 / 0.588 & 0.771 / 0.559 & 0.770 / 0.555 \\
+\hline
+StandardScaler & 0.766 / 0.589 & \cellcolor[HTML]{C1E1C1}0.770 / 0.560 &\cellcolor[HTML]{C1E1C1} 0.770 / 0.555 \\
+\hline
+PowerTransformer & 0.766 / 0.592 & 0.763 / 0.564 & 0.761 / 0.554 \\
+\hline
+QuantileTransformer & 0.766 / 0.592 & 0.763 / 0.564 & 0.761 / 0.554 \\
+\hline
+\end{tabular}
+\caption{Comparison of different scalers for the \textit{Diabetes} dataset}
+\label{table:diabetesscalers}
+\end{table}
 
 
 
