@@ -45,8 +45,8 @@ random_forest = Pipeline([
 # all models
 models = [
     ("LinearSVC", linear_svc),
-    #("Ridge", ridge),
-    #("RandomForest", random_forest)
+    ("Ridge", ridge),
+    ("RandomForest", random_forest)
 ]
 
 
