@@ -44,6 +44,7 @@ This section describes the methodology used in your work.
 This is an example of a subsection.
 
 \section{Preprocessing}
+\label{sec:preprocessing}
 We will do four different measures to properly preprocess the data. These are: data imputation, encoding of categorical variables,
 scaling of numerical values and dimensionality reduction. In this section we will look at each dataset and 
 describe which tasks can be used on the dataset and how a specific task is performed. Then we will compare the different
@@ -201,6 +202,7 @@ In the end we decided to use the scalers marked in green for the respective clas
 
 
 \section{Hyperparameters}
+\label{sec:hyperparameters}
 Now we want to take a closer look at the hyperparameters of our models. In a first step we want to optimize the hyperparameters for the different models and datasets.
 In a second step we will analyze how sensitive the models are to changes in the hyperparameters. Unfortunately we will not be able to find the optimum for all hyperparameters, as scikit-learn offers a wide range, so we are going to focus on the most important ones.\\
 
@@ -261,16 +263,11 @@ At this point we also want to compare cross-validation to the hold-out method.
 The hold-out method works by taking 70\% of the data as the training set and the remaining 30\% as the test set.
 Then on the test set an evaluation is done. The cross-validation has already been introduced in a previous section.\\
 The scores for the hold-out method
-highly depend on the split chosen as seen in figures~\ref{fig:model_comparison congress}
- and~\ref{fig:model_comparison amazon}, where the box-plots are shown for the
-datasets \textit{'congressional voting'} and \textit{'Amazon Commerce Reviews'}.
+highly depend on the split and the model chosen as seen in figure~\ref{fig:model_comparison congress},
+where the box-plots are shown for the
+\textit{'Amazon Commerce Reviews'} dataset.W
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\textwidth]{congress/plots/model_comparison.pdf}
-\caption{Model Comparison for \textit{'Congressional Voting'} dataset}
-\label{fig:model_comparison congress}
-\end{figure}
+
 
 \begin{figure}[h!]
 \centering
@@ -295,6 +292,8 @@ the variance is really low.
 We also want compare the efficiency of the classifiers. For this we used the runtime of the hold-out
 method calculation from above. We measured both the time for training (including preprocessing) and
 the time it took the test the model. Those values are displayed in table~\ref{tab:runtime_models}.
+
+
 \begin{table}[h!]
 \centering
 \footnotesize
@@ -302,13 +301,13 @@ the time it took the test the model. Those values are displayed in table~\ref{ta
 \hline
 \textbf{Model} & \multicolumn{2}{c|}{Census} & \multicolumn{2}{c|}{Amazon} & \multicolumn{2}{c|}{Congress} & \multicolumn{2}{c|}{Diabetes} \\
 \hline
-& \textbf{Train Time (s)} & \textbf{Pred Time (s)} & \textbf{Train Time (s)} & \textbf{Pred Time (s)} & \textbf{Train Time (s)} & \textbf{Pred Time (s)} & \textbf{Train Time (s)} & \textbf{Pred Time (s)} \\
+& \textbf{Train} & \textbf{Pred} & \textbf{Train} & \textbf{Pred} & \textbf{Train} & \textbf{Pred} & \textbf{Train} & \textbf{Pred} \\
 \hline
-LinearSVC & 0.174524 & 0.018444 & 0.511283 & 0.021711 & 0.003864 & 0.001623 & 0.002617 & 0.000600 \\
+LinearSVC & 0.17 & 0.02 & 0.51 & 0.02 & 0.00 & 0.00 & 0.00 & 0.00 \\
 \hline
-Ridge & 0.092652 & 0.022379 & 7.912478 & 0.199596 & 0.004253 & 0.001394 & 0.002666 & 0.000626 \\
+Ridge & 0.09 & 0.02 & 7.91 & 0.20 & 0.00 & 0.00 & 0.00 & 0.00 \\
 \hline
-RandomForest & 126.585000 & 1.630719 & 12.922183 & 0.097901 & 0.996177 & 0.028010 & 4.791669 & 0.088513 \\
+RandomForest & 126.59 & 1.63 & 12.92 & 0.10 & 1.00 & 0.03 & 4.79 & 0.09 \\
 \hline
 \end{tabular}
 \vspace{0.3cm}
@@ -349,20 +348,18 @@ Diabetes & 0.004 & 1.25 \\
 \caption{Comparison of Dual and Normal Ridge classifier training time for different datasets}
 \label{tab:dual_comparison}
 \end{table}
-
-
 After all experiments our final conclusion is that no classifier we used outperformed the other across all
-datasets. The results in table \ref{einfügen} imply that the effectiveness of a classifier is highly dependent on the
+datasets. The results in table \ref{tab:best_results} imply that the effectiveness of a classifier is highly dependent on the
 dataset. What we can establish is that the linear support vector classifier was never the worst in both
 metrics. Therefore it seems to be a very versatile classifier. In comparison the success for random forests
 varied quite a lot for different datasets and effectiveness measures. This could be due to the fact, that
-decision trees generally tend to overfit the model. As for efficiency, table \ref{einfügen} highlighted a big weakness of
-the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{einfügen}, choosing
+decision trees generally tend to overfit the model. As for efficiency, table \ref{tab:runtime_models} highlighted a big weakness of
+the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{preprocessing}, choosing
 the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
 though in varying magnitude for different classifiers and datasets. Here random forest seems the be the
-least influenced by the choice of scaler as seen in table \ref{einfügen} and \ref{einfügen}. The sensitivity analysis in section \ref{einfügen}
+least influenced by the choice of scaler as seen in tables \ref{table:censustransformers} and \ref{table:diabetesscalers}. The sensitivity analysis in section \ref{einfügen}
 showed how much of an impact even a single hyperparameter can have on the overall performance of a
-model. However, comparing the results of section \ref{einfügen} with the ones in section \ref{einfügen} and table \ref{einfügen}, it is clear that
+model. However, comparing the results of section \ref{sec:preprocessing} with the ones in section \ref{sec:hyperparameters} and table \ref{tab:runtime_models}, it is clear that
 tuning the parameters hardly influenced the result for the ”congressional voting” dataset. In contrast, the
 recall score for the ”diabetes” dataset and both effectiveness scores for the ”Amazon Commerce Reviews”
 improved a lot after the parameter tuning. For the dataset ”Census Income” only the support vector
@@ -372,13 +369,6 @@ classifier is chosen everything else depends on the combination of the two inclu
 parameter tuning and preprocessing as well as the overall success.
 
 
-% References
-\begin{thebibliography}{9}
-\bibitem{example1}
-Author, \textit{Title of the Book}, Publisher, Year.
 
-\bibitem{example2}
-Author, \textit{Title of the Article}, Journal, Volume, Page numbers, Year.
-\end{thebibliography}
 
 \end{document}
