@@ -207,9 +207,103 @@ For tuning we want to use Bayesian Optimization from the scikit-optimize package
 
 Bayesian Optimization does not only take a function as input but a search space as well, which is why we need to decide on an appropriate rnage of values for the parameters as well. Moreover, because we chose two different performance measures for each dataset, we will have to do the optimization twice and then compare results to get the overall best.
 
+\section{Random Forest Classifier}  
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    Dataset & \textbf{estimators} & \textbf{depth} & \textbf{split} & \textbf{leafs} & \textbf{features} & accuracy \\
+    \hline
+    \multicolumn{7}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
+    \hline
+    congressional voting & 1963 & 40 & 20 & 4 & None & 0.963 \\%20241111_151340
+    \hline
+    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.728 \\%20241111_145855
+    \hline
+    Census Income & 100 & 30 & 20 & 1 & sqrt & 0.865 \\%20241111_123502
+    \hline
+    diabetes & 3000 & 40 & 2 & 4 & sqrt & 0.773 \\%20241111_151657
+    \hline
+    \end{tabular}
+    \caption{Tuned hyperparameters for random forest classifier and accuracy} 
+    \label{table:tu_hyp_rf_ac}
+    \end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    Dataset & \textbf{estimators} & \textbf{depth} & \textbf{split} & \textbf{leafs} & \textbf{features} & F1/Recall \\
+    \hline
+    \multicolumn{7}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
+    \hline
+    congressional voting & 1963 & 40 & 20 & 4 & None & 0.957 \\%20241111_151340
+    \hline
+    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.728 \\%20241111_145855
+    \hline
+    Census Income & 2000 & 40 & 20 & 1 & sqrt & 0.686 \\%20241111_123502
+    \hline
+    diabetes & 3000 & 70 & 6 & 4 & None & 0.623 \\%20241111_151657
+    \hline
+    \end{tabular}
+    \caption{Tuned hyperparameters for random forest classifier and F1 score/Recall} 
+    \label{table:tu_hyp_rf_f1}
+    \end{table}
+
+As you can see we got the same tuning accuracy and for F1 score on the first two datasets. On the last two datasets we ran the F1 score with the best parameters for accuracy and got a F1 score of 0.685 for the Census Income dataset and a Recall of 0.647 for the diabetes dataset so we will keep the parametervalues for the best accuracy.
+Search space was different for different datasets.
 
 
+\section{Linear Support Vector Classifier}
 
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    Dataset & \textbf{C} & \textbf{fit\_intercept} &  \textbf{class\_weight} & \textbf{dual} & accuracy \\
+    \hline
+    \multicolumn{6}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
+    \hline
+    congressional voting & 1.150 & True & balanced & False & 0.963 \\%20241111_151511
+    \hline
+    Amazon Reviews & 0.00946 & True & balanced & False & 0.748 \\%20241111_075742
+    \hline
+    Census Income & 679.520 & True & None & False & 0.853 \\%20241111_093143
+    \hline
+    diabetes & 2.353 & True & None & False  & 0.771 \\%20241111_150042
+    \hline
+    \end{tabular}
+    \caption{Tuned hyperparameters for linear support vector classifier and accuracy} 
+    \label{table:tu_hyp_svc_ac}
+    \end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    Dataset & \textbf{C} & \textbf{fit\_intercept} &  \textbf{class\_weight} & \textbf{dual} & F1/Recall \\
+    \hline
+    \multicolumn{6}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
+    \hline
+    congressional voting & 1.241 & True & None & False & 0.955 \\%20241111_151511
+    \hline
+    Amazon Reviews & 0.0093 & True & balanced & False &  0.725 \\%20241111_075742
+    \hline
+    Census Income & 0.274 & True & balanced & False & 0.677 \\%20241111_093143
+    \hline
+    diabetes & 1e-06 & False & balanced & False  & 0.838 \\%20241111_150042
+    \hline
+    \end{tabular}
+    \caption{Tuned hyperparameters for linear support vector classifier and F1 score/Recall} 
+    \label{table:tu_hyp_svc_f1}
+    \end{table}
+    
+We have that the computation with the primal problem outperformed the dual problem in every case. However it should be noted that for the Amazon dataset we got the same accuracy and F1 score for dual computation. Therefore we will choose the dual computation as it is faster.
+
+Later we will see that small changes in C do not vary result too much so we choose C=0.00946 for Amazon and C=1.2 for congressional voting. Taking the other values from table \ref{table:tu_hyp_svc_ac} for congressional voting we get an F1 score of 0.951 which is pretty good and we will use these values.
+
+For the other datasets finding the right values is harder because they differ quite a lot. The census dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference than our loss in accuracy so we choose these values. To diabetes we will get back later.
 
 \section{Discussion}
 This section discusses the implications of your results.
