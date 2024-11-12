@@ -44,6 +44,7 @@ This section describes the methodology used in your work.
 This is an example of a subsection.
 
 \section{Preprocessing}
+\label{sec:preprocessing}
 We will do four different measures to properly preprocess the data. These are: data imputation, encoding of categorical variables,
 scaling of numerical values and dimensionality reduction. In this section we will look at each dataset and 
 describe which tasks can be used on the dataset and how a specific task is performed. Then we will compare the different
@@ -75,12 +76,12 @@ Here the right number in each cell is the average accuracy and the left number i
 \hline
 \textbf{Data Imputation} & \textbf{Random Forest} & \textbf{LinearSVC} & \textbf{Ridge} \\
 \hline
-\textbf{most frequent} & \cellcolor[HTML]{C1E1C1} 0.957 /0.949  & \cellcolor[HTML]{C1E1C1} 0.962/0.954  & \cellcolor[HTML]{C1E1C1} 0.963 /0.957 \\
+\textbf{most frequent} & \cellcolor[HTML]{C1E1C1}0.957/0.949 & \cellcolor[HTML]{C1E1C1}0.962/0.954 & \cellcolor[HTML]{C1E1C1}0.963/0.957 \\
 \hline
-\textbf{nan is category} & 0.955 /0.947 & 0.955 /0.947& 0.960/0.953  \\
+\textbf{nan is category} & 0.955/0.947 & 0.955/0.947 & 0.960/0.953 \\
 \hline
 \end{tabular}
-\caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} datasetW}
+\caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} dataset}
 \label{table:imputation}
 \end{table}
 For every classifier the most frequent value imputation strategy yields better results for both accuracy and F1 score.
@@ -118,37 +119,38 @@ number is the F1 score.
 
 \begin{table}[h!]
 \centering
+\small
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \textbf{Scaler} & \textbf{Data Imputation} & \textbf{Random Forest} & \textbf{LinearSVC} & \textbf{Ridge} \\
 \hline
-StandardScaler & most frequent & \cellcolor[HTML]{C1E1C1} 0.857 / 0.677 & 0.852 / 0.655 & 0.841 / 0.607 \\
+StandardScaler & most frequent & \cellcolor[HTML]{C1E1C1}0.857/0.677 & 0.852/0.655 & 0.841/0.607 \\
 \hline
-MaxAbsScaler & most frequent & 0.857 / 0.676 & 0.851 / 0.654 & 0.841 / 0.607 \\
+MaxAbsScaler & most frequent & 0.857/0.676 & 0.851/0.654 & 0.841/0.607 \\
 \hline
-None & most frequent & 0.857 / 0.676 & 0.800 / 0.379 & 0.830 / 0.567 \\
+None & most frequent & 0.857/0.676 & 0.800/0.379 & 0.830/0.567 \\
 \hline
-MinMaxScaler & most frequent & 0.857 / 0.676 & 0.852 / 0.654 & 0.841 / 0.607 \\
+MinMaxScaler & most frequent & 0.857/0.676 & 0.852/0.654 & 0.841/0.607 \\
 \hline
-RobustScaler & most frequent & 0.857 / 0.676 & 0.851 / 0.649 & 0.830 / 0.561 \\
+RobustScaler & most frequent & 0.857/0.676 & 0.851/0.649 & 0.830/0.561 \\
 \hline
-QuantileTransformer & most frequent & 0.857 / 0.676 & 0.845 / 0.645 & 0.842 / 0.621 \\
+QuantileTransformer & most frequent & 0.857/0.676 & 0.845/0.645 & 0.842/0.621 \\
 \hline
-PowerTransformer & most frequent & 0.852 / 0.665 & 0.845 / 0.645 & 0.842 / 0.621 \\
+PowerTransformer & most frequent & 0.852/0.665 & 0.845/0.645 & 0.842/0.621 \\
 \hline
-MaxAbsScaler & \textit{'?'} is category & 0.857 / 0.676 & 0.853 / 0.659 & 0.841 / 0.610 \\
+MaxAbsScaler & \textit{'?'} is category & 0.857/0.676 & 0.853/0.659 & 0.841/0.610 \\
 \hline
-RobustScaler & \textit{'?'} is category & 0.857 / 0.676 & 0.852 / 0.658 & 0.841 / 0.610 \\
+RobustScaler & \textit{'?'} is category & 0.857/0.676 & 0.852/0.658 & 0.841/0.610 \\
 \hline
-None & \textit{'?'} is category & 0.857 / 0.676 & 0.800 / 0.379 & 0.830 / 0.568 \\
+None & \textit{'?'} is category & 0.857/0.676 & 0.800/0.379 & 0.830/0.568 \\
 \hline
-StandardScaler & \textit{'?'} is category & 0.857 / 0.676 & \cellcolor[HTML]{C1E1C1}0.853 / 0.659 & 0.841 / 0.610 \\
+StandardScaler & \textit{'?'} is category & 0.857/0.676 & \cellcolor[HTML]{C1E1C1}0.853/0.659 & 0.841/0.610 \\
 \hline
-MinMaxScaler & \textit{'?'} is category & 0.857 / 0.676 & 0.853 / 0.658 & 0.841 / 0.610 \\
+MinMaxScaler & \textit{'?'} is category & 0.857/0.676 & 0.853/0.658 & 0.841/0.610 \\
 \hline
-QuantileTransformer & \textit{'?'} is category & 0.857 / 0.676 & 0.847 / 0.649 & \cellcolor[HTML]{C1E1C1} 0.844 / 0.627 \\
+QuantileTransformer & \textit{'?'} is category & 0.857/0.676 & 0.847/0.649 & \cellcolor[HTML]{C1E1C1}0.844/0.627 \\
 \hline
-PowerTransformer & \textit{'?'} is category & 0.852 / 0.666 & 0.846 / 0.645 & 0.843 / 0.623 \\
+PowerTransformer & \textit{'?'} is category & 0.852/0.666 & 0.846/0.645 & 0.843/0.623 \\
 \hline
 \end{tabular}
 \caption{Comparison of different numeric and categorical transformers for the \textit{Census Income} dataset}
@@ -173,19 +175,19 @@ combined with setting missing values as an extra category for the ridge classifi
 \hline
 \textbf{Scaler} & \textbf{Random Forest } & \textbf{LinearSVC } & \textbf{Ridge } \\
 \hline
-MinMaxScaler & \cellcolor[HTML]{C1E1C1} 0.767 / 0.592 & 0.770 / 0.553 & 0.768 / 0.542 \\
+MinMaxScaler & \cellcolor[HTML]{C1E1C1}0.767/0.592 & 0.770/0.553 & 0.768/0.542 \\
 \hline
-MaxAbsScaler & 0.767 / 0.590 & 0.771 / 0.553 & 0.769 / 0.543 \\
+MaxAbsScaler & 0.767/0.590 & 0.771/0.553 & 0.769/0.543 \\
 \hline
-RobustScaler & 0.766 / 0.589 & 0.770 / 0.560 & 0.770 / 0.555 \\
+RobustScaler & 0.766/0.589 & 0.770/0.560 & 0.770/0.555 \\
 \hline
-None & 0.766 / 0.588 & \cellcolor[HTML]{C1E1C1}0.771 / 0.559 & 0.770 / 0.555 \\
+None & 0.766/0.588 & \cellcolor[HTML]{C1E1C1}0.771/0.559 & 0.770/0.555 \\
 \hline
-StandardScaler & 0.766 / 0.589 & 0.770 / 0.560 &\cellcolor[HTML]{C1E1C1} 0.770 / 0.555 \\
+StandardScaler & 0.766/0.589 & 0.770/0.560 & \cellcolor[HTML]{C1E1C1}0.770/0.555 \\
 \hline
-PowerTransformer & 0.766 / 0.592 & 0.763 / 0.564 & 0.761 / 0.554 \\
+PowerTransformer & 0.766/0.592 & 0.763/0.564 & 0.761/0.554 \\
 \hline
-QuantileTransformer & 0.766 / 0.592 & 0.763 / 0.564 & 0.761 / 0.554 \\
+QuantileTransformer & 0.766/0.592 & 0.763/0.564 & 0.761/0.554 \\
 \hline
 \end{tabular}
 \caption{Comparison of different scalers for the \textit{Diabetes} dataset}
@@ -200,6 +202,7 @@ In the end we decided to use the scalers marked in green for the respective clas
 
 
 \section{Hyperparameters}
+\label{sec:hyperparameters}
 Now we want to take a closer look at the hyperparameters of our models. In a first step we want to optimize the hyperparameters for the different models and datasets.
 In a second step we will analyze how sensitive the models are to changes in the hyperparameters. Unfortunately we will not be able to find the optimum for all hyperparameters, as scikit-learn offers a wide range, so we are going to focus on the most important ones.\\
 
@@ -328,29 +331,30 @@ you would divide by zero in the calculation.
 \footnotesize
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|}
 \hline
-& \multicolumn{2}{c|}{congressional voting} & \multicolumn{2}{c|}{Amazon Reviews} & \multicolumn{2}{c|}{Census Income} & \multicolumn{2}{c|}{diabetes} \\
+& \multicolumn{2}{c|}{Congressional Voting} & \multicolumn{2}{c|}{Amazon Reviews} & \multicolumn{2}{c|}{Census Income} & \multicolumn{2}{c|}{Diabetes} \\
 \hline
 & Accuracy & F1 & Accuracy & F1 & Accuracy & F1 & Accuracy & Recall \\
 \hline
-Random Forest & 0.973 & 0.966 & 0.708 & 0.667 & 0.805 & 0.677 & 0.766 & 0.623 \\
+Random Forest & 0.959 & 0.952 & 0.649 & 0.630 & 0.866 & 0.684 & 0.766 & 0.623 \\
 \hline
-LinearSVC & 0.969 & 0.961 & 0.742 & 0.710 & 0.866 & 0.684 & 0.736 & 0.796 \\
+LinearSVC & 0.960 & 0.952 & 0.648 & 0.629 & 0.805 & 0.677 & 0.645 & 0.706 \\
 \hline
-Ridge & 0.968 & 0.959 & 0.743 & 0.706 & 0.844 & 0.626 & 0.737 & 0.795 \\
+Ridge & 0.963 & 0.957 & 0.699 & 0.684 & 0.844 & 0.628 & 0.737 & 0.795 \\
 \hline
-Baseline & 0.624 & - & 0.031 & - & 0.761 & - & 0.651 & - \\
+Dummy & 0.613 & - & 0.020 &- & 0.759 & - & 0.653 & - \\
 \hline
 \end{tabular}
 \vspace{0.3cm}
-\caption{Best results for each dataset and classifier}
+\caption{5-fold cross-validation results for each dataset and classifier}
 \label{tab:best_results}
 \end{table}
-The scores in table~\ref{einfügen} are computed using repeated stratified 5-fold
+
+The scores in table~\ref{tab:best_results} are computed using repeated stratified 5-fold
 cross-validation. We chose 10 repetitions for the datasets ”congressional voting” and ”diabetes” and 5
 repetitions for the other two datasets (due to runtime).
-From this table we can conclude that on the dataset \textit{'congressional voting'} the random forest classifier
-performed the best. If we again prefer F1 score for the dataset \textit{'Amazon Commerce Reviews'}, then the
-linear support vector classifier gives the best results. For the dataset \textit{'Census income'} we can see that
+From this table we can conclude that on the dataset \textit{'congressional voting'} and 
+\textit{'Amazon Commerce Reviews'} dataset the ridge classifier
+performed the best. For the dataset \textit{'Census income'} we can see that
 the linear support vector classifier is performing best with respect to both performance measures. Lastly,
 for the \text{diabetes} dataset there is no clear choice. But if we keep our preferences the same as in the
 last few sections, we can conclude that either the linear support vector classifier or the ridge classifier
@@ -359,8 +363,24 @@ At this point we also want to compare cross-validation to the hold-out method.
 The hold-out method works by taking 70\% of the data as the training set and the remaining 30\% as the test set.
 Then on the test set an evaluation is done. The cross-validation has already been introduced in a previous section.\\
 The scores for the hold-out method
-highly depend on the split chosen as seen in figures~\ref{einfügen} and~\ref{einfügen}, where the box-plots are shown for the
-datasets \textit{'congressional voting'} and \textit{'Amazon Commerce Reviews'}. In contrast, for the dataset 
+highly depend on the split and the model chosen as seen in figure~\ref{fig:model_comparison congress},
+where the box-plots are shown for the
+\textit{'Amazon Commerce Reviews'} dataset.W
+
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{amazon/plots/model_comparison.pdf}
+\caption{Model Comparison for \textit{'Amazon Commerce Reviews'} dataset}
+\label{fig:model_comparison amazon}
+\end{figure}
+
+
+
+
+
+In contrast, for the dataset 
 \textit{'Census Income'} the hold-out scores are almost the same as the mean of the cross-validation, which is to be
 expected because this dataset has a lot of instances. The box-plots for this dataset (figure 9) are also
 comparatively very narrow, meaning that the scores calculated during cross-validation vary very little i.e.
@@ -371,7 +391,29 @@ the variance is really low.
 
 We also want compare the efficiency of the classifiers. For this we used the runtime of the hold-out
 method calculation from above. We measured both the time for training (including preprocessing) and
-the time it took the test the model. Those values are displayed in table~\ref{einfügen}.
+the time it took the test the model. Those values are displayed in table~\ref{tab:runtime_models}.
+
+
+\begin{table}[h!]
+\centering
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Model} & \multicolumn{2}{c|}{Census} & \multicolumn{2}{c|}{Amazon} & \multicolumn{2}{c|}{Congress} & \multicolumn{2}{c|}{Diabetes} \\
+\hline
+& \textbf{Train} & \textbf{Pred} & \textbf{Train} & \textbf{Pred} & \textbf{Train} & \textbf{Pred} & \textbf{Train} & \textbf{Pred} \\
+\hline
+LinearSVC & 0.17 & 0.02 & 0.51 & 0.02 & 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+Ridge & 0.09 & 0.02 & 7.91 & 0.20 & 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+RandomForest & 126.59 & 1.63 & 12.92 & 0.10 & 1.00 & 0.03 & 4.79 & 0.09 \\
+\hline
+\end{tabular}
+\vspace{0.3cm}
+\caption{Runtime of models for different datasets}
+\label{tab:runtime_models}
+\end{table}
 
 
 
@@ -391,7 +433,7 @@ dataset as it is very low dimensional the dual prosedure is faster. The results 
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
-\textbf{Dataset} & \textbf{Not Dual} & \textbf{Dual} \\
+\textbf{Dataset} & \textbf{Normal} & \textbf{Dual} \\
 \hline
 Census & 0.198 & 1.43 \\
 \hline
@@ -403,23 +445,21 @@ Diabetes & 0.004 & 1.25 \\
 \hline
 \end{tabular}
 \vspace{0.3cm}
-\caption{Comparison of Dual and Not Dual values for different datasets}
+\caption{Comparison of Dual and Normal Ridge classifier training time for different datasets}
 \label{tab:dual_comparison}
 \end{table}
-
-
 After all experiments our final conclusion is that no classifier we used outperformed the other across all
-datasets. The results in table \ref{einfügen} imply that the effectiveness of a classifier is highly dependent on the
+datasets. The results in table \ref{tab:best_results} imply that the effectiveness of a classifier is highly dependent on the
 dataset. What we can establish is that the linear support vector classifier was never the worst in both
 metrics. Therefore it seems to be a very versatile classifier. In comparison the success for random forests
 varied quite a lot for different datasets and effectiveness measures. This could be due to the fact, that
-decision trees generally tend to overfit the model. As for efficiency, table \ref{einfügen} highlighted a big weakness of
-the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{einfügen}, choosing
+decision trees generally tend to overfit the model. As for efficiency, table \ref{tab:runtime_models} highlighted a big weakness of
+the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{preprocessing}, choosing
 the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
 though in varying magnitude for different classifiers and datasets. Here random forest seems the be the
-least influenced by the choice of scaler as seen in table \ref{einfügen} and \ref{einfügen}. The sensitivity analysis in section \ref{einfügen}
+least influenced by the choice of scaler as seen in tables \ref{table:censustransformers} and \ref{table:diabetesscalers}. The sensitivity analysis in section \ref{einfügen}
 showed how much of an impact even a single hyperparameter can have on the overall performance of a
-model. However, comparing the results of section \ref{einfügen} with the ones in section \ref{einfügen} and table \ref{einfügen}, it is clear that
+model. However, comparing the results of section \ref{sec:preprocessing} with the ones in section \ref{sec:hyperparameters} and table \ref{tab:runtime_models}, it is clear that
 tuning the parameters hardly influenced the result for the ”congressional voting” dataset. In contrast, the
 recall score for the ”diabetes” dataset and both effectiveness scores for the ”Amazon Commerce Reviews”
 improved a lot after the parameter tuning. For the dataset ”Census Income” only the support vector
@@ -429,13 +469,6 @@ classifier is chosen everything else depends on the combination of the two inclu
 parameter tuning and preprocessing as well as the overall success.
 
 
-% References
-\begin{thebibliography}{9}
-\bibitem{example1}
-Author, \textit{Title of the Book}, Publisher, Year.
 
-\bibitem{example2}
-Author, \textit{Title of the Article}, Journal, Volume, Page numbers, Year.
-\end{thebibliography}
 
 \end{document}
