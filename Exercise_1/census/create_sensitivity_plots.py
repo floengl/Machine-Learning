@@ -34,7 +34,7 @@ preprocessor_linear_svc = ColumnTransformer(
 )
 linear_svc = Pipeline([
     ("preprocessor", preprocessor_linear_svc),
-    ("model", LinearSVC(random_state=1234, max_iter=10000, dual=False, fit_intercept=False, C=0.152))
+    ("model", LinearSVC(random_state=1234, max_iter=10000, dual=False, class_weight=None, C=679.520, fit_intercept=True))
 ])
 
 # define RidgeClassifier pipeline
@@ -46,7 +46,7 @@ preprocessor_ridge = ColumnTransformer(
 )
 ridge = Pipeline([
     ("preprocessor", preprocessor_ridge),
-    ("model", RidgeClassifier(random_state=1234, alpha=94.5))
+    ("model", RidgeClassifier(random_state=1234, alpha=11.333, fit_intercept=True, class_weight="balanced"))
 ])
 
 # define Random Forest pipeline
@@ -58,8 +58,8 @@ preprocessor_rf = ColumnTransformer(
 )
 random_forest = Pipeline([
     ("preprocessor", preprocessor_rf),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=1448, max_depth=40,
-                                     min_samples_split=17, min_samples_leaf=2, max_features="sqrt"))
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=100, max_depth=30,
+                                     min_samples_split=20, min_samples_leaf=1, max_features="sqrt"))
 ])
 
 # all models
@@ -74,11 +74,13 @@ param_ranges = {
     "LinearSVC": {
         "C": 10**np.linspace(-3, 3, 15),
         "class_weight": [None, "balanced"],
-        "fit_intercept": [True, False]
+        "fit_intercept": [True, False],
+        "dual": [True, False]
     },
     "RidgeClassifier": {
         "alpha": np.linspace(0, 100, 20),
-        "fit_intercept": [True, False]
+        "fit_intercept": [True, False],
+        "class_weight": [None, "balanced"]
     },
     "RandomForestClassifier": {
         "max_depth": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
@@ -119,4 +121,4 @@ for name, pipeline in models:
         plt.ylabel("score")
         plt.legend()
         plt.tight_layout()
-        plt.savefig(os.path.join(Config.PLOTS_DIR, f"{name}_{param}_sensitivity.pdf"))
+        plt.savefig(os.path.join(Config.PLOTS_DIR, f"{name}_{param}_sensitivity_new.pdf"))
