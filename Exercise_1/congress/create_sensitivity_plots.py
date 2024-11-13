@@ -20,7 +20,7 @@ linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("imputer", SimpleImputer(strategy="most_frequent")),
     ("one_hot_encoder", OneHotEncoder(drop="if_binary")),
-    ("model", LinearSVC(random_state=1234, max_iter=100000, C=0.58))
+    ("model", LinearSVC(random_state=1234, max_iter=100000, C=1.2,fit_intercept=True, class_weight="balanced", dual=False))
 ])
 
 # define RidgeClassifier pipeline
@@ -28,7 +28,7 @@ ridge = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("imputer", SimpleImputer(strategy="most_frequent")),
     ("one_hot_encoder", OneHotEncoder(drop="if_binary")),
-    ("model", RidgeClassifier(random_state=1234, alpha=0.057, fit_intercept=False))
+    ("model", RidgeClassifier(random_state=1234, alpha=0.0, fit_intercept=True, class_weight=None))
 ])
 
 # define Random Forest pipeline
@@ -36,15 +36,15 @@ random_forest = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("imputer", SimpleImputer(strategy="most_frequent")),
     ("one_hot_encoder", OneHotEncoder(drop="if_binary")),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=100,
-                                     min_samples_split=2, min_samples_leaf=1, max_features="log2"))
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=1963, max_depth=40,
+                                     min_samples_split=20, min_samples_leaf=4, max_features=None))
 ])
 
 # all models
 models = [
     ("LinearSVC", linear_svc),
     ("RidgeClassifier", ridge),
-    ("RandomForestClassifier", random_forest)
+   # ("RandomForestClassifier", random_forest)
 ]
 
 # parameter ranges for sensitivity analysis
@@ -52,19 +52,21 @@ param_ranges = {
     "LinearSVC": {
         "C": 10**np.linspace(-3, 3, 30),
         "class_weight": [None, "balanced"],
-        "fit_intercept": [True, False]
+        "fit_intercept": [True, False],
+        "dual": [True, False]
     },
     "RidgeClassifier": {
         "alpha": np.linspace(0, 5, 30),
-        "fit_intercept": [True, False]
+        "fit_intercept": [True, False],
+        "class_weight": [None, "balanced"]
     },
-    "RandomForestClassifier": {
-        "max_depth": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        "n_estimators": np.linspace(100, 3000, 15, dtype=int),
-        "min_samples_split": range(2, 15),
-        "min_samples_leaf": range(1, 6),
-        "max_features": ["sqrt", "log2", None]
-    }
+   # "RandomForestClassifier": {
+        #"max_depth": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        #"n_estimators": np.linspace(100, 3000, 15, dtype=int),
+       # "min_samples_split": range(2, 15),
+      #  "min_samples_leaf": range(1, 6),
+     #   "max_features": ["sqrt", "log2", None]
+    #}
 }
 
 # plot sensitivity analysis
