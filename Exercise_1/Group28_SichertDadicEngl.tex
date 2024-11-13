@@ -6,12 +6,14 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{geometry}
+\usepackage{parskip}
+\usepackage{lmodern}
 
 \usepackage{colortbl} % For coloring table cells and lines
 \usepackage[table]{xcolor} % For more color options
 \usepackage{booktabs}
 
-
+\setlength{\parskip}{1em} % Adjust the length as needed
 
 \geometry{a4paper, margin=1in}
 
@@ -76,9 +78,9 @@ Here the right number in each cell is the average accuracy and the left number i
 \hline
 \textbf{Data Imputation} & \textbf{Random Forest} & \textbf{LinearSVC} & \textbf{Ridge} \\
 \hline
-\textbf{most frequent} & \cellcolor[HTML]{C1E1C1}0.957/0.949 & \cellcolor[HTML]{C1E1C1}0.962/0.954 & \cellcolor[HTML]{C1E1C1}0.963/0.957 \\
+\textsf{most frequent} & \cellcolor[HTML]{C1E1C1}0.957/0.949 & \cellcolor[HTML]{C1E1C1}0.962/0.954 & \cellcolor[HTML]{C1E1C1}0.963/0.957 \\
 \hline
-\textbf{nan is category} & 0.955/0.947 & 0.955/0.947 & 0.960/0.953 \\
+\textsf{nan is category} & 0.955/0.947 & 0.955/0.947 & 0.960/0.953 \\
 \hline
 \end{tabular}
 \caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} dataset}
@@ -122,7 +124,7 @@ number is the F1 score.
 \small
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Scaler} & \textbf{Data Imputation} & \textbf{Random Forest} & \textbf{LinearSVC} & \textbf{Ridge} \\
+\textbf{Scaler} & \textsf{Data Imputation} & \textbf{Random Forest} & \textbf{LinearSVC} & \textbf{Ridge} \\
 \hline
 StandardScaler & most frequent & \cellcolor[HTML]{C1E1C1}0.857/0.677 & 0.852/0.655 & 0.841/0.607 \\
 \hline
@@ -204,19 +206,19 @@ In the end we decided to use the scalers marked in green for the respective clas
 \section{Hyperparameters}
 \label{sec:hyperparameters}
 Now we want to take a closer look at the hyperparameters of our models. In a first step we want to optimize the hyperparameters for the different models and datasets.
-In a second step we will analyze how sensitive the models are to changes in the hyperparameters. Unfortunately we will not be able to find the optimum for all hyperparameters, as scikit-learn offers a wide range, so we are going to focus on the most important ones.\\
+In a second step we will analyze how sensitive the models are to changes in the hyperparameters. Unfortunately we will not be able to find the optimum for all hyperparameters, as scikit-learn offers a wide range, so we are going to focus on the most important ones.
 
 For tuning we want to use Bayesian Optimization from the scikit-optimize package. Bayesian Optimization is a probabilistic approach to finding the minimum or maximum. This means that it builds a probabilistic model of the function and uses this model to decide on where to evaluate in the next step. In our case the function is given by the performance measure. 
 
 Bayesian Optimization does not only take a function as input but a search space as well, which is why we need to decide on an appropriate rnage of values for the parameters as well. Moreover, because we chose two different performance measures for each dataset, we will have to do the optimization twice and then compare results to get the overall best.
 
-\section{Random Forest Classifier}  
+\textbf{Random Forest Classifier:}  
 
 \begin{table}[h!]
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
-    Dataset & \textbf{estimators} & \textbf{depth} & \textbf{split} & \textbf{leafs} & \textbf{features} & accuracy \\
+    Dataset & \textsf{estimators} & \textsf{depth} & \textsf{split} & \textsf{leafs} & \textsf{features} & accuracy \\
     \hline
     \multicolumn{7}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -237,7 +239,7 @@ Bayesian Optimization does not only take a function as input but a search space 
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
-    Dataset & \textbf{estimators} & \textbf{depth} & \textbf{split} & \textbf{leafs} & \textbf{features} & F1/Recall \\
+    Dataset & \textsf{estimators} & \textsf{depth} & \textsf{split} & \textsf{leafs} & \textsf{features} & F1/Recall \\
     \hline
     \multicolumn{7}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -258,13 +260,13 @@ As you can see we got the same tuning accuracy and for F1 score on the first two
 Search space was different for different datasets.
 
 
-\section{Linear Support Vector Classifier}
+\textbf{Linear Support Vector Classifier:}
 
 \begin{table}[h!]
     \centering
     \begin{tabular}{|c|c|c|c|c|c|}
     \hline
-    Dataset & \textbf{C} & \textbf{fit\_intercept} &  \textbf{class\_weight} & \textbf{dual} & accuracy \\
+    Dataset & \textsf{C} & \textsf{fit\_intercept} &  \textsf{class\_weight} & \textsf{dual} & accuracy \\
     \hline
     \multicolumn{6}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -285,7 +287,7 @@ Search space was different for different datasets.
     \centering
     \begin{tabular}{|c|c|c|c|c|c|}
     \hline
-    Dataset & \textbf{C} & \textbf{fit\_intercept} &  \textbf{class\_weight} & \textbf{dual} & F1/Recall \\
+    Dataset & \textsf{C} & \textsf{fit\_intercept} &  \textsf{class\_weight} & \textsf{dual} & F1/Recall \\
     \hline
     \multicolumn{6}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -304,17 +306,17 @@ Search space was different for different datasets.
     
 We have that the computation with the primal problem outperformed the dual problem in every case. However it should be noted that for the Amazon dataset we got the same accuracy and F1 score for dual computation. Therefore we will choose the dual computation as it is faster.
 
-Later we will see that small changes in C do not vary result too much so we choose C=0.00946 for Amazon and C=1.2 for congressional voting. Taking the other values from table \ref{table:tu_hyp_svc_ac} for congressional voting we get an F1 score of 0.951 which is pretty good and we will use these values.
+Later we will see that small changes in \textsf{C} do not vary result too much so we choose \textsf{C}=0.00946 for Amazon and \textsf{C} =1.2 for congressional voting. Taking the other values from table \ref{table:tu_hyp_svc_ac} for congressional voting we get an F1 score of 0.951 which is pretty good and we will use these values.
 
 For the other datasets finding the right values is harder because they differ quite a lot. The census dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference than our loss in accuracy so we choose these values. To diabetes we will get back later.
 
-\section{Ridge Classifier}
+\textbf{Ridge Classifier:}
 
 \begin{table}[h!]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
     \hline
-    Dataset & \textbf{alpha} & \textbf{fit\_intercept} &  \textbf{class\_weight} &  accuracy \\
+    Dataset & \textsf{alpha} & \textsf{fit\_intercept} &  \textsf{class\_weight} &  accuracy \\
     \hline
     \multicolumn{5}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -335,7 +337,7 @@ For the other datasets finding the right values is harder because they differ qu
     \centering
     \begin{tabular}{|c|c|c|c|c|}
     \hline
-    Dataset & \textbf{alpha} & \textbf{fit\_intercept} &  \textbf{class\_weight} & F1/Recall \\
+    Dataset & \textsf{alpha} & \textsf{fit\_intercept} &  \textsf{class\_weight} & F1/Recall \\
     \hline
     \multicolumn{5}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -358,8 +360,10 @@ For the census dataset testing the values for the best accuracy gave us a F1 sco
 
 To the diabetes dataset we will get back later.
 
+
 For the tuning and testing processes, we always used repeated stratified 5 fold crossvalidation. On the congressional voting and the diabetes dataset we used 10 repetitions and on the other two datasets we used 5 repetitions except for the random forest classifier with which we did only one repetition. This was due to the otherwise very long runtime for the large datasets.
 
+\textbf{Linear Support Vector Classifier Sensitivity:}
 
 \begin{figure}[h!]
     \centering
@@ -369,7 +373,9 @@ For the tuning and testing processes, we always used repeated stratified 5 fold 
     \end{figure}
     
 
-Linear SVC sensitivity. In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small values of C the two scores diverge heavily. To get the best Recall with still decent accuracy we chose classweight balanced fit\_intercept True and C=0.0452. This gives us an accuracy of 0.747 and a Recall of 0.734.%20241113_110548 sensitivity analysis
+In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small values of \textsf{C} the two scores diverge heavily. To get the best Recall with still decent accuracy we chose \textsf{class\_weight}=\textsf{'balanced'} and \textsf{fit\_intercept}=\textsf{True} and \textsf{C}=0.0452. This gives us an accuracy of 0.747 and a Recall of 0.734.%20241113_110548 sensitivity analysis
+
+\textbf{Ridge Classifier Sensitivity:}
 
 \begin{figure}[h!]
     \centering
@@ -378,7 +384,7 @@ Linear SVC sensitivity. In figure \ref{fig:sensitivity svc diabetes} we can see,
     \label{fig:sensitivity ridge diabetes}
     \end{figure}
 
-By looking at figure \ref{fig:sensitivity ridge diabetes} we can see that we have to set class\_weight to 'balanced' and fit\_intercept to False when favoring Recall over accuracy. In that case the best value for alpha is 0. In that case we get an accuracy of 0.737 and a Recall of 0.797.%20241113_115258 sensitivity analysis
+By looking at figure \ref{fig:sensitivity ridge diabetes} we can see that we have to set \textsf{class\_weight} to \textsf{'balanced'} and \textsf{fit\_intercept} to \textsf{False} when favoring Recall over accuracy. In that case the best value for alpha is 0. In that case we get an accuracy of 0.737 and a Recall of 0.797.%20241113_115258 sensitivity analysis
 
 \section{Discussion}
 This section discusses the implications of your results.
