@@ -19,7 +19,7 @@ X, y = load_training_dataset()
 linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("max_abs_scaler", MaxAbsScaler()),
-    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.02344))
+    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.00946,dual=True, fit_intercept=True))
 ])
 
 # define RidgeClassifier pipeline
@@ -27,20 +27,20 @@ ridge = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("power_transformer", PowerTransformer()),
     ("pca", PCA(n_components=0.99)),
-    ("model", RidgeClassifier(random_state=1234, alpha=51.6, fit_intercept=False))
+    ("model", RidgeClassifier(random_state=1234, alpha=45.32, fit_intercept=False, class_weight=None))
 ])
 
 # define Random Forest pipeline
 random_forest = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("max_abs_scaler", MaxAbsScaler()),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=100,
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=40,
                                      min_samples_split=2, min_samples_leaf=1, max_features="sqrt"))
 ])
 
 # all models
 models = [
-    ("LinearSVC", linear_svc),
+    #("LinearSVC", linear_svc),
     ("RidgeClassifier", ridge),
     ("RandomForestClassifier", random_forest)
 ]
@@ -50,11 +50,13 @@ param_ranges = {
     "LinearSVC": {
         "C": 10**np.linspace(-3, 3, 15),
         "class_weight": [None, "balanced"],
-        "fit_intercept": [True, False]
+        "fit_intercept": [True, False],
+        "dual": [True, False]
     },
     "RidgeClassifier": {
         "alpha": np.linspace(0, 100, 20),
-        "fit_intercept": [True, False]
+        "fit_intercept": [True, False],
+        "class_weight": [None, "balanced"]
     },
     "RandomForestClassifier": {
         "max_depth": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
@@ -74,8 +76,8 @@ for name, pipeline in models:
         for value in param_ranges[name][param]:
             model = clone(pipeline)
             model.set_params(**{f"model__{param}": value})
-            n_repeats = 1 if name == "RandomForestClassifier" else 5
-            cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=n_repeats, random_state=1234)
+            n_repeats = 1 if name == "RandomForestClassifier" else 1
+            cv = RepeatedStratifiedKFold(n_splits=2, n_repeats=n_repeats, random_state=1234)
             scores = cross_validate(model, X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
             accuracy.append(scores["test_accuracy"].mean())
             f1.append(scores["test_f1_macro"].mean())
