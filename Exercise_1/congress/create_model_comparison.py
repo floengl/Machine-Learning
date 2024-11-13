@@ -22,7 +22,7 @@ linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("imputer", SimpleImputer(strategy="most_frequent")),
     ("one_hot_encoder", OneHotEncoder(drop="if_binary")),
-    ("model", LinearSVC(random_state=1234, max_iter=100000, C=0.57,fit_intercept=True, class_weight=None))
+    ("model", LinearSVC(random_state=1234, max_iter=100000, C=1.2,fit_intercept=True, class_weight="balanced", dual=False))
 ])
 
 # define RidgeClassifier pipeline
@@ -30,7 +30,7 @@ ridge = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("imputer", SimpleImputer(strategy="most_frequent")),
     ("one_hot_encoder", OneHotEncoder(drop="if_binary")),
-    ("model", RidgeClassifier(random_state=1234, alpha=0.0, fit_intercept=True))
+    ("model", RidgeClassifier(random_state=1234, alpha=0.0, fit_intercept=True, class_weight=None))
 ])
 
 # define Random Forest pipeline
@@ -38,8 +38,8 @@ random_forest = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("imputer", SimpleImputer(strategy="most_frequent")),
     ("one_hot_encoder", OneHotEncoder(drop="if_binary")),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=100,
-                                     min_samples_split=2, min_samples_leaf=1, max_features="log2"))
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=1963, max_depth=40,
+                                     min_samples_split=20, min_samples_leaf=4, max_features=None))
 ])
 
 # all models
