@@ -38,7 +38,7 @@ preprocessor_linear_svc = ColumnTransformer(
 )
 linear_svc = Pipeline([
     ("preprocessor", preprocessor_linear_svc),
-    ("model", LinearSVC(random_state=1234, max_iter=10000, dual=False, class_weight="balanced", C=0.274))
+    ("model", LinearSVC(random_state=1234, max_iter=10000, dual=False, class_weight=None, C=679.520, fit_intercept=True))
 ])
 
 # define RidgeClassifier pipeline
@@ -50,7 +50,7 @@ preprocessor_ridge = ColumnTransformer(
 )
 ridge = Pipeline([
     ("preprocessor", preprocessor_ridge),
-    ("model", RidgeClassifier(random_state=1234, alpha=0, fit_intercept=False))
+    ("model", RidgeClassifier(random_state=1234, alpha=11.333, fit_intercept=True, class_weight="balanced"))
 ])
 
 # define Random Forest pipeline
@@ -62,8 +62,8 @@ preprocessor_rf = ColumnTransformer(
 )
 random_forest = Pipeline([
     ("preprocessor", preprocessor_rf),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=1448, max_depth=40,
-                                     min_samples_split=17, min_samples_leaf=2, max_features="sqrt"))
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=100, max_depth=30,
+                                     min_samples_split=20, min_samples_leaf=1, max_features="sqrt"))
 ])
 
 # all models
