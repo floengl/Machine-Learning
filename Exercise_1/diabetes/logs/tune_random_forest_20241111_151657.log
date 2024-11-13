@@ -1,0 +1,115 @@
+11.11.2024 15:16:57
+Scoring: accuracy
+Best score: 0.7732119514472454
+best params: OrderedDict({'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 3000})
+CV results:
+                                                                                                                                                 params  mean_test_score  std_test_score  rank_test_score
+28    {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 3000}         0.773212        0.028618                1
+48    {'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 3000}         0.773212        0.028618                1
+40   {'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 3000}         0.773212        0.028618                1
+47    {'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 3000}         0.773212        0.028618                1
+23    {'model__max_depth': 20, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 2597}         0.773081        0.028491                5
+13    {'model__max_depth': 20, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 3, 'model__n_estimators': 2979}         0.772952        0.028827                6
+25     {'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 540}         0.772684        0.028439                7
+27    {'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 317}         0.772557        0.028302                8
+37    {'model__max_depth': 10, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 3000}         0.772300        0.029347                9
+5     {'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 11, 'model__n_estimators': 802}         0.771646        0.026976               10
+46   {'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 18, 'model__n_estimators': 2925}         0.771384        0.027302               11
+34    {'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 5, 'model__min_samples_split': 2, 'model__n_estimators': 2049}         0.771255        0.029079               12
+42  {'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 3, 'model__min_samples_split': 20, 'model__n_estimators': 2992}         0.770865        0.028600               13
+15    {'model__max_depth': 80, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 5, 'model__min_samples_split': 2, 'model__n_estimators': 1300}         0.770864        0.029455               14
+6     {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 3, 'model__min_samples_split': 3, 'model__n_estimators': 2733}         0.770730        0.029887               15
+32    {'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 3, 'model__min_samples_split': 20, 'model__n_estimators': 413}         0.770474        0.027940               16
+16    {'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1, 'model__min_samples_split': 8, 'model__n_estimators': 350}         0.770346        0.029147               17
+21    {'model__max_depth': 20, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 3, 'model__min_samples_split': 3, 'model__n_estimators': 2825}         0.770339        0.030057               18
+44  {'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 5, 'model__min_samples_split': 17, 'model__n_estimators': 2933}         0.770081        0.026918               19
+31    {'model__max_depth': 10, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1, 'model__min_samples_split': 3, 'model__n_estimators': 2439}         0.769947        0.028726               20
+38     {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 106}         0.769947        0.025673               21
+49    {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1, 'model__min_samples_split': 4, 'model__n_estimators': 2860}         0.769428        0.028968               22
+33   {'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1, 'model__min_samples_split': 19, 'model__n_estimators': 2617}         0.769301        0.027431               23
+22    {'model__max_depth': 60, 'model__max_features': 'log2', 'model__min_samples_leaf': 5, 'model__min_samples_split': 3, 'model__n_estimators': 2351}         0.769173        0.027931               24
+29   {'model__max_depth': 90, 'model__max_features': 'log2', 'model__min_samples_leaf': 5, 'model__min_samples_split': 20, 'model__n_estimators': 1105}         0.769041        0.025944               25
+12    {'model__max_depth': 10, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 5, 'model__min_samples_split': 17, 'model__n_estimators': 200}         0.768522        0.026568               26
+11    {'model__max_depth': 60, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 5, 'model__min_samples_split': 20, 'model__n_estimators': 385}         0.768519        0.026570               27
+45    {'model__max_depth': 50, 'model__max_features': 'log2', 'model__min_samples_leaf': 1, 'model__min_samples_split': 3, 'model__n_estimators': 2993}         0.768515        0.028863               28
+4     {'model__max_depth': 30, 'model__max_features': 'log2', 'model__min_samples_leaf': 3, 'model__min_samples_split': 14, 'model__n_estimators': 786}         0.768515        0.023872               28
+17    {'model__max_depth': 70, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 2, 'model__min_samples_split': 2, 'model__n_estimators': 2918}         0.768389        0.027892               30
+20   {'model__max_depth': 50, 'model__max_features': 'log2', 'model__min_samples_leaf': 4, 'model__min_samples_split': 20, 'model__n_estimators': 1017}         0.768126        0.025891               31
+7     {'model__max_depth': 40, 'model__max_features': 'log2', 'model__min_samples_leaf': 4, 'model__min_samples_split': 9, 'model__n_estimators': 1926}         0.767998        0.028047               32
+0    {'model__max_depth': 40, 'model__max_features': 'log2', 'model__min_samples_leaf': 2, 'model__min_samples_split': 17, 'model__n_estimators': 2157}         0.767995        0.026846               33
+24  {'model__max_depth': 100, 'model__max_features': 'log2', 'model__min_samples_leaf': 2, 'model__min_samples_split': 13, 'model__n_estimators': 2983}         0.767867        0.027136               34
+43   {'model__max_depth': 100, 'model__max_features': 'log2', 'model__min_samples_leaf': 5, 'model__min_samples_split': 18, 'model__n_estimators': 155}         0.767742        0.027454               35
+26    {'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1, 'model__min_samples_split': 19, 'model__n_estimators': 187}         0.767736        0.028134               36
+35   {'model__max_depth': 90, 'model__max_features': 'log2', 'model__min_samples_leaf': 3, 'model__min_samples_split': 20, 'model__n_estimators': 2443}         0.767736        0.025502               36
+30    {'model__max_depth': 90, 'model__max_features': 'log2', 'model__min_samples_leaf': 2, 'model__min_samples_split': 2, 'model__n_estimators': 1066}         0.766953        0.028291               38
+10    {'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 5, 'model__min_samples_split': 20, 'model__n_estimators': 318}         0.766827        0.026356               39
+2     {'model__max_depth': 30, 'model__max_features': 'log2', 'model__min_samples_leaf': 1, 'model__min_samples_split': 17, 'model__n_estimators': 469}         0.766568        0.026727               40
+41     {'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 2, 'model__min_samples_split': 4, 'model__n_estimators': 113}         0.765648        0.026733               41
+39       {'model__max_depth': 50, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 3, 'model__n_estimators': 528}         0.765385        0.024911               42
+8      {'model__max_depth': 20, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 16, 'model__n_estimators': 2460}         0.765258        0.024622               43
+3       {'model__max_depth': 90, 'model__max_features': None, 'model__min_samples_leaf': 2, 'model__min_samples_split': 19, 'model__n_estimators': 457}         0.765001        0.027886               44
+14     {'model__max_depth': 50, 'model__max_features': None, 'model__min_samples_leaf': 5, 'model__min_samples_split': 19, 'model__n_estimators': 1924}         0.764349        0.025919               45
+1      {'model__max_depth': 40, 'model__max_features': None, 'model__min_samples_leaf': 4, 'model__min_samples_split': 20, 'model__n_estimators': 1963}         0.763826        0.025420               46
+19     {'model__max_depth': None, 'model__max_features': None, 'model__min_samples_leaf': 4, 'model__min_samples_split': 2, 'model__n_estimators': 132}         0.763168        0.025494               47
+18      {'model__max_depth': 70, 'model__max_features': None, 'model__min_samples_leaf': 5, 'model__min_samples_split': 20, 'model__n_estimators': 843}         0.763046        0.023394               48
+9      {'model__max_depth': 10, 'model__max_features': None, 'model__min_samples_leaf': 2, 'model__min_samples_split': 20, 'model__n_estimators': 2156}         0.762394        0.024276               49
+36      {'model__max_depth': 90, 'model__max_features': None, 'model__min_samples_leaf': 5, 'model__min_samples_split': 6, 'model__n_estimators': 2556}         0.762137        0.026453               50
+
+
+Scoring: recall
+Best score: 0.6228581411600279
+best params: OrderedDict({'model__max_depth': 70, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 6, 'model__n_estimators': 3000})
+CV results:
+                                                                                                                                                params  mean_test_score  std_test_score  rank_test_score
+25     {'model__max_depth': 70, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 6, 'model__n_estimators': 3000}         0.622858        0.058872                1
+28     {'model__max_depth': 40, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 9, 'model__n_estimators': 2057}         0.622488        0.058359                2
+45     {'model__max_depth': 60, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 6, 'model__n_estimators': 2924}         0.622117        0.058548                3
+35   {'model__max_depth': None, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 9, 'model__n_estimators': 2154}         0.621740        0.058981                4
+44     {'model__max_depth': 70, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 7, 'model__n_estimators': 1006}         0.621733        0.060221                5
+47     {'model__max_depth': 30, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 6, 'model__n_estimators': 2293}         0.620999        0.059136                6
+29     {'model__max_depth': 40, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 9, 'model__n_estimators': 3000}         0.620999        0.059559                6
+48     {'model__max_depth': 20, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 6, 'model__n_estimators': 2339}         0.620629        0.059023                8
+31     {'model__max_depth': 20, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 9, 'model__n_estimators': 2222}         0.620615        0.059213                9
+20     {'model__max_depth': 70, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 12, 'model__n_estimators': 100}         0.619937        0.068803               10
+18     {'model__max_depth': 60, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 12, 'model__n_estimators': 100}         0.619937        0.068803               10
+22   {'model__max_depth': None, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 12, 'model__n_estimators': 100}         0.619937        0.068803               10
+19     {'model__max_depth': 20, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 12, 'model__n_estimators': 100}         0.619937        0.068803               10
+37   {'model__max_depth': None, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 7, 'model__n_estimators': 2179}         0.619504        0.059664               14
+40   {'model__max_depth': None, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 2, 'model__n_estimators': 3000}         0.618770        0.059560               15
+26     {'model__max_depth': 10, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 5, 'model__n_estimators': 3000}         0.618763        0.056897               16
+36     {'model__max_depth': 50, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 2, 'model__n_estimators': 1992}         0.618756        0.058412               17
+10     {'model__max_depth': 60, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 16, 'model__n_estimators': 161}         0.616967        0.065712               18
+38     {'model__max_depth': 10, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 9, 'model__n_estimators': 2458}         0.616548        0.060409               19
+49     {'model__max_depth': 10, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 10, 'model__n_estimators': 193}         0.615814        0.063096               20
+13     {'model__max_depth': 70, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 19, 'model__n_estimators': 136}         0.615416        0.061298               21
+21      {'model__max_depth': 30, 'model__max_features': None, 'model__min_samples_leaf': 3, 'model__min_samples_split': 4, 'model__n_estimators': 320}         0.613194        0.064664               22
+32      {'model__max_depth': 70, 'model__max_features': None, 'model__min_samples_leaf': 5, 'model__min_samples_split': 9, 'model__n_estimators': 132}         0.613138        0.061045               23
+8     {'model__max_depth': 20, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 16, 'model__n_estimators': 2460}         0.612082        0.058140               24
+12     {'model__max_depth': 60, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 20, 'model__n_estimators': 412}         0.610566        0.062081               25
+3      {'model__max_depth': 90, 'model__max_features': None, 'model__min_samples_leaf': 2, 'model__min_samples_split': 19, 'model__n_estimators': 457}         0.609860        0.057967               26
+11      {'model__max_depth': 60, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 2, 'model__n_estimators': 100}         0.609860        0.066602               26
+30  {'model__max_depth': 70, 'model__max_features': 'log2', 'model__min_samples_leaf': 1, 'model__min_samples_split': 10, 'model__n_estimators': 2835}         0.609064        0.065817               28
+43    {'model__max_depth': 40, 'model__max_features': 'log2', 'model__min_samples_leaf': 1, 'model__min_samples_split': 7, 'model__n_estimators': 187}         0.609036        0.065575               29
+16   {'model__max_depth': 10, 'model__max_features': 'log2', 'model__min_samples_leaf': 1, 'model__min_samples_split': 2, 'model__n_estimators': 1632}         0.608344        0.062425               30
+15     {'model__max_depth': 50, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 19, 'model__n_estimators': 993}         0.607945        0.057794               31
+39  {'model__max_depth': None, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 20, 'model__n_estimators': 3000}         0.607219        0.059344               32
+14    {'model__max_depth': 80, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 20, 'model__n_estimators': 1156}         0.607198        0.058253               33
+46   {'model__max_depth': 50, 'model__max_features': 'log2', 'model__min_samples_leaf': 1, 'model__min_samples_split': 2, 'model__n_estimators': 2964}         0.607198        0.061272               33
+42     {'model__max_depth': 40, 'model__max_features': None, 'model__min_samples_leaf': 5, 'model__min_samples_split': 2, 'model__n_estimators': 1061}         0.606094        0.059212               35
+27     {'model__max_depth': 70, 'model__max_features': None, 'model__min_samples_leaf': 5, 'model__min_samples_split': 7, 'model__n_estimators': 3000}         0.603864        0.060194               36
+41     {'model__max_depth': 80, 'model__max_features': None, 'model__min_samples_leaf': 5, 'model__min_samples_split': 20, 'model__n_estimators': 153}         0.603473        0.062789               37
+9     {'model__max_depth': 10, 'model__max_features': None, 'model__min_samples_leaf': 2, 'model__min_samples_split': 20, 'model__n_estimators': 2156}         0.602397        0.058045               38
+24  {'model__max_depth': 100, 'model__max_features': 'log2', 'model__min_samples_leaf': 3, 'model__min_samples_split': 2, 'model__n_estimators': 2162}         0.602369        0.065706               39
+1     {'model__max_depth': 40, 'model__max_features': None, 'model__min_samples_leaf': 4, 'model__min_samples_split': 20, 'model__n_estimators': 1963}         0.601628        0.057797               40
+33    {'model__max_depth': 70, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1, 'model__min_samples_split': 4, 'model__n_estimators': 132}         0.601272        0.068612               41
+0   {'model__max_depth': 40, 'model__max_features': 'log2', 'model__min_samples_leaf': 2, 'model__min_samples_split': 17, 'model__n_estimators': 2157}         0.600126        0.062510               42
+2    {'model__max_depth': 30, 'model__max_features': 'log2', 'model__min_samples_leaf': 1, 'model__min_samples_split': 17, 'model__n_estimators': 469}         0.599399        0.062600               43
+4    {'model__max_depth': 30, 'model__max_features': 'log2', 'model__min_samples_leaf': 3, 'model__min_samples_split': 14, 'model__n_estimators': 786}         0.598260        0.059720               44
+7    {'model__max_depth': 40, 'model__max_features': 'log2', 'model__min_samples_leaf': 4, 'model__min_samples_split': 9, 'model__n_estimators': 1926}         0.597142        0.062555               45
+34    {'model__max_depth': 50, 'model__max_features': 'log2', 'model__min_samples_leaf': 5, 'model__min_samples_split': 2, 'model__n_estimators': 128}         0.596331        0.056563               46
+6    {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 3, 'model__min_samples_split': 3, 'model__n_estimators': 2733}         0.591915        0.065522               47
+5    {'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4, 'model__min_samples_split': 11, 'model__n_estimators': 802}         0.587820        0.062258               48
+23  {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 3, 'model__min_samples_split': 15, 'model__n_estimators': 1847}         0.587107        0.063516               49
+17  {'model__max_depth': 10, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 5, 'model__min_samples_split': 20, 'model__n_estimators': 2703}         0.574004        0.063832               50
+
+
