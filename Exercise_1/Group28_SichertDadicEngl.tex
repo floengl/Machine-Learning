@@ -360,6 +360,26 @@ To the diabetes dataset we will get back later.
 
 For the tuning and testing processes, we always used repeated stratified 5 fold crossvalidation. On the congressional voting and the diabetes dataset we used 10 repetitions and on the other two datasets we used 5 repetitions except for the random forest classifier with which we did only one repetition. This was due to the otherwise very long runtime for the large datasets.
 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{diabetes/plots/linearsvc_parameter_sensitivity.pdf}
+    \caption{Sensitivity of Parameter C for datasets \textit{'Diabetes'}}
+    \label{fig:sensitivity svc diabetes}
+    \end{figure}
+    
+
+Linear SVC sensitivity. In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small values of C the two scores diverge heavily. To get the best Recall with still decent accuracy we chose classweight balanced fit\_intercept True and C=0.0452. This gives us an accuracy of 0.747 and a Recall of 0.734.%20241113_110548 sensitivity analysis
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{diabetes/plots/ridge_parameter_sensitivity.pdf}
+    \caption{Sensitivity of Parameter alpha for datasets \textit{'Diabetes'}}
+    \label{fig:sensitivity ridge diabetes}
+    \end{figure}
+
+By looking at figure \ref{fig:sensitivity ridge diabetes} we can see that we have to set class\_weight to 'balanced' and fit\_intercept to False when favoring Recall over accuracy. In that case the best value for alpha is 0. In that case we get an accuracy of 0.737 and a Recall of 0.797.%20241113_115258 sensitivity analysis
+
 \section{Discussion}
 This section discusses the implications of your results.
 

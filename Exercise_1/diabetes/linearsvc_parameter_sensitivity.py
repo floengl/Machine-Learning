@@ -19,7 +19,7 @@ estimator = Pipeline([
 
 class_weight = [None, "balanced"]
 fit_intercept = [True, False]
-C = 10**np.linspace(-3, 3, 30)
+C = 10**np.linspace(-6, 3, 50)
 
 data = []
 for cw in class_weight:
@@ -42,7 +42,7 @@ for i, cw in enumerate(class_weight):
         plot.semilogx(df["C"], df["recall"], label="recall")
         plot.set_xlabel("C")
         plot.set_ylabel("score")
-        plot.set_ylim(0.55, 0.8)
+        plot.set_ylim(0.32, 0.8)
 handles, labels = axs[0, 0].get_legend_handles_labels()
 fig.legend(handles, labels, loc='lower center', ncol=2)
 fig.tight_layout()

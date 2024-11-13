@@ -18,14 +18,14 @@ X, y = load_training_dataset()
 # define LinearSVC pipeline
 linear_svc = Pipeline([
     ("preprocessor", Pipeline([("none", "passthrough")])),
-    ("model", LinearSVC(random_state=1234, max_iter=100000, dual=False, C=0.028072,
-                        class_weight="balanced", fit_intercept=False))
+    ("model", LinearSVC(random_state=1234, max_iter=100000, dual=False, C=0.045204,
+                        class_weight="balanced", fit_intercept=True))
 ])
 
 # define RidgeClassifier pipeline
 ridge = Pipeline([
     ("preprocessor", StandardScaler()),
-    ("model", RidgeClassifier(random_state=1234, alpha=40, fit_intercept=False))
+    ("model", RidgeClassifier(random_state=1234, alpha=0, fit_intercept=False, class_weight="balanced"))
 ])
 
 # define Random Forest pipeline
