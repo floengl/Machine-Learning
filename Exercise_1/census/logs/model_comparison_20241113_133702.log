@@ -1,0 +1,27 @@
+13.11.2024 13:37:02
+
+Runtime of models:
+          model  train_time  pred_time
+0     LinearSVC    0.404298   0.034055
+1         Ridge    0.166258   0.040907
+2  RandomForest   15.975096   0.248006
+
+Holdout results:
+             model_score     score
+0     LinearSVC Accuracy  0.853682
+1           LinearSVC F1  0.663105
+2         Ridge Accuracy  0.792193
+3               Ridge F1  0.664980
+4  RandomForest Accuracy  0.863031
+5        RandomForest F1  0.683189
+
+Cross validation results:
+                          score          
+                           mean       std
+model_score                              
+LinearSVC Accuracy     0.853118  0.003026
+LinearSVC F1           0.659312  0.007192
+RandomForest Accuracy  0.866103  0.002610
+RandomForest F1        0.684832  0.006457
+Ridge Accuracy         0.794644  0.003955
+Ridge F1               0.665443  0.004890

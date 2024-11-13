@@ -40,7 +40,7 @@ random_forest = Pipeline([
 
 # all models
 models = [
-    ("LinearSVC", linear_svc),
+    #("LinearSVC", linear_svc),
     ("RidgeClassifier", ridge),
     ("RandomForestClassifier", random_forest)
 ]
@@ -74,8 +74,8 @@ for name, pipeline in models:
         for value in param_ranges[name][param]:
             model = clone(pipeline)
             model.set_params(**{f"model__{param}": value})
-            n_repeats = 1 if name == "RandomForestClassifier" else 5
-            cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=n_repeats, random_state=1234)
+            n_repeats = 1 if name == "RandomForestClassifier" else 1
+            cv = RepeatedStratifiedKFold(n_splits=2, n_repeats=n_repeats, random_state=1234)
             scores = cross_validate(model, X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
             accuracy.append(scores["test_accuracy"].mean())
             f1.append(scores["test_f1_macro"].mean())
