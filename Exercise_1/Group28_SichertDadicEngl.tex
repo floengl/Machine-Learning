@@ -308,6 +308,58 @@ Later we will see that small changes in C do not vary result too much so we choo
 
 For the other datasets finding the right values is harder because they differ quite a lot. The census dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference than our loss in accuracy so we choose these values. To diabetes we will get back later.
 
+\section{Ridge Classifier}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Dataset & \textbf{alpha} & \textbf{fit\_intercept} &  \textbf{class\_weight} &  accuracy \\
+    \hline
+    \multicolumn{5}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
+    \hline
+    congressional voting & 0 & True & None & 0.963 \\%20241111_122418
+    \hline
+    Amazon Reviews & 45.32 & False & None &  0.754 \\%20241111_110048
+    \hline
+    Census Income & 63.876 & True & None &  0.844 \\%20241111_121945
+    \hline
+    diabetes & 0 & True & None &  0.771 \\%20241111_151531
+    \hline
+    \end{tabular}
+    \caption{Tuned hyperparameters for ridge classifier and accuracy} 
+    \label{table:tu_hyp_ridge_ac}
+    \end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Dataset & \textbf{alpha} & \textbf{fit\_intercept} &  \textbf{class\_weight} & F1/Recall \\
+    \hline
+    \multicolumn{5}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
+    \hline
+    congressional voting & 0 & True & None & 0.963 \\%20241111_122418
+    \hline
+    Amazon Reviews & 45.32 & False & None &  0.73 \\%20241111_110048
+    \hline
+    Census Income & 11.333 & True & balanced & 0.666 \\%20241111_121945
+    \hline
+    diabetes & 0 & False & balanced & 0.797 \\%20241111_11531
+    \hline
+    \end{tabular}
+    \caption{Tuned hyperparameters for ridge classifier and F1 score/Recall} 
+    \label{table:tu_hyp_ridge_f1}
+    \end{table}
+
+For congressional voting and amazon the values in table \ref{table:tu_hyp_ridge_ac} and table \ref{table:tu_hyp_svc_f1} coincide so those are the best settings. 
+
+For the census dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
+
+To the diabetes dataset we will get back later.
+
+For the tuning and testing processes, we always used repeated stratified 5 fold crossvalidation. On the congressional voting and the diabetes dataset we used 10 repetitions and on the other two datasets we used 5 repetitions except for the random forest classifier with which we did only one repetition. This was due to the otherwise very long runtime for the large datasets.
+
 \section{Discussion}
 This section discusses the implications of your results.
 

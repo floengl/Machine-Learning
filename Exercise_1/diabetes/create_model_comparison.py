@@ -31,8 +31,8 @@ ridge = Pipeline([
 # define Random Forest pipeline
 random_forest = Pipeline([
     ("preprocessor", MinMaxScaler()),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=3000, max_depth=50,
-                                     min_samples_split=6, min_samples_leaf=1, max_features=None))
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=3000, max_depth=40,
+                                     min_samples_split=2, min_samples_leaf=4, max_features="sqrt"))
 ])
 
 # all models
