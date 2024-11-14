@@ -8,6 +8,7 @@
 \usepackage{geometry}
 \usepackage{parskip}
 \usepackage{lmodern}
+\usepackage{subcaption}
 
 \usepackage{colortbl} % For coloring table cells and lines
 \usepackage[table]{xcolor} % For more color options
@@ -223,7 +224,7 @@ Bayesian Optimization does not only take a function as input but a search space 
 \end{itemize}
 
 
-    For the big datasets 'Amazon Commerce Reviews' and 'Diabetes' we will use the search space:
+For the big datasets 'Amazon Commerce Reviews' and 'Diabetes' we will use the search space:
  
 
 \begin{center}
@@ -351,9 +352,9 @@ The results show, that the computation with the primal problem outperformed the 
 
 Later we will see that small changes in \textsf{C} do not vary the result too much, so we choose \textsf{C}=0.00946 for 'Amazon Commerce Reviews' and \textsf{C} =1.2 for 'congressional voting'. Taking the other values from table \ref{table:tu_hyp_svc_ac} for 'congressional voting' we get an F1 score of 0.951 which is pretty good and we will use these values.
 
-For the other two datasets finding the right values for optimizing both perfromance measures at the same time is harder because they differ quite a lot. The census dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference to the optimal value than our loss in accuracy would be otherwiese so we choose these values.
+For the other two datasets finding the right values for optimizing both perfromance measures at the same time is harder because they differ quite a lot. The 'Census Income' dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference to the optimal value than our loss in accuracy would be otherwiese so we choose these values.
 
-To diabetes we will get back later in the sensitivity analysis because, as we will see, matters are more complicated for this dataset.
+To the 'diabetes' dataset we will get back later in the sensitivity analysis because, as we will see, matters are more complicated for this dataset.
 
 \textbf{Ridge Classifier:}
 As for the linear support vector classifier the arguably most influencial parameter is the regularization parameter called \textsf{alpha}. For the ridge classifier the regularization punishes high weights which again helps to prevent overfitting. \textsf{alpha} for the ridge classifier correspond to the value \(\frac{1}{2 \text{\textsf{C}}}\) and therefore has to be positive.\\
@@ -408,7 +409,7 @@ Once more table \ref{table:tu_hyp_ridge_ac} shows the tuned parameters for the a
 
 For 'congressional voting' and 'Amazon Commerce Reviews' the values in table \ref{table:tu_hyp_ridge_ac} and table \ref{table:tu_hyp_svc_f1} coincide, so those are the best settings. 
 
-For the census dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
+For the 'Census Income' dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
 
 Again we will revisit the 'diabetes' dataset later in the sensitivity analysis to analyze the best parameter setting for overall performance.
 
@@ -417,6 +418,48 @@ For the tuning and testing processes, we always used repeated stratified 5 fold 
 
 The next step in analysing the influence of hyperparameters on our classifiers is the sensitivity analysis. This means we will take a look at how changing a single parameter value influences the performance of the model. We will do this for the hyperparameters we tuned in the previous section and will always change one while keeping the others at their optimal values, which we found earlier. We are going to achieve this by plotting the effectiveness measures against the parameter values.\\
 However for the 'diabetes' Dataset in combination with the linear support vector claassifier and the ridge classifier we will take a closer look and try all combinations of \textsf{fit\_intercept} and \textsf{class\_weight} and vary the parameters \textsf{C} and \textsf{alpha} because we still need to decide on the overall best setting.
+
+\textbf{Random Forest Classifier Sensitivity:}
+We first want to find out how much each of the 5 considered hyperparameters influences the effectiveness of the classifier. We found that the sensitivity highly depends on the dataset:
+
+\begin{itemize}
+    \item \textsf{n\_estimators}: On the datasets 'Census Income' and 'diabetes, the parameter changed almost nothing. However for 'Amazon Commerce Reviews we got a clear Trend, that both measures increased with the number of trees first rather quickly and then more slowly. For the 'congressional voting' dataset the parameter seemed to influence the effectiveness but we no clear trend could be identified. 
+\item \textsf{max\_depth}: Varying this parameter only changed the effectiveness for the 'Amazon Commerce Reviews'  and the 'Census Income' dataset. Here we could see that the accuracy increased with the depth of the trees at first and then stagnated, but the increase in accuracy for 'Census Income' was almost negligible and the increase in the F1 score was also way smaller than for 'Amazon Commerce Reviews'.
+
+\item \textsf{min\_samples\_split}: For the 'Census Income' and the 'diabetes datasets varying this parameter hardly changed the effectiveness scores. On 'Amazon Commerce Reviews' both scores decreased with higher values whereas for the 'congressional voting' dataset both values decreased to a minimum at \textsf{min\_samples\_split}=5 and then increased to the original value again.
+\item \textsf{min\_samples\_leaf}: This parameter did not really influence the performance for the 'diabetes' and 'Census Income' datasets. For the other two, small values fared better which fits in with our optimized values.
+\item \textsf{max\_features}: 'sqrt' consistently outperformed 'log2' by quite a big margin on the 'Amazon Commerce Reviews' dataset. For the 'Census Income' it die not make much of a difference. On our smaller and less dimensional datasets None led to the best results except for the accuracy of 'diabetes' where 'sqrt' performed a little better.
+\end{itemize}
+
+To underline our conclusions we want to give a few examplary plots in figure \ref{fig:sensitivity rf} below. 
+
+\begin{figure}[h!]
+    \captionsetup{justification=centering}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{congress/plots/RandomForestClassifier_n_estimators_sensitivity.pdf}
+        \caption{Parameter \textsf{n\_estimators} for dataset 'congressional voting'}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{amazon/plots/RandomForestClassifier_max_depth_sensitivity.pdf}
+        \caption{Parameter \textsf{max\_depth} for dataset 'Amazon Commerce Reviews'}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{diabetes/plots/rf_min_samples_split_sensitivity.pdf}
+        \caption{Parameter \textsf{min\_samples\_split} for dataset 'diabetes'}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{congress/plots/RandomForestClassifier_min_samples_leaf_sensitivity.pdf}
+        \caption{Parameter \textsf{min\_samples\_leaf} for dataset 'congressional voting'}
+        \label{fig:sub4}
+    \end{subfigure}
+    \caption{Sensitivity Analysis of Random Forest Classifier}
+    \label{fig: sensitivity rf}
+\end{figure}
+
+Bla Bla bla
 
 \textbf{Linear Support Vector Classifier Sensitivity:}
 
