@@ -236,7 +236,7 @@ Bayesian Optimization does not only take a function as input but a search space 
 
 Here we didn't consider 'None' as a value for \textsf{max\_features} because it resulted in a runtime that was way too long for the scope of this project. Moreover it is empirically known, that the other results usually give better values for classification. Nonetheless on the other two datasets we could test \textsf{max\_features} = 'None' and could set the number of trees up to 3000, as these are significantly smaller datasets. For the other parameters we used the same search space as for the big datasets. In table \ref{table:tu_hyp_rf_ac} and \ref{table:tu_hyp_rf_f1} we summarized the results of our tuning process by giving the best values for the respective performance measures.
 
-As already discussed we used the F1 score as a seconed metric for all datasets excepts the 'diabetes' dataset for which we used Recall instead. It is also important to note that on the multiclass dataset 'Amazon Commerce Reviews' we used the macro avareged F1 score and on the others the standard weighted one.
+As already discussed we used the F1 score as a seconed metric for all datasets excepts the 'diabetes' dataset for which we used recall instead. It is also important to note that on the multiclass dataset 'Amazon Commerce Reviews' we used the macro avareged F1 score and on the others the standard weighted one.
 
 \begin{table}[h!]
     \centering
@@ -263,7 +263,7 @@ As already discussed we used the F1 score as a seconed metric for all datasets e
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
-    Dataset & \textsf{estimators} & \textsf{depth} & \textsf{split} & \textsf{leafs} & \textsf{features} & F1/Recall \\
+    Dataset & \textsf{estimators} & \textsf{depth} & \textsf{split} & \textsf{leafs} & \textsf{features} & F1/recall \\
     \hline
     \multicolumn{7}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -276,11 +276,11 @@ As already discussed we used the F1 score as a seconed metric for all datasets e
     diabetes & 3000 & 70 & 6 & 4 & None & 0.623 \\%20241111_151657
     \hline
     \end{tabular}
-    \caption{Tuned hyperparameters for random forest classifier and F1 score/Recall} 
+    \caption{Tuned hyperparameters for random forest classifier and F1 score/recall} 
     \label{table:tu_hyp_rf_f1}
     \end{table}
 
-We got the same results tuning for accuracy and for the F1 score on the first two datasets. On the last two datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.685 for the Census Income dataset and a Recall of 0.647 for the diabetes dataset, so we will keep the parameter values for the best accuracy.
+We got the same results tuning for accuracy and for the F1 score on the first two datasets. On the last two datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.685 for the Census Income dataset and a recall of 0.647 for the diabetes dataset, so we will keep the parameter values for the best accuracy.
 
 Search space was different for different datasets.
 
@@ -294,7 +294,16 @@ Search space was different for different datasets.
 \item \textsf{dual}: Takes the values 'True' or 'False' and decides whether the primal or the dual problem is solved. Generally the dual Problem is faster especially for high dimensional data, but as we will see sometimes you get better results with the primal problem.
 \end{itemize}
 
+As already discussed, the influence of the \textsf{class\_weight} will be especially interesting for our imbalanced datasets. For the linear support vector classifier we used the following search space on all four datasets:
 
+\begin{center}
+    \parbox{0.55\textwidth}{%
+    \raggedright
+    \textsf{C}\(\in[10^{-6},10^{6}]\), \textsf{fit\_intercept}\(\in\){True,False},\\ \textsf{class\_weight}\(\in\){'balanced','None'}, \textsf{dual}\(\in\){True,False}.	
+    }
+\end{center}
+
+Again we summarized the results of our optimization process in table \ref{table:tu_hyp_svc_ac} and \ref{table:tu_hyp_svc_f1}.
 
 \begin{table}[h!]
     \centering
@@ -321,7 +330,7 @@ Search space was different for different datasets.
     \centering
     \begin{tabular}{|c|c|c|c|c|c|}
     \hline
-    Dataset & \textsf{C} & \textsf{fit\_intercept} &  \textsf{class\_weight} & \textsf{dual} & F1/Recall \\
+    Dataset & \textsf{C} & \textsf{fit\_intercept} &  \textsf{class\_weight} & \textsf{dual} & F1/recall \\
     \hline
     \multicolumn{6}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -334,17 +343,26 @@ Search space was different for different datasets.
     diabetes & 1e-06 & False & balanced & False  & 0.838 \\%20241111_150042
     \hline
     \end{tabular}
-    \caption{Tuned hyperparameters for linear support vector classifier and F1 score/Recall} 
+    \caption{Tuned hyperparameters for linear support vector classifier and F1 score/recall} 
     \label{table:tu_hyp_svc_f1}
     \end{table}
     
-We have that the computation with the primal problem outperformed the dual problem in every case. However it should be noted that for the Amazon dataset we got the same accuracy and F1 score for dual computation. Therefore we will choose the dual computation as it is faster.
+The results show, that the computation with the primal problem outperformed the dual problem in every case. However it should be noted that for the 'Amazon Commerce Reviews' dataset we got the same accuracy and F1 score for dual computation. Therefore we will choose the dual computation as it is faster.
 
-Later we will see that small changes in \textsf{C} do not vary result too much so we choose \textsf{C}=0.00946 for Amazon and \textsf{C} =1.2 for congressional voting. Taking the other values from table \ref{table:tu_hyp_svc_ac} for congressional voting we get an F1 score of 0.951 which is pretty good and we will use these values.
+Later we will see that small changes in \textsf{C} do not vary the result too much, so we choose \textsf{C}=0.00946 for 'Amazon Commerce Reviews' and \textsf{C} =1.2 for 'congressional voting'. Taking the other values from table \ref{table:tu_hyp_svc_ac} for 'congressional voting' we get an F1 score of 0.951 which is pretty good and we will use these values.
 
-For the other datasets finding the right values is harder because they differ quite a lot. The census dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference than our loss in accuracy so we choose these values. To diabetes we will get back later.
+For the other two datasets finding the right values for optimizing both perfromance measures at the same time is harder because they differ quite a lot. The census dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference to the optimal value than our loss in accuracy would be otherwiese so we choose these values.
+
+To diabetes we will get back later in the sensitivity analysis because, as we will see, matters are more complicated for this dataset.
 
 \textbf{Ridge Classifier:}
+As for the linear support vector classifier the arguably most influencial parameter is the regularization parameter called \textsf{alpha}. For the ridge classifier the regularization punishes high weights which again helps to prevent overfitting. \textsf{alpha} for the ridge classifier correspond to the value \(\frac{1}{2 \text{\textsf{C}}}\) and therefore has to be positive.\\
+We also considered two other parameters, which we already encountered when tuning the linear support vector classifier, namely \textsf{fit\_intercept} and \textsf{class\_weight}. The search space we considered is:
+\begin{center}
+    \textsf{alpha}\(\in[0,100]\), \textsf{fit\_intercept}\(\in\){True,False}, \textsf{class\_weight}\(\in\){'balanced','None'}.
+\end{center}
+
+Once more table \ref{table:tu_hyp_ridge_ac} shows the tuned parameters for the accuracy and table \ref{table:tu_hyp_ridge_f1} for the F1 score/recall.
 
 \begin{table}[h!]
     \centering
@@ -371,7 +389,7 @@ For the other datasets finding the right values is harder because they differ qu
     \centering
     \begin{tabular}{|c|c|c|c|c|}
     \hline
-    Dataset & \textsf{alpha} & \textsf{fit\_intercept} &  \textsf{class\_weight} & F1/Recall \\
+    Dataset & \textsf{alpha} & \textsf{fit\_intercept} &  \textsf{class\_weight} & F1/recall \\
     \hline
     \multicolumn{5}{c}{\vspace{-0.4cm}} \\ % Adds vertical space
     \hline
@@ -384,18 +402,21 @@ For the other datasets finding the right values is harder because they differ qu
     diabetes & 0 & False & balanced & 0.797 \\%20241111_11531
     \hline
     \end{tabular}
-    \caption{Tuned hyperparameters for ridge classifier and F1 score/Recall} 
+    \caption{Tuned hyperparameters for ridge classifier and F1 score/recall} 
     \label{table:tu_hyp_ridge_f1}
     \end{table}
 
-For congressional voting and amazon the values in table \ref{table:tu_hyp_ridge_ac} and table \ref{table:tu_hyp_svc_f1} coincide so those are the best settings. 
+For 'congressional voting' and 'Amazon Commerce Reviews' the values in table \ref{table:tu_hyp_ridge_ac} and table \ref{table:tu_hyp_svc_f1} coincide, so those are the best settings. 
 
 For the census dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
 
-To the diabetes dataset we will get back later.
+Again we will revisit the 'diabetes' dataset later in the sensitivity analysis to analyze the best parameter setting for overall performance.
 
 
 For the tuning and testing processes, we always used repeated stratified 5 fold crossvalidation. On the congressional voting and the diabetes dataset we used 10 repetitions and on the other two datasets we used 5 repetitions except for the random forest classifier with which we did only one repetition. This was due to the otherwise very long runtime for the large datasets.
+
+The next step in analysing the influence of hyperparameters on our classifiers is the sensitivity analysis. This means we will take a look at how changing a single parameter value influences the performance of the model. We will do this for the hyperparameters we tuned in the previous section and will always change one while keeping the others at their optimal values, which we found earlier. We are going to achieve this by plotting the effectiveness measures against the parameter values.\\
+However for the 'diabetes' Dataset in combination with the linear support vector claassifier and the ridge classifier we will take a closer look and try all combinations of \textsf{fit\_intercept} and \textsf{class\_weight} and vary the parameters \textsf{C} and \textsf{alpha} because we still need to decide on the overall best setting.
 
 \textbf{Linear Support Vector Classifier Sensitivity:}
 
@@ -407,7 +428,7 @@ For the tuning and testing processes, we always used repeated stratified 5 fold 
     \end{figure}
     
 
-In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small values of \textsf{C} the two scores diverge heavily. To get the best Recall with still decent accuracy we chose \textsf{class\_weight}=\textsf{'balanced'} and \textsf{fit\_intercept}=\textsf{True} and \textsf{C}=0.0452. This gives us an accuracy of 0.747 and a Recall of 0.734.%20241113_110548 sensitivity analysis
+In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small values of \textsf{C} the two scores diverge heavily. To get the best recall with still decent accuracy we chose \textsf{class\_weight}=\textsf{'balanced'} and \textsf{fit\_intercept}=\textsf{True} and \textsf{C}=0.0452. This gives us an accuracy of 0.747 and a recall of 0.734.%20241113_110548 sensitivity analysis
 
 \textbf{Ridge Classifier Sensitivity:}
 
@@ -418,7 +439,7 @@ In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small val
     \label{fig:sensitivity ridge diabetes}
     \end{figure}
 
-By looking at figure \ref{fig:sensitivity ridge diabetes} we can see that we have to set \textsf{class\_weight} to \textsf{'balanced'} and \textsf{fit\_intercept} to \textsf{False} when favoring Recall over accuracy. In that case the best value for alpha is 0. In that case we get an accuracy of 0.737 and a Recall of 0.797.%20241113_115258 sensitivity analysis
+By looking at figure \ref{fig:sensitivity ridge diabetes} we can see that we have to set \textsf{class\_weight} to \textsf{'balanced'} and \textsf{fit\_intercept} to \textsf{False} when favoring recall over accuracy. In that case the best value for alpha is 0. In that case we get an accuracy of 0.737 and a recall of 0.797.%20241113_115258 sensitivity analysis
 
 \section{Discussion}
 This section discusses the implications of your results.
@@ -445,7 +466,7 @@ you would divide by zero in the calculation.
 \hline
 & \multicolumn{2}{c|}{Congressional Voting} & \multicolumn{2}{c|}{Amazon Reviews} & \multicolumn{2}{c|}{Census Income} & \multicolumn{2}{c|}{Diabetes} \\
 \hline
-& Accuracy & F1 & Accuracy & F1 & Accuracy & F1 & Accuracy & Recall \\
+& Accuracy & F1 & Accuracy & F1 & Accuracy & F1 & Accuracy & recall \\
 \hline
 Random Forest & 0.959 & 0.952 & 0.649 & 0.630 & 0.866 & 0.684 & 0.766 & 0.623 \\
 \hline
