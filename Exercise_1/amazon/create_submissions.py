@@ -20,22 +20,23 @@ X_test = load_test_dataset()
 linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("max_abs_scaler", MaxAbsScaler()),
-    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.02344))
+    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.00946,dual=True, fit_intercept=True))
 ])
+
 
 # define RidgeClassifier pipeline
 ridge = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("power-transformer", PowerTransformer()),
+    ("power_transformer", PowerTransformer()),
     ("pca", PCA(n_components=0.99)),
-    ("model", RidgeClassifier(random_state=1234, alpha=65.6, fit_intercept=False))
+    ("model", RidgeClassifier(random_state=1234, alpha=45.32, fit_intercept=False, class_weight=None))
 ])
 
 # define Random Forest pipeline
 random_forest = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("max_abs_scaler", MaxAbsScaler()),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=100,
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=40,
                                      min_samples_split=2, min_samples_leaf=1, max_features="sqrt"))
 ])
 
