@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,10pt]{article}
 
 % Packages
 \usepackage[utf8]{inputenc}
@@ -9,6 +9,7 @@
 \usepackage{parskip}
 \usepackage{lmodern}
 \usepackage{subcaption}
+\usepackage{fullpage}
 
 \usepackage{colortbl} % For coloring table cells and lines
 \usepackage[table]{xcolor} % For more color options
@@ -16,35 +17,31 @@
 
 \setlength{\parskip}{1em} % Adjust the length as needed
 
-\geometry{a4paper, margin=1in}
+\geometry{a4paper, margin=0.8in}
 
 % Title and Author
-\title{Exercise 1}
-\author{Your Name}
+\title{Exercise 1: Classification}
+\author{Florian Engl (12102619),\\ Lukas Sichert (12114770),\\ Kristof Dadic (12105475)}
+\date{November 2024}
 
 \begin{document}
 
 % Title Page
 \maketitle
 
-% Abstract
-\begin{abstract}
-This is the abstract of the document. It provides a brief summary of the content.
-\end{abstract}
-
 % Table of Contents
 \tableofcontents
-\newpage
+
 
 % Sections
-\section{Introduction}
-This is the introduction section. Here you can introduce the topic of your document.
+\section{Datasets}
 
-\section{Methodology}
-This section describes the methodology used in your work.
 
-\subsection{Subsection Example}
-This is an example of a subsection.
+\section{Classifiers}
+Bitte auf Whatsapp schaun wegen svc vs lsvc vllt auch bisl auf mathemat hintegründe eingehen
+
+\section{Evaluation}
+anmerken welche F1 score und wie der funktioniert haben eh alle getestet siehe whatsapp oder logfiles von test lsvc svc Man kann f1 macro auch auf nicht multiclass classification anwenden. und auch normalen f1 auf multiclass classification.
 
 \section{Preprocessing}
 \label{sec:preprocessing}
@@ -431,7 +428,7 @@ We first want to find out how much each of the 5 considered hyperparameters infl
 \item \textsf{max\_features}: 'sqrt' consistently outperformed 'log2' by quite a big margin on the 'Amazon Commerce Reviews' dataset. For the 'Census Income' it die not make much of a difference. On our smaller and less dimensional datasets None led to the best results except for the accuracy of 'diabetes' where 'sqrt' performed a little better.
 \end{itemize}
 
-To underline our conclusions we want to give a few examplary plots in figure \ref{fig:sensitivity rf} below. 
+To underline our conclusions we want to give a few examplary plots in figure \ref{fig: sensitivity rf} below. 
 
 \begin{figure}[h!]
     \captionsetup{justification=centering}
@@ -453,39 +450,78 @@ To underline our conclusions we want to give a few examplary plots in figure \re
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{congress/plots/RandomForestClassifier_min_samples_leaf_sensitivity.pdf}
         \caption{Parameter \textsf{min\_samples\_leaf} for dataset 'congressional voting'}
-        \label{fig:sub4}
     \end{subfigure}
-    \caption{Sensitivity Analysis of Random Forest Classifier}
+    \caption{Sensitivity analysis of random forest classifier}
     \label{fig: sensitivity rf}
 \end{figure}
 
-Bla Bla bla
 
 \textbf{Linear Support Vector Classifier Sensitivity:}
+
+The parameter \textsf{C} had significant influence on the performance for every dataset except the 'Census Income' one, where only the F1 score increased at first and then also stagnated.\\
+Setting \textsf{class\_weight} to 'balanced' improved the F1 score/recall for every dataset as expected but also improved the accuracy for the 'Amazon Commerce Reviews' and the 'congressional voting' dataset. On the other datasets it decreased the accuracy, so there is no overall conclusion as to what setting to use as it depends not only on the dataset but also on the preferred performance measure.\\
+For the parameter \textsf{fit\_intercept}, we found that setting the intercept to 'True' yielded the best results for accuracy and F1 score across all datasets. When considering the recall on the 'diabetes' dataset, \textsf{fit\_intercept}=False performed slightly better, but the overall best choice was again False, as we will see later.\\
+The parameter \textsf{dual} gave better results for accuracy and recall when set to 'False' for the 'Census Income' dataset. On the other datasets it did not make much of a difference, only the accuracy on the 'diabetes' dataset was slightly better when setting \textsf{dual} to 'False'.
+
+\begin{figure}[h!]
+    \captionsetup{justification=centering}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{congress/plots/LinearSVC_C_sensitivity_new.pdf}
+        \caption{Parameter \textsf{C} for dataset 'congressional voting'}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{amazon/plots/LinearSVC_C_sensitivity.pdf}
+        \caption{Parameter \textsf{C} for dataset 'Amazon Commerce Reviews'}
+    \end{subfigure}
+    \caption{Sensitivity analysis of linear suppport vector classifier}
+    \label{fig: sensitivity lsvc}
+\end{figure}
+
+We still have to analyse the sensitivity plots for the dataset diabetes to figure out what parameter values ar the best overall.\\
+In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small values of \textsf{C} the two scores diverge heavily, which means the \textsf{C} value found in table \ref{table:tu_hyp_svc_f1} is not suitable for optimizing accuracy and recall at the same time.\\
+To get the best recall with still decent accuracy we choose \textsf{class\_weight}=\textsf{'balanced'} and \textsf{fit\_intercept}='True' and \textsf{C}=0.0452. This gives us an accuracy of 0.747 and a recall of 0.734.%20241113_110548 sensitivity analysis
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{diabetes/plots/linearsvc_parameter_sensitivity.pdf}
-    \caption{Sensitivity of Parameter C for datasets \textit{'Diabetes'}}
+    \caption{Sensitivity of Parameter \textsf{C} for datasets 'diabetes'}
     \label{fig:sensitivity svc diabetes}
-    \end{figure}
-    
-
-In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small values of \textsf{C} the two scores diverge heavily. To get the best recall with still decent accuracy we chose \textsf{class\_weight}=\textsf{'balanced'} and \textsf{fit\_intercept}=\textsf{True} and \textsf{C}=0.0452. This gives us an accuracy of 0.747 and a recall of 0.734.%20241113_110548 sensitivity analysis
+\end{figure}
 
 \textbf{Ridge Classifier Sensitivity:}
+
+Interestingly we found that for the ridge classifier the parameter \textsf{alpha} hardly influenced the effectiveness scores of our models. While the measures were nearly left untouched by variation of \textsf{alpha} for the 'Census Income' and the 'diabetes' dataset, the 'Amazon Commerce Reviews' dataset showed a little variation  in accuracy and F1 score and the 'congressional voting' showed a decrease in both metrics as one can see in figure \ref{fig: sensitivity ridge} but the difference was not really significant considering the scaling of the plot.\\
+Setting \textsf{class\_weight} to 'balanced' improved the F1 score/recall for the 'Census Income' and the 'diabetes' dataset while lowering the accuracy as one could expect due to the bias variance trade off. For the other two datasets this hyperparameter did not really influence performance at all.\\
+Finally we want to analyse the parameter \textsf{fit\_intercept}. This parameter had no significant influence on the dataset 'Census Income' and only slightly increased accuracy and F1 score when set to 'True' for 'congressional voting'. For 'Amazon Commerce Reviews' interestingly setting it to 'False' increased the scores of both metrics by about .5 percentage points. The biggest influence that we could observe was when testing it on the 'diabetes' Dataset. Here \textsf{fit\_intercept}=False yielded a pretty significant increase in recall but a decrease in accuracy as one can see from figure \ref{fig:sensitivity ridge diabetes}.
+
+\begin{figure}[h!]
+    \captionsetup{justification=centering}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{congress/plots/RidgeClassifier_alpha_sensitivity_new.pdf}
+        \caption{Parameter \textsf{alpha} for dataset 'congressional voting'}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{census/plots/RidgeClassifier_alpha_sensitivity.pdf}
+        \caption{Parameter \textsf{alpha} for dataset 'Census Income'}
+    \end{subfigure}
+    \caption{Sensitivity analysis of ridge classifier}
+    \label{fig: sensitivity ridge}
+\end{figure}
+
+Once more we are not done yet, as we still need to decide on the best parameter setting for the diabetes dataset.\\
+We have already established, that changing \textsf{alpha} does not really influence the performance of the model, so we the more important question is what combination of the other two parameters works best.\\
+By looking at figure \ref{fig:sensitivity ridge diabetes} we can see that we have to set \textsf{class\_weight} to 'balanced' and \textsf{fit\_intercept} to 'False' when favoring recall over accuracy because this gives us the highest recall and in the other cases the recall was either a lot worse or the accuracy only increased marginally. For this combination of \textsf{fit\_intercept} and \textsf{class\_weight} the best value for alpha is 0 and we get an accuracy of 0.737 and a recall of 0.797.%20241113_115258 sensitivity analysis
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{diabetes/plots/ridge_parameter_sensitivity.pdf}
-    \caption{Sensitivity of Parameter alpha for datasets \textit{'Diabetes'}}
+    \caption{Sensitivity of Parameter alpha for datasets 'diabetes'}
     \label{fig:sensitivity ridge diabetes}
     \end{figure}
 
-By looking at figure \ref{fig:sensitivity ridge diabetes} we can see that we have to set \textsf{class\_weight} to \textsf{'balanced'} and \textsf{fit\_intercept} to \textsf{False} when favoring recall over accuracy. In that case the best value for alpha is 0. In that case we get an accuracy of 0.737 and a recall of 0.797.%20241113_115258 sensitivity analysis
 
-\section{Discussion}
-This section discusses the implications of your results.
 
 \section{Conclusion}
 The goal of this section is to compare the classifiers for each dataset and give a general overview on the
