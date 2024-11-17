@@ -36,7 +36,7 @@ ridge = Pipeline([
 random_forest = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("max_abs_scaler", MaxAbsScaler()),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=40,
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=50,
                                      min_samples_split=2, min_samples_leaf=1, max_features="sqrt"))
 ])
 

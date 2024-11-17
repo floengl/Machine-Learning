@@ -363,7 +363,7 @@ As already discussed we used the F1 score as a second metric for all datasets ex
     \hline
     congressional voting & 1963 & 40 & 20 & 4 & None & 0.963 \\%20241111_151340
     \hline
-    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.730 \\%20241111_145855
+    Amazon Reviews & 2000 & 50 & 2 & 1 & sqrt & 0.732 \\%new_tune_random_forest_20241117_133725
     \hline
     Census Income & 100 & 30 & 20 & 1 & sqrt & 0.865 \\%20241111_123502
     \hline
@@ -384,7 +384,7 @@ As already discussed we used the F1 score as a second metric for all datasets ex
     \hline
     congressional voting & 1963 & 40 & 20 & 4 & None & 0.957 \\%20241111_151340
     \hline
-    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.702 \\%20241111_145855
+    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.704 \\%new_tune_random_forest_20241117_133725
     \hline
     Census Income & 2000 & 40 & 20 & 1 & sqrt & 0.686 \\%20241111_123502
     \hline
@@ -395,10 +395,7 @@ As already discussed we used the F1 score as a second metric for all datasets ex
     \label{table:tu_hyp_rf_f1}
     \end{table}
 
-We got the same results tuning for accuracy and for the F1 score on the first two datasets. On the last two datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.685 for the Census Income dataset and a recall of 0.647 for the diabetes dataset, so we will keep the parameter values for the best accuracy.
-
-Search space was different for different datasets.
-
+We got the same results tuning for accuracy and for the F1 score on the first dataset. On the last three datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.698 for the "Amazon Commerce Review" dataset a F1 score of 0.685 for the "Census Income" dataset and a recall of 0.647 for the "diabetes" dataset, so we will keep the parameter values for the best accuracy since they are only slightly worse.
 
 \textbf{Linear Support Vector Classifier:} For support vector machines the arguably most important hyperparameter, apart from the type of kernel used, is the regularization parameter \textsf{C}. The Kernel in our case is always linear which leaves \textsf{C}. In addition we considered three other parameters, we thought to be interesting. The considered hyperparameters are:
 
