@@ -272,7 +272,7 @@ In a second step we will analyze how sensitive the models are to changes in the 
 
 For tuning we want to use Bayesian Optimization from the scikit-optimize package. Bayesian Optimization is a probabilistic approach to finding the minimum or maximum. This means that it builds a probabilistic model of the function and uses this model to decide on where to evaluate in the next step. In our case the function is given by the performance measure. 
 
-Bayesian Optimization does not only take a function as input but a search space as well, which is why we need to decide on an appropriate rnage of values for the parameters as well. Moreover, because we chose two different performance measures for each dataset, we will have to do the optimization twice and then compare results to get the overall best.
+Bayesian Optimization does not only take a function as input but a search space as well, which is why we need to decide on an appropriate range of values for the parameters as well. Moreover, because we chose two different performance measures for each dataset, we will have to do the optimization twice and then compare results to get the overall best.
 
 \textbf{Random Forest Classifier:} The random forest classifier has a lot of hyperparameters and takes a comparatively long time to train and evaluate. That being the case we decided to focus the following five parameters to keep tuning times at a reasonable level. These are:
 
@@ -285,7 +285,7 @@ Bayesian Optimization does not only take a function as input but a search space 
 \end{itemize}
 
 
-For the big datasets 'Amazon Commerce Reviews' and 'Diabetes' we will use the search space:
+For the big datasets "Amazon Commerce Reviews" and "Diabetes" we will use the search space:
  
 
 \begin{center}
@@ -298,7 +298,7 @@ For the big datasets 'Amazon Commerce Reviews' and 'Diabetes' we will use the se
 
 Here we didn't consider 'None' as a value for \textsf{max\_features} because it resulted in a runtime that was way too long for the scope of this project. Moreover it is empirically known, that the other results usually give better values for classification. Nonetheless on the other two datasets we could test \textsf{max\_features} = 'None' and could set the number of trees up to 3000, as these are significantly smaller datasets. For the other parameters we used the same search space as for the big datasets. In table \ref{table:tu_hyp_rf_ac} and \ref{table:tu_hyp_rf_f1} we summarized the results of our tuning process by giving the best values for the respective performance measures.
 
-As already discussed we used the F1 score as a seconed metric for all datasets excepts the 'diabetes' dataset for which we used recall instead. It is also important to note that on the multiclass dataset 'Amazon Commerce Reviews' we used the macro avareged F1 score and on the others the standard weighted one.
+As already discussed we used the F1 score as a second metric for all datasets excepts the "diabetes" dataset for which we used recall instead. It is also important to note that on the multiclass dataset "Amazon Commerce Reviews" we used the macro avareged F1 score and on the others the standard weighted one.
 
 \begin{table}[h!]
     \centering
@@ -347,7 +347,7 @@ We got the same results tuning for accuracy and for the F1 score on the first tw
 Search space was different for different datasets.
 
 
-\textbf{Linear Support Vector Classifier:} For support vector machines the arguably most important hyperparameter, apart from the tpe of kernel used, is the regularization parameter \textsf{C}. The Kernel in our case is always linear which leaves \textsf{C}. In addition we considered three other parameters, we thought to be interesting. The considered hyperparameters are:
+\textbf{Linear Support Vector Classifier:} For support vector machines the arguably most important hyperparameter, apart from the type of kernel used, is the regularization parameter \textsf{C}. The Kernel in our case is always linear which leaves \textsf{C}. In addition we considered three other parameters, we thought to be interesting. The considered hyperparameters are:
 
 \begin{itemize}
     \item \textsf{C}: The so called regularization parameter. Its inverse is the strength of the regularization, which is why it has to be greater than 0. A strong regularization means a big loss if the decision boundary small.
