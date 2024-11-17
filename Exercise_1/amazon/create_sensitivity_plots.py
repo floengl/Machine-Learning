@@ -18,7 +18,7 @@ X, y = load_training_dataset()
 # define LinearSVC pipeline
 linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("max_abs_scaler", MaxAbsScaler()),
+    ("power_transform", PowerTransformer()),
     ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.00946,dual=True, fit_intercept=True))
 ])
 
@@ -33,7 +33,7 @@ ridge = Pipeline([
 # define Random Forest pipeline
 random_forest = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("max_abs_scaler", MaxAbsScaler()),
+    ("powertransform", PowerTransformer()),
     ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=40,
                                      min_samples_split=2, min_samples_leaf=1, max_features="sqrt"))
 ])
