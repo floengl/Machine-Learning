@@ -416,9 +416,9 @@ Again we summarized the results of our optimization process in table \ref{table:
     
 The results show, that the computation with the primal problem outperformed the dual problem in every case. However it should be noted that for the "Amazon Commerce Reviews" dataset we got the same accuracy and F1 score for dual computation. Therefore we will choose the dual computation as it is faster.
 
-Later we will see that small changes in \textsf{C} do not vary the result too much, so we choose \textsf{C}=0.00946 for "Amazon Commerce Reviews" and \textsf{C} =1.2 for "congressional voting". Taking the other values from table \ref{table:tu_hyp_svc_ac} for "congressional voting" we get an F1 score of 0.951 which is pretty good and we will use these values.
+Later we will see that small changes in \textsf{C} do not vary the result too much, so we choose \textsf{C}=0.00946 for "Amazon Commerce Reviews" and \textsf{C} =1.2 for "Congressional Voting". Taking the other values from table \ref{table:tu_hyp_svc_ac} for "Congressional Voting" we get an F1 score of 0.951 which is pretty good and we will use these values.
 
-For the other two datasets finding the right values for optimizing both perfromance measures at the same time is harder because they differ quite a lot. The "Census Income" dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference to the optimal value than our loss in accuracy would be otherwiese so we choose these values.
+For the other two datasets finding the right values for optimizing both performance measures at the same time is harder because they differ quite a lot. The "Census Income" dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference to the optimal value than our loss in accuracy would be otherwiese so we choose these values.
 
 To the "Diabetes" dataset we will get back later in the sensitivity analysis because, as we will see, matters are more complicated for this dataset.
 
@@ -473,7 +473,7 @@ Once more table \ref{table:tu_hyp_ridge_ac} shows the tuned parameters for the a
     \label{table:tu_hyp_ridge_f1}
     \end{table}
 
-For "congressional voting" and "Amazon Commerce Reviews" the values in table \ref{table:tu_hyp_ridge_ac} and table \ref{table:tu_hyp_svc_f1} coincide, so those are the best settings. 
+For "Congressional Voting" and "Amazon Commerce Reviews" the values in table \ref{table:tu_hyp_ridge_ac} and table \ref{table:tu_hyp_svc_f1} coincide, so those are the best settings. 
 
 For the "census income" dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
 
@@ -489,12 +489,12 @@ However for the "Diabetes" Dataset in combination with the linear support vector
 We first want to find out how much each of the 5 considered hyperparameters influences the effectiveness of the classifier. We found that the sensitivity highly depends on the dataset:
 
 \begin{itemize}
-    \item \textsf{n\_estimators}: On the datasets "Census Income" and 'diabetes, the parameter changed almost nothing. However for 'Amazon Commerce Reviews we got a clear Trend, that both measures increased with the number of trees first rather quickly and then more slowly. For the "congressional voting" dataset the parameter seemed to influence the effectiveness but we no clear trend could be identified. 
+    \item \textsf{n\_estimators}: On the datasets "Census Income" and "Diabetes", the parameter changed almost nothing. However for 'Amazon Commerce Reviews we got a clear Trend, that both measures increased with the number of trees first rather quickly and then more slowly. For the "Congressional Voting" dataset the parameter seemed to influence the effectiveness but we no clear trend could be identified. 
 \item \textsf{max\_depth}: Varying this parameter only changed the effectiveness for the "Amazon Commerce Reviews"  and the "Census Income" dataset. Here we could see that the accuracy increased with the depth of the trees at first and then stagnated, but the increase in accuracy for "Census Income" was almost negligible and the increase in the F1 score was also way smaller than for "Amazon Commerce Reviews".
 
-\item \textsf{min\_samples\_split}: For the "Census Income" and the 'diabetes datasets varying this parameter hardly changed the effectiveness scores. On "Amazon Commerce Reviews" both scores decreased with higher values whereas for the "congressional voting" dataset both values decreased to a minimum at \textsf{min\_samples\_split}=5 and then increased to the original value again.
+\item \textsf{min\_samples\_split}: For the "Census Income" and the "Diabetes" datasets varying this parameter hardly changed the effectiveness scores. On "Amazon Commerce Reviews" both scores decreased with higher values whereas for the "Congressional Voting" dataset both values decreased to a minimum at \\ \textsf{min\_samples\_split}=5 and then increased to the original value again.
 \item \textsf{min\_samples\_leaf}: This parameter did not really influence the performance for the "Diabetes" and "Census Income" datasets. For the other two, small values fared better which fits in with our optimized values.
-\item \textsf{max\_features}: 'sqrt' consistently outperformed 'log2' by quite a big margin on the "Amazon Commerce Reviews" dataset. For the "Census Income" it die not make much of a difference. On our smaller and less dimensional datasets None led to the best results except for the accuracy of "Diabetes" where 'sqrt' performed a little better.
+\item \textsf{max\_features}: 'sqrt' consistently outperformed 'log2' by quite a big margin on the "Amazon Commerce Reviews" dataset. For the "Census Income" it die not make much of a difference. On our smaller and less dimensional datasets 'None' led to the best results except for the accuracy of "Diabetes" where 'sqrt' performed a little better.
 \end{itemize}
 
 To underline our conclusions we want to give a few examplary plots in figure \ref{fig: sensitivity rf} below. 
@@ -503,7 +503,7 @@ To underline our conclusions we want to give a few examplary plots in figure \re
     \captionsetup{justification=centering}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{congress/plots/RandomForestClassifier_n_estimators_sensitivity.pdf}
-        \caption{Parameter \textsf{n\_estimators} for dataset "congressional voting"}
+        \caption{Parameter \textsf{n\_estimators} for dataset "Congressional Voting"}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
@@ -518,7 +518,7 @@ To underline our conclusions we want to give a few examplary plots in figure \re
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{congress/plots/RandomForestClassifier_min_samples_leaf_sensitivity.pdf}
-        \caption{Parameter \textsf{min\_samples\_leaf} for dataset "congressional voting"}
+        \caption{Parameter \textsf{min\_samples\_leaf} for dataset "Congressional Voting"}
     \end{subfigure}
     \caption{Sensitivity analysis of random forest classifier}
     \label{fig: sensitivity rf}
@@ -528,7 +528,7 @@ To underline our conclusions we want to give a few examplary plots in figure \re
 \textbf{Linear Support Vector Classifier Sensitivity:}
 
 The parameter \textsf{C} had significant influence on the performance for every dataset except the "Census Income" one, where only the F1 score increased at first and then also stagnated.\\
-Setting \textsf{class\_weight} to 'balanced' improved the F1 score/recall for every dataset as expected but also improved the accuracy for the "Amazon Commerce Reviews" and the "congressional voting" dataset. On the other datasets it decreased the accuracy, so there is no overall conclusion as to what setting to use as it depends not only on the dataset but also on the preferred performance measure.\\
+Setting \textsf{class\_weight} to 'balanced' improved the F1 score/recall for every dataset as expected but also improved the accuracy for the "Amazon Commerce Reviews" and the "Congressional Voting" dataset. On the other datasets it decreased the accuracy, so there is no overall conclusion as to what setting to use as it depends not only on the dataset but also on the preferred performance measure.\\
 For the parameter \textsf{fit\_intercept}, we found that setting the intercept to 'True' yielded the best results for accuracy and F1 score across all datasets. When considering the recall on the "Diabetes" dataset, \textsf{fit\_intercept}=False performed slightly better, but the overall best choice was again False, as we will see later.\\
 The parameter \textsf{dual} gave better results for accuracy and recall when set to 'False' for the "Census Income" dataset. On the other datasets it did not make much of a difference, only the accuracy on the "Diabetes" dataset was slightly better when setting \textsf{dual} to 'False'.
 
@@ -536,7 +536,7 @@ The parameter \textsf{dual} gave better results for accuracy and recall when set
     \captionsetup{justification=centering}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{congress/plots/LinearSVC_C_sensitivity_new.pdf}
-        \caption{Parameter \textsf{C} for dataset "congressional voting"}
+        \caption{Parameter \textsf{C} for dataset "Congressional Voting"}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
@@ -560,15 +560,15 @@ To get the best recall with still decent accuracy we choose \textsf{class\_weigh
 
 \textbf{Ridge Classifier Sensitivity:}
 
-Interestingly we found that for the ridge classifier the parameter \textsf{alpha} hardly influenced the effectiveness scores of our models. While the measures were nearly left untouched by variation of \textsf{alpha} for the "Census Income" and the "Diabetes" dataset, the "Amazon Commerce Reviews" dataset showed a little variation  in accuracy and F1 score and the "congressional voting" showed a decrease in both metrics as one can see in figure \ref{fig: sensitivity ridge} but the difference was not really significant considering the scaling of the plot.\\
+Interestingly we found that for the ridge classifier the parameter \textsf{alpha} hardly influenced the effectiveness scores of our models. While the measures were nearly left untouched by variation of \textsf{alpha} for the "Census Income" and the "Diabetes" dataset, the "Amazon Commerce Reviews" dataset showed a little variation  in accuracy and F1 score and the "Congressional Voting" showed a decrease in both metrics as one can see in figure \ref{fig: sensitivity ridge} but the difference was not really significant considering the scaling of the plot.\\
 Setting \textsf{class\_weight} to 'balanced' improved the F1 score/recall for the "Census Income" and the "Diabetes" dataset while lowering the accuracy as one could expect due to the bias variance trade off. For the other two datasets this hyperparameter did not really influence performance at all.\\
-Finally we want to analyse the parameter \textsf{fit\_intercept}. This parameter had no significant influence on the dataset "Census Income" and only slightly increased accuracy and F1 score when set to 'True' for "congressional voting". For "Amazon Commerce Reviews" interestingly setting it to 'False' increased the scores of both metrics by about .5 percentage points. The biggest influence that we could observe was when testing it on the "Diabetes" Dataset. Here \textsf{fit\_intercept}=False yielded a pretty significant increase in recall but a decrease in accuracy as one can see from figure \ref{fig:sensitivity ridge diabetes}.
+Finally we want to analyse the parameter \textsf{fit\_intercept}. This parameter had no significant influence on the dataset "Census Income" and only slightly increased accuracy and F1 score when set to 'True' for "Congressional Voting". For "Amazon Commerce Reviews" interestingly setting it to 'False' increased the scores of both metrics by about .5 percentage points. The biggest influence that we could observe was when testing it on the "Diabetes" Dataset. Here \textsf{fit\_intercept}=False yielded a pretty significant increase in recall but a decrease in accuracy as one can see from figure \ref{fig:sensitivity ridge diabetes}.
 
 \begin{figure}[h!]
     \captionsetup{justification=centering}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{congress/plots/RidgeClassifier_alpha_sensitivity_new.pdf}
-        \caption{Parameter \textsf{alpha} for dataset "congressional voting"}
+        \caption{Parameter \textsf{alpha} for dataset "Congressional Voting"}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
@@ -633,7 +633,7 @@ Dummy & 0.613 & - & 0.020 &- & 0.759 & - & 0.653 & - \\
 The scores in table~\ref{tab:best_results} are computed using repeated stratified 5-fold
 cross-validation. We chose 10 repetitions for the datasets ”congressional voting” and ”diabetes” and 5
 repetitions for the other two datasets (due to runtime).
-From this table we can conclude that on the dataset \textit{"congressional voting"} and 
+From this table we can conclude that on the dataset \textit{"Congressional Voting"} and 
 \textit{"Amazon Commerce Reviews"} dataset the ridge classifier
 performed the best. For the dataset \textit{"Census Income"} we can see that
 the linear support vector classifier is performing best with respect to both performance measures. Lastly,
@@ -735,7 +735,7 @@ dataset. What we can establish is that the linear support vector classifier was 
 metrics. Therefore it seems to be a very versatile classifier. In comparison the success for random forests
 varied quite a lot for different datasets and effectiveness measures. This could be due to the fact, that
 decision trees generally tend to overfit the model. As for efficiency, table \ref{tab:runtime_models} highlighted a big weakness of
-the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{preprocessing}, choosing
+the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{sec:preprocessingpreprocessing}, choosing
 the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
 though in varying magnitude for different classifiers and datasets. Here random forest seems the be the
 least influenced by the choice of scaler as seen in tables \ref{table:censustransformers} and \ref{table:diabetesscalers}. The sensitivity analysis in section \ref{einfügen}
