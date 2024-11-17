@@ -45,8 +45,8 @@ In this first chapter, we want to give a brief summary of the 4 datasets used in
 All other attributes in the dataset represent significant issues on which members of the U.S. House of Representatives voted. Each instance in the dataset corresponds to the voting record of a single congressman on these 16 issues. The values of the attributes are \emph{y} if the congressman voted in favor of the issue, \emph{n} if the congressman voted against the issue, and \emph{unknown} if their position on the issue is not recorded. \\
 The primary goal of the classification task is to predict a congressman’s political party affiliation based on their voting behavior. All attributes are categorical, taking only binary values. However, since some values are missing (marked as \emph{unknown}), data imputation will be required during preprocessing. Additionally, there is no need to scale the data because each attribute is already binary.
 
-\textbf{Amazon Commerce Reviews:} This dataset contains 750 entries, each corresponding to a customer review sourced from Amazon. It includes 10,000 features along with a target variable labeled \emph{Class}. The target attribute consists of 50 distinct categories, each representing the first name of the author of the review. All other attributes correspond to individual English word, with integer values that indicate the frequency of each word’s occurrence in a review. \\
-The objective is to determine the author of a review based on the frequency distribution of the words it contains. Given that the range of values for different features varies widely, scaling the data during preprocessing may improve performance. Notably, the dataset has no missing values.
+\textbf{Amazon Commerce Reviews:} This dataset contains 750 entries, each corresponding to a customer review sourced from Amazon. It includes 10,000 features along with a target variable labeled \emph{Class}. The target attribute consists of 50 distinct categories, each representing the first name of the reviewer. All other attributes correspond to individual English word, with integer values that indicate the frequency of each word’s occurrence in a review. \\
+The objective is to determine the writer based on the frequency distribution of the words it contains. Given that the range of values for different features varies widely, scaling the data during preprocessing may improve performance. Notably, the dataset has no missing values.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.75\linewidth]{amazon/plots/plot_amazon_classes.pdf}
@@ -82,7 +82,7 @@ In short, Ridge regression is an enhanced version of linear regression that inco
 
 When evaluating a classifier's performance on a dataset, several factors need to be considered. These include selecting appropriate performance metrics and determining how to split the data into training and testing sets. For our analysis, we employed repeated stratified k-fold cross-validation for each classifier and dataset. In this approach, the data is divided into k equally sized groups, or folds. At each step, k-1 folds are used for training, and the remaining fold is used for validation, resulting in the classifier being trained k times. The term stratified means that each fold maintains approximately the same class distribution as the original dataset, while repeated means that this process is performed multiple times. This method offers several advantages. By using multiple folds, the evaluation becomes less sensitive to the specific split of the data, as performance is averaged across k different splits. Repeating this process further reduces result variance. Stratified cross-validation is particularly beneficial for imbalanced datasets, as it guarantees that all training and test sets reflect the original class distribution. However, this method introduces the challenge of avoiding data leakage, which we address in the preprocessing section.
 
-When choosing the number of folds and repetitions, a balance must be struck. Increasing repetitions improves result accuracy up to some point, but increases the runtime. Regarding the number of folds, small datasets or imbalanced classes may suffer if the test sets become too small or fail to represent all classes. In such cases, fewer folds are preferable. An alternative to cross-validation is the holdout method, where the dataset is split once into training and test sets. However, this method is less reliable unless the dataset is very large. We will revisit this in the Results and Findings section.
+When choosing the number of folds and repetitions, a balance must be struck. Increasing repetitions improves result accuracy up to some point, but increases the runtime. Regarding the number of folds, small datasets or imbalanced classes may suffer if the test sets become too small or fail to represent all classes. In such cases, fewer folds are preferable. An alternative to cross-validation is the holdout method, where the dataset is split once into training and test sets. However, this method is less reliable unless the dataset is very large. We will revisit this in the Conclusion section.
 
 Now focusing on the performance measures, we can differentiate between effectiveness and efficiency. Firstly, efficiency refers to the time required to train the model and classify new data. The importance of training time versus classification time depends on the use case. In most real-world scenarios, fast classification is prioritized, while training time is less critical since it is typically a one-time process.
 For this project, though, we aimed to compare different preprocessing techniques and hyperparameters across three classifiers to identify the best-performing configurations. This required numerous evaluations using repeated stratified k-fold cross-validation, involving both training and testing. As a result, both training and classification times were important considerations, though training typically takes longer. To measure efficiency, we used the runtime for a single train-test split (using a 70\%-30\% holdout split). This approach allowed us to fairly compare classifiers across datasets, as the number of folds and repetitions varied between datasets and classifiers.
@@ -171,7 +171,6 @@ We will try the most common scalers in the scikit-learn library, namely
 The Transformers and the RobustScaler are known to be robust to outliers. We have also tested a method for dimensionality reduction called
 principal component analysis (PCA). This method is used to reduce the number of features by projecting the data onto a lower dimensional space. 
 The n\_components= 0.95 parameter determines, that our data should be projected onto the number of dimensions that explain 95\% of the variance.
-<<<<<<< HEAD
 Again the results are visualized in table~\ref{table:scaling}.
 
 \begin{table}[h!]
@@ -210,7 +209,7 @@ QuantileTransformer & pca & 0.229/0.198 & 0.663/0.637 & 0.715/0.687 \\
 PowerTransformer & pca & 0.231/0.214 & 0.677/0.647 & \cellcolor[HTML]{C1E1C1}  0.754/0.729 \\
 \hline
 \end{tabular}
-\caption{Comparison of different numeric scalers and dimensionality reduction techniques for the \textit{Census Income} dataset}
+\caption{Comparison of different numeric scalers and dimensionality reduction techniques for the "Amazon Commerce Reviews" dataset}
 \label{table:scaling}
 \end{table}
 
@@ -220,19 +219,16 @@ PowerTransformer & pca & 0.231/0.214 & 0.677/0.647 & \cellcolor[HTML]{C1E1C1}  0
 
 
 
-=======
-Again the results are visualized in table~\ref{table:scaling}.\\
->>>>>>> 80e7a0fb04a76d3fce6ad08aad65508d121242ff
 In the above Experiment we have used 5 folds and 10 repetitions for the cross-validation. The best results are achieved by the PowerTransformer for all classifiers. However, only the ridge classifier benefited from the
 dimension reduction.
 
 
 \textbf{Census Income:} This dataset has missing values, but only for categorical values.
- Those values are labeled with \textit{'?'}. We will try the same two strategies as for the \textit{Congressional Voting} dataset.
+ Those values are labeled with \textit{'?'}. We will try the same two strategies as for the "Congressional Voting" dataset.
  The only exception is the \textit{'education'} column. This column is already encoded as the
  \textit{'education-num'} column and will therefore be dropped. For the numeric columns 
  we tested the same numerical scalers, which we have tried for the 
- \textit{Amazon Commerce Reviews} dataset. Since the dataset only has 14 features,
+ "Amazon Commerce Reviews dataset. Since the dataset only has 14 features,
 we will not use dimensionality reduction. Like for the previous
 datasets we will present the result in a table, where the first score in each cell is accuracy and the second
 number is the F1 score.
@@ -310,7 +306,7 @@ PowerTransformer & 0.766/0.592 & 0.763/0.564 & 0.761/0.554 \\
 QuantileTransformer & 0.766/0.592 & 0.763/0.564 & 0.761/0.554 \\
 \hline
 \end{tabular}
-\caption{Comparison of different scalers for the \textit{Diabetes} dataset}
+\caption{Comparison of different scalers for the "Diabetes dataset}
 \label{table:diabetesscalers}
 \end{table}
 In the end we decided to use the scalers marked in green for the respective classifiers.\\
@@ -684,19 +680,11 @@ Dummy & 0.613 & - & 0.020 &- & 0.759 & - & 0.653 & - \\
 The scores in table~\ref{tab:best_results} are computed using repeated stratified 5-fold
 cross-validation. We chose 10 repetitions for the datasets ”congressional voting” and ”diabetes” and 5
 repetitions for the other two datasets (due to runtime).
-<<<<<<< HEAD
-From this table we can conclude that on the dataset \textit{'congressional voting'} and 
-\textit{'Amazon Commerce Reviews'} dataset the ridge classifier
-performed the best, although all classifiers performed almost the same. For the dataset \textit{'Census income'} we can see that
+From this table we can conclude that on the dataset "congressional voting" and 
+"Amazon Commerce Review" dataset the ridge classifier
+performed the best, although all classifiers performed almost the same. For the dataset "Census Income" we can see that
 the Random Forest classifier is performing best with respect to both performance measures. Lastly,
-for the \text{diabetes} dataset the random forest classifier outperformed the others in both measures. But if we keep our preferences the same as in the
-=======
-From this table we can conclude that on the dataset \textit{"Congressional Voting"} and 
-\textit{"Amazon Commerce Reviews"} dataset the ridge classifier
-performed the best. For the dataset \textit{"Census Income"} we can see that
-the linear support vector classifier is performing best with respect to both performance measures. Lastly,
-for the \text{diabetes} dataset there is no clear choice. But if we keep our preferences the same as in the
->>>>>>> 80e7a0fb04a76d3fce6ad08aad65508d121242ff
+for the diabetes dataset the random forest classifier outperformed the others in both measures. But if we keep our preferences the same as in the
 last few sections, we can conclude that either the linear support vector classifier or the ridge classifier
 are the best choice for this dataset. \\
 At this point we also want to compare cross-validation to the hold-out method. 
@@ -705,18 +693,14 @@ Then on the test set an evaluation is done. The cross-validation has already bee
 The scores for the hold-out method
 highly depend on the split and the model chosen as seen in figure~\ref{fig:model_comparison congress},
 where the box-plots are shown for the
-<<<<<<< HEAD
-\textit{'Amazon Commerce Reviews'} dataset.
-=======
-\textit{"Amazon Commerce Reviews"} dataset.
->>>>>>> 80e7a0fb04a76d3fce6ad08aad65508d121242ff
+"Amazon Commerce Review" dataset.
 
 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{amazon/plots/model_comparison.pdf}
-\caption{Model Comparison for \textit{"Amazon Commerce Reviews"} dataset}
+\caption{Model Comparison for "Amazon Commerce Review" dataset}
 \label{fig:model_comparison amazon}
 \end{figure}
 
@@ -725,7 +709,7 @@ where the box-plots are shown for the
 
 
 In contrast, for the dataset 
-\textit{"Census Income"} the hold-out scores are almost the same as the mean of the cross-validation, which is to be
+"Census Income" the hold-out scores are almost the same as the mean of the cross-validation, which is to be
 expected because this dataset has a lot of instances. The box-plots for this dataset (figure 9) are also
 comparatively very narrow, meaning that the scores calculated during cross-validation vary very little i.e.
 the variance is really low.
@@ -763,14 +747,14 @@ RandomForest & 126.59 & 1.63 & 12.92 & 0.10 & 1.00 & 0.03 & 4.79 & 0.09 \\
 
 
 On the contrary, the linear support vector classifier and ridge classifier performed similar
-on the first glance. The results from \textit{"Amazon Commerce Reviews"} and \textit{"Census Income"} might suggest,
+on the first glance. The results from "Amazon Commerce Review" and "Census Income" might suggest,
 that the linear support vector classifier is faster for high dimensional datasets, whereas the ridge classifier
 is quicker with a high number of instances. We found out that the parameter dual of the linear support
 vector classifier has a great influence on its runtime. This parameter describes whether the algorithm
 should solve for the primal or dual optimization problem. Let n be number of samples and d the number
 of dimensions of a dataset. The dual formulation requires the computation of a n × n matrix, whereas
 in the primal formulation a d × d matrix is calculated. Therefore the primal formulation is faster for
-datasets, where n > d, which was especially noticeable for the ”Census Income” dataset. Also on the~\textit{"Diabetes"}
+datasets, where n > d, which was especially noticeable for the ”Census Income” dataset. Also on the "Diabetes"
 dataset as it is very low dimensional the dual prosedure is faster. The results are shown in table~\ref{tab:dual_comparison}.
 
 \begin{table}[h!]
@@ -803,7 +787,7 @@ the random forest classifier, namely that it’s comparatively very slow. Summin
 =======
 the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{sec:preprocessingpreprocessing}, choosing
 >>>>>>> 80e7a0fb04a76d3fce6ad08aad65508d121242ff
-the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
+Sthe right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
 though in varying magnitude for different classifiers and datasets. Here random forest seems the be the
 least influenced by the choice of scaler as seen in tables \ref{table:censustransformers} and \ref{table:diabetesscalers}. The sensitivity analysis in section \ref{sec:hyperparameters}
 showed how much of an impact even a single hyperparameter can have on the overall performance of a
