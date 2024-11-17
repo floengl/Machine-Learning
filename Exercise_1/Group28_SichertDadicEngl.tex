@@ -47,6 +47,12 @@ The primary goal of the classification task is to predict a congressman’s poli
 
 \textbf{Amazon Commerce Reviews:} This dataset contains 750 entries, each corresponding to a customer review sourced from Amazon. It includes 10,000 features along with a target variable labeled \emph{Class}. The target attribute consists of 50 distinct categories, each representing the first name of the author of the review. All other attributes correspond to individual English word, with integer values that indicate the frequency of each word’s occurrence in a review. \\
 The objective is to determine the author of a review based on the frequency distribution of the words it contains. Given that the range of values for different features varies widely, scaling the data during preprocessing may improve performance. Notably, the dataset has no missing values.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{amazon/plots/plot_amazon_classes.pdf}
+    \caption{Distribution of target attribute for ”Amazon Commerce Reviews”}
+    \label{fig:amazondist}
+\end{figure}
 
 \textbf{Census Income:} The "Census Income" dataset is derived from the 1994 U.S. Census database, maintained by the United States Census Bureau, a federal agency responsible for conducting the decennial U.S. census. The objective of this dataset is to predict whether an individual earns more than \$50,000 per year. The dataset contains 14 attributes plus the target variable, income, with 48,842 instances. The target variable is categorical, with two possible values $<=50K$ and $>50K$, distributed as follows:
 \begin{equation*}
@@ -62,13 +68,11 @@ Since the numerical attributes have significantly different ranges, scaling may 
 
 \section{Classifiers}
 
-{\color{red} vllt kann man bei margin noch anmerken dass das auch decision boundary heißt?}
-
 Here, we want to provide insight into the classifiers we selected for our project and explain our reasoning behind these choices. We ultimately chose the Random Forest Classifier, the Linear Support Vector Classifier, and the Ridge Classifier, all implemented using the scikit-learn Python library.
 
 First, we wanted to include at least one classifier from the lecture, as a practical application of the theoretical knowledge we gained during the lectures. Upon reviewing examples of how others approach classification tasks, it became evident that random forests are a very popular choice. When we tested this classifier on our initial dataset, "Congressional Voting," it delivered excellent results right away. Therefore, we decided to include random forests as the first classifier in our project. One major advantage of the random forest classifier is its inherent support for multi-class classification, which is particularly beneficial for datasets like "Amazon Commerce Reviews." Random forests are part of the ensemble methods family, which combines the predictions of multiple base estimators to reduce variance. Specifically, the employed algorithm constructs several decision trees and averages their predictions. This approach not only minimizes variance but also mitigates the overfitting tendencies of individual decision trees. However, one potential drawback is a slight increase in bias.
 
-Selecting an appropriate classifier for the "Amazon Commerce Reviews" dataset posed some challenges due to its high dimensionality. Additionally, the dataset is sparse, with most attribute values being zero, and it contains a limited number of instances, providing only minimal information for each of the 50 classes. After researching potential solutions, we identified support vector machines (SVMs) as a suitable choice for high-dimensional, sparse data. Although SVMs are primarily designed for binary classification tasks, they can handle multi-class datasets using appropriate strategies. SVMs operate by constructing one or more hyperplanes to separate data points into distinct classes, aiming to maximize the margin between the nearest data points of each class. If the data is not linearly separable, kernel methods can be employed to map the data into a higher-dimensional space where separation becomes feasible. \\
+Selecting an appropriate classifier for the "Amazon Commerce Reviews" dataset posed some challenges due to its high dimensionality. Additionally, the dataset is sparse, with most attribute values being zero, and it contains a limited number of instances, providing only minimal information for each of the 50 classes. After researching potential solutions, we identified support vector machines (SVMs) as a suitable choice for high-dimensional, sparse data. Although SVMs are primarily designed for binary classification tasks, they can handle multi-class datasets using appropriate strategies. SVMs operate by constructing one or more hyperplanes to separate data points into distinct classes, aiming to maximize the margin {\color{red}(also called decision boundary)} between the nearest data points of each class. If the data is not linearly separable, kernel methods can be employed to map the data into a higher-dimensional space where separation becomes feasible. \\
 In scikit-learn, two SVM classifiers are available: the Linear Support Vector Classifier (LinearSVC) and the Support Vector Classifier (SVC). While SVC can use a linear kernel, it is not equivalent to LinearSVC due to differences in their underlying implementations. Additionally, LinearSVC is specifically recommended for large datasets. After testing both classifiers on our dataset, we concluded that in terms of accuracy, both options yield similar results when employing linear kernels, {\color{red} except on the "Amazon Commerce Reviews" Dataset, where LinearSVC fared better}, but LinearSVC outperforms SVC in terms of runtime, which is why we chose this as our second classifier. For multi-class classification, LinearSVC employs the "one-vs-the-rest" strategy, training a separate model for each class in the target variable. Based on these results, we selected LinearSVC as our second classifier.
 
 For the last classifier, we opted for a straightforward yet still quite effective approach. After exploring various classifiers available in scikit-learn, we decided to focus on linear models. Preliminary testing with our datasets revealed that the Ridge Classifier performed really well in terms of both efficiency and accuracy. Paired with the fact that one member of our team already has some theoretical knowledge in ridge regression due to his econometrics course, we decided to go with it for this project. 
@@ -170,12 +174,7 @@ The n\_components= 0.95 parameter determines, that our data should be projected 
 Again the results are visualized in table~\ref{table:scaling}.\\
 In the above Experiment we have used 5 folds and 10 repetitions for the cross-validation. The best results are achieved by the PowerTransformer for all classifiers. However, only the ridge classifier benefited from the
 dimension reduction.
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.75\linewidth]{Exercise_1/amazon/plots/plot_amazon_classes.pdf}
-    \caption{Distribution of target attribute for ”Amazon Commerce Reviews”}
-    \label{fig:amazondist}
-\end{figure}
+
 
 \textbf{Census Income:} This dataset has missing values, but only for categorical values.
  Those values are labeled with \textit{'?'}. We will try the same two strategies as for the \textit{Congressional Voting} dataset.
