@@ -170,6 +170,12 @@ The n\_components= 0.95 parameter determines, that our data should be projected 
 Again the results are visualized in table~\ref{table:scaling}.\\
 In the above Experiment we have used 5 folds and 10 repetitions for the cross-validation. The best results are achieved by the PowerTransformer for all classifiers. However, only the ridge classifier benefited from the
 dimension reduction.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Exercise_1/amazon/plots/plot_amazon_classes.pdf}
+    \caption{Distribution of target attribute for ”Amazon Commerce Reviews”}
+    \label{fig:amazondist}
+\end{figure}
 
 \textbf{Census Income:} This dataset has missing values, but only for categorical values.
  Those values are labeled with \textit{'?'}. We will try the same two strategies as for the \textit{Congressional Voting} dataset.
