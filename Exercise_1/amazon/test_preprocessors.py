@@ -78,6 +78,7 @@ scalers.append(("none", no_scaling))
 scalers.append(("robust_scaler", robust_scaler))
 scalers.append(("power_transformer", power_transformer))    
 scalers.append(("quantile_transformer", quantile_transformer))  
+scalers.append(("minmax_scaler", minmax_scaler))
 
 # dimensionality reduction to test
 dim_reductions = []
