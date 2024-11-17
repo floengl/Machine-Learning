@@ -113,21 +113,23 @@ scaling of numerical values and dimensionality reduction. In this section we wil
 describe which tasks can be used on the dataset and how a specific task is performed. Then we will compare the different
 settings for all the models and determine their effectiveness using measures described in the previous section. 
 In order to make this a meaningful comparison, we will use the default hyperparameters for all classifiers and 
-we will split the data equally in the cross-validation.\\
-Data leakage occurs when data is preprocessed before it was split into the training and test set. This way information 
+we will split the data equally in the cross-validation.
+
+One thing we have to be careful with is Data leakage. Data leakage occurs when data is preprocessed before it was split into the training and test set. This way information 
 from the test set is used to preprocess the training set. For example the MinMaxScaler uses the minimun and maximum values 
 to scale these values properly. The values should only be computed on the training set and then be used on both training and 
-test set. This can get rather difficult when using cross-validation. In order to avoid this, we will use the pipelines.    
-Pipelines are a feature of scikit-learn that allow for the chaining of multiple transformers and estimators and also avoid 
+test set. This can get rather difficult when using cross-validation. In order to avoid this, we will use pipelines.    
+Pipelines are a feature of scikit-learn that allow the chaining of multiple transformers and estimators and also avoid 
 data leakage. We will define a different pipeline for each preprocessing task and variant and chain these pipelines to compare 
-the different settings.\\
+the different settings.
+
 \textbf{Congressional Voting:} As this dataset contains missing values we will need a strategy to impute these values. 
 It is important to note that the missing values are all labeled as \textit{'unknown'}.
 As all the values are categorical there are two possible strategies for data imputation.
 We can either use the most frequent value of the respective attribute in the training dataset
 or we can treat the missing values as a separate category. We will use one-hot-encoding for the categorical values,
 except for the binary ones. Binary values will be encoded as 0 and 1. By using one-hot-encoding
-the tow different treatments of the missing values will yield a different encoding. Still all the values remain binary, 
+the two different treatments of the missing values will yield a different encoding. Still all the values remain binary, 
 so no further scaling is needed. As the dataset is rather small, we will not use dimensionality reduction. This means
 that we will only compare the two different strategies for data imputation.
 In table~\ref{table:imputation} the results are visualized for the different classifiers.
@@ -144,11 +146,12 @@ Here the right number in each cell is the average accuracy and the left number i
 \textsf{nan is category} & 0.955/0.947 & 0.955/0.947 & 0.960/0.953 \\
 \hline
 \end{tabular}
-\caption{Comparison of data imputation for different classifiers for \textit{Congressional Voting} dataset}
+\caption{Comparison of data imputation for different classifiers for "Congressional Voting" dataset}
 \label{table:imputation}
 \end{table}
 For every classifier the most frequent value imputation strategy yields better results for both accuracy and F1 score.
-In this test we used 5 folds and 10 repetitions for the cross-validation.\\
+In this test we used 5 folds and 10 repetitions for the cross-validation.
+
 \textbf{Amazon Commerce Reviews:} This dataset contains no missing values, therefore we don't need to impute any values.
 The target attribute has 50 different values, which will be encoded as \textit{0,1,2\ldots,49}. 
 All the other values are numerical, therefore we will try different scaling strategies.
@@ -164,13 +167,11 @@ We will try the most common scalers in the scikit-learn library, namely
 The Transformers and the RobustScaler are known to be robust to outliers. We have also tested a method for dimensionality reduction called
 principal component analysis (PCA). This method is used to reduce the number of features by projecting the data onto a lower dimensional space. 
 The n\_components= 0.95 parameter determines, that our data should be projected onto the number of dimensions that explain 95\% of the variance.
-Again the results are visualized in table~\ref{table:scaling}.
-
-
-
+Again the results are visualized in table~\ref{table:scaling}.\\
 In the above Experiment we have used 5 folds and 10 repetitions for the cross-validation. The best results are achieved by the PowerTransformer for all classifiers. However, only the ridge classifier benefited from the
-dimension reduction.\\
-\textbf{Census Income:} This dataset hat missing values, but only for categorical values.
+dimension reduction.
+
+\textbf{Census Income:} This dataset has missing values, but only for categorical values.
  Those values are labeled with \textit{'?'}. We will try the same two strategies as for the \textit{Congressional Voting} dataset.
  The only exception is the \textit{'education'} column. This column is already encoded as the
  \textit{'education-num'} column and will therefore be dropped. For the numeric columns 
@@ -216,10 +217,9 @@ QuantileTransformer & \textit{'?'} is category & 0.857/0.676 & 0.847/0.649 & \ce
 PowerTransformer & \textit{'?'} is category & 0.852/0.666 & 0.846/0.645 & 0.843/0.623 \\
 \hline
 \end{tabular}
-\caption{Comparison of different numeric and categorical transformers for the \textit{Census Income} dataset}
+\caption{Comparison of different numeric and categorical transformers for the "Census Income" dataset}
 \label{table:censustransformers}
 \end{table}
-
 We used 5 folds and 5 repetitions in the cross-validation for this experiment, except for the random forest
 classifier. The random forest classifier was too slow, and we had to reduce the number of repetitions to 1.
 For this dataset the best
@@ -227,7 +227,8 @@ preprocessing strategy was different for every classifier. The respective cells 
 table above. After these experiments we decided to use the StandardScaler combined with setting missing
 values as the most frequent category for the random forest classifier, the StandardScaler but with setting
 missing values as an extra category for the linear support vector classifier and the QuantileTransformer
-combined with setting missing values as an extra category for the ridge classifier.\\
+combined with setting missing values as an extra category for the ridge classifier.
+
 \textbf{Diabetes:} This dataset does not have any missing values except for the target attribute. Therefore, we 
  don't need to consider data imputation. As the dataset is very low dimensional, we will not use any dimensionality reduction. 
  So we will only compare different scaling methods. We have used the already introduced scaling methods 
