@@ -166,6 +166,50 @@ principal component analysis (PCA). This method is used to reduce the number of 
 The n\_components= 0.95 parameter determines, that our data should be projected onto the number of dimensions that explain 95\% of the variance.
 Again the results are visualized in table~\ref{table:scaling}.
 
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Scaler} & \textbf{Dim Reduction} & \textbf{Random Forest} & \textbf{LinearSVC} & \textbf{Ridge} \\
+\hline
+StandardScaler & none & 0.577/0.537 & 0.717/0.689 & 0.692/0.669 \\
+\hline
+MaxAbsScaler & none & 0.577/0.536 & 0.732/0.707 & 0.699/0.680 \\
+\hline
+None & none & 0.578/0.537 & 0.613/0.582 & 0.580/0.549 \\
+\hline
+MinMaxScaler & none & 0.577/0.536 & 0.640/0.622 & 0.649/0.631 \\
+\hline
+RobustScaler & none & 0.576/0.535 & 0.672/0.641 & 0.595/0.567 \\
+\hline
+QuantileTransformer & none &  0.581/0.543 & 0.739/0.712 & 0.696/0.671 \\
+\hline
+PowerTransformer & none &   \cellcolor[HTML]{C1E1C1} 0.581/0.544 & \cellcolor[HTML]{C1E1C1}  0.742/0.714 & 0.733/0.710 \\
+\hline
+MaxAbsScaler & pca & 0.225/0.198 & 0.670/0.647 & 0.730/0.706 \\
+\hline
+RobustScaler & pca & 0.266/0.228 & 0.528/0.500 & 0.637/0.603 \\
+\hline
+None & pca & 0.257/0.220 & 0.466/0.434 & 0.622/0.581 \\
+\hline
+StandardScaler & pca & 0.257/0.237 & 0.604/0.580 & 0.725/0.697 \\
+\hline
+MinMaxScaler & pca & 0.233/0.206 & 0.573/0.557 & 0.621/0.610 \\
+\hline
+QuantileTransformer & pca & 0.229/0.198 & 0.663/0.637 & 0.715/0.687 \\
+\hline
+PowerTransformer & pca & 0.231/0.214 & 0.677/0.647 & \cellcolor[HTML]{C1E1C1}  0.754/0.729 \\
+\hline
+\end{tabular}
+\caption{Comparison of different numeric scalers and dimensionality reduction techniques for the \textit{Census Income} dataset}
+\label{table:scaling}
+\end{table}
+
+
+
+
+
 
 
 In the above Experiment we have used 5 folds and 10 repetitions for the cross-validation. The best results are achieved by the PowerTransformer for all classifiers. However, only the ridge classifier benefited from the
@@ -309,7 +353,7 @@ As already discussed we used the F1 score as a seconed metric for all datasets e
     \hline
     congressional voting & 1963 & 40 & 20 & 4 & None & 0.963 \\%20241111_151340
     \hline
-    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.728 \\%20241111_145855
+    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.730 \\%20241111_145855
     \hline
     Census Income & 100 & 30 & 20 & 1 & sqrt & 0.865 \\%20241111_123502
     \hline
@@ -330,7 +374,7 @@ As already discussed we used the F1 score as a seconed metric for all datasets e
     \hline
     congressional voting & 1963 & 40 & 20 & 4 & None & 0.957 \\%20241111_151340
     \hline
-    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.728 \\%20241111_145855
+    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.702 \\%20241111_145855
     \hline
     Census Income & 2000 & 40 & 20 & 1 & sqrt & 0.686 \\%20241111_123502
     \hline
@@ -610,11 +654,11 @@ you would divide by zero in the calculation.
 \hline
 & Accuracy & F1 & Accuracy & F1 & Accuracy & F1 & Accuracy & recall \\
 \hline
-Random Forest & 0.959 & 0.952 & 0.649 & 0.630 & 0.866 & 0.684 & 0.766 & 0.623 \\
+Random Forest & 0.963 & 0.956 & 0.649 & 0.630 & 0.866 & 0.684 & 0.773 & 0.590 \\
 \hline
-LinearSVC & 0.960 & 0.952 & 0.648 & 0.629 & 0.805 & 0.677 & 0.645 & 0.706 \\
+LinearSVC & 0.962 & 0.957 & 0.648 & 0.629 & 0.853 & 0.659 & 0.747 & 0.734 \\
 \hline
-Ridge & 0.963 & 0.957 & 0.699 & 0.684 & 0.844 & 0.628 & 0.737 & 0.795 \\
+Ridge & 0.963 & 0.957 & 0.699 & 0.684 & 0.794 & 0.65 & 0.737 & 0.797 \\
 \hline
 Dummy & 0.613 & - & 0.020 &- & 0.759 & - & 0.653 & - \\
 \hline
