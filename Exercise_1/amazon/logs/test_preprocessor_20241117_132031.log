@@ -1,0 +1,21 @@
+17.11.2024 13:20:31
+
+Accuracy LinearSVC:
+          scaler dim_reduction      mean       std
+1  minmax_scaler          none  0.640000  0.002667
+0  minmax_scaler           pca  0.573333  0.018667
+
+F1 LinearSVC:
+          scaler dim_reduction      mean       std
+1  minmax_scaler          none  0.622360  0.000425
+0  minmax_scaler           pca  0.557285  0.017125
+
+Accuracy Ridge:
+          scaler dim_reduction      mean       std
+0  minmax_scaler           pca  0.649333  0.006667
+1  minmax_scaler          none  0.621333  0.018667
+
+F1 Ridge:
+          scaler dim_reduction      mean       std
+0  minmax_scaler           pca  0.631656  0.011238
+1  minmax_scaler          none  0.609917  0.020203

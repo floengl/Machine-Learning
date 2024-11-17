@@ -500,7 +500,7 @@ Once more table \ref{table:tu_hyp_ridge_ac} shows the tuned parameters for the a
     \hline
     congressional voting & 0 & True & None & 0.963 \\%20241111_122418
     \hline
-    Amazon Reviews & 45.32 & False & None &  0.73 \\%20241111_110048
+    Amazon Reviews & 45.32 & False & None &  0.730 \\%20241111_110048
     \hline
     Census Income & 11.333 & True & balanced & 0.666 \\%20241111_121945
     \hline
@@ -654,11 +654,11 @@ you would divide by zero in the calculation.
 \hline
 & Accuracy & F1 & Accuracy & F1 & Accuracy & F1 & Accuracy & recall \\
 \hline
-Random Forest & 0.963 & 0.956 & 0.649 & 0.630 & 0.866 & 0.684 & 0.773 & 0.590 \\
+Random Forest & 0.963 & 0.956 & 0.730 & 0.702 & 0.866 & 0.684 & 0.773 & 0.590 \\
 \hline
-LinearSVC & 0.962 & 0.957 & 0.648 & 0.629 & 0.853 & 0.659 & 0.747 & 0.734 \\
+LinearSVC & 0.962 & 0.957 & 0.748 & 0.725 & 0.853 & 0.659 & 0.747 & 0.734 \\
 \hline
-Ridge & 0.963 & 0.957 & 0.699 & 0.684 & 0.794 & 0.65 & 0.737 & 0.797 \\
+Ridge & 0.963 & 0.957 & 0.754 & 0.730 & 0.794 & 0.65 & 0.737 & 0.797 \\
 \hline
 Dummy & 0.613 & - & 0.020 &- & 0.759 & - & 0.653 & - \\
 \hline
@@ -673,9 +673,9 @@ cross-validation. We chose 10 repetitions for the datasets ”congressional voti
 repetitions for the other two datasets (due to runtime).
 From this table we can conclude that on the dataset \textit{'congressional voting'} and 
 \textit{'Amazon Commerce Reviews'} dataset the ridge classifier
-performed the best. For the dataset \textit{'Census income'} we can see that
-the linear support vector classifier is performing best with respect to both performance measures. Lastly,
-for the \text{diabetes} dataset there is no clear choice. But if we keep our preferences the same as in the
+performed the best, although all classifiers performed almost the same. For the dataset \textit{'Census income'} we can see that
+the Random Forest classifier is performing best with respect to both performance measures. Lastly,
+for the \text{diabetes} dataset the random forest classifier outperformed the others in both measures. But if we keep our preferences the same as in the
 last few sections, we can conclude that either the linear support vector classifier or the ridge classifier
 are the best choice for this dataset. \\
 At this point we also want to compare cross-validation to the hold-out method. 
@@ -684,7 +684,7 @@ Then on the test set an evaluation is done. The cross-validation has already bee
 The scores for the hold-out method
 highly depend on the split and the model chosen as seen in figure~\ref{fig:model_comparison congress},
 where the box-plots are shown for the
-\textit{'Amazon Commerce Reviews'} dataset.W
+\textit{'Amazon Commerce Reviews'} dataset.
 
 
 
@@ -773,10 +773,10 @@ dataset. What we can establish is that the linear support vector classifier was 
 metrics. Therefore it seems to be a very versatile classifier. In comparison the success for random forests
 varied quite a lot for different datasets and effectiveness measures. This could be due to the fact, that
 decision trees generally tend to overfit the model. As for efficiency, table \ref{tab:runtime_models} highlighted a big weakness of
-the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{preprocessing}, choosing
+the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{sec:preprocessing}, choosing
 the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
 though in varying magnitude for different classifiers and datasets. Here random forest seems the be the
-least influenced by the choice of scaler as seen in tables \ref{table:censustransformers} and \ref{table:diabetesscalers}. The sensitivity analysis in section \ref{einfügen}
+least influenced by the choice of scaler as seen in tables \ref{table:censustransformers} and \ref{table:diabetesscalers}. The sensitivity analysis in section \ref{sec:hyperparameters}
 showed how much of an impact even a single hyperparameter can have on the overall performance of a
 model. However, comparing the results of section \ref{sec:preprocessing} with the ones in section \ref{sec:hyperparameters} and table \ref{tab:runtime_models}, it is clear that
 tuning the parameters hardly influenced the result for the ”congressional voting” dataset. In contrast, the
