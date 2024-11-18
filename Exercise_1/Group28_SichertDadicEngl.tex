@@ -72,8 +72,8 @@ Here, we want to provide insight into the classifiers we selected for our projec
 
 First, we wanted to include at least one classifier from the lecture, as a practical application of the theoretical knowledge we gained during the lectures. Upon reviewing examples of how others approach classification tasks, it became evident that random forests are a very popular choice. When we tested this classifier on our initial dataset, "Congressional Voting," it delivered excellent results right away. Therefore, we decided to include random forests as the first classifier in our project. One major advantage of the random forest classifier is its inherent support for multi-class classification, which is particularly beneficial for datasets like "Amazon Commerce Reviews." Random forests are part of the ensemble methods family, which combines the predictions of multiple base estimators to reduce variance. Specifically, the employed algorithm constructs several decision trees and averages their predictions. This approach not only minimizes variance but also mitigates the overfitting tendencies of individual decision trees. However, one potential drawback is a slight increase in bias.
 
-Selecting an appropriate classifier for the "Amazon Commerce Reviews" dataset posed some challenges due to its high dimensionality. Additionally, the dataset is sparse, with most attribute values being zero, and it contains a limited number of instances, providing only minimal information for each of the 50 classes. After researching potential solutions, we identified support vector machines (SVMs) as a suitable choice for high-dimensional, sparse data. Although SVMs are primarily designed for binary classification tasks, they can handle multi-class datasets using appropriate strategies. SVMs operate by constructing one or more hyperplanes to separate data points into distinct classes, aiming to maximize the margin between the nearest data points of each class. If the data is not linearly separable, kernel methods can be employed to map the data into a higher-dimensional space where separation becomes feasible. \\
-In scikit-learn, two SVM classifiers are available: the Linear Support Vector Classifier (LinearSVC) and the Support Vector Classifier (SVC). While SVC can use a linear kernel, it is not equivalent to LinearSVC due to differences in their underlying implementations. Additionally, LinearSVC is specifically recommended for large datasets. After testing both classifiers on our dataset, we concluded that in terms of accuracy, both options yield similar results when employing linear kernels, but LinearSVC outperforms SVC in terms of runtime, which is why we chose this as our second classifier. For multi-class classification, LinearSVC employs the "one-vs-the-rest" strategy, training a separate model for each class in the target variable. Based on these results, we selected LinearSVC as our second classifier.
+Selecting an appropriate classifier for the "Amazon Commerce Reviews" dataset posed some challenges due to its high dimensionality. Additionally, the dataset is sparse, with most attribute values being zero, and it contains a limited number of instances, providing only minimal information for each of the 50 classes. After researching potential solutions, we identified support vector machines (SVMs) as a suitable choice for high-dimensional, sparse data. Although SVMs are primarily designed for binary classification tasks, they can handle multi-class datasets using appropriate strategies. SVMs operate by constructing one or more hyperplanes to separate data points into distinct classes, aiming to maximize the margin (also called decision boundary) between the nearest data points of each class. If the data is not linearly separable, kernel methods can be employed to map the data into a higher-dimensional space where separation becomes feasible. \\
+In scikit-learn, two SVM classifiers are available: the Linear Support Vector Classifier (LinearSVC) and the Support Vector Classifier (SVC). While SVC can use a linear kernel, it is not equivalent to LinearSVC due to differences in their underlying implementations. Additionally, LinearSVC is specifically recommended for large datasets. After testing both classifiers on our dataset, we concluded that in terms of accuracy, both options yield similar results when employing linear kernels, except on the "Amazon Commerce Reviews" Dataset, where LinearSVC fared better, but LinearSVC outperforms SVC in terms of runtime, which is why we chose this as our second classifier. For multi-class classification, LinearSVC employs the "one-vs-the-rest" strategy, training a separate model for each class in the target variable. Based on these results, we selected LinearSVC as our second classifier.
 
 For the last classifier, we opted for a straightforward yet still quite effective approach. After exploring various classifiers available in scikit-learn, we decided to focus on linear models. Preliminary testing with our datasets revealed that the Ridge Classifier performed really well in terms of both efficiency and accuracy. Paired with the fact that one member of our team already has some theoretical knowledge in ridge regression due to his econometrics course, we decided to go with it for this project. 
 In short, Ridge regression is an enhanced version of linear regression that incorporates a penalty term into the cost function to reduce the risk of overfitting. This penalty term is regulated by a hyperparameter, which determines the degree of regularization. While a higher value can help mitigate overfitting, setting it too high may result in underfitting. This method is suitable for binary classification when the target variable is mapped to the values $\{-1, 1\}$. For multi-class classification, the Ridge Classifier uses multi-output regression, where multiple numerical outputs are predicted for each input.
@@ -106,7 +106,7 @@ Diabetes & Accuracy & Recall \\ \hline
 \caption{Effectiveness measures}
 \label{tab:effectiveness_measures}
 \end{table}
-In the brief explanation of the F1 score above, we focused on binary data. However, the "Amazon Commerce Reviews" dataset is multi-class. In scikit-learn, there are three methods for calculating the F1 score for multi-class data, controlled by the average parameter: 'micro', 'macro', and 'weighted'. For this project, we chose the 'macro' approach. In this method, the F1 score is computed separately for each class in a "one-vs-the-rest" fashion and then averaged across all classes. This ensures that each class contributes equally to the final score, regardless of its frequency in the dataset. In contrast, the 'weighted' approach accounts for class imbalance by weighting each class's F1 score proportionally to its representation in the data.  We compared all variants in preliminary tests across all datasets we use the F1 score in, since they are also applicable in the binary case, and chose to go with the "regular" F1-score for the datasets "Congressional Voting" and "Census Income" and the 'macro' F1-Score for "Amazon Commerce Reviews".
+In the brief explanation of the F1 score above, we focused on binary data. However, the "Amazon Commerce Reviews" dataset is multi-class. In scikit-learn, there are three methods for calculating the F1 score for multi-class data, controlled by the average parameter: 'micro', 'macro', and 'weighted'. For this project, we chose the 'macro' approach. In this method, the F1 score is computed separately for each class in a "one-vs-the-rest" fashion and then averaged across all classes. This ensures that each class contributes equally to the final score, regardless of its frequency in the dataset. In contrast, the 'weighted' approach accounts for class imbalance by weighting each class's F1 score proportionally to its representation in the data and the 'micro' approach counts the global true positives, false positives and false negatives and directly computes the F1 score, therefore giving each instance the same weight regardless of class.  We compared all variants in preliminary tests across all datasets we use the F1 score in, since they are also applicable in the binary case, and chose to go with the "regular" F1-score for the datasets "Congressional Voting" and "Census Income" and the 'macro' F1-Score for "Amazon Commerce Reviews".
 
 Despite careful consideration in selecting performance metrics, they are not "sufficient" to guarantee that the trained model will perform equally well on unseen data. Metrics can only guide us in evaluating a model's performance based on the available data and its intended use case.
 
@@ -225,10 +225,11 @@ dimension reduction.
 
 \textbf{Census Income:} This dataset has missing values, but only for categorical values.
  Those values are labeled with \textit{'?'}. We will try the same two strategies as for the "Congressional Voting" dataset.
+ Those values are labeled with \textit{'?'}. We will try the same two strategies as for the "Congressional Voting" dataset.
  The only exception is the \textit{'education'} column. This column is already encoded as the
  \textit{'education-num'} column and will therefore be dropped. For the numeric columns 
  we tested the same numerical scalers, which we have tried for the 
- "Amazon Commerce Reviews dataset. Since the dataset only has 14 features,
+ "Amazon Commerce Reviews" dataset. Since the dataset only has 14 features,
 we will not use dimensionality reduction. Like for the previous
 datasets we will present the result in a table, where the first score in each cell is accuracy and the second
 number is the F1 score.
@@ -362,7 +363,7 @@ As already discussed we used the F1 score as a second metric for all datasets ex
     \hline
     congressional voting & 1963 & 40 & 20 & 4 & None & 0.963 \\%20241111_151340
     \hline
-    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.730 \\%20241111_145855
+    Amazon Reviews & 2000 & 50 & 2 & 1 & sqrt & 0.732 \\%new_tune_random_forest_20241117_133725
     \hline
     Census Income & 100 & 30 & 20 & 1 & sqrt & 0.865 \\%20241111_123502
     \hline
@@ -383,7 +384,7 @@ As already discussed we used the F1 score as a second metric for all datasets ex
     \hline
     congressional voting & 1963 & 40 & 20 & 4 & None & 0.957 \\%20241111_151340
     \hline
-    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.702 \\%20241111_145855
+    Amazon Reviews & 2000 & 40 & 2 & 1 & sqrt & 0.704 \\%new_tune_random_forest_20241117_133725
     \hline
     Census Income & 2000 & 40 & 20 & 1 & sqrt & 0.686 \\%20241111_123502
     \hline
@@ -394,10 +395,7 @@ As already discussed we used the F1 score as a second metric for all datasets ex
     \label{table:tu_hyp_rf_f1}
     \end{table}
 
-We got the same results tuning for accuracy and for the F1 score on the first two datasets. On the last two datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.685 for the Census Income dataset and a recall of 0.647 for the diabetes dataset, so we will keep the parameter values for the best accuracy.
-
-Search space was different for different datasets.
-
+We got the same results tuning for accuracy and for the F1 score on the first dataset. On the last three datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.698 for the "Amazon Commerce Review" dataset a F1 score of 0.685 for the "Census Income" dataset and a recall of 0.647 for the "diabetes" dataset, so we will keep the parameter values for the best accuracy since they are only slightly worse.
 
 \textbf{Linear Support Vector Classifier:} For support vector machines the arguably most important hyperparameter, apart from the type of kernel used, is the regularization parameter \textsf{C}. The Kernel in our case is always linear which leaves \textsf{C}. In addition we considered three other parameters, we thought to be interesting. The considered hyperparameters are:
 
