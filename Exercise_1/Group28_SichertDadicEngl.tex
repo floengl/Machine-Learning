@@ -68,15 +68,15 @@ Since the numerical attributes have significantly different ranges, scaling may 
 
 \section{Classifiers}
 
-Here, we want to provide insight into the classifiers we selected for our project and explain our reasoning behind these choices. We ultimately chose the Random Forest Classifier, the Linear Support Vector Classifier, and the ridge Classifier, all implemented using the scikit-learn Python library.
+Here, we want to provide insight into the classifiers we selected for our project and explain our reasoning behind these choices. We ultimately chose the random forest Classifier, the Linear Support Vector Classifier, and the ridge classifier, all implemented using the scikit-learn Python library.
 
 First, we wanted to include at least one classifier from the lecture, as a practical application of the theoretical knowledge we gained during the lectures. Upon reviewing examples of how others approach classification tasks, it became evident that random forests are a very popular choice. When we tested this classifier on our initial dataset, "Congressional Voting," it delivered excellent results right away. Therefore, we decided to include random forests as the first classifier in our project. One major advantage of the random forest classifier is its inherent support for multi-class classification, which is particularly beneficial for datasets like "Amazon Commerce Reviews." Random forests are part of the ensemble methods family, which combines the predictions of multiple base estimators to reduce variance. Specifically, the employed algorithm constructs several decision trees and averages their predictions. This approach not only minimizes variance but also mitigates the overfitting tendencies of individual decision trees. However, one potential drawback is a slight increase in bias.
 
 Selecting an appropriate classifier for the "Amazon Commerce Reviews" dataset posed some challenges due to its high dimensionality. Additionally, the dataset is sparse, with most attribute values being zero, and it contains a limited number of instances, providing only minimal information for each of the 50 classes. After researching potential solutions, we identified support vector machines (SVMs) as a suitable choice for high-dimensional, sparse data. Although SVMs are primarily designed for binary classification tasks, they can handle multi-class datasets using appropriate strategies. SVMs operate by constructing one or more hyperplanes to separate data points into distinct classes, aiming to maximize the margin (also called decision boundary) between the nearest data points of each class. If the data is not linearly separable, kernel methods can be employed to map the data into a higher-dimensional space where separation becomes feasible. \\
 In scikit-learn, two SVM classifiers are available: the Linear Support Vector Classifier (LinearSVC) and the Support Vector Classifier (SVC). While SVC can use a linear kernel, it is not equivalent to LinearSVC due to differences in their underlying implementations. Additionally, LinearSVC is specifically recommended for large datasets. After testing both classifiers on our dataset, we concluded that in terms of accuracy, both options yield similar results when employing linear kernels, except on the "Amazon Commerce Reviews" Dataset, where LinearSVC fared better, but LinearSVC outperforms SVC in terms of runtime, which is why we chose this as our second classifier. For multi-class classification, LinearSVC employs the "one-vs-the-rest" strategy, training a separate model for each class in the target variable. Based on these results, we selected LinearSVC as our second classifier.
 
-For the last classifier, we opted for a straightforward yet still quite effective approach. After exploring various classifiers available in scikit-learn, we decided to focus on linear models. Preliminary testing with our datasets revealed that the ridge Classifier performed really well in terms of both efficiency and accuracy. Paired with the fact that one member of our team already has some theoretical knowledge in ridge regression due to his econometrics course, we decided to go with it for this project. 
-In short, ridge regression is an enhanced version of linear regression that incorporates a penalty term into the cost function to reduce the risk of overfitting. This penalty term is regulated by a hyperparameter, which determines the degree of regularization. While a higher value can help mitigate overfitting, setting it too high may result in underfitting. This method is suitable for binary classification when the target variable is mapped to the values $\{-1, 1\}$. For multi-class classification, the Ridge Classifier uses multi-output regression, where multiple numerical outputs are predicted for each input.
+For the last classifier, we opted for a straightforward yet still quite effective approach. After exploring various classifiers available in scikit-learn, we decided to focus on linear models. Preliminary testing with our datasets revealed that the ridge classifier performed really well in terms of both efficiency and accuracy. Paired with the fact that one member of our team already has some theoretical knowledge in ridge regression due to his econometrics course, we decided to go with it for this project. 
+In short, ridge regression is an enhanced version of linear regression that incorporates a penalty term into the cost function to reduce the risk of overfitting. This penalty term is regulated by a hyperparameter, which determines the degree of regularization. While a higher value can help mitigate overfitting, setting it too high may result in underfitting. This method is suitable for binary classification when the target variable is mapped to the values $\{-1, 1\}$. For multi-class classification, the ridge classifier uses multi-output regression, where multiple numerical outputs are predicted for each input.
 
 \section{Evaluation}
 
@@ -87,11 +87,11 @@ When choosing the number of folds and repetitions, a balance must be struck. Inc
 Now focusing on the performance measures, we can differentiate between effectiveness and efficiency. Firstly, efficiency refers to the time required to train the model and classify new data. The importance of training time versus classification time depends on the use case. In most real-world scenarios, fast classification is prioritized, while training time is less critical since it is typically a one-time process.
 For this project, though, we aimed to compare different preprocessing techniques and hyperparameters across three classifiers to identify the best-performing configurations. This required numerous evaluations using repeated stratified k-fold cross-validation, involving both training and testing. As a result, both training and classification times were important considerations, though training typically takes longer. To measure efficiency, we used the runtime for a single train-test split (using a 70\%-30\% holdout split). This approach allowed us to fairly compare classifiers across datasets, as the number of folds and repetitions varied between datasets and classifiers.
 
-When evaluating effectiveness, several metrics can be used. The most commonly used is accuracy, which is calculated as the ratio of correct predictions to the total number of predictions. While accuracy provides a general sense of a classifier’s performance, it can be misleading for imbalanced datasets. For instance, if 99\% of the samples belong to one class and only 1\% to another, a simple dummy classifier that predicts the majority class for all samples would achieve 99\% accuracy. While this might seem like a good result, it is deceptive, as the classifier has not actually learned anything meaningful. Both the "Amazon Commerce Reviews" and "Census Income" datasets are moderately imbalanced. As a result, we decided to use accuracy as one of the evaluation metrics but remained cautious about its limitations in these cases. In addition to accuracy, precision and recall are also widely used metrics. Precision measures the proportion of all correct positive predictions. Thus, high precision indicates a low false positive rate. Recall measures the proportion of actual positives that were correctly identified. Thus, high recall minimises false negatives. While both precision and recall are valuable, they are often inversely related. To balance these metrics, the F-score combines them into a single value. For all datasets expect "Diabetes", we chose the F1 score, defined as:
+When evaluating effectiveness, several metrics can be used. The most commonly used is accuracy, which is calculated as the ratio of correct predictions to the total number of predictions. While accuracy provides a general sense of a classifier’s performance, it can be misleading for imbalanced datasets. For instance, if 99\% of the samples belong to one class and only 1\% to another, a simple dummy classifier that predicts the majority class for all samples would achieve 99\% accuracy. While this might seem like a good result, it is deceptive, as the classifier has not actually learned anything meaningful. Both the "Amazon Commerce Reviews" and "Census Income" datasets are moderately imbalanced. As a result, we decided to use accuracy as one of the evaluation metrics but remained cautious about its limitations in these cases. In addition to accuracy, precision and recall are also widely used metrics. Precision measures the proportion of all correct positive predictions. Thus, high precision indicates a low false positive rate. Recall measures the proportion of actual positives that were correctly identified. Thus, high recall minimizes false negatives. While both precision and recall are valuable, they are often inversely related. To balance these metrics, the F-score combines them into a single value. For all datasets expect "Diabetes", we chose the F1 score, defined as:
 \begin{equation*}
     F1=\frac{2 \text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}
 \end{equation*}
-The closer the F1 score is to 1, the better the model's performance. However, a low F1 score can be less informative, as it might result from poor precision, poor recall, or both. One of the strengths of precision, recall, and F1 scores is their suitability for evaluating models on imbalanced datasets. For this reason, we chose the F1 score as the primary metric for three out of the four datasets. The exception was the "Diabetes" dataset, where we prioritized recall instead. In this case, the primary objective is to minimize false negatives, as misclassifying a sick person as healthy could have serious consequences. Conversely, false positives are less concerning, as individuals flagged as potentially positive are likely to undergo further medical testing for confirmation. We summarised the effectiveness measures for each dataset in the table below.
+The closer the F1 score is to 1, the better the model's performance. However, a low F1 score can be less informative, as it might result from poor precision, poor recall, or both. One of the strengths of precision, recall, and F1 scores is their suitability for evaluating models on imbalanced datasets. For this reason, we chose the F1 score as the primary metric for three out of the four datasets. The exception was the "Diabetes" dataset, where we prioritized recall instead. In this case, the primary objective is to minimize false negatives, as misclassifying a sick person as healthy could have serious consequences. Conversely, false positives are less concerning, as individuals flagged as potentially positive are likely to undergo further medical testing for confirmation. We summarized the effectiveness measures for each dataset in the table below.
 
 \begin{table}[h]
 \centering
@@ -120,7 +120,7 @@ In order to make this a meaningful comparison, we will use the default hyperpara
 we will split the data equally in the cross-validation.
 
 One thing we have to be careful with is Data leakage. Data leakage occurs when data is preprocessed before it was split into the training and test set. This way information 
-from the test set is used to preprocess the training set. For example the MinMaxScaler uses the minimun and maximum values 
+from the test set is used to preprocess the training set. For example the MinMaxScaler uses the minimum and maximum values 
 to scale these values properly. The values should only be computed on the training set and then be used on both training and 
 test set. This can get rather difficult when using cross-validation. In order to avoid this, we will use pipelines.    
 Pipelines are a feature of scikit-learn that allow the chaining of multiple transformers and estimators and also avoid 
@@ -343,14 +343,14 @@ For the big datasets "Amazon Commerce Reviews" and "Diabetes" we will use the se
 \begin{center}
     \parbox{0.75\textwidth}{%
     \raggedright
-    \textsf{n\_estimators} \(\in\) \{100,\dots, 2000\}, \textsf{max\_depth} \(\in\) \{None, 10 \dots ,100\}, \\
+    \textsf{n\_estimators} \(\in\) \{100,\dots, 2000\}, \textsf{max\_depth} \(\in\) \{None, 10 \dots , 100\}, \\
     \textsf{min\_samples\_split} \(\in\) \{2, \dots, 100\}, \textsf{min\_samples\_leaf} \(\in\) \{1, \dots, 5\}, \\
     \textsf{max\_features} \(\in\) \{'sqrt', 'log2'\}.}
 \end{center}
 
-Here we didn't consider 'None' as a value for \textsf{max\_features} because it resulted in a runtime that was way too long for the scope of this project. Moreover it is empirically known, that the other results usually give better values for classification. Nonetheless on the other two datasets we could test \textsf{max\_features} = 'None' and could set the number of trees up to 3000, as these are significantly smaller datasets. For the other parameters we used the same search space as for the big datasets. In table \ref{table:tu_hyp_rf_ac} and \ref{table:tu_hyp_rf_f1} we summarized the results of our tuning process by giving the best values for the respective performance measures.
+Here we didn't consider 'None' as a value for \textsf{max\_features} because it resulted in a runtime that was way too long for the scope of this project. Moreover, it is empirically known, that the other results usually give better values for classification. Nonetheless, on the other two datasets we could test \textsf{max\_features} = 'None' and could set the number of trees up to 3000, as these are significantly smaller datasets. For the other parameters we used the same search space as for the big datasets. In table \ref{table:tu_hyp_rf_ac} and \ref{table:tu_hyp_rf_f1} we summarized the results of our tuning process by giving the best values for the respective performance measures.
 
-As already discussed we used the F1 score as a second metric for all datasets excepts the "Diabetes" dataset for which we used recall instead. It is also important to note that on the multiclass dataset "Amazon Commerce Reviews" we used the macro avareged F1 score and on the others the standard weighted one.
+As already discussed we used the F1 score as a second metric for all datasets excepts the "Diabetes" dataset for which we used recall instead. It is also important to note that on the multiclass dataset "Amazon Commerce Reviews" we used the macro averaged F1 score and on the others the standard weighted one.
 
 \begin{table}[h!]
     \centering
@@ -394,14 +394,14 @@ As already discussed we used the F1 score as a second metric for all datasets ex
     \label{table:tu_hyp_rf_f1}
     \end{table}
 
-We got the same results tuning for accuracy and for the F1 score on the first dataset. On the last three datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.698 for the "Amazon Commerce Review" dataset a F1 score of 0.685 for the "Census Income" dataset and a recall of 0.647 for the "Diabetes" dataset, so we will keep the parameter values for the best accuracy since they perform only slightly worse on the second perfromance measure than the optimal values.
+We got the same results tuning for accuracy and for the F1 score on the first dataset. On the last three datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.698 for the "Amazon Commerce Review" dataset a F1 score of 0.685 for the "Census Income" dataset and a recall of 0.647 for the "Diabetes" dataset, so we will keep the parameter values for the best accuracy since they perform only slightly worse on the second performance measure than the optimal values.
 
 \textbf{Linear Support Vector Classifier:} For support vector machines the arguably most important hyperparameter, apart from the type of kernel used, is the regularization parameter \textsf{C}. The Kernel in our case is always linear which leaves \textsf{C}. In addition we considered three other parameters, we thought to be interesting. The considered hyperparameters are:
 
 \begin{itemize}
-    \item \textsf{C}: The so called regularization parameter. Its inverse is the strength of the regularization, which is why it has to be greater than 0. A strong regularization means a big loss if the decision boundary small.
+    \item \textsf{C}: The so-called regularization parameter. Its inverse is the strength of the regularization, which is why it has to be greater than 0. A strong regularization means a big loss if the decision boundary small.
 \item \textsf{fit\_intercept}: It can be set to 'True' or 'False'. If set to 'True' the model will calculate the intercept for the decision boundary.
-\item\textsf{class\_weight}: This parameter decides how much the model should take into account classifying differently sized classes. In unbalanced datasets for example it can be useful to give a bigger weight to correctly classifying the minority class in order to prevent the model overly predicting the majority class. We only considered the values 'balanced' and 'None' but you could assign specific weights for each class. When set to 'balanced' the weights are inversly proportional to class sizes.
+\item\textsf{class\_weight}: This parameter decides how much the model should take into account classifying differently sized classes. In unbalanced datasets for example it can be useful to give a bigger weight to correctly classifying the minority class in order to prevent the model overly predicting the majority class. We only considered the values 'balanced' and 'None' but you could assign specific weights for each class. When set to 'balanced' the weights are inversely proportional to class sizes.
 \item \textsf{dual}: Takes the values 'True' or 'False' and decides whether the primal or the dual problem is solved. Generally the dual Problem is faster especially for high dimensional data, but as we will see sometimes you get better results with the primal problem.
 \end{itemize}
 
@@ -458,16 +458,16 @@ Again we summarized the results of our optimization process in table \ref{table:
     \label{table:tu_hyp_svc_f1}
     \end{table}
     
-The results show, that the computation with the primal problem outperformed the dual problem in every case. However it should be noted that for the "Amazon Commerce Reviews" dataset we got the same accuracy and F1 score for dual computation. Therefore we will choose the dual computation as it is faster.
+The results show, that the computation with the primal problem outperformed the dual problem in every case. However, it should be noted that for the "Amazon Commerce Reviews" dataset we got the same accuracy and F1 score for dual computation. Therefore, we will choose the dual computation as it is faster.
 
-Later we will see that small changes in \textsf{C} do not vary the result too much, so we choose \textsf{C}=0.00946 for "Amazon Commerce Reviews" and \textsf{C} =1.2 for "Congressional Voting". Taking the other values from table \ref{table:tu_hyp_svc_ac} for "Congressional Voting" we get an F1 score of 0.951 which is pretty good and we will use these values.
+Later we will see that small changes in \textsf{C} do not vary the result too much, so we choose \textsf{C}=0.00946 for "Amazon Commerce Reviews" and \textsf{C} =1.2 for "Congressional Voting". Taking the other values from table \ref{table:tu_hyp_svc_ac} for "Congressional Voting" we get an F1 score of 0.951 which is pretty good, so we will use these values.
 
-For the other two datasets finding the right values for optimizing both performance measures at the same time is harder because they differ quite a lot. The "Census Income" dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference to the optimal value than our loss in accuracy would be otherwiese so we choose these values.
+For the other two datasets finding the right values for optimizing both performance measures at the same time is harder because they differ quite a lot. The "Census Income" dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference to the optimal value than our loss in accuracy would be otherwise, so we choose these values.
 
 To the "Diabetes" dataset we will get back later in the sensitivity analysis because, as we will see, matters are more complicated for this dataset.
 
 \textbf{Ridge Classifier:}
-As for the linear support vector classifier the arguably most influencial parameter is the regularization parameter called \textsf{alpha}. For the ridge classifier the regularization punishes high weights which again helps to prevent overfitting. \textsf{alpha} for the ridge classifier correspond to the value \(\frac{1}{2 \text{\textsf{C}}}\) and therefore has to be positive.\\
+As for the linear support vector classifier the arguably most influential parameter is the regularization parameter called \textsf{alpha}. For the ridge classifier the regularization punishes high weights which again helps to prevent overfitting. \textsf{alpha} for the ridge classifier correspond to the value \(\frac{1}{2 \text{\textsf{C}}}\) and therefore has to be positive.\\
 We also considered two other parameters, which we already encountered when tuning the linear support vector classifier, namely \textsf{fit\_intercept} and \textsf{class\_weight}. The search space we considered is:
 \begin{center}
     \textsf{alpha}\(\in[0,100]\), \textsf{fit\_intercept}\(\in\){True,False}, \textsf{class\_weight}\(\in\){'balanced','None'}.
@@ -519,29 +519,29 @@ Once more table \ref{table:tu_hyp_ridge_ac} shows the tuned parameters for the a
 
 For "Congressional Voting" and "Amazon Commerce Reviews" the values in table \ref{table:tu_hyp_ridge_ac} and table \ref{table:tu_hyp_svc_f1} coincide, so those are the best settings. 
 
-For the "Census Income" dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
+For the "Census Income" dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score, so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
 
 Again we will revisit the "Diabetes" dataset later in the sensitivity analysis to analyze the best parameter setting for overall performance.
 
 
-For the tuning and testing processes, we always used repeated stratified 5 fold crossvalidation. On the "Congressional Voting" and the "Diabetes" dataset we used 10 repetitions and on the other two datasets we used 5 repetitions except for the random forest classifier with which we did only one repetition. This was due to the otherwise very long runtime for the large datasets.
+For the tuning and testing processes, we always used repeated stratified 5-fold crossvalidation. On the "Congressional Voting" and the "Diabetes" dataset we used 10 repetitions and on the other two datasets we used 5 repetitions except for the random forest classifier with which we did only one repetition. This was due to the otherwise very long runtime for the large datasets.
 
-The next step in analysing the influence of hyperparameters on our classifiers is the sensitivity analysis. This means we will take a look at how changing a single parameter value influences the performance of the model. We will do this for the hyperparameters we tuned in the previous section and will always change one while keeping the others at their optimal values, which we found earlier. We are going to achieve this by plotting the effectiveness measures against the parameter values.\\
-However for the "Diabetes" Dataset in combination with the linear support vector claassifier and the ridge classifier we will take a closer look and try all combinations of \textsf{fit\_intercept} and \textsf{class\_weight} and vary the parameters \textsf{C} and \textsf{alpha} because we still need to decide on the overall best setting.
+The next step in analyzing the influence of hyperparameters on our classifiers is the sensitivity analysis. This means we will take a look at how changing a single parameter value influences the performance of the model. We will do this for the hyperparameters we tuned in the previous section and will always change one while keeping the others at their optimal values, which we found earlier. We are going to achieve this by plotting the effectiveness measures against the parameter values.\\
+However, for the "Diabetes" Dataset in combination with the linear support vector classifier and the ridge classifier we will take a closer look and try all combinations of \textsf{fit\_intercept} and \textsf{class\_weight} and vary the parameters \textsf{C} and \textsf{alpha} because we still need to decide on the overall best setting.
 
 \textbf{Random Forest Classifier Sensitivity:}
 We first want to find out how much each of the 5 considered hyperparameters influences the effectiveness of the classifier. We found that the sensitivity highly depends on the dataset:
 
 \begin{itemize}
-    \item \textsf{n\_estimators}: On the datasets "Census Income" and "Diabetes", the parameter changed almost nothing. However for 'Amazon Commerce Reviews we got a clear Trend, that both measures increased with the number of trees first rather quickly and then more slowly. For the "Congressional Voting" dataset the parameter seemed to influence the effectiveness but we no clear trend could be identified. 
+    \item \textsf{n\_estimators}: On the datasets "Census Income" and "Diabetes", the parameter changed almost nothing. However, for 'Amazon Commerce Reviews we got a clear Trend, that both measures increased with the number of trees first rather quickly and then more slowly. For the "Congressional Voting" dataset the parameter seemed to influence the effectiveness but we no clear trend could be identified. 
 \item \textsf{max\_depth}: Varying this parameter only changed the effectiveness for the "Amazon Commerce Reviews"  and the "Census Income" dataset. Here we could see that the accuracy increased with the depth of the trees at first and then stagnated, but the increase in accuracy for "Census Income" was almost negligible and the increase in the F1 score was also way smaller than for "Amazon Commerce Reviews".
 
 \item \textsf{min\_samples\_split}: For the "Census Income" and the "Diabetes" datasets varying this parameter hardly changed the effectiveness scores. On "Amazon Commerce Reviews" both scores decreased with higher values whereas for the "Congressional Voting" dataset both values decreased to a minimum at \\ \textsf{min\_samples\_split}=5 and then increased to the original value again.
 \item \textsf{min\_samples\_leaf}: This parameter did not really influence the performance for the "Diabetes" and "Census Income" datasets. For the other two, small values fared better which fits in with our optimized values.
-\item \textsf{max\_features}: 'sqrt' consistently outperformed 'log2' by quite a big margin on the "Amazon Commerce Reviews" dataset. For the "Census Income" it die not make much of a difference. On our smaller and less dimensional datasets 'None' led to the best results except for the accuracy of "Diabetes" where 'sqrt' performed a little better.
+\item \textsf{max\_features}: 'sqrt' consistently outperformed 'log2' by quite a big margin on the "Amazon Commerce Reviews" dataset. For the "Census Income" it does not make much of a difference. On our smaller and less dimensional datasets 'None' led to the best results except for the accuracy of "Diabetes" where 'sqrt' performed a little better.
 \end{itemize}
 
-To underline our conclusions we want to give a few examplary plots in figure \ref{fig: sensitivity rf} below. 
+To underline our conclusions we want to give a few exemplary plots in figure \ref{fig: sensitivity rf} below. 
 
 \begin{figure}[h!]
     \captionsetup{justification=centering}
@@ -587,11 +587,11 @@ The parameter \textsf{dual} gave better results for accuracy and recall when set
         \includegraphics[width=\textwidth]{amazon/plots/LinearSVC_C_sensitivity.pdf}
         \caption{Parameter \textsf{C} for dataset "Amazon Commerce Reviews"}
     \end{subfigure}
-    \caption{Sensitivity analysis of linear suppport vector classifier}
+    \caption{Sensitivity analysis of linear support vector classifier}
     \label{fig: sensitivity lsvc}
 \end{figure}
 
-We still have to analyse the sensitivity plots for the dataset "Diabetes" to figure out what parameter values ar the best overall.\\
+We still have to analyze the sensitivity plots for the dataset "Diabetes" to figure out what parameter values are the best overall.\\
 In figure \ref{fig:sensitivity svc diabetes} we can see, that for very small values of \textsf{C} the two scores diverge heavily, which means the \textsf{C} value found in table \ref{table:tu_hyp_svc_f1} is not suitable for optimizing accuracy and recall at the same time.\\
 To get the best recall with still decent accuracy we choose \textsf{class\_weight}=\textsf{'balanced'} and \textsf{fit\_intercept}='True' and \textsf{C}=0.0452. This gives us an accuracy of 0.747 and a recall of 0.734.%20241113_110548 sensitivity analysis
 
@@ -604,9 +604,9 @@ To get the best recall with still decent accuracy we choose \textsf{class\_weigh
 
 \textbf{Ridge Classifier Sensitivity:}
 
-Interestingly we found that for the ridge classifier the parameter \textsf{alpha} hardly influenced the effectiveness scores of our models. While the measures were nearly left untouched by variation of \textsf{alpha} for the "Census Income" and the "Diabetes" dataset, the "Amazon Commerce Reviews" dataset showed a little variation  in accuracy and F1 score and the "Congressional Voting" showed a decrease in both metrics as one can see in figure \ref{fig: sensitivity ridge} but the difference was not really significant considering the scaling of the plot.\\
+Interestingly we found that for the ridge classifier the parameter \textsf{alpha} hardly influenced the effectiveness scores of our models. While the measures were nearly left untouched by variation of \textsf{alpha} for the "Census Income" and the "Diabetes" dataset, the "Amazon Commerce Reviews" dataset showed a little variation  in accuracy and F1 score and the "Congressional Voting" showed a decrease in both metrics as one can see in figure \ref{fig: sensitivity ridge}, but the difference was not really significant considering the scaling of the plot.\\
 Setting \textsf{class\_weight} to 'balanced' improved the F1 score/recall for the "Census Income" and the "Diabetes" dataset while lowering the accuracy as one could expect due to the bias variance trade off. For the other two datasets this hyperparameter did not really influence performance at all.\\
-Finally we want to analyse the parameter \textsf{fit\_intercept}. This parameter had no significant influence on the dataset "Census Income" and only slightly increased accuracy and F1 score when set to 'True' for "Congressional Voting". For "Amazon Commerce Reviews" interestingly setting it to 'False' increased the scores of both metrics by about .5 percentage points. The biggest influence that we could observe was when testing it on the "Diabetes" Dataset. Here \textsf{fit\_intercept}=False yielded a pretty significant increase in recall but a decrease in accuracy as one can see from figure \ref{fig:sensitivity ridge diabetes}.
+Finally, we want to analyze the parameter \textsf{fit\_intercept}. This parameter had no significant influence on the dataset "Census Income" and only slightly increased accuracy and F1 score when set to 'True' for "Congressional Voting". For "Amazon Commerce Reviews" interestingly setting it to 'False' increased the scores of both metrics by about .5 percentage points. The biggest influence that we could observe was when testing it on the "Diabetes" Dataset. Here \textsf{fit\_intercept}=False yielded a pretty significant increase in recall but a decrease in accuracy as one can see from figure \ref{fig:sensitivity ridge diabetes}.
 
 \begin{figure}[h!]
     \captionsetup{justification=centering}
@@ -624,7 +624,7 @@ Finally we want to analyse the parameter \textsf{fit\_intercept}. This parameter
 \end{figure}
 
 Once more we are not done yet, as we still need to decide on the best parameter setting for the "Diabetes" dataset.\\
-We have already established, that changing \textsf{alpha} does not really influence the performance of the model, so we the more important question is what combination of the other two parameters works best.\\
+We have already established, that changing \textsf{alpha} does not really influence the performance of the model, so the more important question is what combination of the other two parameters works best.\\
 By looking at figure \ref{fig:sensitivity ridge diabetes} we can see that we have to set \textsf{class\_weight} to 'balanced' and \textsf{fit\_intercept} to 'False' when favoring recall over accuracy because this gives us the highest recall and in the other cases the recall was either a lot worse or the accuracy only increased marginally. For this combination of \textsf{fit\_intercept} and \textsf{class\_weight} the best value for alpha is 0 and we get an accuracy of 0.737 and a recall of 0.797.%20241113_115258 sensitivity analysis
 
 \begin{figure}[h!]
@@ -679,7 +679,7 @@ repetitions for the other two datasets (due to runtime).
 From this table we can conclude that on the datasets "Congressional Voting" and 
 "Amazon Commerce Review" the ridge classifier
 performed the best, although all classifiers performed almost the same. For the dataset "Census Income" we can see that
-the Random Forest classifier is performing best with respect to both performance measures. Lastly,
+the random forest classifier is performing best with respect to both performance measures. Lastly,
 for the "Diabetes" dataset the random forest classifier outperformed the others in both measures. But if we keep our preferences the same as in the
 last few sections, we can conclude that either the linear support vector classifier or the ridge classifier
 are the best choice for this dataset. \\
@@ -709,7 +709,7 @@ where the box-plots are shown for the
 
 
 
-We also want compare the efficiency of the classifiers. For this we used the runtime of the hold-out
+We also want to compare the efficiency of the classifiers. For this we used the runtime of the hold-out
 method calculation from above. We measured both the time for training (including preprocessing) and
 the time it took the test the model. Those values are displayed in table~\ref{tab:runtime_models}.
 
@@ -739,15 +739,15 @@ RandomForest & 126.59 & 1.63 & 12.92 & 0.10 & 1.00 & 0.03 & 4.79 & 0.09 \\
 
 
 On the contrary, the linear support vector classifier and ridge classifier performed similar
-on the first glance. The results from "Amazon Commerce Review" and "Census Income" might suggest,
+at the first glance. The results from "Amazon Commerce Review" and "Census Income" might suggest,
 that the linear support vector classifier is faster for high dimensional datasets, whereas the ridge classifier
 is quicker with a high number of instances. We found out that the parameter dual of the linear support
 vector classifier has a great influence on its runtime. This parameter describes whether the algorithm
-should solve for the primal or dual optimization problem. Let n be number of samples and d the number
-of dimensions of a dataset. The dual formulation requires the computation of a n × n matrix, whereas
-in the primal formulation a d × d matrix is calculated. Therefore the primal formulation is faster for
-datasets, where n is greater than d, which was especially noticeable for the ”Census Income” dataset. Also on the "Diabetes"
-dataset as it is very low dimensional the dual prosedure is faster. The results are shown in table~\ref{tab:dual_comparison}.
+should solve for the primal or dual optimization problem. Let n be the number of samples and d the number
+of dimensions of a dataset. The dual formulation requires the computation of an n × n matrix, whereas
+in the primal formulation a d × d matrix is calculated. Therefore, the primal formulation is faster for
+datasets, where n is greater than d, which was especially noticeable for the ”Census Income” dataset. Also, on the "Diabetes"
+dataset as it is very low dimensional the dual procedure is faster. The results are shown in table~\ref{tab:dual_comparison}.
 
 \begin{table}[h!]
 \centering
@@ -771,12 +771,12 @@ Diabetes & 0.004 & 1.25 \\
 After all experiments our final conclusion is that no classifier we used outperformed the other across all
 datasets. The results in table \ref{tab:best_results} imply that the effectiveness of a classifier is highly dependent on the
 dataset. What we can establish is that the linear support vector classifier was never the worst in both
-metrics. Therefore it seems to be a very versatile classifier. In comparison the success for random forests
+metrics. Therefore, it seems to be a very versatile classifier. In comparison, n the success for random forests
 varied quite a lot for different datasets and effectiveness measures. This could be due to the fact, that
 decision trees generally tend to overfit the model. As for efficiency, table \ref{tab:runtime_models} highlighted a big weakness of
 the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{sec:preprocessing}, choosing
 the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
-though in varying magnitude for different classifiers and datasets. Here random forest seems the be the
+though in varying magnitude for different classifiers and datasets. Here random forest seems to be the
 least influenced by the choice of scaler as seen in tables \ref{table:censustransformers} and \ref{table:diabetesscalers}. The sensitivity analysis in section \ref{sec:hyperparameters}
 showed how much of an impact even a single hyperparameter can have on the overall performance of a
 model. However, comparing the results of section \ref{sec:preprocessing} with the ones in section \ref{sec:hyperparameters} and table \ref{tab:runtime_models}, it is clear that
