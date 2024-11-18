@@ -30,7 +30,7 @@
 \maketitle
 
 % Table of Contents
-\tableofcontents
+%\tableofcontents
 
 
 % Sections
@@ -225,10 +225,9 @@ dimension reduction.
 
 \textbf{Census Income:} This dataset has missing values, but only for categorical values.
  Those values are labeled with \textit{'?'}. We will try the same two strategies as for the "Congressional Voting" dataset.
- Those values are labeled with \textit{'?'}. We will try the same two strategies as for the "Congressional Voting" dataset.
  The only exception is the \textit{'education'} column. This column is already encoded as the
  \textit{'education-num'} column and will therefore be dropped. For the numeric columns 
- we tested the same numerical scalers, which we have tried for the 
+ we tested the same numerical scalers, which we tried for the 
  "Amazon Commerce Reviews" dataset. Since the dataset only has 14 features,
 we will not use dimensionality reduction. Like for the previous
 datasets we will present the result in a table, where the first score in each cell is accuracy and the second
@@ -395,7 +394,7 @@ As already discussed we used the F1 score as a second metric for all datasets ex
     \label{table:tu_hyp_rf_f1}
     \end{table}
 
-We got the same results tuning for accuracy and for the F1 score on the first dataset. On the last three datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.698 for the "Amazon Commerce Review" dataset a F1 score of 0.685 for the "Census Income" dataset and a recall of 0.647 for the "diabetes" dataset, so we will keep the parameter values for the best accuracy since they are only slightly worse.
+We got the same results tuning for accuracy and for the F1 score on the first dataset. On the last three datasets we calculated the second performance measure with the best parameters for accuracy and got a F1 score of 0.698 for the "Amazon Commerce Review" dataset a F1 score of 0.685 for the "Census Income" dataset and a recall of 0.647 for the "diabetes" dataset, so we will keep the parameter values for the best accuracy since they perform only slightly worse on the second perfromance measure than the optimal values.
 
 \textbf{Linear Support Vector Classifier:} For support vector machines the arguably most important hyperparameter, apart from the type of kernel used, is the regularization parameter \textsf{C}. The Kernel in our case is always linear which leaves \textsf{C}. In addition we considered three other parameters, we thought to be interesting. The considered hyperparameters are:
 
@@ -678,8 +677,8 @@ Dummy & 0.613 & - & 0.020 &- & 0.759 & - & 0.653 & - \\
 The scores in table~\ref{tab:best_results} are computed using repeated stratified 5-fold
 cross-validation. We chose 10 repetitions for the datasets ”congressional voting” and ”diabetes” and 5
 repetitions for the other two datasets (due to runtime).
-From this table we can conclude that on the dataset "congressional voting" and 
-"Amazon Commerce Review" dataset the ridge classifier
+From this table we can conclude that on the datasets "congressional voting" and 
+"Amazon Commerce Review" the ridge classifier
 performed the best, although all classifiers performed almost the same. For the dataset "Census Income" we can see that
 the Random Forest classifier is performing best with respect to both performance measures. Lastly,
 for the diabetes dataset the random forest classifier outperformed the others in both measures. But if we keep our preferences the same as in the
@@ -746,16 +745,23 @@ that the linear support vector classifier is faster for high dimensional dataset
 is quicker with a high number of instances. We found out that the parameter dual of the linear support
 vector classifier has a great influence on its runtime. This parameter describes whether the algorithm
 should solve for the primal or dual optimization problem. Let n be number of samples and d the number
+<<<<<<< HEAD
 of dimensions of a dataset. The dual formulation requires the computation of a n × n matrix, whereas
 in the primal formulation a d × d matrix is calculated. Therefore the primal formulation is faster for
 datasets, where n is greater than d, which was especially noticeable for the ”Census Income” dataset. Also on the "Diabetes"
 dataset as it is very low dimensional the dual prosedure is faster. The results are shown in table~\ref{tab:dual_comparison}.
+=======
+of dimensions of a dataset. The dual formulation requires the computation of a \(n \times n\) matrix, whereas
+in the primal formulation a \(d \times d\) matrix is calculated. Therefore the primal formulation is faster for
+datasets, where \(n > d\), which was especially noticeable for the ”Census Income” dataset. Also on the "diabetes"
+dataset, as it is very low dimensional, the dual procedure is faster. The results are shown in table~\ref{tab:dual_comparison}.
+>>>>>>> 757c580700a5db549361ae98aab95fe0452b4159
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
-\textbf{Dataset} & \textbf{Normal} & \textbf{Dual} \\
+\textbf{Dataset} & \textbf{Primal} & \textbf{Dual} \\
 \hline
 Census & 0.198 & 1.43 \\
 \hline
@@ -767,7 +773,7 @@ Diabetes & 0.004 & 1.25 \\
 \hline
 \end{tabular}
 \vspace{0.3cm}
-\caption{Comparison of Dual and Normal Ridge classifier training time for different datasets}
+\caption{Comparison of Dual and Normal Linear Support Vector classifier training time for different datasets}
 \label{tab:dual_comparison}
 \end{table}
 After all experiments our final conclusion is that no classifier we used outperformed the other across all
@@ -777,7 +783,6 @@ metrics. Therefore it seems to be a very versatile classifier. In comparison the
 varied quite a lot for different datasets and effectiveness measures. This could be due to the fact, that
 decision trees generally tend to overfit the model. As for efficiency, table \ref{tab:runtime_models} highlighted a big weakness of
 the random forest classifier, namely that it’s comparatively very slow. Summing up section \ref{sec:preprocessing}, choosing
-the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
 the right preprocessing steps, especially the scaler and dimension reduction, influences the results notably,
 though in varying magnitude for different classifiers and datasets. Here random forest seems the be the
 least influenced by the choice of scaler as seen in tables \ref{table:censustransformers} and \ref{table:diabetesscalers}. The sensitivity analysis in section \ref{sec:hyperparameters}
