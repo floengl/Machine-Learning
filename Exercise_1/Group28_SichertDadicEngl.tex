@@ -519,7 +519,7 @@ Once more table \ref{table:tu_hyp_ridge_ac} shows the tuned parameters for the a
 
 For "Congressional Voting" and "Amazon Commerce Reviews" the values in table \ref{table:tu_hyp_ridge_ac} and table \ref{table:tu_hyp_svc_f1} coincide, so those are the best settings. 
 
-For the "census income" dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
+For the "Census Income" dataset testing the values for the best accuracy gave us a F1 score of 0.626 and vice versa we got an accuracy of 0.795. In this case the loss in accuracy is comparable to the loss in the F1 score so we choose the values from table \ref{table:tu_hyp_ridge_f1}. Doing this we take into account that the dataset is imbalanced and prevent the model from exploiting the different class sizes.
 
 Again we will revisit the "Diabetes" dataset later in the sensitivity analysis to analyze the best parameter setting for overall performance.
 
@@ -674,9 +674,9 @@ Dummy & 0.613 & - & 0.020 & - & 0.759 & - & 0.653 & - \\
 \end{table}
 
 The scores in table~\ref{tab:best_results} are computed using repeated stratified 5-fold
-cross-validation. We chose 10 repetitions for the datasets ”congressional voting” and ”Diabetes” and 5
+cross-validation. We chose 10 repetitions for the datasets ”Congressional Voting” and ”Diabetes” and 5
 repetitions for the other two datasets (due to runtime).
-From this table we can conclude that on the datasets "congressional voting" and 
+From this table we can conclude that on the datasets "Congressional Voting" and 
 "Amazon Commerce Review" the ridge classifier
 performed the best, although all classifiers performed almost the same. For the dataset "Census Income" we can see that
 the Random Forest classifier is performing best with respect to both performance measures. Lastly,
