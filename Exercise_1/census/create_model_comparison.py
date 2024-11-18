@@ -38,7 +38,7 @@ preprocessor_linear_svc = ColumnTransformer(
 )
 linear_svc = Pipeline([
     ("preprocessor", preprocessor_linear_svc),
-    ("model", LinearSVC(random_state=1234, max_iter=10000, dual=False, class_weight=None, C=679.520, fit_intercept=True))
+    ("model", LinearSVC(random_state=1234, max_iter=10000, dual=False, class_weight=None, C=50359.789529752066, fit_intercept=True))
 ])
 
 # define RidgeClassifier pipeline
@@ -50,7 +50,7 @@ preprocessor_ridge = ColumnTransformer(
 )
 ridge = Pipeline([
     ("preprocessor", preprocessor_ridge),
-    ("model", RidgeClassifier(random_state=1234, alpha=11.333, fit_intercept=True, class_weight="balanced"))
+    ("model", RidgeClassifier(random_state=1234, alpha=91.333, fit_intercept=True, class_weight="balanced"))
 ])
 
 # define Random Forest pipeline
@@ -62,8 +62,8 @@ preprocessor_rf = ColumnTransformer(
 )
 random_forest = Pipeline([
     ("preprocessor", preprocessor_rf),
-    ("model", RandomForestClassifier(random_state=1234, n_estimators=100, max_depth=30,
-                                     min_samples_split=20, min_samples_leaf=1, max_features="sqrt"))
+    ("model", RandomForestClassifier(random_state=1234, n_estimators=334, max_depth=90,
+                                     min_samples_split=19, min_samples_leaf=2, max_features="sqrt"))
 ])
 
 # all models
@@ -120,7 +120,7 @@ plt.tight_layout()
 plt.savefig(os.path.join(Config.PLOTS_DIR, "model_comparison.pdf"))
 
 # log results
-logger = setup_logging("model_comparison")
+logger = setup_logging("new_model_comparison")
 logger.info("\nRuntime of models:")
 logger.info(df_runtime)
 logger.info("\nHoldout results:")
