@@ -35,7 +35,7 @@ search_space = {
 }
 
 # cross validation strategy
-cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=1, random_state=1234)
+cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=1, random_state=1234, n_jobs=-1)
 
 for score in ["accuracy", "f1_macro"]:
     # optimizer
