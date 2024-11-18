@@ -708,11 +708,7 @@ where the box-plots are shown for the
 
 
 
-In contrast, for the dataset 
-"Census Income" the hold-out scores are almost the same as the mean of the cross-validation, which is to be
-expected because this dataset has a lot of instances. The box-plots for this dataset (figure 9) are also
-comparatively very narrow, meaning that the scores calculated during cross-validation vary very little i.e.
-the variance is really low.
+ 
 
 
 
@@ -754,7 +750,7 @@ vector classifier has a great influence on its runtime. This parameter describes
 should solve for the primal or dual optimization problem. Let n be number of samples and d the number
 of dimensions of a dataset. The dual formulation requires the computation of a n × n matrix, whereas
 in the primal formulation a d × d matrix is calculated. Therefore the primal formulation is faster for
-datasets, where n > d, which was especially noticeable for the ”Census Income” dataset. Also on the "Diabetes"
+datasets, where n is greater than d, which was especially noticeable for the ”Census Income” dataset. Also on the "Diabetes"
 dataset as it is very low dimensional the dual prosedure is faster. The results are shown in table~\ref{tab:dual_comparison}.
 
 \begin{table}[h!]
