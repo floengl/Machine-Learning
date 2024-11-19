@@ -1,6 +1,6 @@
 from utils import Config, load_training_dataset, setup_logging
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MaxAbsScaler, PowerTransformer
+from sklearn.preprocessing import MaxAbsScaler, PowerTransformer, QuantileTransformer
 from sklearn.decomposition import PCA
 from sklearn.compose import ColumnTransformer
 from sklearn.svm import LinearSVC
@@ -21,14 +21,14 @@ X, y = load_training_dataset()
 # define LinearSVC pipeline
 linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("max_abs_scaler", MaxAbsScaler()),
+    ("max_abs_scaler", QuantileTransformer()),
     ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.00946,dual=True, fit_intercept=True))
 ])
 
 # define RidgeClassifier pipeline
 ridge = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("max_abs_scaler", PowerTransformer()),
+    ("pow_scaler", PowerTransformer()),
     ("pca", PCA(n_components=0.99)),
     ("model", RidgeClassifier(random_state=1234, alpha=45.32, fit_intercept=False, class_weight=None))
 ])
@@ -36,7 +36,7 @@ ridge = Pipeline([
 # define Random Forest pipeline
 random_forest = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("max_abs_scaler", MaxAbsScaler()),
+    ("pow_scaler", PowerTransformer()),
     ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=50,
                                      min_samples_split=2, min_samples_leaf=1, max_features="sqrt"))
 ])
@@ -45,8 +45,8 @@ random_forest = Pipeline([
 # all models
 models = [
     ("LinearSVC", linear_svc),
-    ("Ridge", ridge),
-    ("RandomForest", random_forest)
+    #("Ridge", ridge),
+    #("RandomForest", random_forest)
 ]
 
 
@@ -56,7 +56,7 @@ data_runtime = []
 plt.figure(figsize=(10, 6))
 for name, model in models:
     # evaluate model with cross validation
-    cv = RepeatedStratifiedKFold(n_splits=2, n_repeats=1, random_state=1234)
+    cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=10, random_state=1234)
     scores = cross_validate(model, X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
     # evaluate model with holdout method and measure runtime
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
@@ -91,7 +91,7 @@ mean_line_dummy, = plt.plot([], [], '--', linewidth=1.5, color='white', label='M
 plt.legend(handles=[plt_holdout, mean_line_dummy], loc="lower right")
 plt.xlabel("")
 plt.tight_layout()
-plt.savefig(os.path.join(Config.PLOTS_DIR, "model_comparison.pdf"))
+plt.savefig(os.path.join(Config.PLOTS_DIR, "new_model_comparison.pdf"))
 
 # log results
 logger = setup_logging("model_comparison")
