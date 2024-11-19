@@ -426,7 +426,7 @@ Again we summarized the results of our optimization process in table \ref{table:
     \hline
     congressional voting & 1.150 & True & balanced & False & 0.963 \\%20241111_151511
     \hline
-    Amazon Reviews & 0.00946 & True & balanced & False & 0.748 \\%20241111_075742
+    Amazon Reviews & 0.00266 & True & balanced & False & 0.751 \\%new20241119_1101235
     \hline
     Census Income & 679.520 & True & None & False & 0.853 \\%20241111_093143
     \hline
@@ -447,7 +447,7 @@ Again we summarized the results of our optimization process in table \ref{table:
     \hline
     congressional voting & 1.241 & True & None & False & 0.955 \\%20241111_151511
     \hline
-    Amazon Reviews & 0.0093 & True & balanced & False &  0.725 \\%20241111_075742
+    Amazon Reviews & 0.00350 & True & balanced & False &  0.729 \\%new20241119_101235
     \hline
     Census Income & 0.274 & True & balanced & False & 0.677 \\%20241111_093143
     \hline
@@ -460,7 +460,7 @@ Again we summarized the results of our optimization process in table \ref{table:
     
 The results show, that the computation with the primal problem outperformed the dual problem in every case. However, it should be noted that for the "Amazon Commerce Reviews" dataset we got the same accuracy and F1 score for dual computation. Therefore, we will choose the dual computation as it is faster.
 
-Later we will see that small changes in \textsf{C} do not vary the result too much, so we choose \textsf{C}=0.00946 for "Amazon Commerce Reviews" and \textsf{C} =1.2 for "Congressional Voting". Taking the other values from table \ref{table:tu_hyp_svc_ac} for "Congressional Voting" we get an F1 score of 0.951 which is pretty good, so we will use these values.
+Later we will see that small changes in \textsf{C} do not vary the result too much, so we choose \textsf{C}=0.003 for "Amazon Commerce Reviews" and \textsf{C} =1.2 for "Congressional Voting". Taking the other values from table \ref{table:tu_hyp_svc_ac} for "Congressional Voting" we get an F1 score of 0.951 which is pretty good, so we will use these values.
 
 For the other two datasets finding the right values for optimizing both performance measures at the same time is harder because they differ quite a lot. The "Census Income" dataset is imbalanced, which is why we would usually prefer the values in table \ref{table:tu_hyp_svc_f1}. This gives us an accuracy of 0.805. But using the values from table \ref{table:tu_hyp_svc_ac} the F1 score is 0.659312, which is less of a difference to the optimal value than our loss in accuracy would be otherwise, so we choose these values.
 
