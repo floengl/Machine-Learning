@@ -190,9 +190,9 @@ MinMaxScaler & none & 0.577/0.536 & 0.640/0.622 & 0.649/0.631 \\
 \hline
 RobustScaler & none & 0.576/0.535 & 0.672/0.641 & 0.595/0.567 \\
 \hline
-QuantileTransformer & none &  0.581/0.543 & 0.739/0.712 & 0.696/0.671 \\
+QuantileTransformer & none &  0.581/0.543 & \cellcolor[HTML]{C1E1C1}0.739/0.712 & 0.696/0.671 \\
 \hline
-PowerTransformer & none &   \cellcolor[HTML]{C1E1C1} 0.581/0.544 & \cellcolor[HTML]{C1E1C1}  0.742/0.714 & 0.733/0.710 \\
+PowerTransformer & none &   \cellcolor[HTML]{C1E1C1} 0.581/0.544 &   0.742/0.714 & 0.733/0.710 \\
 \hline
 MaxAbsScaler & pca & 0.225/0.198 & 0.670/0.647 & 0.730/0.706 \\
 \hline
@@ -220,7 +220,7 @@ PowerTransformer & pca & 0.231/0.214 & 0.677/0.647 & \cellcolor[HTML]{C1E1C1}  0
 
 
 In the above Experiment we have used 5 folds and 10 repetitions for the cross-validation. The best results are achieved by the PowerTransformer for all classifiers. However, only the ridge classifier benefited from the
-dimension reduction.
+dimension reduction. Still for the LinearSVC we used the QuantileTransformer, because the Power Transfomer is not parallelizable and therefore takes too much time to be viable.
 
 
 \textbf{Census Income:} This dataset has missing values, but only for categorical values.
@@ -659,7 +659,7 @@ you would divide by zero in the calculation.
 \hline
 & Accuracy & F1 & Accuracy & F1 & Accuracy & F1 & Accuracy & Recall \\
 \hline
-Random Forest & 0.963 & 0.957 & 0.732 & 0.704 & 0.866 & 0.685 & 0.773 & 0.590 \\
+Random Forest & 0.963 & 0.957 & 0.744 & 0.717 & 0.866 & 0.685 & 0.773 & 0.590 \\
 \hline
 LinearSVC & 0.963 & 0.956 & 0.748 & 0.725 & 0.853 & 0.659 & 0.747 & 0.734 \\
 \hline
