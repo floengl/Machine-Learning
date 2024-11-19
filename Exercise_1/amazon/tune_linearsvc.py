@@ -1,6 +1,6 @@
 from utils import load_training_dataset, setup_logging
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MaxAbsScaler, PowerTransformer
+from sklearn.preprocessing import MaxAbsScaler, QuantileTransformer
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.svm import LinearSVC
@@ -17,7 +17,7 @@ X, y = load_training_dataset()
 # define preprocessing pipeline
 preprocessor = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-    ("powertransformer", PowerTransformer())
+    ("quantiletransformer", QuantileTransformer())
 ])
 
 # define estimator
@@ -35,7 +35,7 @@ search_space = {
 }
 
 # cross validation strategy
-cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=1, random_state=1234, n_jobs=-1)
+cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=1, random_state=1234)
 
 for score in ["accuracy", "f1_macro"]:
     # optimizer
