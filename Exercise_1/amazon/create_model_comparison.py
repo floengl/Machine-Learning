@@ -21,23 +21,14 @@ X, y = load_training_dataset()
 # define LinearSVC pipeline
 linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-<<<<<<< HEAD
-    ("max_abs_scaler", QuantileTransformer()),
-    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.00946,dual=True, fit_intercept=True))
-=======
     ("quantiletransformer", QuantileTransformer()),
     ("model", LinearSVC(random_state=1234, max_iter=100000, class_weight="balanced", C=0.003,dual=True, fit_intercept=True))
->>>>>>> 2748dab46bcb761a8c1051c4eeaab292acb80a34
 ])
 
 # define RidgeClassifier pipeline
 ridge = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-<<<<<<< HEAD
-    ("pow_scaler", PowerTransformer()),
-=======
     ("powertransformer", PowerTransformer()),
->>>>>>> 2748dab46bcb761a8c1051c4eeaab292acb80a34
     ("pca", PCA(n_components=0.99)),
     ("model", RidgeClassifier(random_state=1234, alpha=45.32, fit_intercept=False, class_weight=None))
 ])
@@ -45,11 +36,7 @@ ridge = Pipeline([
 # define Random Forest pipeline
 random_forest = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
-<<<<<<< HEAD
-    ("pow_scaler", PowerTransformer()),
-=======
     ("powertransformer", PowerTransformer()),
->>>>>>> 2748dab46bcb761a8c1051c4eeaab292acb80a34
     ("model", RandomForestClassifier(random_state=1234, n_estimators=2000, max_depth=50,
                                      min_samples_split=2, min_samples_leaf=1, max_features="sqrt"))
 ])
@@ -69,11 +56,7 @@ data_runtime = []
 plt.figure(figsize=(10, 6))
 for name, model in models:
     # evaluate model with cross validation
-<<<<<<< HEAD
     cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=10, random_state=1234)
-=======
-    cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=5, random_state=1234)
->>>>>>> 2748dab46bcb761a8c1051c4eeaab292acb80a34
     scores = cross_validate(model, X, y, scoring=["accuracy", "f1_macro"], cv=cv, n_jobs=-1)
     # evaluate model with holdout method and measure runtime
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
