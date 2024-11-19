@@ -20,7 +20,7 @@ X_test = load_test_dataset()
 linear_svc = Pipeline([
     ("remove_ID", ColumnTransformer([("remove_ID", "drop", "ID")], remainder="passthrough")),
     ("max_abs_scaler", MaxAbsScaler()),
-    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.00946,dual=True, fit_intercept=True))
+    ("model", LinearSVC(random_state=1234, max_iter=10000, class_weight="balanced", C=0.003,dual=True, fit_intercept=True))
 ])
 
 
