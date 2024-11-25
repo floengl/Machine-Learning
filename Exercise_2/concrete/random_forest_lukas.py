@@ -60,11 +60,10 @@ class RandomForestRegressor(object):
     """
     def predict(self, feature):
         predictions = []
-
         for tree in self.trees:
             predictions.append(tree.predict([feature])[0])
-
         return np.mean(predictions)
+
 
 def test_rf():
     X, y = load_dataset()
@@ -74,8 +73,12 @@ def test_rf():
     rf.fit(X_train, y_train)
 
     predictions = [rf.predict(feature) for feature in X_test.values]
-    mse = np.mean((predictions - y_test.values) ** 2)
-    logger.info(f"Mean Squared Error: {mse}")
+    meansquarederror = np.mean((predictions - y_test.values) ** 2)
+    rootmeansquarederror = np.sqrt(meansquarederror)
+    absoluteerror = np.mean(np.abs(predictions - y_test.values))
+    logger.info(f"Mean Squared Error: {meansquarederror}")
+    logger.info(f"Root Mean Squared Error: {rootmeansquarederror}")
+    logger.info(f"Absolute Error: {absoluteerror}")
 
 
 # Run the test function
