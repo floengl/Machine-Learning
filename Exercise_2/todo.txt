@@ -1,0 +1,33 @@
+Benötigen zwei classes random forest und build decision tree:
+
+random forest:
+    nimmt train daten findet wählt zufällig verschiedene subsets aus. trainiert auf jedem dieser subsets einen decision tree und bildet dann den durchschnitt 
+    der prediction values
+
+    können uns überlegen:   unterschiedlich große subsets 
+                            unterschiedliche gewichtung beim durchschnitt bilden
+                            vielleicht schon bei jedem subset nur spezielle features verwenden (decision tree verwindet dann alle features)
+                            number of trees variieren 
+                            wenn möglich bootstrapping mit random seed machen für reproducability
+
+decision tree:
+bei jeder node gewisse anzahl an random features auswählen um die splits zu berechnen, wie viele ist gegeben durch max features
+welche perfromance measure betrachten wir? MSE RMSE MAE können alle betrachtet werden (vielleicht weighted nach größe der zwei neuen leaves bei einem split)
+
+    Wichtig:    min sample leaf sollten villeicht größer als eins sein damit erwartungswert repräsentativ
+                max depth Wichtig
+                min samples split
+                max features sagt wieviele random features bei jeder node betrachtet werden
+
+
+wenn möglich random forest so implementieren, dass verwenden von pipeline möglich ist.
+
+Chatgpt auch random forest programm schreiben lassen und vergleichen
+
+
+
+SUPERCONDUCTIVITY:
+     Max abs scales ist bester scaler ein wenig besser als none aber höhere standardabweichung
+
+
+Concrete:
