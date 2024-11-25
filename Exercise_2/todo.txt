@@ -30,4 +30,5 @@ SUPERCONDUCTIVITY:
      Max abs scales ist bester scaler ein wenig besser als none aber höhere standardabweichung
 
 
-Concrete:
+CONCRETE:
+    Robust scaler funktioniert am besten wieder nur wenig unterschied allerdings und höhere standardabweichung
