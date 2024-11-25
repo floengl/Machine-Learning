@@ -1,1 +1,33 @@
 25.11.2024 18:57:07
+
+Accuracy:
+
+Mean Absolute Error (MAE):
+                scaler      mean       std
+2         MaxAbsScaler  5.199793  0.106494
+6                 None  5.202622  0.108050
+3         RobustScaler  5.202781  0.106085
+4     PowerTransformer  5.203315  0.106193
+5  QuantileTransformer  5.203315  0.106193
+0       StandardScaler  5.204189  0.103865
+1         MinMaxScaler  5.206719  0.107025
+
+Mean Squared Error (MSE):
+                scaler       mean       std
+2         MaxAbsScaler  87.703131  5.266300
+4     PowerTransformer  87.744479  5.209659
+5  QuantileTransformer  87.744479  5.209659
+6                 None  87.804663  5.287342
+1         MinMaxScaler  87.818214  5.324537
+3         RobustScaler  87.824445  5.315394
+0       StandardScaler  87.849437  5.128055
+
+Root Mean Squared Error (RMSE):
+                scaler      mean       std
+2         MaxAbsScaler  9.360898  0.276993
+4     PowerTransformer  9.363196  0.273942
+5  QuantileTransformer  9.363196  0.273942
+6                 None  9.366294  0.277862
+1         MinMaxScaler  9.366962  0.279723
+3         RobustScaler  9.367303  0.279418
+0       StandardScaler  9.368929  0.269455
