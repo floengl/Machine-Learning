@@ -1,4 +1,5 @@
-from utils import load_training_dataset
+from utils import load_dataset
 
-X,y=load_training_dataset()
+X,y=load_dataset()
 print(X)
+print(y)
