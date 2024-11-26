@@ -1,7 +1,5 @@
-import random
 import numpy as np
-import pandas as pd
-from utils import load_dataset, setup_logging
+from utils import load_dataset
 from sklearn.model_selection import train_test_split
 
 
