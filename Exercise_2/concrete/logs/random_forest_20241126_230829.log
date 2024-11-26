@@ -1,30 +1,30 @@
-26.11.2024 23:01:00
+26.11.2024 23:08:29
 
 BinaryTreeRegressor:
 
 Mean Absolute Error (MAE):
        mean
-0  5.446449
+0  4.973364
 
 Mean Squared Error (MSE):
         mean
-0  80.851464
+0  59.898955
 
 Root Mean Squared Error (RMSE):
        mean
-0  8.991744
+0  7.739442
 
 Mean Absolute Error (MAE):
          scaler      mean
-0  RobustScaler  5.399869
-1          None  5.399869
+1          None  4.780943
+0  RobustScaler  4.781274
 
 Mean Squared Error (MSE):
          scaler       mean
-0  RobustScaler  62.607649
-1          None  62.607649
+0  RobustScaler  56.794791
+1          None  56.840677
 
 Root Mean Squared Error (RMSE):
-         scaler    mean
-0  RobustScaler  7.9125
-1          None  7.9125
+         scaler      mean
+0  RobustScaler  7.536232
+1          None  7.539276
