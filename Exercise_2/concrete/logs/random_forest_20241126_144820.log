@@ -1,0 +1,13 @@
+26.11.2024 14:48:20
+
+Mean Absolute Error (MAE):
+  scaler       mean
+0   None  13.852332
+
+Mean Squared Error (MSE):
+  scaler        mean
+0   None  291.938049
+
+Root Mean Squared Error (RMSE):
+  scaler       mean
+0   None  17.086195
