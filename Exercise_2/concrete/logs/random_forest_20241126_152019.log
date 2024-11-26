@@ -1,0 +1,27 @@
+26.11.2024 15:20:19
+
+BinaryTreeRegressor:
+
+Mean Absolute Error (MAE):
+       mean
+0  4.539817
+
+Mean Squared Error (MSE):
+        mean
+0  51.146163
+
+Root Mean Squared Error (RMSE):
+       mean
+0  7.151655
+
+Mean Absolute Error (MAE):
+  scaler      mean
+0   None  4.488273
+
+Mean Squared Error (MSE):
+  scaler       mean
+0   None  48.826176
+
+Root Mean Squared Error (RMSE):
+  scaler      mean
+0   None  6.987573
