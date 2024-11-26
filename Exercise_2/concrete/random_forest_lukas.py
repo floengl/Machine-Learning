@@ -13,6 +13,7 @@ from sklearn.tree import DecisionTreeRegressor
 from utils import logger
 from sklearn.model_selection import cross_validate
 from sklearn.model_selection import RepeatedKFold
+from regression_tree import RegressionTree
 
 
 
@@ -39,14 +40,15 @@ class ourRandomForestRegressor(object):
         if type(X) == np.ndarray:
             data = list(zip(X, y))
         else:
-            data = list(zip(X.values, y.values))
+            X= X.values
+            y = y.values
+            data = list(zip(X, y))
         
 
         with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
             rand_fts = list( map(lambda x: random.sample(data, min(self.nb_samples, len(data))),
                            range(self.nb_trees)))
-
-
+            
             self.trees = list(executor.map(self.train_tree, rand_fts))
 
 
@@ -58,10 +60,13 @@ class ourRandomForestRegressor(object):
     """
     def train_tree(self, data):
         if self.max_depth == -1:
-            tree = DecisionTreeRegressor()
+            tree = RegressionTree()
         else:
-            tree = DecisionTreeRegressor(max_depth=self.max_depth)
-        X,y = list(zip(*data))
+            tree = RegressionTree(max_depth=self.max_depth)
+            
+        X,y = zip(*data)
+        X = np.array(X)
+        y = np.array(y)
         tree.fit(X, y)
         return tree
 
@@ -71,6 +76,8 @@ class ourRandomForestRegressor(object):
     :param  feature:    The features used to predict
     """
     def predict(self, feature):
+        if isinstance(feature, pd.DataFrame):
+           feature = feature.values
         predictions = np.array([tree.predict(feature) for tree in self.trees])
         return np.mean(predictions, axis=0)
 
@@ -81,15 +88,15 @@ logger = setup_logging("random_forest")
 X, y = load_dataset()
 X = X
 y = y
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+X_train, X_test1, y_train, y_test1 = train_test_split(X, y, test_size=0.3)
 
 
+X_test = X_test1.values
+y_test =y_test1.values
 scalers = [
     ("RobustScaler", RobustScaler()),
     ("None", Pipeline([("none", "passthrough")]))
 ]
-
-
 
 mae = []
 mse = []
@@ -98,10 +105,12 @@ rmse = []
 for name, scaler in scalers:
     pipeline = Pipeline([
         ("preprocessor", scaler),
-        ("rf", ourRandomForestRegressor(nb_trees=400, nb_samples=10000, max_workers=12))
+        ("rf", ourRandomForestRegressor(nb_trees=400, nb_samples=1000, max_workers=12))
     ])
     # Fit the pipeline on the training data
     pipeline.fit(X_train, y_train)
+    print(type(X_test))
+
 
     # Predict on the test data
     predictions = pipeline.predict(X_test)
