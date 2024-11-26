@@ -32,7 +32,7 @@ rmse = []
 for name, scaler in scalers:
     pipeline = Pipeline([
         ("preprocessor", scaler),
-        ("rf", DecisionTreeRegressor(random_state=1234))
+        ("rf", RandomForestRegressor(random_state=1234))
     ])
     cv = RepeatedKFold(n_splits=5, n_repeats=2, random_state=1234)
     scores = cross_validate(pipeline, X, y, scoring=["neg_mean_absolute_error", "neg_mean_squared_error", "neg_root_mean_squared_error"], cv=cv, n_jobs=-1)

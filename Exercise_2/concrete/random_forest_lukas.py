@@ -36,7 +36,11 @@ class ourRandomForestRegressor(object):
     :param  y:   Target values
     """
     def fit(self, X, y):
-        data = list(zip(X.values, y.values))
+        if type(X) == np.ndarray:
+            data = list(zip(X, y))
+        else:
+            data = list(zip(X.values, y.values))
+        
 
         with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
             rand_fts = list( map(lambda x: random.sample(data, min(self.nb_samples, len(data))),
@@ -81,7 +85,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 
 scalers = [
-    #("RobustScaler", RobustScaler()),
+    ("RobustScaler", RobustScaler()),
     ("None", Pipeline([("none", "passthrough")]))
 ]
 
@@ -94,7 +98,7 @@ rmse = []
 for name, scaler in scalers:
     pipeline = Pipeline([
         ("preprocessor", scaler),
-        ("rf", ourRandomForestRegressor(nb_trees=1, nb_samples=1000, max_workers=12))
+        ("rf", ourRandomForestRegressor(nb_trees=400, nb_samples=10000, max_workers=12))
     ])
     # Fit the pipeline on the training data
     pipeline.fit(X_train, y_train)
