@@ -14,6 +14,7 @@ from utils import logger
 from sklearn.model_selection import cross_validate
 from sklearn.model_selection import RepeatedKFold
 from regression_tree import RegressionTree
+from sklearn.ensemble import RandomForestRegressor
 
 
 
@@ -24,13 +25,14 @@ class ourRandomForestRegressor(object):
     :param  max_depth:      Maximum depth of the trees
     :param  max_workers:    Maximum number of processes to use for training
     """
-    def __init__(self, nb_trees, nb_samples, max_depth=-1, max_workers=1):
+    def __init__(self, nb_trees, nb_samples, max_depth=-1, max_workers=1, random_state=None):
         self.trees = []
         self.nb_trees = nb_trees
         self.nb_samples = nb_samples
         self.max_depth = max_depth
         self.max_workers = max_workers
-
+        if random_state!=None:
+            random.seed(random_state)
     """
     Trains self.nb_trees number of decision trees.
     :param  X:   Features
@@ -105,7 +107,7 @@ rmse = []
 for name, scaler in scalers:
     pipeline = Pipeline([
         ("preprocessor", scaler),
-        ("rf", ourRandomForestRegressor(nb_trees=400, nb_samples=1000, max_workers=12))
+        ("rf", ourRandomForestRegressor(nb_trees=400, nb_samples=1000, max_workers=10, random_state=1234))
     ])
     # Fit the pipeline on the training data
     pipeline.fit(X_train, y_train)
@@ -127,10 +129,12 @@ for name, scaler in scalers:
 
 
 
-tree = DecisionTreeRegressor()
+tree = DecisionTreeRegressor(random_state=1234)
 tree.fit(X_train, y_train)
 tree_predictions = tree.predict(X_test)    
-
+rf = RandomForestRegressor(random_state=1234)
+rf.fit(X_train, y_train)
+rf_predictions = rf.predict(X_test)
 
 
 
@@ -138,17 +142,20 @@ brmae = np.mean(np.abs(tree_predictions - y_test))
 brmse= np.mean((tree_predictions - y_test) ** 2)
 brrmse = np.sqrt(brmse)
 
+rfmae = np.mean(np.abs(rf_predictions - y_test))
+rfmse= np.mean((rf_predictions - y_test) ** 2)
+rfrmse = np.sqrt(rfmse)
 
-logger.info(f"\nBinaryTreeRegressor:")
-logger.info(f"\nMean Absolute Error (MAE):")
-logger.info(pd.DataFrame([(brmae)], columns=['mean']))
 
-logger.info(f"\nMean Squared Error (MSE):")
-logger.info(pd.DataFrame([(brmse)], columns=['mean']))
+logger.info("\nscikitlearn:")
+logger.info("\nMean Absolute Error (MAE):")
+logger.info(pd.DataFrame([["binarytree", brmae], ["random_forest", rfmae]], columns=['model', 'mean']))
 
-logger.info(f"\nRoot Mean Squared Error (RMSE):")
-logger.info(pd.DataFrame([(brrmse)], columns=['mean']))
+logger.info("\nMean Squared Error (MSE):")
+logger.info(pd.DataFrame([["binarytree", brmse], ["random_forest", rfmse]], columns=['model', 'mean']))
 
+logger.info("\nRoot Mean Squared Error (RMSE):")
+logger.info(pd.DataFrame([["binarytree", brrmse], ["random_forest", rfrmse]], columns=['model', 'mean']))
 
 # Log the results
 logger.info(f"\nMean Absolute Error (MAE):")
