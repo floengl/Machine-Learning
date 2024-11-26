@@ -67,6 +67,7 @@ class RegressionTree:
             return node.result
         else:
             val = observation[node.col]
+
             branch = None
             if val < node.threshold:
                 branch = node.left
@@ -75,7 +76,9 @@ class RegressionTree:
             return self.regress(observation, branch)
         
     def predict(self, features):
-        return self.regress(features, self.root_node)
+
+        y_pred = [self.regress(row, self.root_node) for row in features]
+        return y_pred
 
 
 if __name__ == "__main__":
@@ -86,6 +89,6 @@ if __name__ == "__main__":
 
     tree = RegressionTree(max_depth=6, min_samples_split=1)
     tree.fit(X_train.values, y_train.values)
-    y_pred = [tree.predict(x) for x in X_test.values]
+    y_pred = tree.predict(X_test.values)
     mse = np.mean((y_pred - y_test) ** 2)
     print(f"MSE: {mse}")
