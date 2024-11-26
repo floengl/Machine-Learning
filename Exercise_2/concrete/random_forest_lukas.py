@@ -36,16 +36,15 @@ class ourRandomForestRegressor(object):
     :param  y:   Target values
     """
     def fit(self, X, y):
-        data = list(zip(X, y))
-        """
+        data = list(zip(X.values, y.values))
+
         with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
             rand_fts = list( map(lambda x: random.sample(data, min(self.nb_samples, len(data))),
                            range(self.nb_trees)))
-            print(rand_fts[0])
+
 
             self.trees = list(executor.map(self.train_tree, rand_fts))
-        """
-        self.trees=[self.train_tree(data)]
+
 
 
     """
@@ -59,7 +58,6 @@ class ourRandomForestRegressor(object):
         else:
             tree = DecisionTreeRegressor(max_depth=self.max_depth)
         X,y = list(zip(*data))
- 
         tree.fit(X, y)
         return tree
 
@@ -69,18 +67,16 @@ class ourRandomForestRegressor(object):
     :param  feature:    The features used to predict
     """
     def predict(self, feature):
-        predictions = []
-        for tree in self.trees:
-            predictions.append(tree.predict(feature))
-        return np.mean(predictions)
+        predictions = np.array([tree.predict(feature) for tree in self.trees])
+        return np.mean(predictions, axis=0)
 
 
 
 
 logger = setup_logging("random_forest")
 X, y = load_dataset()
-X = X.values
-y = y.values
+X = X
+y = y
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 
@@ -98,23 +94,47 @@ rmse = []
 for name, scaler in scalers:
     pipeline = Pipeline([
         ("preprocessor", scaler),
-        ("rf", ourRandomForestRegressor(nb_trees=1, nb_samples=100, max_workers=12))
+        ("rf", ourRandomForestRegressor(nb_trees=1, nb_samples=1000, max_workers=12))
     ])
     # Fit the pipeline on the training data
     pipeline.fit(X_train, y_train)
 
     # Predict on the test data
     predictions = pipeline.predict(X_test)
-    
-    
+        
     mean_absolute_error = np.mean(np.abs(predictions - y_test))
     mean_squared_error = np.mean((predictions - y_test) ** 2)
     root_mean_squared_error = np.sqrt(mean_squared_error)
+
+
 
     mae.append((name, mean_absolute_error))
     mse.append((name, mean_squared_error))
     rmse.append((name, root_mean_squared_error))
 
+
+
+tree = DecisionTreeRegressor()
+tree.fit(X_train, y_train)
+tree_predictions = tree.predict(X_test)    
+
+
+
+
+brmae = np.mean(np.abs(tree_predictions - y_test))
+brmse= np.mean((tree_predictions - y_test) ** 2)
+brrmse = np.sqrt(brmse)
+
+
+logger.info(f"\nBinaryTreeRegressor:")
+logger.info(f"\nMean Absolute Error (MAE):")
+logger.info(pd.DataFrame([(brmae)], columns=['mean']))
+
+logger.info(f"\nMean Squared Error (MSE):")
+logger.info(pd.DataFrame([(brmse)], columns=['mean']))
+
+logger.info(f"\nRoot Mean Squared Error (RMSE):")
+logger.info(pd.DataFrame([(brrmse)], columns=['mean']))
 
 
 # Log the results
