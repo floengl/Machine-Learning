@@ -32,3 +32,6 @@ SUPERCONDUCTIVITY:
 
 CONCRETE:
     Robust scaler funktioniert am besten wieder nur wenig unterschied allerdings und höhere standardabweichung
+
+
+Warum gehen wir durch die features in der predict function? wäre samples nicht angemessener?

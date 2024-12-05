@@ -85,7 +85,7 @@ if __name__ == "__main__":
     X, y = load_dataset()
     X = X
     y = y
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
 
     tree = RegressionTree(max_depth=6, min_samples_split=1)
     tree.fit(X_train.values, y_train.values)
