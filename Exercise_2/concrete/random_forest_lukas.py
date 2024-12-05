@@ -31,8 +31,10 @@ class ourRandomForestRegressor(object):
         self.nb_samples = nb_samples
         self.max_depth = max_depth
         self.max_workers = max_workers
-        if random_state!=None:
-            random.seed(random_state)
+        self.random_state = random_state
+        self.rng = np.random.default_rng(random_state)
+        #if random_state!=None:
+        #    random.seed(random_state)
     """
     Trains self.nb_trees number of decision trees.
     :param  X:   Features
@@ -48,10 +50,9 @@ class ourRandomForestRegressor(object):
         
 
         with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
-            rand_fts = list( map(lambda x: random.sample(data, min(self.nb_samples, len(data))),
-                           range(self.nb_trees)))
-            
-            self.trees = list(executor.map(self.train_tree, rand_fts))
+            rand_fts = [self.rng.choice(data, size=min(self.nb_samples, len(data)), replace=False) for _ in range(self.nb_trees)]
+            random_states = self.rng.integers(low=0, high=1e6, size=self.nb_trees)
+            self.trees = list(executor.map(self.train_tree, rand_fts, random_states))
 
 
 
@@ -60,11 +61,11 @@ class ourRandomForestRegressor(object):
     :param  data:   A List containing the index of the tree being trained
                     and the data to train it
     """
-    def train_tree(self, data):
+    def train_tree(self, data, random_state):
         if self.max_depth == -1:
             tree = RegressionTree()
         else:
-            tree = RegressionTree(max_depth=self.max_depth)
+            tree = RegressionTree(max_depth=self.max_depth, random_state=random_state)
             
         X,y = zip(*data)
         X = np.array(X)
