@@ -1,0 +1,33 @@
+05.12.2024 16:22:44
+
+scikitlearn:
+
+Mean Absolute Error (MAE):
+           model      mean
+0     binarytree  4.397668
+1  random_forest  3.547247
+
+Mean Squared Error (MSE):
+           model       mean
+0     binarytree  40.970617
+1  random_forest  24.189697
+
+Root Mean Squared Error (RMSE):
+           model      mean
+0     binarytree  6.400829
+1  random_forest  4.918302
+
+Mean Absolute Error (MAE):
+         scaler      mean
+0  RobustScaler  4.673942
+1          None  4.673942
+
+Mean Squared Error (MSE):
+         scaler       mean
+0  RobustScaler  45.248243
+1          None  45.248243
+
+Root Mean Squared Error (RMSE):
+         scaler      mean
+0  RobustScaler  6.726681
+1          None  6.726681

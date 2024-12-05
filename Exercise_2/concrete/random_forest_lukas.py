@@ -80,6 +80,7 @@ class ourRandomForestRegressor(object):
     def predict(self, feature):
         if isinstance(feature, pd.DataFrame):
            feature = feature.values
+           print(feature.shape)
         predictions = np.array([tree.predict(feature) for tree in self.trees])
         return np.mean(predictions, axis=0)
 
@@ -88,13 +89,8 @@ class ourRandomForestRegressor(object):
 
 logger = setup_logging("random_forest")
 X, y = load_dataset()
-X = X
-y = y
-X_train, X_test1, y_train, y_test1 = train_test_split(X, y, test_size=0.3)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
 
-
-X_test = X_test1.values
-y_test =y_test1.values
 scalers = [
     ("RobustScaler", RobustScaler()),
     ("None", Pipeline([("none", "passthrough")]))
@@ -107,11 +103,11 @@ rmse = []
 for name, scaler in scalers:
     pipeline = Pipeline([
         ("preprocessor", scaler),
-        ("rf", ourRandomForestRegressor(nb_trees=400, nb_samples=1000, max_workers=10, random_state=1234))
+        ("rf", ourRandomForestRegressor(nb_trees=40, nb_samples=1000, max_workers=12, random_state=1234))
     ])
     # Fit the pipeline on the training data
     pipeline.fit(X_train, y_train)
-    print(type(X_test))
+
 
 
     # Predict on the test data
@@ -132,7 +128,7 @@ for name, scaler in scalers:
 tree = DecisionTreeRegressor(random_state=1234)
 tree.fit(X_train, y_train)
 tree_predictions = tree.predict(X_test)    
-rf = RandomForestRegressor(random_state=1234)
+rf = RandomForestRegressor(n_estimators=40,random_state=1234)
 rf.fit(X_train, y_train)
 rf_predictions = rf.predict(X_test)
 
