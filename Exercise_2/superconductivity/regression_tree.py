@@ -1,5 +1,5 @@
 import numpy as np
-from utils import load_dataset
+from utils import load_training_dataset
 from sklearn.model_selection import train_test_split
 
 
@@ -97,7 +97,7 @@ class RegressionTree:
 
 
 if __name__ == "__main__":
-    X, y = load_dataset()
+    X, y = load_training_dataset()
     X = X
     y = y
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
