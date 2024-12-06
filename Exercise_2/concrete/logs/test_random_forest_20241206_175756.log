@@ -1,0 +1,9 @@
+06.12.2024 17:57:56
+
+nb_trees=40,nb_samples=400
+
+MSE ourRFR:
+   preprocessor       mean       std
+0  RobustScaler  29.561448  3.637636
+
+RMSE ourRFR:
