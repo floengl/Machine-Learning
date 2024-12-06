@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import RobustScaler
 import numpy as np
 import pandas as pd
-from utils import load_dataset, setup_logging, load_dataset_notopcolumn
+from utils import load_dataset, setup_logging
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from utils import logger
@@ -63,7 +63,7 @@ class ourRandomForestRegressor(object):
     """
     def train_tree(self, data, random_state):
         if self.max_depth == -1:
-            tree = RegressionTree()
+            tree = RegressionTree(random_state=random_state)
         else:
             tree = RegressionTree(max_depth=self.max_depth, random_state=random_state)
             
@@ -104,7 +104,7 @@ rmse = []
 for name, scaler in scalers:
     pipeline = Pipeline([
         ("preprocessor", scaler),
-        ("rf", ourRandomForestRegressor(nb_trees=40, nb_samples=1000, max_workers=12, random_state=1234))
+        ("rf", ourRandomForestRegressor(nb_trees=40, nb_samples=400, max_workers=12, random_state=1234))
     ])
     # Fit the pipeline on the training data
     pipeline.fit(X_train, y_train)
