@@ -50,9 +50,11 @@ class ourRandomForestRegressor(object):
         
 
         with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
-            rand_fts = [self.rng.choice(data, size=min(self.nb_samples, len(data)), replace=False) for _ in range(self.nb_trees)]
+            indices = np.arange(len(data))
+            rand_ind = [self.rng.choice(indices, size=min(self.nb_samples, len(data)), replace=False) for _ in range(self.nb_trees)]
+            bootstrap_data = [[data[i] for i in ind] for ind in rand_ind]   
             random_states = self.rng.integers(low=0, high=1e6, size=self.nb_trees)
-            self.trees = list(executor.map(self.train_tree, rand_fts, random_states))
+            self.trees = list(executor.map(self.train_tree, bootstrap_data, random_states))
 
 
 
