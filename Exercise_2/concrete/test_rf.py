@@ -20,8 +20,8 @@ if __name__ == "__main__":
         ("None", Pipeline([("none", "passthrough")]))
     ]
 
-    nb_trees=40
-    nb_samples=400
+    nb_trees=200
+    nb_samples=650
     max_workers=12
 
     logger.info(f"\nnb_trees={nb_trees},nb_samples={nb_samples}")
@@ -51,13 +51,13 @@ if __name__ == "__main__":
             root_mean_squared_error = np.sqrt(-np.mean(cv_results['test_neg_mean_squared_error']))
             rmse.append((name, root_mean_squared_error))
 
-            logger.info(f"\nMSE {model_name}:")
-            logger.info(pd.DataFrame(mse, columns=['preprocessor', 'mean', 'std'])
-                        .sort_values(by='mean', ascending=True))
-            logger.info(f"\nRMSE {model_name}:")
-            logger.info(pd.DataFrame(rmse, columns=['preprocessor', 'rmean'])
-                        .sort_values(by='rmean', ascending=True))
-            
+        logger.info(f"\nMSE {model_name}:")
+        logger.info(pd.DataFrame(mse, columns=['preprocessor', 'mean', 'std'])
+                    .sort_values(by='mean', ascending=True))
+        logger.info(f"\nRMSE {model_name}:")
+        logger.info(pd.DataFrame(rmse, columns=['preprocessor', 'rmean'])
+                    .sort_values(by='rmean', ascending=True))
+        
 
 
 
