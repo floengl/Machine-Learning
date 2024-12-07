@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_validate, RepeatedKFold
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import RobustScaler
 from sklearn.pipeline import Pipeline
 
@@ -20,16 +20,17 @@ if __name__ == "__main__":
         ("None", Pipeline([("none", "passthrough")]))
     ]
 
-    nb_trees=200
-    nb_samples=650
+    nb_trees=40
+    boot_type= True
+    nb_samples="Full"
     max_workers=12
 
-    logger.info(f"\nnb_trees={nb_trees},nb_samples={nb_samples}")
+    logger.info(f"\nnb_trees={nb_trees}, nb_samples={nb_samples}, boot_type={boot_type}, max_workers={max_workers}")
     # models to test with
     models = [
-        ("ourRFR", ourRandomForestRegressor(nb_trees=nb_trees, nb_samples=nb_samples, max_workers=max_workers, random_state=1234)),
+        ("ourRFR", ourRandomForestRegressor(nb_trees=nb_trees, nb_samples=nb_samples, boot_type=boot_type, max_workers=max_workers, random_state=1234)),
         ("scikit_RFR", RandomForestRegressor(random_state=1234)),
-        ("scikit_DTR", DecisionTreeRegressor(random_state=1234))
+        ("scikit_KNN", KNeighborsRegressor())
     ]
 
     for model_name, model in models:
