@@ -7,5 +7,5 @@ def relative_squared_error(y_true, y_pred):
     model_error = np.sum((y_true - y_pred) ** 2)
     return model_error / baseline_error
 
-# Create a scorer object
+#make custom scorer
 rse_scorer = make_scorer(relative_squared_error, greater_is_better=False)
