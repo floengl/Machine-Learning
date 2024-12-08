@@ -4,11 +4,10 @@ from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 import pandas as pd
 from regression_tree import RegressionTree
-from sklearn.base import BaseEstimator, RegressorMixin
 
 
 
-class ourRandomForestRegressor(BaseEstimator, RegressorMixin):
+class ourRandomForestRegressor():
     """
     :param  nb_trees:       Number of decision trees to use
     :param  nb_samples:     Number of samples to give to each tree
@@ -107,7 +106,10 @@ class ourRandomForestRegressor(BaseEstimator, RegressorMixin):
 
     def set_params(self, **params):
         for key, value in params.items():
-            setattr(self, key, value)
+            if hasattr(self, key):
+                setattr(self, key, value)
+            else:
+                raise ValueError(f"Invalid parameter {key} for estimator {self.__class__.__name__}.")
         return self
 
 
