@@ -39,7 +39,7 @@ def main():
         n_jobs=-1,
         verbose=1,
         random_state=1234,
-        n_iter=2
+        n_iter=50
     )
 
     # fit
@@ -63,7 +63,7 @@ def main():
         n_jobs=-1,
         verbose=1,
         random_state=1234,
-        n_iter=2
+        n_iter=50
     )
 
     # fit

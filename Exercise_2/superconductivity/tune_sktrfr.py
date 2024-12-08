@@ -2,7 +2,7 @@ from utils import load_dataset, setup_logging, rse_scorer
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import RepeatedKFold
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import MaxAbsScaler
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 from skopt import BayesSearchCV
@@ -14,7 +14,7 @@ def main():
 
     # define estimator
     estimator = Pipeline([
-        ("preprocessor", RobustScaler()),
+        ("preprocessor", MaxAbsScaler()),
         ("model", RandomForestRegressor(random_state=1234))
     ])
 

@@ -2,29 +2,28 @@ from utils import load_dataset, setup_logging, rse_scorer
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import RepeatedKFold
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import MaxAbsScaler
 from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestRegressor
 from skopt import BayesSearchCV
 from skopt.space import Integer, Categorical
+from sklearn.neighbors import KNeighborsRegressor
 
 def main():
-    logger = setup_logging("tune_skt_random_forest")
+    logger = setup_logging("tune_skt_KNN")
     X, y = load_dataset()
 
     # define estimator
     estimator = Pipeline([
-        ("preprocessor", RobustScaler()),
-        ("model", RandomForestRegressor(random_state=1234))
+        ("preprocessor", MaxAbsScaler()),
+        ("model", KNeighborsRegressor())
     ])
 
-    # search space
+
+    # Search space
     search_space = {
-        "model__n_estimators": Categorical([10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300]),
-        "model__max_depth": Categorical([None, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]),
-        "model__min_samples_split": Integer(2, 20),
-        "model__max_features": Categorical([None, "sqrt", "log2"]),
-        "model__bootstrap": Categorical([True, False]),
+        "model__n_neighbors": Integer(1, 50),
+        "model__weights": Categorical(['uniform', 'distance']),
+        "model__p": Integer(1, 5),
     }
 
     cv=RepeatedKFold(n_splits=4, n_repeats=3, random_state=1234)
