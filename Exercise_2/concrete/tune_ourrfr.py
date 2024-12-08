@@ -39,7 +39,7 @@ def main():
         n_jobs=-1,
         verbose=1,
         random_state=1234,
-        n_iter=25
+        n_iter=50
     )
 
     # fit
@@ -58,12 +58,12 @@ def main():
     optimizer = BayesSearchCV(
         estimator=estimator,
         search_spaces=search_space,
-        scoring="MSE",
+        scoring="neg_mean_squared_error",
         cv=cv,
         n_jobs=-1,
         verbose=1,
         random_state=1234,
-        n_iter=25
+        n_iter=50
     )
 
     # fit
