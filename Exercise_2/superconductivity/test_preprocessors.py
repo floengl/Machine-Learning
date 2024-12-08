@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from utils import load_training_dataset, setup_logging
+from utils import load_dataset, setup_logging
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_validate
@@ -12,7 +12,7 @@ from sklearn.preprocessing import (StandardScaler, MinMaxScaler, RobustScaler,
 logger = setup_logging("test_preprocessor")
 
 # load dataset
-X, y = load_training_dataset()
+X, y = load_dataset()
 
 # scalers to test
 scalers = [
