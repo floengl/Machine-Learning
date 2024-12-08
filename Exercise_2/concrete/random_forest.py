@@ -4,17 +4,18 @@ from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 import pandas as pd
 from regression_tree import RegressionTree
+from sklearn.base import BaseEstimator, RegressorMixin
 
 
 
-class ourRandomForestRegressor(object):
+class ourRandomForestRegressor(BaseEstimator, RegressorMixin):
     """
     :param  nb_trees:       Number of decision trees to use
     :param  nb_samples:     Number of samples to give to each tree
     :param  max_depth:      Maximum depth of the trees
     :param  max_workers:    Maximum number of processes to use for training
     """
-    def __init__(self, nb_trees,  nb_samples = "Full", max_depth=-1, max_workers=1, random_state=None, boot_type = True, min_samples_split=2, max_features=None):
+    def __init__(self, nb_trees=40,  nb_samples = "Full", max_depth=-1, max_workers=1, random_state=None, boot_type = True, min_samples_split=2, max_features=None):
         self.trees = []
         self.nb_trees = nb_trees
         self.nb_samples = nb_samples
@@ -90,7 +91,24 @@ class ourRandomForestRegressor(object):
            print(feature.shape)
         predictions = np.array([tree.predict(feature) for tree in self.trees])
         return np.mean(predictions, axis=0)
+    
+    
+    def get_params(self, deep=True):
+        return {
+            "nb_trees": self.nb_trees,
+            "nb_samples": self.nb_samples,
+            "max_depth": self.max_depth,
+            "max_workers": self.max_workers,
+            "random_state": self.random_state,
+            "boot_type": self.boot_type,
+            "min_samples_split": self.min_samples_split,
+            "max_features": self.max_features
+        }
 
+    def set_params(self, **params):
+        for key, value in params.items():
+            setattr(self, key, value)
+        return self
 
 
 
