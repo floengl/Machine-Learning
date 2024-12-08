@@ -16,7 +16,7 @@ def main():
     # define estimator
     estimator = Pipeline([
         ("preprocessor", RobustScaler()),
-        ("model", KNeighborsRegressor(random_state=1234, n_neighbors=5, weights='distance', p=5))
+        ("model", KNeighborsRegressor( n_neighbors=5, weights='distance', p=5))
     ])
 
     # search space
