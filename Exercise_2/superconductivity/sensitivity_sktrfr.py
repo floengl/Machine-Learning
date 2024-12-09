@@ -1,5 +1,5 @@
 from utils import Config, load_dataset, rse_scorer
-from random_forest import ourRandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import RepeatedKFold, cross_validate
@@ -16,17 +16,16 @@ def main():
     # define estimator
     estimator = Pipeline([
         ("preprocessor", RobustScaler()),
-        ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=40, min_samples_split=2,max_features='log2', nb_samples='Full', nb_trees=40))
+        ("model", RandomForestRegressor(random_state=1234, bootstrap=False, max_depth=30, min_samples_split=2,max_features='log2', n_estimators=300))
     ])
 
     # search space
     param_ranges = {
-        "nb_trees": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300],
-        "max_depth": [-1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        "n_estimators": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+        "max_depth": [None, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         "min_samples_split": np.linspace(2, 20, 1, dtype=int),
-        "nb_samples": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, "Full"],
         "max_features": [None, "sqrt", "log2"],
-        "boot_type": [True, False],
+        "bootstrap": [True, False],
     }
 
     # plot sensitivity analysis
@@ -53,7 +52,7 @@ def main():
         plt.ylabel("score")
         plt.legend()
         plt.tight_layout()
-        plt.savefig(os.path.join(Config.PLOTS_DIR, f"rf_{param}_sensitivity.pdf"))
+        plt.savefig(os.path.join(Config.PLOTS_DIR, f"sktrfr_{param}_sensitivity.pdf"))
 
 if __name__ == "__main__":
     main()
