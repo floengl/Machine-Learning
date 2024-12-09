@@ -23,7 +23,7 @@ def main():
     param_ranges = {
         "nb_trees": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
         "max_depth": [-1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        "min_samples_split": np.linspace(2, 20, 1, dtype=int),
+        "min_samples_split": np.linspace(2, 20, 19, dtype=int),
         "nb_samples": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, "Full"],
         "max_features": [None, "sqrt", "log2"],
         "boot_type": [True, False],

@@ -1,5 +1,5 @@
 from utils import Config, load_dataset, rse_scorer
-from sklearn.ensemble import RandomForestRegressor
+from random_forest import ourRandomForestRegressor
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import RepeatedKFold, cross_validate
@@ -16,20 +16,21 @@ def main():
     # define estimator
     estimator = Pipeline([
         ("preprocessor", RobustScaler()),
-        ("model", RandomForestRegressor(random_state=1234, bootstrap=False, max_depth=30, min_samples_split=2,max_features='log2', n_estimators=300))
+        ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=40, min_samples_split=2,max_features='log2', nb_samples='Full', nb_trees=40))
     ])
 
     # search space
     param_ranges = {
-        "n_estimators": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
-        "max_depth": [None, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        "nb_trees": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300],
+        "max_depth": [-1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         "min_samples_split": np.linspace(2, 20, 19, dtype=int),
+        "nb_samples": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, "Full"],
         "max_features": [None, "sqrt", "log2"],
-        "bootstrap": [True, False],
+        "boot_type": [True, False],
     }
 
     # plot sensitivity analysis
-    for param in param_ranges:
+    for param in {"min_samples_split"}:
         print(f"Running sensitivity analysis on parameter {param}")
         rse = []
         mse = []
@@ -40,19 +41,27 @@ def main():
             scores = cross_validate(model, X, y, scoring={"neg_mean_squared_error": "neg_mean_squared_error", "rse": rse_scorer}, cv=cv, n_jobs=-1)
             mse.append(scores["test_neg_mean_squared_error"].mean())
             rse.append(scores["test_rse"].mean())
-        plt.figure(figsize=(7, 5))
+        fig, ax1 = plt.subplots(figsize=(7, 5))
+
         x_str = [str(value) for value in param_ranges[param]]
         if "None" in x_str or "True" in x_str or "False" in x_str:
             x = x_str
         else:
             x = param_ranges[param]
-        plt.plot(x, mse, label="MSE")
-        plt.plot(x, rse, label="RSE")
-        plt.xlabel(param)
-        plt.ylabel("score")
-        plt.legend()
-        plt.tight_layout()
-        plt.savefig(os.path.join(Config.PLOTS_DIR, f"sktrfr_{param}_sensitivity.pdf"))
+
+        ax1.plot(x, mse, 'b-', label="MSE")
+        ax1.set_xlabel(param)
+        ax1.set_ylabel("MSE", color='b')
+        ax1.tick_params(axis='y', labelcolor='b')
+
+        ax2 = ax1.twinx()
+        ax2.plot(x, rse, color = 'orange', label="RSE")
+        ax2.set_ylabel("RSE", color='orange')
+        ax2.tick_params(axis='y', labelcolor='orange')
+
+        fig.tight_layout()
+        plt.title(f"Sensitivity Analysis for {param}")
+        plt.savefig(os.path.join(Config.PLOTS_DIR, f"ourrfr_{param}_sensitivity_2scale.pdf"))
 
 if __name__ == "__main__":
     main()
