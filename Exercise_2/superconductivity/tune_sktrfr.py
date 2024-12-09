@@ -20,7 +20,7 @@ def main():
 
     # search space
     search_space = {
-        "model__n_estimators": Categorical([10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300]),
+        "model__n_estimators": Categorical([10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000]),
         "model__max_depth": Categorical([None, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]),
         "model__min_samples_split": Integer(2, 20),
         "model__max_features": Categorical([None, "sqrt", "log2"]),

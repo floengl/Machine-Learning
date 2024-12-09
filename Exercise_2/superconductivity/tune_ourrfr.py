@@ -20,7 +20,7 @@ def main():
 
     # search space
     search_space = {
-        "model__nb_trees": Categorical([10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400]),
+        "model__nb_trees": Categorical([10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000]),
         "model__max_depth": Categorical([-1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]),
         "model__min_samples_split": Integer(2, 20),
         "model__nb_samples": Categorical([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, "Full"]),
