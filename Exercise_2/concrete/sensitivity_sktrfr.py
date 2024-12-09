@@ -23,7 +23,7 @@ def main():
     param_ranges = {
         "n_estimators": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300],
         "max_depth": [None, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        "min_samples_split": np.linspace(2, 20, 1, dtype=int),
+        "min_samples_split": np.linspace(2, 20, 19, dtype=int),
         "max_features": [None, "sqrt", "log2"],
         "bootstrap": [True, False],
     }
