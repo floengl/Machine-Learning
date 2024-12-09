@@ -3,7 +3,7 @@ from random_forest import ourRandomForestRegressor
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import RepeatedKFold, cross_validate
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import MaxAbsScaler
 from sklearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
 from sklearn.base import clone
@@ -15,13 +15,13 @@ def main():
 
     # define estimator
     estimator = Pipeline([
-        ("preprocessor", RobustScaler()),
+        ("preprocessor", MaxAbsScaler()),
         ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=40, min_samples_split=2,max_features='log2', nb_samples='Full', nb_trees=40))
     ])
 
     # search space
     param_ranges = {
-        "nb_trees": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300],
+        "nb_trees": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
         "max_depth": [-1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         "min_samples_split": np.linspace(2, 20, 19, dtype=int),
         "nb_samples": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, "Full"],
