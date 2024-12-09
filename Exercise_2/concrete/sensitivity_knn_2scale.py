@@ -46,13 +46,13 @@ def main():
         else:
             x = param_ranges[param]
 
-        ax1.plot(x, mse, 'cyan-', label="MSE")
+        ax1.plot(x, mse, 'b-', label="MSE")
         ax1.set_xlabel(param)
-        ax1.set_ylabel("MSE", color='cyan')
-        ax1.tick_params(axis='y', labelcolor='cyan')
+        ax1.set_ylabel("MSE", color='b')
+        ax1.tick_params(axis='y', labelcolor='b')
 
         ax2 = ax1.twinx()
-        ax2.plot(x, rse, 'orange-', label="RSE")
+        ax2.plot(x, rse, label="RSE", color = 'orange')
         ax2.set_ylabel("RSE", color='orange')
         ax2.tick_params(axis='y', labelcolor='orange')
 

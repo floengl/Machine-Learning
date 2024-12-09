@@ -49,19 +49,19 @@ def main():
         else:
             x = param_ranges[param]
 
-        ax1.plot(x, mse, 'cyan-', label="MSE")
+        ax1.plot(x, mse, 'b-', label="MSE")
         ax1.set_xlabel(param)
-        ax1.set_ylabel("MSE", color='cyan')
-        ax1.tick_params(axis='y', labelcolor='cyan')
+        ax1.set_ylabel("MSE", color='b')
+        ax1.tick_params(axis='y', labelcolor='b')
 
         ax2 = ax1.twinx()
-        ax2.plot(x, rse, 'orange-', label="RSE")
+        ax2.plot(x, rse, color = 'orange', label="RSE")
         ax2.set_ylabel("RSE", color='orange')
         ax2.tick_params(axis='y', labelcolor='orange')
 
         fig.tight_layout()
         plt.title(f"Sensitivity Analysis for {param}")
-        plt.savefig(os.path.join(Config.PLOTS_DIR, f"knn_{param}_sensitivity_2scale.pdf"))
+        plt.savefig(os.path.join(Config.PLOTS_DIR, f"ourrfr_{param}_sensitivity_2scale.pdf"))
 
 if __name__ == "__main__":
     main()
