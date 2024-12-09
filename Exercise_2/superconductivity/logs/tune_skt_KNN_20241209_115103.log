@@ -1,1 +1,58 @@
 09.12.2024 11:51:03
+Scoring: RSE
+Best score: -0.0869198050175312
+best params: OrderedDict({'model__n_neighbors': 4, 'model__p': 1, 'model__weights': 'distance'})
+CV results:
+                                                                     params  mean_test_score  std_test_score  rank_test_score
+35   {'model__n_neighbors': 4, 'model__p': 1, 'model__weights': 'distance'}        -0.086920        0.003671                1
+37   {'model__n_neighbors': 5, 'model__p': 1, 'model__weights': 'distance'}        -0.086973        0.003928                2
+25   {'model__n_neighbors': 6, 'model__p': 1, 'model__weights': 'distance'}        -0.087536        0.003789                3
+38   {'model__n_neighbors': 3, 'model__p': 1, 'model__weights': 'distance'}        -0.087835        0.003585                4
+22   {'model__n_neighbors': 7, 'model__p': 1, 'model__weights': 'distance'}        -0.088126        0.003820                5
+21   {'model__n_neighbors': 8, 'model__p': 1, 'model__weights': 'distance'}        -0.088984        0.003832                6
+18   {'model__n_neighbors': 9, 'model__p': 1, 'model__weights': 'distance'}        -0.089808        0.003785                7
+16  {'model__n_neighbors': 10, 'model__p': 1, 'model__weights': 'distance'}        -0.090462        0.003662                8
+24   {'model__n_neighbors': 6, 'model__p': 2, 'model__weights': 'distance'}        -0.091782        0.003434                9
+41  {'model__n_neighbors': 12, 'model__p': 1, 'model__weights': 'distance'}        -0.091838        0.003757               10
+12  {'model__n_neighbors': 13, 'model__p': 1, 'model__weights': 'distance'}        -0.092583        0.003549               11
+34    {'model__n_neighbors': 4, 'model__p': 1, 'model__weights': 'uniform'}        -0.094154        0.004657               12
+32  {'model__n_neighbors': 16, 'model__p': 1, 'model__weights': 'distance'}        -0.094429        0.003224               13
+23   {'model__n_neighbors': 4, 'model__p': 5, 'model__weights': 'distance'}        -0.094624        0.004112               14
+39  {'model__n_neighbors': 18, 'model__p': 1, 'model__weights': 'distance'}        -0.095732        0.003023               15
+49   {'model__n_neighbors': 7, 'model__p': 4, 'model__weights': 'distance'}        -0.096685        0.003589               16
+40  {'model__n_neighbors': 24, 'model__p': 1, 'model__weights': 'distance'}        -0.098971        0.002698               17
+31  {'model__n_neighbors': 27, 'model__p': 1, 'model__weights': 'distance'}        -0.100677        0.002432               18
+13  {'model__n_neighbors': 10, 'model__p': 5, 'model__weights': 'distance'}        -0.100880        0.003015               19
+45  {'model__n_neighbors': 12, 'model__p': 4, 'model__weights': 'distance'}        -0.102119        0.003415               20
+48  {'model__n_neighbors': 30, 'model__p': 1, 'model__weights': 'distance'}        -0.102191        0.002310               21
+17  {'model__n_neighbors': 31, 'model__p': 1, 'model__weights': 'distance'}        -0.102684        0.002246               22
+1   {'model__n_neighbors': 21, 'model__p': 2, 'model__weights': 'distance'}        -0.103850        0.002811               23
+36  {'model__n_neighbors': 34, 'model__p': 1, 'model__weights': 'distance'}        -0.104028        0.002199               24
+27  {'model__n_neighbors': 37, 'model__p': 1, 'model__weights': 'distance'}        -0.105213        0.002162               25
+43  {'model__n_neighbors': 40, 'model__p': 1, 'model__weights': 'distance'}        -0.106337        0.002130               26
+29  {'model__n_neighbors': 17, 'model__p': 5, 'model__weights': 'distance'}        -0.108164        0.002835               27
+10   {'model__n_neighbors': 1, 'model__p': 1, 'model__weights': 'distance'}        -0.108279        0.005605               28
+11    {'model__n_neighbors': 1, 'model__p': 1, 'model__weights': 'uniform'}        -0.108279        0.005605               28
+33  {'model__n_neighbors': 46, 'model__p': 1, 'model__weights': 'distance'}        -0.108378        0.002260               30
+42  {'model__n_neighbors': 48, 'model__p': 1, 'model__weights': 'distance'}        -0.109038        0.002275               31
+14  {'model__n_neighbors': 50, 'model__p': 1, 'model__weights': 'distance'}        -0.109694        0.002258               32
+9     {'model__n_neighbors': 8, 'model__p': 2, 'model__weights': 'uniform'}        -0.111427        0.003526               33
+7   {'model__n_neighbors': 23, 'model__p': 4, 'model__weights': 'distance'}        -0.111853        0.002956               34
+19    {'model__n_neighbors': 1, 'model__p': 5, 'model__weights': 'uniform'}        -0.114420        0.006469               35
+30   {'model__n_neighbors': 1, 'model__p': 5, 'model__weights': 'distance'}        -0.114420        0.006469               35
+5   {'model__n_neighbors': 42, 'model__p': 3, 'model__weights': 'distance'}        -0.119622        0.003027               37
+26  {'model__n_neighbors': 33, 'model__p': 5, 'model__weights': 'distance'}        -0.119694        0.002835               38
+8    {'model__n_neighbors': 12, 'model__p': 2, 'model__weights': 'uniform'}        -0.122091        0.003593               39
+44  {'model__n_neighbors': 50, 'model__p': 3, 'model__weights': 'distance'}        -0.122697        0.003046               40
+46  {'model__n_neighbors': 48, 'model__p': 4, 'model__weights': 'distance'}        -0.125053        0.003160               41
+15  {'model__n_neighbors': 50, 'model__p': 5, 'model__weights': 'distance'}        -0.127876        0.003099               42
+2    {'model__n_neighbors': 16, 'model__p': 4, 'model__weights': 'uniform'}        -0.139227        0.003415               43
+4    {'model__n_neighbors': 16, 'model__p': 4, 'model__weights': 'uniform'}        -0.139227        0.003415               43
+6    {'model__n_neighbors': 20, 'model__p': 3, 'model__weights': 'uniform'}        -0.144416        0.003577               45
+28   {'model__n_neighbors': 31, 'model__p': 1, 'model__weights': 'uniform'}        -0.144938        0.002979               46
+0    {'model__n_neighbors': 21, 'model__p': 5, 'model__weights': 'uniform'}        -0.151762        0.003407               47
+20   {'model__n_neighbors': 50, 'model__p': 1, 'model__weights': 'uniform'}        -0.162140        0.004128               48
+3    {'model__n_neighbors': 44, 'model__p': 2, 'model__weights': 'uniform'}        -0.168408        0.005071               49
+47   {'model__n_neighbors': 39, 'model__p': 3, 'model__weights': 'uniform'}        -0.170183        0.005416               50
+
+

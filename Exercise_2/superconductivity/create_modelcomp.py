@@ -1,6 +1,6 @@
 from utils import Config, load_dataset, setup_logging, rse_scorer, relative_squared_error
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import MaxAbsScaler
 from sklearn.neighbors import KNeighborsRegressor
 from random_forest import ourRandomForestRegressor
 
@@ -19,19 +19,19 @@ X, y = load_dataset()
 
 # define estimator
 ourrfr = Pipeline([
-    ("preprocessor", RobustScaler()),
+    ("preprocessor", MaxAbsScaler()),
     ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=40, min_samples_split=2,max_features='log2', nb_samples='Full', nb_trees=40))
 ])
 
 # define estimator
 sktrfr = Pipeline([
-    ("preprocessor", RobustScaler()),
+    ("preprocessor", MaxAbsScaler()),
     ("model", RandomForestRegressor(random_state=1234, bootstrap=False, max_depth=30, min_samples_split=2,max_features='log2', n_estimators=300))
 ])
 
 # define estimator
 knn = Pipeline([
-    ("preprocessor", RobustScaler()),
+    ("preprocessor", MaxAbsScaler()),
     ("model", KNeighborsRegressor( n_neighbors=5, weights='distance', p=5))
 ])
 
