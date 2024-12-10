@@ -22,11 +22,11 @@ def main():
     search_space = {
         "model__n_estimators": Categorical([10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200]),
         "model__max_depth": Categorical([None, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]),
-        "model__min_samples_split": Integer(2, 20),
+        "model__min_samples_split": Integer(2, 10),
         "model__max_features": Categorical(["sqrt", "log2"])
     }
 
-    cv=RepeatedKFold(n_splits=4, n_repeats=3, random_state=1234)
+    cv=RepeatedKFold(n_splits=4, n_repeats=2, random_state=1234)
 
     # optimizer
     optimizer = BayesSearchCV(
