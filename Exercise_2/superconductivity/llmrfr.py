@@ -2,8 +2,6 @@ import numpy as np
 from utils import load_dataset
 from sklearn.model_selection import train_test_split
 
-import numpy as np
-
 # Custom Decision Tree for Regression with Standard Deviation as the cost function
 import numpy as np
 
@@ -96,16 +94,31 @@ class LLMRandomForestRegressor:
         y = np.array(y)
 
         n_samples, n_features = X.shape
-        self.max_features = self.max_features or n_features
+
+        # Interpret `max_features`
+        if isinstance(self.max_features, str):
+            if self.max_features == "sqrt":
+                self.max_features = int(np.sqrt(n_features))
+            elif self.max_features == "log2":
+                self.max_features = int(np.log2(n_features))
+            else:
+                raise ValueError(f"Invalid value for max_features: {self.max_features}")
+        elif self.max_features is None:
+            self.max_features = n_features
+        elif isinstance(self.max_features, (int, float)):
+            self.max_features = int(self.max_features)
 
         for _ in range(self.n_estimators):
+            # Sample data with replacement (Bootstrap)
             indices = self.rng.choice(n_samples, n_samples, replace=True)
             X_sample = X[indices]
             y_sample = y[indices]
 
+            # Randomly select feature subset
             feature_indices = self.rng.choice(n_features, self.max_features, replace=False)
             self.feature_subsets.append(feature_indices)
 
+            # Train a decision tree on the bootstrap sample
             tree = DecisionTreeRegressor(max_depth=self.max_depth, min_samples_split=self.min_samples_split)
             tree.fit(X_sample[:, feature_indices], y_sample)
             self.trees.append(tree)
@@ -117,6 +130,15 @@ class LLMRandomForestRegressor:
             for tree, feature_indices in zip(self.trees, self.feature_subsets)
         ])
         return np.mean(predictions, axis=0)
+    
+    # only thing implemented ourselves so that we can tune it
+    def set_params(self, **params):
+        for key, value in params.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+            else:
+                raise ValueError(f"Invalid parameter {key} for estimator {self.__class__.__name__}.")
+        return self
 
 
 # Example usage
@@ -126,13 +148,13 @@ if __name__ == "__main__":
     y = y
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
 
-    tree = DecisionTreeRegressor(max_depth=6, min_samples_split=2)
-    tree.fit(X_train.values, y_train.values)
-    y_pred = tree.predict(X_test.values)
-    mse = np.mean((y_pred - y_test) ** 2)
-    print(f"MSE of individual tree: {mse}")
+    # tree = DecisionTreeRegressor()
+    # tree.fit(X_train.values, y_train.values)
+    # y_pred = tree.predict(X_test.values)
+    # mse = np.mean((y_pred - y_test) ** 2)
+    # print(f"MSE of individual tree: {mse}")
 
-    rf = LLMRandomForestRegressor(n_estimators=40, max_depth=5, max_features=2)
+    rf = LLMRandomForestRegressor(n_estimators=40, max_depth=5, max_features="log2")
     rf.fit(X_train.values, y_train.values)
     y_pred = rf.predict(X_test.values)
     mse = np.mean((y_pred - y_test) ** 2)
