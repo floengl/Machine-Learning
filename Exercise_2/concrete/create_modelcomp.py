@@ -21,7 +21,7 @@ X, y = load_dataset()
 # define estimator
 ourrfr = Pipeline([
     ("preprocessor", RobustScaler()),
-    ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=40, min_samples_split=2,max_features='log2', nb_samples='Full', nb_trees=40))
+    ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=40, min_samples_split=2,max_features='log2', nb_samples='Full', nb_trees=40, max_workers=12))
 ])
 
 # define estimator
@@ -102,7 +102,7 @@ plt.savefig(os.path.join(Config.PLOTS_DIR, "model_comparison_mse.pdf"))
 
 # Plot RSE
 plt.figure(figsize=(10, 6))
-ax = sns.boxplot(x="model_score", y="score", data=df_cv[df_cv["model_score"].str.contains("Rse")], palette=my_pal, showmeans=True,
+ax = sns.boxplot(x="model_score", y="score",hue = "model_score", data=df_cv[df_cv["model_score"].str.contains("Rse")], palette=my_pal, showmeans=True,
                  meanline=True, meanprops=meanlineprops)
 
 # Plot holdout results as red crosses for RSE
