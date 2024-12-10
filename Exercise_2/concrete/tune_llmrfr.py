@@ -26,7 +26,7 @@ def main():
         "model__max_features": Categorical([None, "sqrt", "log2"])
     }
 
-    cv=RepeatedKFold(n_splits=4, n_repeats=3, random_state=1234)
+    cv=RepeatedKFold(n_splits=4, n_repeats=2, random_state=1234)
 
     # optimizer
     optimizer = BayesSearchCV(
