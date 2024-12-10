@@ -3,6 +3,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import RobustScaler
 from sklearn.neighbors import KNeighborsRegressor
 from random_forest import ourRandomForestRegressor
+from llmrfr import LLMRandomForestRegressor
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_validate, RepeatedKFold, train_test_split
@@ -32,16 +33,20 @@ sktrfr = Pipeline([
 # define estimator
 knn = Pipeline([
     ("preprocessor", RobustScaler()),
-    ("model", KNeighborsRegressor( n_neighbors=5, weights='distance', p=5))
+    ("model", KNeighborsRegressor(n_neighbors=5, weights='distance', p=5))
 ])
 
-
+llmrfr = Pipeline([
+    ("preprocessor", RobustScaler()),
+    ("model", LLMRandomForestRegressor(random_state=1234, max_depth=None, min_samples_split=2, max_features=None, n_estimators=100))
+])
 
 # all models
 models = [
     ("OurRFR", ourrfr),
     ("SKTRFR", sktrfr),
-    ("KNN", knn)
+    ("KNN", knn),
+    ("LLMRFR", llmrfr)
 ]
 
 data_cv = []
@@ -77,7 +82,7 @@ df_runtime = pd.DataFrame(data_runtime, columns=["model", "train_time", "pred_ti
 # Plot MSE
 plt.figure(figsize=(10, 6))
 meanlineprops = dict(linestyle='--', linewidth=1.5, color='white')
-my_pal = {model_score: "C0" if "OurRFR" in model_score else "C1" if "SKTRFR" in model_score else "C2"
+my_pal = {model_score: "C0" if "OurRFR" in model_score else "C1" if "SKTRFR" in model_score else "C2" if "KNN" in model_score else "C3"
           for model_score in df_cv["model_score"].unique()}
 sns.set(style="darkgrid")
 sns.color_palette("pastel")
