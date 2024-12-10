@@ -1,0 +1,10 @@
+08.12.2024 21:56:12
+Scoring: RSE
+Best score: -0.12239903884828002
+best params: OrderedDict({'model__boot_type': True, 'model__max_depth': 90, 'model__max_features': None, 'model__min_samples_split': 17, 'model__nb_samples': 0.8, 'model__nb_trees': 300})
+CV results:
+                                                                                                                                                               params  mean_test_score  std_test_score  rank_test_score
+0   {'model__boot_type': True, 'model__max_depth': 90, 'model__max_features': None, 'model__min_samples_split': 17, 'model__nb_samples': 0.8, 'model__nb_trees': 300}        -0.122399        0.022844                1
+1  {'model__boot_type': True, 'model__max_depth': 30, 'model__max_features': 'log2', 'model__min_samples_split': 20, 'model__nb_samples': 0.7, 'model__nb_trees': 70}        -0.152624        0.023378                2
+
+
