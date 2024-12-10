@@ -30,7 +30,7 @@ def main():
     }
 
     # plot sensitivity analysis
-    for param in {"min_samples_split"}:
+    for param in param_ranges:
         print(f"Running sensitivity analysis on parameter {param}")
         rse = []
         mse = []
