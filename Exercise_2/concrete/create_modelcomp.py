@@ -87,7 +87,7 @@ my_pal = {model_score: "C0" if "OurRFR" in model_score else "C1" if "SKTRFR" in 
 sns.set_theme(style="darkgrid")
 sns.color_palette("pastel")
 ax = sns.boxplot(x="model_score", y="score", data=df_cv[df_cv["model_score"].str.contains("Mse")], palette=my_pal, showmeans=True,
-                 meanline=True, meanprops=meanlineprops)
+                 meanline=True, meanprops=meanlineprops, hue="model_score")
 
 # Plot holdout results as red crosses for MSE
 holdout_x = df_holdout[df_holdout["model_score"].str.contains("Mse")]["model_score"].unique()
