@@ -4,6 +4,7 @@ from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 import pandas as pd
 from regression_tree import RegressionTree
+import os
 
 
 
@@ -14,14 +15,14 @@ class ourRandomForestRegressor():
     :param  max_depth:      Maximum depth of the trees
     :param  max_workers:    Maximum number of processes to use for training
     """
-    def __init__(self, nb_trees=40,  nb_samples = "Full", max_depth=-1, max_workers=1, random_state=None, boot_type = True, min_samples_split=2, max_features=None):
+    def __init__(self, nb_trees=40,  nb_samples = "Full", max_depth=-1, max_workers=-1, random_state=None, boot_type = True, min_samples_split=2, max_features=None):
         self.trees = []
         self.nb_trees = nb_trees
         self.nb_samples = nb_samples
         self.min_samples_split = min_samples_split
         self.max_depth = max_depth
         self.max_features = max_features
-        self.max_workers = max_workers
+        self.max_workers = max_workers if max_workers != -1 else os.cpu_count()
         self.random_state = random_state
         self.boot_type = boot_type
         self.rng = np.random.default_rng(random_state)
