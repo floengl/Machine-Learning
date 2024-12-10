@@ -26,13 +26,13 @@ ourrfr = Pipeline([
 # define estimator
 sktrfr = Pipeline([
     ("preprocessor", MaxAbsScaler()),
-    ("model", RandomForestRegressor(random_state=1234, bootstrap=False, max_depth=30, min_samples_split=2,max_features='log2', n_estimators=300))
+    ("model", RandomForestRegressor(random_state=1234, bootstrap=False, max_depth=50, min_samples_split=11,max_features='sqrt', n_estimators=80))
 ])
 
 # define estimator
 knn = Pipeline([
     ("preprocessor", MaxAbsScaler()),
-    ("model", KNeighborsRegressor( n_neighbors=5, weights='distance', p=5))
+    ("model", KNeighborsRegressor( n_neighbors=4, weights='distance', p=1))
 ])
 
 

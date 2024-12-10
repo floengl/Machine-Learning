@@ -16,7 +16,7 @@ def main():
     # define estimator
     estimator = Pipeline([
         ("preprocessor", MaxAbsScaler()),
-        ("model", RandomForestRegressor(random_state=1234, bootstrap=False, max_depth=30, min_samples_split=2,max_features='log2', n_estimators=300))
+        ("model", RandomForestRegressor(random_state=1234, bootstrap=False, max_depth=50, min_samples_split=11,max_features='sqrt', n_estimators=80))
     ])
 
     # search space
@@ -29,7 +29,7 @@ def main():
     }
 
     # plot sensitivity analysis
-    for param in {"min_samples_split"}:
+    for param in param_ranges:
         print(f"Running sensitivity analysis on parameter {param}")
         rse = []
         mse = []
