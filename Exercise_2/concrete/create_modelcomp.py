@@ -79,7 +79,7 @@ plt.figure(figsize=(10, 6))
 meanlineprops = dict(linestyle='--', linewidth=1.5, color='white')
 my_pal = {model_score: "C0" if "OurRFR" in model_score else "C1" if "SKTRFR" in model_score else "C2"
           for model_score in df_cv["model_score"].unique()}
-sns.set(style="darkgrid")
+sns.set_theme(style="darkgrid")
 sns.color_palette("pastel")
 ax = sns.boxplot(x="model_score", y="score", data=df_cv[df_cv["model_score"].str.contains("Mse")], palette=my_pal, showmeans=True,
                  meanline=True, meanprops=meanlineprops)
