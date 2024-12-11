@@ -1,0 +1,33 @@
+10.12.2024 14:09:03
+Scoring: RSE
+Best score: -0.07880142280763472
+best params: OrderedDict({'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_split': 4, 'model__n_estimators': 200})
+CV results:
+                                                                                                                 params  mean_test_score  std_test_score  rank_test_score
+3    {'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_split': 4, 'model__n_estimators': 200}        -0.078801        0.003140                1
+11   {'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 90}        -0.079237        0.003276                2
+17    {'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 90}        -0.079237        0.003276                2
+1    {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_split': 8, 'model__n_estimators': 200}        -0.079494        0.003062                4
+10    {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 70}        -0.079533        0.003276                5
+23    {'model__max_depth': 30, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 60}        -0.079680        0.003288                6
+12  {'model__max_depth': None, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 60}        -0.079685        0.003286                7
+19  {'model__max_depth': None, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 40}        -0.079825        0.003173                8
+16    {'model__max_depth': 80, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 40}        -0.079825        0.003173                8
+8    {'model__max_depth': 20, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 100}        -0.079844        0.003295               10
+5     {'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_split': 8, 'model__n_estimators': 70}        -0.080308        0.003220               11
+14    {'model__max_depth': 70, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 30}        -0.080309        0.002923               12
+15    {'model__max_depth': 60, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__n_estimators': 20}        -0.081474        0.003140               13
+21   {'model__max_depth': 60, 'model__max_features': 'log2', 'model__min_samples_split': 2, 'model__n_estimators': 200}        -0.082316        0.003285               14
+0    {'model__max_depth': 40, 'model__max_features': 'log2', 'model__min_samples_split': 3, 'model__n_estimators': 150}        -0.082490        0.003172               15
+2    {'model__max_depth': 30, 'model__max_features': 'log2', 'model__min_samples_split': 2, 'model__n_estimators': 100}        -0.082816        0.003088               16
+4     {'model__max_depth': 30, 'model__max_features': 'log2', 'model__min_samples_split': 6, 'model__n_estimators': 80}        -0.083978        0.003256               17
+7     {'model__max_depth': 40, 'model__max_features': 'log2', 'model__min_samples_split': 9, 'model__n_estimators': 50}        -0.085405        0.002882               18
+22    {'model__max_depth': 70, 'model__max_features': 'log2', 'model__min_samples_split': 3, 'model__n_estimators': 20}        -0.087084        0.003391               19
+6     {'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_split': 5, 'model__n_estimators': 10}        -0.087128        0.003416               20
+18    {'model__max_depth': 60, 'model__max_features': 'log2', 'model__min_samples_split': 2, 'model__n_estimators': 10}        -0.093100        0.003965               21
+9    {'model__max_depth': 10, 'model__max_features': 'sqrt', 'model__min_samples_split': 3, 'model__n_estimators': 200}        -0.123792        0.002431               22
+24   {'model__max_depth': 10, 'model__max_features': 'sqrt', 'model__min_samples_split': 10, 'model__n_estimators': 10}        -0.127275        0.003122               23
+20   {'model__max_depth': 10, 'model__max_features': 'log2', 'model__min_samples_split': 10, 'model__n_estimators': 50}        -0.135785        0.002675               24
+13   {'model__max_depth': 10, 'model__max_features': 'log2', 'model__min_samples_split': 10, 'model__n_estimators': 10}        -0.141395        0.003774               25
+
+
