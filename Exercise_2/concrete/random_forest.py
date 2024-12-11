@@ -9,12 +9,7 @@ import os
 
 
 class ourRandomForestRegressor():
-    """
-    :param  nb_trees:       Number of decision trees to use
-    :param  nb_samples:     Number of samples to give to each tree
-    :param  max_depth:      Maximum depth of the trees
-    :param  max_workers:    Maximum number of processes to use for training
-    """
+
     def __init__(self, nb_trees=40,  nb_samples = "Full", max_depth=-1, max_workers=-1, random_state=None, boot_type = True, min_samples_split=2, max_features=None):
         self.trees = []
         self.nb_trees = nb_trees
@@ -28,11 +23,7 @@ class ourRandomForestRegressor():
         self.rng = np.random.default_rng(random_state)
         #if random_state!=None:
         #    random.seed(random_state)
-    """
-    Trains self.nb_trees number of decision trees.
-    :param  X:   Features
-    :param  y:   Target values
-    """
+
     def fit(self, X, y):
         if type(X) == np.ndarray:
             data = list(zip(X, y))
@@ -40,10 +31,7 @@ class ourRandomForestRegressor():
             X= X.values
             y = y.values
             data = list(zip(X, y))
-        
         length = len(data)
-
-      
         if isinstance(self.nb_samples, float) and 0<self.nb_samples<1:
             nb_samples = int(length*self.nb_samples)
         elif isinstance(self.nb_samples, int):
@@ -61,13 +49,6 @@ class ourRandomForestRegressor():
             #builds the trees
             self.trees = list(executor.map(self.train_tree, bootstrap_data, random_states))
 
-
-
-    """
-    Trains a single tree and returns it.
-    :param  data:   A List containing the index of the tree being trained
-                    and the data to train it
-    """
     def train_tree(self, data, random_state):
         if self.max_depth == -1:
             tree = RegressionTree(random_state=random_state, min_samples_split=self.min_samples_split, max_features=self.max_features)
@@ -80,18 +61,11 @@ class ourRandomForestRegressor():
         tree.fit(X, y)
         return tree
 
-    """
-    Returns a prediction for the given feature. The result is the average of
-    the predictions from all trees.
-    :param  feature:    The features used to predict
-    """
     def predict(self, feature):
         if isinstance(feature, pd.DataFrame):
            feature = feature.values
-           print(feature.shape)
         predictions = np.array([tree.predict(feature) for tree in self.trees])
         return np.mean(predictions, axis=0)
-    
     
     def get_params(self, deep=True):
         return {
