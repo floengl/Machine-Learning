@@ -3,6 +3,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MaxAbsScaler
 from sklearn.neighbors import KNeighborsRegressor
 from random_forest import ourRandomForestRegressor
+from llmrfr import LLMRandomForestRegressor
+
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_validate, RepeatedKFold, train_test_split
@@ -20,7 +22,7 @@ X, y = load_dataset()
 # define estimator
 ourrfr = Pipeline([
     ("preprocessor", MaxAbsScaler()),
-    ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=40, min_samples_split=2,max_features='log2', nb_samples='Full', nb_trees=40))
+    ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=100, min_samples_split=2,max_features='sqrt', nb_samples=0.7, nb_trees=150, max_workers=12))
 ])
 
 # define estimator
@@ -36,12 +38,18 @@ knn = Pipeline([
 ])
 
 
+llmrfr = Pipeline([
+    ("preprocessor", MaxAbsScaler()),
+    ("model", LLMRandomForestRegressor(random_state=1234, max_depth=90, min_samples_split=4, max_features='sqrt', n_estimators=200))
+])
+
 
 # all models
 models = [
     ("OurRFR", ourrfr),
     ("SKTRFR", sktrfr),
-    ("KNN", knn)
+    ("KNN", knn),
+    ("LLMRFR", llmrfr)
 ]
 
 data_cv = []

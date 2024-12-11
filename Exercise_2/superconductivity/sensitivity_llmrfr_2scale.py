@@ -1,5 +1,5 @@
 from utils import Config, load_dataset, rse_scorer
-from random_forest import ourRandomForestRegressor
+from llmrfr import LLMRandomForestRegressor
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import RepeatedKFold, cross_validate
@@ -15,18 +15,17 @@ def main():
 
     # define estimator
     estimator = Pipeline([
-        ("preprocessor", MaxAbsScaler()),
-        ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=100, min_samples_split=2,max_features='sqrt', nb_samples=0.7, nb_trees=150, max_workers=12))
-    ])
+    ("preprocessor", MaxAbsScaler()),
+    ("model", LLMRandomForestRegressor(random_state=1234, max_depth=90, min_samples_split=4, max_features='sqrt', n_estimators=200))
+])
 
     # search space
     param_ranges = {
-        "nb_trees": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200],
-        "max_depth": [-1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        "n_estimators": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200],
+        "max_depth": [None, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         "min_samples_split": np.linspace(2, 20, 19, dtype=int),
-        "nb_samples": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7],
+        "nb_samples": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, "Full"],
         "max_features": ["sqrt", "log2"],
-        "boot_type": [True, False],
     }
 
     # plot sensitivity analysis
@@ -61,7 +60,7 @@ def main():
 
         fig.tight_layout()
         plt.title(f"Sensitivity Analysis for {param}")
-        plt.savefig(os.path.join(Config.PLOTS_DIR, f"ourrfr_{param}_sensitivity_2scale.pdf"))
+        plt.savefig(os.path.join(Config.PLOTS_DIR, f"llmrfr_{param}_sensitivity_2scale.pdf"))
 
 if __name__ == "__main__":
     main()
