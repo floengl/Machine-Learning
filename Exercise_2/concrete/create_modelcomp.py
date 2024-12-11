@@ -24,6 +24,8 @@ ourrfr = Pipeline([
     ("model", ourRandomForestRegressor(random_state=1234, boot_type=False, max_depth=40, min_samples_split=2,max_features='log2', nb_samples='Full', nb_trees=40, max_workers=12))
 ])
 
+
+
 # define estimator
 sktrfr = Pipeline([
     ("preprocessor", RobustScaler()),
