@@ -58,7 +58,7 @@ data_runtime = []
 plt.figure(figsize=(10, 6))
 for name, model in models:
     # evaluate model with cross validation
-    cv = RepeatedKFold(n_splits=4, n_repeats=3, random_state=1234)
+    cv = RepeatedKFold(n_splits=4, n_repeats=1, random_state=1234)
     scores = cross_validate(model, X, y, scoring={"mse": "neg_mean_squared_error", "rse": rse_scorer}, cv=cv, n_jobs=-1)
     # evaluate model with holdout method and measure runtime
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
