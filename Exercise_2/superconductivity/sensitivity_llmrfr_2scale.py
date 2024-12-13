@@ -16,7 +16,7 @@ def main():
     # define estimator
     estimator = Pipeline([
     ("preprocessor", MaxAbsScaler()),
-    ("model", LLMRandomForestRegressor(random_state=1234, max_depth=90, min_samples_split=4, max_features='sqrt', n_estimators=200))
+    ("model", LLMRandomForestRegressor(random_state=1234, max_depth=60, min_samples_split=4, max_features='sqrt', n_estimators=100))
 ])
 
     # search space
