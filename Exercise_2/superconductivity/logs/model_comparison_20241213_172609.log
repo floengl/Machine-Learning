@@ -1,0 +1,32 @@
+13.12.2024 17:26:09
+
+Runtime of models:
+    model   train_time  pred_time
+0  OurRFR  2340.603187   5.993693
+1  SKTRFR    10.307848   0.134639
+2     KNN     0.033743   2.491119
+3  LLMRFR  8497.948970   6.141224
+
+Holdout results:
+  model_score       score
+0  OurRFR Mse  -97.156021
+1  OurRFR Rse   -0.080372
+2  SKTRFR Mse  -95.288285
+3  SKTRFR Rse   -0.078827
+4     KNN Mse -110.867051
+5     KNN Rse   -0.091715
+6  LLMRFR Mse -102.017958
+7  LLMRFR Rse   -0.084395
+
+Cross validation results:
+                  score          
+                   mean       std
+model_score                      
+KNN Mse     -104.568489  6.313143
+KNN Rse       -0.089120  0.004548
+LLMRFR Mse   -96.532095  6.092168
+LLMRFR Rse    -0.082268  0.004367
+OurRFR Mse   -91.647973  6.697571
+OurRFR Rse    -0.078102  0.004963
+SKTRFR Mse   -91.450742  5.907677
+SKTRFR Rse    -0.077965  0.005006
