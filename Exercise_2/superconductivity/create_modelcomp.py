@@ -35,7 +35,7 @@ def main():
     # define estimator
     knn = Pipeline([
         ("preprocessor", MaxAbsScaler()),
-        ("model", KNeighborsRegressor( n_neighbors=4, weights='distance', p=1))
+        ("model", KNeighborsRegressor(n_neighbors=4, weights='distance', p=1))
     ])
 
 
@@ -49,8 +49,7 @@ def main():
     models = [
         ("OurRFR", ourrfr),
         ("SKTRFR", sktrfr),
-        ("KNN", knn),
-        ("LLMRFR", llmrfr)
+        ("KNN", knn)
     ]
 
     data_cv = []
@@ -59,7 +58,7 @@ def main():
     plt.figure(figsize=(10, 6))
     for name, model in models:
         # evaluate model with cross validation
-        cv = RepeatedKFold(n_splits=3, n_repeats=1, random_state=1234)
+        cv = RepeatedKFold(n_splits=4, n_repeats=3, random_state=1234)
         scores = cross_validate(model, X, y, scoring={"mse": "neg_mean_squared_error", "rse": rse_scorer}, cv=cv, n_jobs=-1)
         # evaluate model with holdout method and measure runtime
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1234)
@@ -102,7 +101,7 @@ def main():
     plt.legend(handles=[plt_holdout, mean_line_dummy], loc="lower right")
     plt.xlabel("")
     plt.tight_layout()
-    plt.savefig(os.path.join(Config.PLOTS_DIR, "model_comparison_mse.pdf"))
+    plt.savefig(os.path.join(Config.PLOTS_DIR, "model_comparison_mse_withoutllm.pdf"))
 
     # Plot RSE
     plt.figure(figsize=(10, 6))
@@ -118,7 +117,7 @@ def main():
     plt.legend(handles=[plt_holdout, mean_line_dummy], loc="lower right")
     plt.xlabel("")
     plt.tight_layout()
-    plt.savefig(os.path.join(Config.PLOTS_DIR, "model_comparison_rse.pdf"))
+    plt.savefig(os.path.join(Config.PLOTS_DIR, "model_comparison_rse_withoutllm.pdf"))
 
     # log results
     logger = setup_logging("model_comparison")
