@@ -19,14 +19,16 @@ Holdout results:
 7  LLMRFR Rse  -0.092322
 
 Cross validation results:
-                 score          
-                  mean       std
-model_score                     
-KNN Mse     -52.444999  3.994584
-KNN Rse      -0.191201  0.028289
-LLMRFR Mse  -26.818862  2.986105
-LLMRFR Rse   -0.097498  0.014836
-OurRFR Mse  -25.597001  4.151924
-OurRFR Rse   -0.092680  0.015951
-SKTRFR Mse  -22.552244  3.143861
-SKTRFR Rse   -0.081670  0.012272
+                 
+Relative Squared Error:    
+KNN Rse      -0.191201
+LLMRFR Rse   -0.097498 
+OurRFR Rse   -0.092680
+SKTRFR Rse   -0.081670
+
+Mean Squared Error:
+KNN Mse     -52.444999 
+LLMRFR Mse  -26.818862
+OurRFR Mse  -25.597001
+SKTRFR Mse  -22.552244
+
