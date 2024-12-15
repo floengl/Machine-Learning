@@ -29,9 +29,6 @@ class RegressionTree:
         if depth == 0:
             # print("Max depth reached")
             return self.Node(result=np.mean(y))
-
-
-
         best_feature, best_threshold, best_score = None, None, float('inf')
         dim=X.shape[1]
         if self.max_features==None:
@@ -50,13 +47,11 @@ class RegressionTree:
 
                 if len(y_left) == 0 or len(y_right) == 0:
                     continue
-
                 current_score = score(y, y_left, y_right)
                 if current_score < best_score:
                     best_score = current_score
                     best_threshold = threshold
                     best_feature = feature
-
         if best_threshold is None:
             # print("No best threshold found")
             return self.Node(result=np.mean(y))
