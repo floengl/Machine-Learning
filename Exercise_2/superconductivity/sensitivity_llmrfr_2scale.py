@@ -16,14 +16,14 @@ def main():
     # define estimator
     estimator = Pipeline([
     ("preprocessor", MaxAbsScaler()),
-    ("model", LLMRandomForestRegressor(random_state=1234, max_depth=60, min_samples_split=4, max_features='sqrt', n_estimators=100))
+    ("model", LLMRandomForestRegressor(random_state=1234, max_depth=40, min_samples_split=4, max_features='sqrt', n_estimators=60))
 ])
 
     # search space
     param_ranges = {
-        "n_estimators": [ 20,  40,  60,  80,  100, 150],
-        "max_depth": [None, 20,  40,  60,  80,  100],
-        "min_samples_split": np.linspace(2, 20, 10, dtype=int),
+        "n_estimators": [ 20,  50,  80,  100, 150],
+        "max_depth": [ 20,  50,  80,  100],
+        "min_samples_split": [2, 4, 8, 16, 20],
         "max_features": ["sqrt", "log2"],
     }
 
