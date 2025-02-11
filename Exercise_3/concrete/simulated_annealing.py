@@ -8,23 +8,19 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.linear_model import Ridge
 from sklearn.svm import LinearSVC
 from sklearn.neighbors import KNeighborsRegressor
-from sklearn.metrics import f1_score
+from sklearn.metrics import root_mean_squared_error
 from utils import load_dataset, setup_logging
 from utils import logger
+import copy
 
 
-models = {"rf": RandomForestRegressor,
-          "LinearSVC": LinearSVC,
-          "Ridge": Ridge,
-          "BinaryTree": DecisionTreeRegressor,
-          "KNN": KNeighborsRegressor}
 
 
 # Sample train_model function #
 ###############################
 
-def train_model(curr_params, param, Xtrain, Xvalid, Ytrain,
-                 Yvalid, model):
+def train_model(models, curr_model,curr_params, start_param, Xtrain, Xvalid, Ytrain,
+                 Yvalid):
      """
      Train the model with given set of hyperparameters
      curr_params - Dict of hyperparameters and chosen values
@@ -37,60 +33,63 @@ def train_model(curr_params, param, Xtrain, Xvalid, Ytrain,
 
 
      
-     params_copy = param.copy()
+     params_copy = start_param[curr_model].copy()
      params_copy.update(curr_params)
-     model = models[model](**params_copy)
+     model = models[curr_model](**params_copy)
      model.fit(Xtrain, Ytrain)
      preds = model.predict(Xvalid)
-     metric_val = f1_score(Yvalid, preds) # Any metric can be used
+     metric_val = root_mean_squared_error(Yvalid, preds) # Any metric can be used
 
      return model, metric_val
 
 
-def choose_params(param_dict, curr_params=None):
-    """
-    Function to choose parameters for next iteration
-    Inputs:
-    param_dict - Ordered dictionary of hyperparameter search space
-    curr_params - Dict of current hyperparameters
-    Output:
-    Dictionary of parameters
-    """
-    if curr_params:
-        next_params = curr_params.copy()
-        param_to_update = np.random.choice(list(param_dict.keys()))
-        param_vals = param_dict[param_to_update]
-        curr_index = param_vals.index(curr_params[param_to_update])
-        if curr_index == 0:
-            next_params[param_to_update] = param_vals[1]
-        elif curr_index == len(param_vals) - 1:
-            next_params[param_to_update] = param_vals[curr_index - 1]
-        else:
-            next_params[param_to_update] = \
-                param_vals[curr_index + np.random.choice([-1, 1])]
+def choose_params(curr_model,start_params, params_vals, curr_params=None, T=0.4):
+
+    print(curr_model)
+    print(curr_params[curr_model])
+    if curr_params[curr_model] is not None:
+        next_params = copy.deepcopy(curr_params[curr_model])
+        param_to_update = np.random.choice(list(start_params[curr_model].keys()))
+        param_vals = curr_params[curr_model][param_to_update]
+        curr_index = params_vals[curr_model][param_to_update].index(curr_params[curr_model][param_to_update])
+        
+        # Determine the new index using a normal distribution around the current index
+        std_dev = max(1, int(len(params_vals[curr_model][param_to_update]) * T))
+        new_index = int(np.random.normal(loc=curr_index, scale=std_dev))
+        new_index = max(0, min(len(params_vals[curr_model][param_to_update]) - 1, new_index))  # Ensure index is within bounds
+        
+        next_params[param_to_update] = params_vals[curr_model][param_to_update][new_index]
     else:
-        next_params = dict()
-        for k, v in param_dict.items():
-            next_params[k] = np.random.choice(v)
+        next_params = {k: np.random.choice(v) for k, v in start_params[curr_model].items()}
 
     return next_params
-def choose_model():
+
+
+def choose_model(models, best_model= None, prev_model=None, T=0.4, T_0=0.4, go_to_best_model=False):
+
     """
     Function to choose model for next iteration
     Output:
     String of model name
     """
+    if go_to_best_model:
+        return best_model
     switch_probabilty = 0.5* T/T_0
-    return np.random.choice(list(models.keys()))
+    if random() < switch_probabilty and prev_model is not None:
+        return prev_model
+    else:
+        return np.random.choice(list(models.keys()))
+    
 
 
-def simulate_annealing(param_dict,
-                       const_param,
+def simulate_annealing(start_params,
+                       param_vals,
                        X_train,
                        X_valid,
                        Y_train,
                        Y_valid,
-                       fn_train,
+                       train_model,
+                       models,
                        maxiters=100,
                        alpha=0.85,
                        beta=1.3,
@@ -99,7 +98,7 @@ def simulate_annealing(param_dict,
     """
     Function to perform hyperparameter search using simulated annealing
     Inputs:
-    param_dict - Ordered dictionary of Hyperparameter search space
+    start_params - Ordered dictionary of Hyperparameter search space
     const_param - Static parameters of the model
     Xtrain - Train Data
     Xvalid - Validation Data
@@ -115,47 +114,46 @@ def simulate_annealing(param_dict,
     Output:
     Dataframe of the parameters explored and corresponding model performance
     """
-    columns = [*param_dict.keys()] + ['Metric', 'Best Metric']
+    columns = [*start_params.keys()] + ['Metric', 'Best Metric']
     results = pd.DataFrame(index=range(maxiters), columns=columns)
     best_metric = -1.
     prev_metric = -1.
-    prev_params = None
+    prev_params = copy.deepcopy(start_params)
     best_params = dict()
     prev_model = None
     best_model = None
-    weights = list(map(lambda x: 10**x, list(range(len(param_dict)))))
-    hash_values = set()
+
+    go_to_best_model= False
     T = T_0
 
     for i in range(maxiters):
         print('Starting Iteration {}'.format(i))
-        while True:
-            curr_model = choose_model()
-            curr_params = choose_params(param_dict, prev_params)
-            indices = [param_dict[k].index(v) for k, v in curr_params.items()]
-            hash_val = sum([i * j for (i, j) in zip(weights, indices)])
-            if hash_val in hash_values:
-                print('Combination revisited')
-            else:
-                hash_values.add(hash_val)
-                break
 
-        model, metric = fn_train(curr_params, const_param, X_train,
+
+        curr_model = choose_model(models,best_model,prev_model, T, T_0, go_to_best_model)
+        print(prev_params[curr_model])
+        curr_params = choose_params(curr_model, start_params, param_vals, prev_params, T)
+
+
+        model, metric = train_model(models, curr_model, curr_params, start_params, X_train,
                                  X_valid, Y_train, Y_valid)
 
         if metric > prev_metric:
             print('Local Improvement in metric from {:8.4f} to {:8.4f} '
                   .format(prev_metric, metric) + ' - parameters accepted')
-            prev_params = curr_params.copy()
+            prev_model = curr_model
+            prev_params[curr_model] = copy.deepcopy(curr_params)
             prev_metric = metric
 
             if metric > best_metric:
                 print('Global improvement in metric from {:8.4f} to {:8.4f} '
                       .format(best_metric, metric) +
                       ' - best parameters updated')
+                best_model = curr_model
                 best_metric = metric
-                best_params = curr_params.copy()
-                best_model = model
+                best_params[curr_model] = copy.deepcopy(curr_params)
+                best_model_final = model
+
         else:
             rnd = np.random.uniform()
             diff = metric - prev_metric
@@ -165,7 +163,7 @@ def simulate_annealing(param_dict,
                       ': {:8.4f} threshold: {:6.4f} random number: {:6.4f}'
                       .format(diff, threshold, rnd))
                 prev_metric = metric
-                prev_params = curr_params
+                prev_params[curr_model] = copy.deepcopy(curr_params)
             else:
                 print('No Improvement and parameters rejected. Metric change' +
                       ': {:8.4f} threshold: {:6.4f} random number: {:6.4f}'
@@ -175,7 +173,9 @@ def simulate_annealing(param_dict,
         results.loc[i, 'Metric'] = metric
         results.loc[i, 'Best Metric'] = best_metric
 
+        go_to_best_model = False
         if i % update_iters == 0:
             T = alpha * T
+            go_to_best_model = True
 
-    return results, best_model
+    return  best_model_final
