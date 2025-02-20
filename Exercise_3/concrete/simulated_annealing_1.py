@@ -71,19 +71,7 @@ def choose_model(models, best_model= None, prev_model=None, T=400, T_0=400, go_t
     
 
 
-def simulate_annealing(start_params,
-                       param_vals,
-                       X_train,
-                       X_valid,
-                       Y_train,
-                       Y_valid,
-                       train_model,
-                       models,
-                       maxiters=100,
-                       alpha=0.9,
-                       beta=1.3,
-                       T_0=400,
-                       update_iters=5):
+def simulate_annealing(start_params, param_vals, X_train, X_valid, Y_train, Y_valid, train_model, models, maxiters=100, alpha=0.9, beta=1.3, T_0=400, update_iters=5):
     """
     Function to perform hyperparameter search using simulated annealing
     Inputs:

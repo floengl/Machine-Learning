@@ -12,9 +12,9 @@ from sklearn.metrics import f1_score
 from utils import load_dataset, setup_logging
 from utils import logger
 
-from simulated_annealing import *
+from simulated_annealing_1 import *
 
-logger = setup_logging("test_annealing")
+logger = setup_logging("test_annealing_1")
 
 models = {"rf": RandomForestRegressor,
           "LinearSVR": LinearSVR,
