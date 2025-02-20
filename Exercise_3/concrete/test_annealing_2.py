@@ -39,11 +39,12 @@ params_vals = {"rf": {"n_estimators": [10,20,50,100,200], "max_depth": [5,10,20,
 X, Y = load_dataset()
 
 
-model, results = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=10, T_0=400, f=10, n_repeats=5, random_seed=random_seed)
+model, results, nr_reheats = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=1000, T_0=400, f=5, n_repeats=1, random_seed=random_seed)
 
 logger.info(f"Random Seed: {random_seed}")
 logger.info(f"Best model: {model}")
 logger.info(f"Best score: {results['Best Metric'].min()}")
+logger.info(f"Number of reheats: {nr_reheats-1}")
 
 # Convert the DataFrame to a string with all rows and columns displayed
 results_str = results.to_string()
@@ -52,7 +53,7 @@ results_str = results.to_string()
 logger.info(f"History:\n{results_str}")
 
 print(model)
-print(results_str)
+print(results)
 
 
 

@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.metrics import root_mean_squared_error
 from sklearn.model_selection import cross_val_score, RepeatedKFold
 import copy
+import time
 
 
 
@@ -62,7 +63,10 @@ def choose_model(models, best_model=None, prev_model=None, T=400, T_0=400, go_to
     
 
 
-def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=train_model_2, maxiters=100, alpha=0.9, beta=1.3, T_0=400, update_iters=5, f=5, n_repeats=1, random_seed=42):
+def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=train_model_2, maxiters=100, alpha=0.95, beta=1.3, T_0=400, update_iters=5, f=5, n_repeats=1, random_seed=42):
+
+    # Start the timer
+    start_time = time.time()
 
     rng = np.random.RandomState(random_seed)
     columns = ['Model'] + [f"{model}_{param}" for model in models for param in start_params[model].keys()] + ['Metric', 'Best Metric']
@@ -73,6 +77,8 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
     best_params = copy.deepcopy(start_params)
     prev_model = None
     best_model = None
+    counter_1 = 0
+    counter_2=1
 
     go_to_best_model= False
     T = T_0
@@ -119,6 +125,7 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
                 print('No Improvement and parameters rejected. Metric change' +
                       ': {:8.4f} threshold: {:6.4f} random number: {:6.4f}'
                       .format(diff, threshold, rnd))
+                counter_1 += 1
 
          # Store the model name
         results.loc[i, 'Model'] = curr_model
@@ -134,7 +141,19 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
         go_to_best_model = False
         if i % update_iters == 0:
             T = alpha * T
-        if i % update_iters*6 == 0:
+        if i % update_iters*4 == 0:
             go_to_best_model = True
+        if counter_1 == 5:
 
-    return  best_model_final, results
+            print('stagnant')
+            if time.time() - start_time > 60*60:
+                break
+            else:
+                counter_1 = 0
+                counter_2 += 1   
+                T = T_0*(1/counter_2 + 1/50)##reheats the system if there is no change
+                print('Reheat')
+
+    end_time = time.time()
+    print(f"Execution time: {end_time - start_time} seconds")
+    return  best_model_final, results, counter_2
