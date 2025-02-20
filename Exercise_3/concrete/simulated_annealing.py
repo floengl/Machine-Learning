@@ -11,8 +11,7 @@ import copy
 # Sample train_model function #
 ###############################
 
-def train_model(models, curr_model, curr_params, start_param, Xtrain, Xvalid, Ytrain,
-                 Yvalid):
+def train_model(models, curr_model, curr_params, Xtrain, Xvalid, Ytrain, Yvalid):
      """
      Train the model with given set of hyperparameters
      curr_params - Dict of hyperparameters and chosen values
@@ -25,9 +24,8 @@ def train_model(models, curr_model, curr_params, start_param, Xtrain, Xvalid, Yt
 
 
      
-     params_copy = start_param[curr_model].copy()
-     params_copy.update(curr_params)
-     model = models[curr_model](**params_copy)
+
+     model = models[curr_model](**curr_params)
      model.fit(Xtrain, Ytrain)
      preds = model.predict(Xvalid)
      metric_val = root_mean_squared_error(Yvalid, preds) # Any metric can be used
@@ -35,18 +33,17 @@ def train_model(models, curr_model, curr_params, start_param, Xtrain, Xvalid, Yt
      return model, metric_val
 
 
-def choose_params(curr_model, params_vals, curr_params=None, T=0.4):
+def choose_params(curr_model, params_vals, curr_params=None, T=400, T_0=400):
 
     print(curr_model)
     print(curr_params[curr_model])
     if curr_params[curr_model] is not None:
         next_params = copy.deepcopy(curr_params[curr_model])
         param_to_update = np.random.choice(list(params_vals[curr_model].keys()))
-        param_vals = curr_params[curr_model][param_to_update]
         curr_index = params_vals[curr_model][param_to_update].index(curr_params[curr_model][param_to_update])
         
         # Determine the new index using a normal distribution around the current index
-        std_dev = max(1, int(len(params_vals[curr_model][param_to_update]) * T))
+        std_dev = max(1, int(len(params_vals[curr_model][param_to_update]) * T/(2*T_0)))
         new_index = int(np.random.normal(loc=curr_index, scale=std_dev))
         new_index = max(0, min(len(params_vals[curr_model][param_to_update]) - 1, new_index))  # Ensure index is within bounds
         
@@ -57,7 +54,7 @@ def choose_params(curr_model, params_vals, curr_params=None, T=0.4):
     return next_params
 
 
-def choose_model(models, best_model= None, prev_model=None, T=0.4, T_0=0.4, go_to_best_model=False):
+def choose_model(models, best_model= None, prev_model=None, T=400, T_0=400, go_to_best_model=False):
 
     """
     Function to choose model for next iteration
@@ -66,8 +63,8 @@ def choose_model(models, best_model= None, prev_model=None, T=0.4, T_0=0.4, go_t
     """
     if go_to_best_model:
         return best_model
-    switch_probabilty = 0.5* T/T_0
-    if random() < switch_probabilty and prev_model is not None:
+    non_switch_probabilty = 1 - np.exp(-0.25*(T_0/T)**2)# starts with a higher switch probability and decreases faster than acceptance probability for worse solutions due to squaring the value
+    if random() < non_switch_probabilty and prev_model is not None:
         return prev_model
     else:
         return np.random.choice(list(models.keys()))
@@ -83,9 +80,9 @@ def simulate_annealing(start_params,
                        train_model,
                        models,
                        maxiters=100,
-                       alpha=0.85,
+                       alpha=0.9,
                        beta=1.3,
-                       T_0=0.40,
+                       T_0=400,
                        update_iters=5):
     """
     Function to perform hyperparameter search using simulated annealing
@@ -106,12 +103,12 @@ def simulate_annealing(start_params,
     Output:
     Dataframe of the parameters explored and corresponding model performance
     """
-    columns = [*start_params.keys()] + ['Metric', 'Best Metric']
+    columns = [Model] + ['Metric', 'Best Metric']
     results = pd.DataFrame(index=range(maxiters), columns=columns)
     best_metric = float('inf')
     prev_metric = float('inf')
     prev_params = copy.deepcopy(start_params)
-    best_params = dict()
+    best_params = copy.deepcopy(start_params)
     prev_model = None
     best_model = None
 
@@ -124,11 +121,10 @@ def simulate_annealing(start_params,
 
         curr_model = choose_model(models, best_model, prev_model, T, T_0, go_to_best_model)
         print(prev_params[curr_model])
-        curr_params = choose_params(curr_model, param_vals, prev_params, T)
+        curr_params = choose_params(curr_model, param_vals, prev_params, T, T_0)
 
 
-        model, metric = train_model(models, curr_model, curr_params, start_params, X_train,
-                                 X_valid, Y_train, Y_valid)
+        model, metric = train_model(models, curr_model, curr_params,  X_train,  X_valid, Y_train, Y_valid)
 
         if metric < prev_metric:
             print('Local Improvement in metric from {:8.4f} to {:8.4f} '
@@ -168,6 +164,7 @@ def simulate_annealing(start_params,
         go_to_best_model = False
         if i % update_iters == 0:
             T = alpha * T
+        if i % update_iters*4 == 0:
             go_to_best_model = True
 
     return  best_model_final, results
