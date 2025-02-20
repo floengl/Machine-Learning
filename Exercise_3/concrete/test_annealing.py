@@ -36,14 +36,11 @@ params_vals = {"rf": {"n_estimators": [10,20,50,100,200], "max_depth": [5,10,20,
 X, y = load_dataset()
 Xtrain, Xvalid, Ytrain, Yvalid = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model = simulate_annealing(start_params, params_vals, Xtrain, Xvalid, Ytrain, Yvalid, train_model,models =  models, maxiters=1000, T_0=0.4)
+model, results = simulate_annealing(start_params, params_vals, Xtrain, Xvalid, Ytrain, Yvalid, train_model, models =  models, maxiters=10, T_0=400)
 
 
-
-model.fit(Xtrain, Ytrain)
-preds = model.predict(Xvalid)
-metric_val = root_mean_squared_error(Yvalid, preds) # Any metric can be used
-print(metric_val)
+print(model)
+print(results)
 
 
 

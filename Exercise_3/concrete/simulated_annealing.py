@@ -2,15 +2,7 @@ import pandas as pd
 import numpy as np
 from collections import OrderedDict
 from random import random
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.linear_model import Ridge
-from sklearn.svm import LinearSVC
-from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import root_mean_squared_error
-from utils import load_dataset, setup_logging
-from utils import logger
 import copy
 
 
@@ -43,13 +35,13 @@ def train_model(models, curr_model, curr_params, start_param, Xtrain, Xvalid, Yt
      return model, metric_val
 
 
-def choose_params(curr_model,start_params, params_vals, curr_params=None, T=0.4):
+def choose_params(curr_model, params_vals, curr_params=None, T=0.4):
 
     print(curr_model)
     print(curr_params[curr_model])
     if curr_params[curr_model] is not None:
         next_params = copy.deepcopy(curr_params[curr_model])
-        param_to_update = np.random.choice(list(start_params[curr_model].keys()))
+        param_to_update = np.random.choice(list(params_vals[curr_model].keys()))
         param_vals = curr_params[curr_model][param_to_update]
         curr_index = params_vals[curr_model][param_to_update].index(curr_params[curr_model][param_to_update])
         
@@ -60,7 +52,7 @@ def choose_params(curr_model,start_params, params_vals, curr_params=None, T=0.4)
         
         next_params[param_to_update] = params_vals[curr_model][param_to_update][new_index]
     else:
-        next_params = {k: np.random.choice(v) for k, v in start_params[curr_model].items()}
+        next_params = {k: np.random.choice(v) for k, v in params_vals[curr_model].items()}
 
     return next_params
 
@@ -116,8 +108,8 @@ def simulate_annealing(start_params,
     """
     columns = [*start_params.keys()] + ['Metric', 'Best Metric']
     results = pd.DataFrame(index=range(maxiters), columns=columns)
-    best_metric = -1.
-    prev_metric = -1.
+    best_metric = float('inf')
+    prev_metric = float('inf')
     prev_params = copy.deepcopy(start_params)
     best_params = dict()
     prev_model = None
@@ -130,22 +122,22 @@ def simulate_annealing(start_params,
         print('Starting Iteration {}'.format(i))
 
 
-        curr_model = choose_model(models,best_model,prev_model, T, T_0, go_to_best_model)
+        curr_model = choose_model(models, best_model, prev_model, T, T_0, go_to_best_model)
         print(prev_params[curr_model])
-        curr_params = choose_params(curr_model, start_params, param_vals, prev_params, T)
+        curr_params = choose_params(curr_model, param_vals, prev_params, T)
 
 
         model, metric = train_model(models, curr_model, curr_params, start_params, X_train,
                                  X_valid, Y_train, Y_valid)
 
-        if metric > prev_metric:
+        if metric < prev_metric:
             print('Local Improvement in metric from {:8.4f} to {:8.4f} '
                   .format(prev_metric, metric) + ' - parameters accepted')
             prev_model = curr_model
             prev_params[curr_model] = copy.deepcopy(curr_params)
             prev_metric = metric
 
-            if metric > best_metric:
+            if metric < best_metric:
                 print('Global improvement in metric from {:8.4f} to {:8.4f} '
                       .format(best_metric, metric) +
                       ' - best parameters updated')
@@ -157,7 +149,7 @@ def simulate_annealing(start_params,
         else:
             rnd = np.random.uniform()
             diff = metric - prev_metric
-            threshold = np.exp(beta * diff / T)
+            threshold = np.exp(-beta * diff / T)
             if rnd < threshold:
                 print('No Improvement but parameters accepted. Metric change' +
                       ': {:8.4f} threshold: {:6.4f} random number: {:6.4f}'
@@ -178,4 +170,4 @@ def simulate_annealing(start_params,
             T = alpha * T
             go_to_best_model = True
 
-    return  best_model_final
+    return  best_model_final, results
