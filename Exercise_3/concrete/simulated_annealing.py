@@ -11,7 +11,7 @@ import copy
 # Sample train_model function #
 ###############################
 
-def train_model(models, curr_model,curr_params, start_param, Xtrain, Xvalid, Ytrain,
+def train_model(models, curr_model, curr_params, start_param, Xtrain, Xvalid, Ytrain,
                  Yvalid):
      """
      Train the model with given set of hyperparameters
@@ -35,13 +35,13 @@ def train_model(models, curr_model,curr_params, start_param, Xtrain, Xvalid, Ytr
      return model, metric_val
 
 
-def choose_params(curr_model, start_params, params_vals, curr_params=None, T=0.4):
+def choose_params(curr_model, params_vals, curr_params=None, T=0.4):
 
     print(curr_model)
     print(curr_params[curr_model])
     if curr_params[curr_model] is not None:
         next_params = copy.deepcopy(curr_params[curr_model])
-        param_to_update = np.random.choice(list(start_params[curr_model].keys()))
+        param_to_update = np.random.choice(list(params_vals[curr_model].keys()))
         param_vals = curr_params[curr_model][param_to_update]
         curr_index = params_vals[curr_model][param_to_update].index(curr_params[curr_model][param_to_update])
         
@@ -52,7 +52,7 @@ def choose_params(curr_model, start_params, params_vals, curr_params=None, T=0.4
         
         next_params[param_to_update] = params_vals[curr_model][param_to_update][new_index]
     else:
-        next_params = {k: np.random.choice(v) for k, v in start_params[curr_model].items()}
+        next_params = {k: np.random.choice(v) for k, v in params_vals[curr_model].items()}
 
     return next_params
 
@@ -124,7 +124,7 @@ def simulate_annealing(start_params,
 
         curr_model = choose_model(models, best_model, prev_model, T, T_0, go_to_best_model)
         print(prev_params[curr_model])
-        curr_params = choose_params(curr_model, start_params, param_vals, prev_params, T)
+        curr_params = choose_params(curr_model, param_vals, prev_params, T)
 
 
         model, metric = train_model(models, curr_model, curr_params, start_params, X_train,
