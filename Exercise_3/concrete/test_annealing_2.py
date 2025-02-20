@@ -15,6 +15,8 @@ from simulated_annealing_2 import *
 
 logger = setup_logging("test_annealing_2")
 
+random_seed = 42
+
 models = {"rf": RandomForestRegressor,
           "LinearSVR": LinearSVR,
           "Ridge": Ridge,
@@ -37,8 +39,9 @@ params_vals = {"rf": {"n_estimators": [10,20,50,100,200], "max_depth": [5,10,20,
 X, Y = load_dataset()
 
 
-model, results = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=100, T_0=400, f=10, n_repeats=5)
+model, results = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=10, T_0=400, f=10, n_repeats=5, random_seed=random_seed)
 
+logger.info(f"Random Seed: {random_seed}")
 logger.info(f"Best model: {model}")
 logger.info(f"Best score: {results['Best Metric'].min()}")
 
