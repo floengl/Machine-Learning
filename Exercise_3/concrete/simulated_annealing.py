@@ -103,7 +103,7 @@ def simulate_annealing(start_params,
     Output:
     Dataframe of the parameters explored and corresponding model performance
     """
-    columns = [Model] + ['Metric', 'Best Metric']
+    columns = ['Model'] + [f"{model}_{param}" for model in models for param in start_params[model].keys()] + ['Metric', 'Best Metric']
     results = pd.DataFrame(index=range(maxiters), columns=columns)
     best_metric = float('inf')
     prev_metric = float('inf')
@@ -157,7 +157,14 @@ def simulate_annealing(start_params,
                       ': {:8.4f} threshold: {:6.4f} random number: {:6.4f}'
                       .format(diff, threshold, rnd))
 
-        results.loc[i, list(curr_params.keys())] = list(curr_params.values())
+         # Store the model name
+        results.loc[i, 'Model'] = curr_model
+
+        # Store the hyperparameters for the current model
+        for param, value in curr_params.items():
+            results.loc[i, f"{curr_model}_{param}"] = value
+
+        # Store the metrics
         results.loc[i, 'Metric'] = metric
         results.loc[i, 'Best Metric'] = best_metric
 

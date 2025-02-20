@@ -14,6 +14,8 @@ from utils import logger
 
 from simulated_annealing import *
 
+logger = setup_logging("test_annealing")
+
 models = {"rf": RandomForestRegressor,
           "LinearSVR": LinearSVR,
           "Ridge": Ridge,
@@ -36,8 +38,16 @@ params_vals = {"rf": {"n_estimators": [10,20,50,100,200], "max_depth": [5,10,20,
 X, y = load_dataset()
 Xtrain, Xvalid, Ytrain, Yvalid = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model, results = simulate_annealing(start_params, params_vals, Xtrain, Xvalid, Ytrain, Yvalid, train_model, models =  models, maxiters=10, T_0=400)
+model, results = simulate_annealing(start_params, params_vals, Xtrain, Xvalid, Ytrain, Yvalid, train_model, models =  models, maxiters=1000, T_0=400)
 
+logger.info(f"Best model: {model}")
+logger.info(f"Best score: {results['Best Metric'].min()}")
+
+# Convert the DataFrame to a string with all rows and columns displayed
+results_str = results.to_string()
+
+# Log the entire DataFrame
+logger.info(f"History:\n{results_str}")
 
 print(model)
 print(results)
