@@ -154,6 +154,9 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
                 T = T_0*(1/counter_2 + 1/50)##reheats the system if there is no change
                 print('Reheat')
 
+        if time.time() - start_time > 60*60*2:
+            break
+
     end_time = time.time()
     print(f"Execution time: {end_time - start_time} seconds")
     return  best_model_final, results, counter_2

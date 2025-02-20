@@ -1,11 +1,5 @@
-import pandas as pd
-import numpy as np
-from collections import OrderedDict
-from random import random
-from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import Ridge, Lasso
 from sklearn.svm import LinearSVR
 from sklearn.neighbors import KNeighborsRegressor
 from utils import load_dataset, setup_logging
@@ -13,7 +7,7 @@ from utils import logger
 
 from simulated_annealing_2 import *
 
-logger = setup_logging("test_annealing_3")
+logger = setup_logging("search")
 
 random_seed = 42
 
@@ -40,9 +34,10 @@ params_vals = {"rf": {"n_estimators": [10,20,30,40,50,60,70,80,90,100,150,200,25
 X, Y = load_dataset()
 
 
-model, results, nr_reheats = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=1000, T_0=400, f=5, n_repeats=1, random_seed=random_seed)
+model, results, nr_reheats = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=1000, T_0=400, f=5, n_repeats=10, random_seed=random_seed)
 
 logger.info(f"Random Seed: {random_seed}")
+logger.info(f"folds: {5}, repeats: {10}")
 logger.info(f"Best model: {model}")
 logger.info(f"Best score: {results['Best Metric'].min()}")
 logger.info(f"Number of reheats: {nr_reheats-1}")
@@ -52,6 +47,7 @@ results_str = results.to_string()
 
 # Log the entire DataFrame
 logger.info(f"History:\n{results_str}")
+logger.info(f"Parameter values: {params_vals}")
 
 print(model)
 print(results)
