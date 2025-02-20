@@ -11,7 +11,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from utils import load_dataset, setup_logging
 from utils import logger
 
-from simulated_annealing_2 import *
+from simulated_annealing_3 import *
 
 logger = setup_logging("test_annealing_3")
 

@@ -5,7 +5,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from utils import load_dataset, setup_logging
 from utils import logger
 
-from simulated_annealing_2 import *
+from simulated_annealing_3 import *
 
 logger = setup_logging("search")
 
@@ -25,7 +25,7 @@ start_params = {"rf": {"n_estimators": 100, "max_depth": 10, "max_features": "lo
                 "KNN": {"n_neighbors": 5, "p": 5}}
 
 params_vals = {"rf": {"n_estimators": [10,20,30,40,50,60,70,80,90,100,150,200,250,300,350,400,500,600,700,800,900], "max_depth": [5,10,20,30,50,75,100,150,200],
-                      "max_features": ["auto", "sqrt", "log2", None]},
+                      "max_features": ["sqrt", "log2", None]},
                 "LinearSVR": {"max_iter": [1000,2000,5000,10000], "C": [10**i for i in range(-3, 4)], "fit_intercept": [True, False]},
                 "Ridge": {"alpha": [10**i for i in range(-3, 4)], "fit_intercept": [True, False]},
                 "Lasso": {"alpha": [10**i for i in range(-3, 4)], "fit_intercept": [True, False]},
@@ -34,7 +34,7 @@ params_vals = {"rf": {"n_estimators": [10,20,30,40,50,60,70,80,90,100,150,200,25
 X, Y = load_dataset()
 
 
-model, results, nr_reheats, extime = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=1000000, T_0=400, f=5, n_repeats=10, random_seed=random_seed)
+model, results, nr_reheats, extime, T = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=1000000, T_0=400, f=5, n_repeats=10, random_seed=random_seed)
 
 logger.info(f"Random Seed: {random_seed}")
 logger.info(f"folds: {5}, repeats: {10}")
@@ -42,6 +42,7 @@ logger.info(f"Best model: {model}")
 logger.info(f"Best score: {results['Best Metric'].min()}")
 logger.info(f"Number of reheats: {nr_reheats-1}")
 logger.info(f"Execution time: {extime/60} minutes")
+logger.info(f"Final temperature: {T}")
 
 # Convert the DataFrame to a string with all rows and columns displayed
 results_str = results.to_string()

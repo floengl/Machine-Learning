@@ -141,10 +141,14 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
         go_to_best_model = False
         if i % update_iters == 0:
             T = alpha * T
+            print('Temperature: {}'.
+                  format(T))
         if i % update_iters*4 == 0:
             go_to_best_model = True
         if counter_1 == 5 or T<0.01:
             print('stagnant')
+            print('Temperature: {}'.
+                  format(T))
             if time.time() - start_time > 60*60:
                 break
             else:
@@ -160,4 +164,4 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
     end_time = time.time()
     execution_time = end_time - start_time
     print(f"Execution time: {end_time - start_time} seconds")
-    return  best_model_final, results, counter_2, execution_time
+    return  best_model_final, results, counter_2, execution_time, T
