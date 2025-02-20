@@ -108,8 +108,8 @@ def simulate_annealing(start_params,
     """
     columns = [*start_params.keys()] + ['Metric', 'Best Metric']
     results = pd.DataFrame(index=range(maxiters), columns=columns)
-    best_metric = -1.
-    prev_metric = -1.
+    best_metric = float('inf')
+    prev_metric = float('inf')
     prev_params = copy.deepcopy(start_params)
     best_params = dict()
     prev_model = None
@@ -170,4 +170,4 @@ def simulate_annealing(start_params,
             T = alpha * T
             go_to_best_model = True
 
-    return  best_model_final
+    return  best_model_final, results
