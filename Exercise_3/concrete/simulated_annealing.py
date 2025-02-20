@@ -19,7 +19,7 @@ import copy
 # Sample train_model function #
 ###############################
 
-def train_model(models, curr_model,curr_params, start_param, Xtrain, Xvalid, Ytrain,
+def train_model(models, curr_model, curr_params, start_param, Xtrain, Xvalid, Ytrain,
                  Yvalid):
      """
      Train the model with given set of hyperparameters
