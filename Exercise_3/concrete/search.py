@@ -34,7 +34,7 @@ params_vals = {"rf": {"n_estimators": [10,20,30,40,50,60,70,80,90,100,150,200,25
 X, Y = load_dataset()
 
 
-model, results, nr_reheats, extime, T = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=1000000, T_0=400, f=5, n_repeats=10, random_seed=random_seed)
+model, results, nr_reheats, extime, T = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=10000000, T_0=400, f=5, n_repeats=10, random_seed=random_seed, alpha=0.85)
 
 logger.info(f"Random Seed: {random_seed}")
 logger.info(f"folds: {5}, repeats: {10}")
