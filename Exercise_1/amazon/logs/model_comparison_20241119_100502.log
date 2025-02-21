@@ -1,17 +1,3 @@
-19.11.2024 10:05:02
-
-Runtime of models:
-       model  train_time  pred_time
-0  LinearSVC     0.49256   0.028361
-
-Holdout results:
-          model_score     score
-0  LinearSVC Accuracy  0.684444
-1  LinearSVC F1_macro  0.633838
-
-Cross validation results:
-                       score          
-                        mean       std
-model_score                           
-LinearSVC Accuracy  0.653333  0.015085
-LinearSVC F1_macro  0.630722  0.010976
+version https://git-lfs.github.com/spec/v1
+oid sha256:ad88cad7025e388476c3945af0d7e9a1d8a00d7ec1b4f49eacd0847fc08f039d
+size 465

@@ -1,27 +1,3 @@
-13.11.2024 13:23:17
-
-Runtime of models:
-          model  train_time  pred_time
-0     LinearSVC    0.004697   0.001005
-1         Ridge    0.005983   0.001359
-2  RandomForest    4.616055   0.177556
-
-Holdout results:
-             model_score     score
-0     LinearSVC Accuracy  0.757576
-1       LinearSVC Recall  0.690476
-2         Ridge Accuracy  0.727273
-3           Ridge Recall  0.726190
-4  RandomForest Accuracy  0.761905
-5    RandomForest Recall  0.511905
-
-Cross validation results:
-                          score          
-                           mean       std
-model_score                              
-LinearSVC Accuracy     0.746636  0.027613
-LinearSVC Recall       0.733697  0.059342
-RandomForest Accuracy  0.773212  0.028909
-RandomForest Recall    0.590433  0.060502
-Ridge Accuracy         0.737382  0.027571
-Ridge Recall           0.796744  0.053502
+version https://git-lfs.github.com/spec/v1
+oid sha256:50a29723413c65c5250b4dca2ec163f4f59bef0046b1ec89f083421f8319c7be
+size 891

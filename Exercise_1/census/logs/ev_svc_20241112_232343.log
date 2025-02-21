@@ -1,9 +1,3 @@
-12.11.2024 23:23:43
-
-Accuracy svc:
-       mean       std
-0  0.853118  0.002965
-
-F1 svc:
-       mean       std
-0  0.659312  0.007047
+version https://git-lfs.github.com/spec/v1
+oid sha256:0d6a325f9ca7b328a47c4bfa222259eaa3b9164517be9a04ff2426d2fa645714
+size 141

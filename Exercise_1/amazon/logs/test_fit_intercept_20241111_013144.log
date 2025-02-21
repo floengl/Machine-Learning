@@ -1,13 +1,3 @@
-11.11.2024 01:31:44
-LinearSVC with fit_intercept=True:
-Accuracy: 0.7317333333333331
-F1: 0.7072748895548897
-LinearSVC with fit_intercept=False:
-Accuracy: 0.7229333333333333
-F1: 0.6983298434898435
-Ridge with fit_intercept=True:
-Accuracy: 0.7300000000000001
-F1: 0.7056503318903319
-Ridge with fit_intercept=False:
-Accuracy: 0.7326666666666667
-F1: 0.7092567099567099
+version https://git-lfs.github.com/spec/v1
+oid sha256:e222ea06ec30c32aec0ef7ac7710c9a216d4ed49e883d277f08917c121b409d4
+size 375

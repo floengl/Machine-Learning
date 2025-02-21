@@ -1,33 +1,3 @@
-07.12.2024 22:54:00
-
-nb_trees=40, nb_samples=Full, boot_type=True, max_workers=12
-
-MSE ourRFR:
-   preprocessor       mean      std
-0  RobustScaler  27.704726  3.31878
-1          None  27.704726  3.31878
-
-RMSE ourRFR:
-   preprocessor     rmean
-0  RobustScaler  5.263528
-1          None  5.263528
-
-MSE scikit_RFR:
-   preprocessor       mean       std
-0  RobustScaler  26.270132  2.769785
-1          None  26.296133  2.805742
-
-RMSE scikit_RFR:
-   preprocessor     rmean
-0  RobustScaler  5.125440
-1          None  5.127976
-
-MSE scikit_KNN:
-   preprocessor       mean       std
-0  RobustScaler  66.951003  4.250271
-1          None  85.899060  6.630419
-
-RMSE scikit_KNN:
-   preprocessor     rmean
-0  RobustScaler  8.182359
-1          None  9.268175
+version https://git-lfs.github.com/spec/v1
+oid sha256:9bc518e05206f58a77e4b5702b7fb76afe8b2f675a3de4361dd5377e67a44113
+size 776

@@ -1,32 +1,3 @@
-10.12.2024 22:07:06
-
-Runtime of models:
-    model  train_time  pred_time
-0  OurRFR    6.080128   0.085448
-1  SKTRFR    0.152842   0.007290
-2     KNN    0.002906   0.008488
-3  LLMRFR   15.367432   0.051388
-
-Holdout results:
-  model_score      score
-0  OurRFR Mse -21.536199
-1  OurRFR Rse  -0.082657
-2  SKTRFR Mse -20.311054
-3  SKTRFR Rse  -0.077955
-4     KNN Mse -59.564721
-5     KNN Rse  -0.228612
-6  LLMRFR Mse -84.162122
-7  LLMRFR Rse  -0.323019
-
-Cross validation results:
-                 score           
-                  mean        std
-model_score                      
-KNN Mse     -52.444999   3.994584
-KNN Rse      -0.191201   0.028289
-LLMRFR Mse  -88.665075  11.755643
-LLMRFR Rse   -0.320665   0.041602
-OurRFR Mse  -24.742190   4.152861
-OurRFR Rse   -0.089428   0.015145
-SKTRFR Mse  -22.763777   3.219315
-SKTRFR Rse   -0.082434   0.012563
+version https://git-lfs.github.com/spec/v1
+oid sha256:4797073290edf3646c94bd1ae69fab1a78f054464dc46ea2570445bf297c4b98
+size 881

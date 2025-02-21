@@ -1,35 +1,3 @@
-21.02.2025 11:00:44
-Random Seed: 42
-folds: 5, repeats: 10
-Alpha: 0.85
-Max time: 120
-Min time: 60
-Decrease temperature after 5 iterations
-Go to best model after 20 iterations
-Inital temperature: 400
-
- Findings:
-
-Best model: RandomForestRegressor(max_depth=50, max_features='log2')
-Best score: 4.940138745442798
-Number of reheats: -1
-Execution time: 0.4563742240269979 minutes
-Final temperature: 289.0
-Best iteration: 0
-Best results achieved after 0.19019084374109904 minutes
-Results saved to: C:\Users\englf\OneDrive\Dokumente\Flo\Studium\Mathe\Machine_Learning\Machine-Learning\Exercise_3\concrete\results\results_20250221_110111.csv
-History:
-   Model rf_n_estimators rf_max_depth rf_max_features LinearSVR_max_iter  ... Lasso_fit_intercept KNN_n_neighbors KNN_p     Metric Best Metric
-0     rf             100           50            log2                NaN  ...                 NaN             NaN   NaN   4.940139    4.940139
-1     rf              10           50            log2                NaN  ...                 NaN             NaN   NaN   5.355763    4.940139
-2    KNN             NaN          NaN             NaN                NaN  ...                 NaN              10     5   9.868833    4.940139
-3     rf              10           50            None                NaN  ...                 NaN             NaN   NaN   5.259051    4.940139
-4  Ridge             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN  10.485668    4.940139
-5    KNN             NaN          NaN             NaN                NaN  ...                 NaN              10     5    9.85834    4.940139
-6     rf              30           50            None                NaN  ...                 NaN             NaN   NaN   4.985596    4.940139
-7  Lasso             NaN          NaN             NaN                NaN  ...                True             NaN   NaN  10.516198    4.940139
-8     rf              10           50            None                NaN  ...                 NaN             NaN   NaN   5.248419    4.940139
-9     rf              10           50            None                NaN  ...                 NaN             NaN   NaN   5.269371    4.940139
-
-[10 rows x 15 columns]
-Parameter values: {'rf': {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 900], 'max_depth': [5, 10, 20, 30, 50, 75, 100, 150, 200], 'max_features': ['sqrt', 'log2', None]}, 'LinearSVR': {'max_iter': [1000, 2000, 5000, 10000], 'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'Ridge': {'alpha': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'Lasso': {'alpha': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'KNN': {'n_neighbors': [3, 5, 10, 20], 'p': [1, 2, 3, 4, 5]}}
+version https://git-lfs.github.com/spec/v1
+oid sha256:419d2dd0657d49f01dbe16dd48c13b0ad1141e13466a1da9c504e89eeb71d96c
+size 2880

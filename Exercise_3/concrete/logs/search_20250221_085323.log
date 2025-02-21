@@ -1,8 +1,3 @@
-21.02.2025 08:53:23
-Random Seed: 42
-folds: 5, repeats: 10
-Best model: RandomForestRegressor(max_depth=30, max_features='log2', n_estimators=90)
-Best score: 4.8596150299688805
-Number of reheats: 9
-Execution time: 60.385849169890086 minutes
-Final temperature: 0.9274155468533458
+version https://git-lfs.github.com/spec/v1
+oid sha256:3c1ec0de904a1410c26b40f35e7f9c0865bef914701b4232dd1e40cba629d53d
+size 285

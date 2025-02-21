@@ -1,33 +1,3 @@
-05.12.2024 16:55:50
-
-scikitlearn:
-
-Mean Absolute Error (MAE):
-           model      mean
-0     binarytree  4.473668
-1  random_forest  3.486967
-
-Mean Squared Error (MSE):
-           model       mean
-0     binarytree  44.750382
-1  random_forest  23.872653
-
-Root Mean Squared Error (RMSE):
-           model      mean
-0     binarytree  6.689573
-1  random_forest  4.885965
-
-Mean Absolute Error (MAE):
-         scaler      mean
-0  RobustScaler  4.512519
-1          None  4.512519
-
-Mean Squared Error (MSE):
-         scaler      mean
-0  RobustScaler  39.77663
-1          None  39.77663
-
-Root Mean Squared Error (RMSE):
-         scaler      mean
-0  RobustScaler  6.306872
-1          None  6.306872
+version https://git-lfs.github.com/spec/v1
+oid sha256:826d19c4c15b72fbcf4e596a78bb462efa7d1698e472a997ff8adff32d2d65e6
+size 723

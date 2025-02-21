@@ -1,22 +1,3 @@
-11.11.2024 07:54:10
-PCA(n_components=0.9):
-Accuracy: 0.730933 (0.030689)
-F1: 0.705107 (0.035054)
-PCA(n_components=0.95):
-Accuracy: 0.730667 (0.026399)
-F1: 0.705137 (0.031612)
-PCA(n_components=0.99):
-Accuracy: 0.724000 (0.023926)
-F1: 0.700500 (0.029235)
-TruncatedSVD(n_components=400):
-Accuracy: 0.722400 (0.030339)
-F1: 0.696182 (0.034752)
-TruncatedSVD(n_components=500):
-Accuracy: 0.726400 (0.025956)
-F1: 0.702243 (0.029538)
-TruncatedSVD(n_components=600):
-Accuracy: 0.697600 (0.024359)
-F1: 0.677787 (0.025563)
-TruncatedSVD(n_components=700):
-Accuracy: 0.697600 (0.024359)
-F1: 0.677787 (0.025563)
+version https://git-lfs.github.com/spec/v1
+oid sha256:eba8b9be3af54627d1567dad78f8158a42c527d0ca6acc6d50757b77e8d39095
+size 619

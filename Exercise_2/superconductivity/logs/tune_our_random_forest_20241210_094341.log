@@ -1,33 +1,3 @@
-10.12.2024 09:43:41
-
-
-Scoring: RSE
-Best score: -0.07460708168885685
-best params: OrderedDict({'model__boot_type': False, 'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 150})
-CV results:
-                                                                                                                                                                  params  mean_test_score  std_test_score  rank_test_score
-15  {'model__boot_type': False, 'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 150}        -0.074607        0.003800                1
-19    {'model__boot_type': False, 'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 80}        -0.075160        0.003592                2
-20    {'model__boot_type': False, 'model__max_depth': -1, 'model__max_features': 'sqrt', 'model__min_samples_split': 3, 'model__nb_samples': 0.7, 'model__nb_trees': 40}        -0.076083        0.004105                3
-13    {'model__boot_type': True, 'model__max_depth': 40, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 150}        -0.077531        0.003413                4
-6     {'model__boot_type': True, 'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_split': 3, 'model__nb_samples': 0.7, 'model__nb_trees': 150}        -0.077534        0.003477                5
-14    {'model__boot_type': True, 'model__max_depth': 60, 'model__max_features': 'sqrt', 'model__min_samples_split': 5, 'model__nb_samples': 0.7, 'model__nb_trees': 150}        -0.078009        0.003381                6
-18    {'model__boot_type': True, 'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 80}        -0.078151        0.003636                7
-22    {'model__boot_type': False, 'model__max_depth': 90, 'model__max_features': 'log2', 'model__min_samples_split': 2, 'model__nb_samples': 0.5, 'model__nb_trees': 80}        -0.078221        0.003823                8
-11     {'model__boot_type': True, 'model__max_depth': 80, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 60}        -0.078586        0.003840                9
-12     {'model__boot_type': True, 'model__max_depth': 50, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 60}        -0.078586        0.003840                9
-16    {'model__boot_type': True, 'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_split': 3, 'model__nb_samples': 0.7, 'model__nb_trees': 50}        -0.078864        0.003780               11
-10   {'model__boot_type': False, 'model__max_depth': 70, 'model__max_features': 'log2', 'model__min_samples_split': 10, 'model__nb_samples': 0.7, 'model__nb_trees': 30}        -0.079007        0.003706               12
-7     {'model__boot_type': True, 'model__max_depth': 90, 'model__max_features': 'log2', 'model__min_samples_split': 5, 'model__nb_samples': 0.5, 'model__nb_trees': 100}        -0.082483        0.003333               13
-0     {'model__boot_type': True, 'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_split': 9, 'model__nb_samples': 0.5, 'model__nb_trees': 200}        -0.083539        0.003199               14
-8      {'model__boot_type': True, 'model__max_depth': 20, 'model__max_features': 'sqrt', 'model__min_samples_split': 8, 'model__nb_samples': 0.6, 'model__nb_trees': 30}        -0.083762        0.003240               15
-9    {'model__boot_type': True, 'model__max_depth': 20, 'model__max_features': 'sqrt', 'model__min_samples_split': 10, 'model__nb_samples': 0.5, 'model__nb_trees': 200}        -0.084506        0.003094               16
-1     {'model__boot_type': True, 'model__max_depth': 30, 'model__max_features': 'log2', 'model__min_samples_split': 10, 'model__nb_samples': 0.5, 'model__nb_trees': 70}        -0.086101        0.003190               17
-17    {'model__boot_type': True, 'model__max_depth': 100, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 10}        -0.087020        0.003760               18
-5    {'model__boot_type': False, 'model__max_depth': 50, 'model__max_features': 'log2', 'model__min_samples_split': 6, 'model__nb_samples': 0.2, 'model__nb_trees': 150}        -0.098515        0.003030               19
-4      {'model__boot_type': True, 'model__max_depth': 90, 'model__max_features': 'sqrt', 'model__min_samples_split': 7, 'model__nb_samples': 0.2, 'model__nb_trees': 90}        -0.100441        0.002688               20
-21    {'model__boot_type': False, 'model__max_depth': 10, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.7, 'model__nb_trees': 80}        -0.111983        0.002235               21
-24    {'model__boot_type': False, 'model__max_depth': 10, 'model__max_features': 'sqrt', 'model__min_samples_split': 2, 'model__nb_samples': 0.5, 'model__nb_trees': 90}        -0.114479        0.002210               22
-2      {'model__boot_type': True, 'model__max_depth': 80, 'model__max_features': 'sqrt', 'model__min_samples_split': 9, 'model__nb_samples': 0.1, 'model__nb_trees': 70}        -0.121826        0.002839               23
-3     {'model__boot_type': False, 'model__max_depth': 30, 'model__max_features': 'sqrt', 'model__min_samples_split': 9, 'model__nb_samples': 0.1, 'model__nb_trees': 20}        -0.126515        0.002836               24
-23     {'model__boot_type': True, 'model__max_depth': 10, 'model__max_features': 'log2', 'model__min_samples_split': 3, 'model__nb_samples': 0.2, 'model__nb_trees': 10}        -0.144684        0.005307               25
+version https://git-lfs.github.com/spec/v1
+oid sha256:01307914c20cda61486d0313fc97239f9dcdf17ee7766a60f69ee230756ba4d9
+size 5998

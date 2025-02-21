@@ -1,16 +1,3 @@
-20.02.2025 18:52:29
-Random Seed: 42
-Best model: KNN
-Best score: 8.890198170989876
-History:
-  Model rf_n_estimators rf_max_depth LinearSVR_max_iter LinearSVR_C Ridge_alpha BinaryTree_max_depth BinaryTree_min_samples_split KNN_n_neighbors    Metric Best Metric
-0   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-1   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-2   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-3   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-4   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-5   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-6   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-7   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-8   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
-9   KNN             NaN          NaN                NaN         NaN         NaN                  NaN                          NaN               5  8.890198    8.890198
+version https://git-lfs.github.com/spec/v1
+oid sha256:ccca4cbea6102b1f6d167651bf9833e566dcc9ff251dcfdf9af22e7c80ef3dd7
+size 1955
