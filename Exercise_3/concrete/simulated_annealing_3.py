@@ -63,7 +63,7 @@ def choose_model(models, best_model=None, prev_model=None, T=400, T_0=400, go_to
     
 
 
-def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=train_model_2, maxiters=100, alpha=0.95, beta=1.3, T_0=400, update_iters=5, f=5, n_repeats=1, random_seed=42):
+def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=train_model_2, maxiters=100, alpha=0.95, beta=1.3, T_0=400, update_iters=5, f=5, n_repeats=1, random_seed=42, mintime=60, maxtime=120, go_to_best_multiple=5):
 
     # Start the timer
     start_time = time.time()
@@ -79,6 +79,8 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
     best_model = None
     counter_1 = 0
     counter_2 = 0
+    best_i = 0
+    best_time = 0
 
     go_to_best_model= False
     T = T_0
@@ -110,6 +112,8 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
                 best_metric = metric
                 best_params[curr_model] = copy.deepcopy(curr_params)
                 best_model_final = model
+                best_i = i
+                best_time = (time.time() - start_time)/60
 
         else:
             rnd = rng.uniform()
@@ -143,25 +147,25 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
             T = alpha * T
             print('Temperature: {}'.
                   format(T))
-        if i % update_iters*4 == 0:
+        if i % update_iters*go_to_best_multiple == 0:
             go_to_best_model = True
         if counter_1 == 5 or T<0.01:
             print('stagnant')
             print('Temperature: {}'.
                   format(T))
-            if time.time() - start_time > 60*60:
+            if time.time() - start_time > mintime*60:
                 break
             else:
                 counter_1 = 0
                 counter_2 += 1   
-                T = T_0*(3600-(time.time()-start_time))/3600 # Reheats to temperature that declines with time
+                T = T_0*(mintime*60-(time.time()-start_time))/(mintime*60) # Reheats to temperature that declines with time
                 print('Reheat')
         
 
-        if time.time() - start_time > 60*60*2:
+        if time.time() - start_time > 60*maxtime:
             break
 
     end_time = time.time()
     execution_time = end_time - start_time
     print(f"Execution time: {end_time - start_time} seconds")
-    return  best_model_final, results, counter_2, execution_time, T
+    return  best_model_final, results, counter_2, execution_time, T, best_i, best_time
