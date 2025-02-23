@@ -27,5 +27,12 @@ main.fdb_latexmk
 Exercise_2/concrete/test_rf_llm.py
 Exercise_2/concrete/__pycache__/
 Exercise_2/superconductivity/__pycache__/
-
-
+Exercise_3/concrete/__pycache__/
+Exercise_3/superconductivity/__pycache__/
+Exercise_3/waves/__pycache__/
+Exercise_3/wine/__pycache__/
+Exercise_3/utils/wine/__pycache__/
+Exercise_3/utils/concrete/__pycache__/
+Exercise_3/utils/superconductivity/__pycache__/
+Exercise_3/utils/waves/__pycache__/
+Exercise_3/concrete/comp_pycaret.py
