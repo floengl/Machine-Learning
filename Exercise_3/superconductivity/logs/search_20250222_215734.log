@@ -1,0 +1,38 @@
+22.02.2025 21:57:34
+Random Seed: 42
+folds: 6, repeats: 1
+Alpha: 0.9
+Max time: 180
+Min time: 120
+Decrease temperature after 2 iterations
+Go to best model after 8 iterations
+Inital temperature: 500
+
+Findings:
+
+Best model: RandomForestRegressor(max_depth=20, max_features='sqrt', n_estimators=500)
+Best score: 9.186566322018491
+Number of reheats: 1
+Execution time: 185.78375704288482 minutes
+Final temperature: 51.339469422045916
+Best iteration: 133
+Best results achieved after 64.48977092901866 minutes
+Results saved to: C:\Users\englf\OneDrive\Dokumente\Flo\Studium\Mathe\Machine_Learning\Machine-Learning\Exercise_3\superconductivity\results\results_20250223_010322.csv
+History:
+         Model rf_n_estimators rf_max_depth rf_max_features LinearSVR_max_iter  ... Lasso_fit_intercept KNN_n_neighbors KNN_p     Metric Best Metric
+0           rf             100           50            log2                NaN  ...                 NaN             NaN   NaN   9.259913    9.259913
+1           rf              10           50            log2                NaN  ...                 NaN             NaN   NaN   9.658415    9.259913
+2          KNN             NaN          NaN             NaN                NaN  ...                 NaN              10     5  13.263312    9.259913
+3           rf              10           50            None                NaN  ...                 NaN             NaN   NaN   9.710622    9.259913
+4        Ridge             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN  17.630044    9.259913
+...        ...             ...          ...             ...                ...  ...                 ...             ...   ...        ...         ...
+9999995    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN        NaN         NaN
+9999996    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN        NaN         NaN
+9999997    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN        NaN         NaN
+9999998    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN        NaN         NaN
+9999999    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN        NaN         NaN
+
+[10000000 rows x 15 columns]
+
+
+Parameter values: {'rf': {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 900], 'max_depth': [5, 10, 20, 30, 50, 75, 100, 150, 200], 'max_features': ['sqrt', 'log2', None]}, 'LinearSVR': {'max_iter': [1000, 2000, 5000, 10000], 'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'Ridge': {'alpha': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'Lasso': {'alpha': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'KNN': {'n_neighbors': [3, 5, 10, 20], 'p': [1, 2, 3, 4, 5]}}

@@ -13,13 +13,13 @@ from simulated_annealing_3 import *
 logger = setup_logging("search_P_100")
 
 random_seed = 42
-alpha = 0.85
-maxtime = 120
-mintime = 60
-f = 5
-n_repeats = 5
-T_0 = 400
-update_iters = 3
+alpha = 0.9
+maxtime = 180
+mintime = 120
+f = 6
+n_repeats = 1
+T_0 = 500
+update_iters = 2
 go_to_best_multiple = 4
 
 models = {"rf": RandomForestRegressor,
