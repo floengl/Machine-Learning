@@ -70,7 +70,7 @@ logger.info(f"Go to best model after {go_to_best_multiple*update_iters} iteratio
 logger.info(F"Inital temperature: {T_0}\n\nFindings:\n")
 logger.info(f"Best model: {model}")
 logger.info(f"Best score: {results['Best Metric'].min()}")
-logger.info(f"Number of reheats: {nr_reheats}")
+logger.info(f"Number of reheats: {nr_reheats-1}")
 logger.info(f"Execution time: {extime/60} minutes")
 logger.info(f"Final temperature: {T}")
 logger.info(f"Best iteration: {best_i}")
