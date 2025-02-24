@@ -20,7 +20,6 @@ def train_model_1(models, curr_model, curr_params, Xtrain, Xvalid, Ytrain, Yvali
 
      return model, metric_val
 
-
 def train_model_2(models, curr_model, curr_params, X, Y, f=5, n_repeats=1, random_seed=42):
     np.random.seed(random_seed)
     model = models[curr_model](**curr_params)
@@ -29,7 +28,6 @@ def train_model_2(models, curr_model, curr_params, X, Y, f=5, n_repeats=1, rando
     mean_cv_score = -cv_scores.mean()  # Convert negative RMSE to positive RMSE
 
     return model, mean_cv_score
-
 
 def choose_params(curr_model, params_vals, curr_params=None, T=400, T_0=400, random_seed=42):
     np.random.seed(random_seed)
@@ -49,7 +47,6 @@ def choose_params(curr_model, params_vals, curr_params=None, T=400, T_0=400, ran
 
     return next_params
 
-
 def choose_model(models, best_model=None, prev_model=None, T=400, T_0=400, go_to_best_model=False, random_seed=42):
   
     np.random.seed(random_seed)
@@ -61,8 +58,6 @@ def choose_model(models, best_model=None, prev_model=None, T=400, T_0=400, go_to
     else:
         return np.random.choice(list(models.keys()))
     
-
-
 def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=train_model_2, maxiters=100, alpha=0.95, beta=1.3, T_0=400, update_iters=5, f=5, n_repeats=1, random_seed=42, mintime=60, maxtime=120, go_to_best_multiple=5):
 
     # Start the timer
