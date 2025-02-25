@@ -110,6 +110,8 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
                 best_metric = metric
                 best_params[curr_model] = copy.deepcopy(curr_params)
                 best_model_final = model
+                best_i = i
+                best_time = (time.time() - start_time)/60
 
         else:
             rnd = rng.uniform()
@@ -139,13 +141,14 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
         results.loc[i, 'Best Metric'] = best_metric
 
         go_to_best_model = False
+
+
         if i % update_iters == 0:
             T = alpha * T
         if i % update_iters*go_to_best_multiple == 0:
             go_to_best_model = True
 
         if counter_1 == 5 or T<0.01:
-
             print('stagnant')
             if time.time() - start_time > mintime*60:
                 break
@@ -159,5 +162,6 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
             break
 
     end_time = time.time()
+    execution_time = end_time - start_time
     print(f"Execution time: {end_time - start_time} seconds")
-    return  best_model_final, results, counter_2
+    return  best_model_final, results, counter_2, execution_time, T, best_i, best_time
