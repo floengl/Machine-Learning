@@ -14,8 +14,8 @@ logger = setup_logging("search_2")
 
 random_seed = 42
 alpha = 0.9
-maxtime = 180
-mintime = 120
+maxtime = 120
+mintime = 60
 f = 6
 n_repeats = 1
 T_0 = 500
