@@ -55,7 +55,7 @@ def choose_model(models, best_model=None, prev_model=None, T=400, T_0=400, go_to
     np.random.seed(random_seed)
     if go_to_best_model:
         return best_model
-    non_switch_probability = 1 - T_0/T#arts with a higher switch probability and decreases faster than acceptance probability for worse solutions due to squaring the value
+    non_switch_probability = 1 - T/T_0#arts with a higher switch probability and decreases faster than acceptance probability for worse solutions due to squaring the value
     if np.random.rand() < non_switch_probability and prev_model is not None:
         return prev_model
     else:

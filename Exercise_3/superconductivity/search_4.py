@@ -45,7 +45,7 @@ params_vals = {"rf": {"n_estimators": [10,20,30,40,50,60,70,80,90,100,150,200,25
 X, Y = load_dataset()
 
 
-model, results, nr_reheats, extime, T, best_i, best_time = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=10000000, T_0=T_0, f=f, n_repeats=n_repeats, random_seed=random_seed, alpha=alpha, mintime=mintime, maxtime=maxtime, update_iters=update_iters, go_to_best_multiple=go_to_best_multiple)
+model, results, nr_reheats, extime, T, best_i, best_time = simulate_annealing(start_params, params_vals, X, Y, models =  models, train_model=train_model_2, maxiters=10000000, T_0=T_0, f=f, n_repeats=n_repeats, random_seed=random_seed, alpha=alpha, mintime=mintime, maxtime=maxtime, update_iters=update_iters, go_to_best_multiple=go_to_best_multiple, beta=100)
 
 # Use the RESULTS_DIR from the config file
 results_dir = Config.RESULTS_DIR
@@ -62,6 +62,7 @@ results.to_csv(results_file, index=False)
 logger.info(f"Random Seed: {random_seed}")
 logger.info(f"folds: {f}, repeats: {n_repeats}")
 logger.info(f"Alpha: {alpha}")
+logger.info(f"beta: {100}")
 logger.info(f"Max time: {maxtime}") 
 logger.info(f"Min time: {mintime}")
 logger.info(f"Decrease temperature after {update_iters} iterations")
