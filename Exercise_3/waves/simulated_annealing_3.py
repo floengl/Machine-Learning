@@ -143,12 +143,15 @@ def simulate_annealing(start_params, param_vals, X, Y,  models, train_model=trai
         results.loc[i, 'Best Metric'] = best_metric
 
         go_to_best_model = False
+
+
         if i % update_iters == 0:
             T = alpha * T
             print('Temperature: {}'.
                   format(T))
         if i % update_iters*go_to_best_multiple == 0:
             go_to_best_model = True
+            
         if counter_1 == 5 or T<0.01:
             print('stagnant')
             print('Temperature: {}'.

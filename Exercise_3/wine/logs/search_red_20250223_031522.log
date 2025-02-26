@@ -1,0 +1,38 @@
+23.02.2025 03:15:22
+Random Seed: 42
+folds: 5, repeats: 10
+Alpha: 0.9
+Max time: 180
+Min time: 120
+Decrease temperature after 5 iterations
+Go to best model after 20 iterations
+Inital temperature: 500
+
+Findings:
+
+Best model: RandomForestRegressor(max_depth=200, max_features='log2', n_estimators=250)
+Best score: 0.5700468084829492
+Number of reheats: 8
+Execution time: 124.25377221504847 minutes
+Final temperature: 0.019608547095999577
+Best iteration: 34
+Best results achieved after 3.282480545838674 minutes
+Results saved to: C:\Users\englf\OneDrive\Dokumente\Flo\Studium\Mathe\Machine_Learning\Machine-Learning\Exercise_3\wine\results\results_20250223_051937.csv
+History:
+         Model rf_n_estimators rf_max_depth rf_max_features LinearSVR_max_iter  ... Lasso_fit_intercept KNN_n_neighbors KNN_p    Metric Best Metric
+0           rf             100           50            log2                NaN  ...                 NaN             NaN   NaN  0.575228    0.575228
+1           rf              10           50            log2                NaN  ...                 NaN             NaN   NaN    0.6015    0.575228
+2          KNN             NaN          NaN             NaN                NaN  ...                 NaN              10     5  0.750259    0.575228
+3           rf              10           50            None                NaN  ...                 NaN             NaN   NaN  0.608756    0.575228
+4        Ridge             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN  0.652124    0.575228
+...        ...             ...          ...             ...                ...  ...                 ...             ...   ...       ...         ...
+9999995    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN       NaN         NaN
+9999996    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN       NaN         NaN
+9999997    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN       NaN         NaN
+9999998    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN       NaN         NaN
+9999999    NaN             NaN          NaN             NaN                NaN  ...                 NaN             NaN   NaN       NaN         NaN
+
+[10000000 rows x 15 columns]
+
+
+Parameter values: {'rf': {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 900], 'max_depth': [5, 10, 20, 30, 50, 75, 100, 150, 200], 'max_features': ['sqrt', 'log2', None]}, 'LinearSVR': {'max_iter': [1000, 2000, 5000, 10000], 'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'Ridge': {'alpha': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'Lasso': {'alpha': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'fit_intercept': [True, False]}, 'KNN': {'n_neighbors': [3, 5, 10, 20], 'p': [1, 2, 3, 4, 5]}}

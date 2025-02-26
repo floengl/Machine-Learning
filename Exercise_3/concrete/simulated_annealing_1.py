@@ -12,19 +12,7 @@ import copy
 ###############################
 
 def train_model(models, curr_model, curr_params, Xtrain, Xvalid, Ytrain, Yvalid):
-     """
-     Train the model with given set of hyperparameters
-     curr_params - Dict of hyperparameters and chosen values
-     param - Dict of hyperparameters that are kept constant
-     Xtrain - Train Data
-     Xvalid - Validation Data
-     Ytrain - Train labels
-     Yvalid - Validaion labels
-     """
-
-
-     
-
+  
      model = models[curr_model](**curr_params)
      model.fit(Xtrain, Ytrain)
      preds = model.predict(Xvalid)
@@ -56,11 +44,7 @@ def choose_params(curr_model, params_vals, curr_params=None, T=400, T_0=400):
 
 def choose_model(models, best_model= None, prev_model=None, T=400, T_0=400, go_to_best_model=False):
 
-    """
-    Function to choose model for next iteration
-    Output:
-    String of model name
-    """
+   
     if go_to_best_model:
         return best_model
     non_switch_probabilty = 1 - np.exp(-0.25*(T_0/T)**2)# starts with a higher switch probability and decreases faster than acceptance probability for worse solutions due to squaring the value
@@ -72,25 +56,7 @@ def choose_model(models, best_model= None, prev_model=None, T=400, T_0=400, go_t
 
 
 def simulate_annealing(start_params, param_vals, X_train, X_valid, Y_train, Y_valid, train_model, models, maxiters=100, alpha=0.9, beta=1.3, T_0=400, update_iters=5):
-    """
-    Function to perform hyperparameter search using simulated annealing
-    Inputs:
-    start_params - Ordered dictionary of Hyperparameter search space
-    const_param - Static parameters of the model
-    Xtrain - Train Data
-    Xvalid - Validation Data
-    Ytrain - Train labels
-    Yvalid - Validaion labels
-    fn_train - Function to train the model
-        (Should return model and metric value as tuple, sample commented above)
-    maxiters - Number of iterations to perform the parameter search
-    alpha - factor to reduce temperature
-    beta - constant in probability estimate
-    T_0 - Initial temperature
-    update_iters - # of iterations required to update temperature
-    Output:
-    Dataframe of the parameters explored and corresponding model performance
-    """
+    
     columns = ['Model'] + [f"{model}_{param}" for model in models for param in start_params[model].keys()] + ['Metric', 'Best Metric']
     results = pd.DataFrame(index=range(maxiters), columns=columns)
     best_metric = float('inf')
