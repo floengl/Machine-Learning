@@ -1,3 +1,7 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5aa0649564fcb15d6ec2548da458ae8221b7c94c2760943b904973a3f56b9f0e
-size 1598
+{"record_id": 0, "iter_per_learner": 1, "logged_metric": {"pred_time": 5.4807612234522186e-05}, "trial_time": 1.1554639339447021, "wall_clock_time": 1.1714673042297363, "validation_loss": 0.7517813836330592, "config": {}, "learner": "MyKNN", "sample_size": 1599}
+{"record_id": 1, "iter_per_learner": 1, "logged_metric": {"pred_time": 8.954027939739648e-05}, "trial_time": 9.309711694717407, "wall_clock_time": 12.8503098487854, "validation_loss": 0.5789138375007795, "config": {}, "learner": "MyRF", "sample_size": 1599}
+{"record_id": 2, "iter_per_learner": 16, "logged_metric": {"pred_time": 9.103472334650988e-05}, "trial_time": 9.055868864059448, "wall_clock_time": 281.9829444885254, "validation_loss": 0.5788103632556105, "config": {}, "learner": "MyRF", "sample_size": 1599}
+{"record_id": 3, "iter_per_learner": 97, "logged_metric": {"pred_time": 9.002441807787248e-05}, "trial_time": 9.041936159133911, "wall_clock_time": 1510.523381948471, "validation_loss": 0.5785440806336134, "config": {}, "learner": "MyRF", "sample_size": 1599}
+{"record_id": 4, "iter_per_learner": 130, "logged_metric": {"pred_time": 9.018554760370883e-05}, "trial_time": 9.061718463897705, "wall_clock_time": 2023.8798341751099, "validation_loss": 0.5782842839208348, "config": {}, "learner": "MyRF", "sample_size": 1599}
+{"record_id": 5, "iter_per_learner": 363, "logged_metric": {"pred_time": 9.178084116370701e-05}, "trial_time": 9.134540557861328, "wall_clock_time": 5211.408127784729, "validation_loss": 0.5781081656033732, "config": {}, "learner": "MyRF", "sample_size": 1599}
+{"curr_best_record_id": 5}
